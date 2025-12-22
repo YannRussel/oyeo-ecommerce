@@ -32,6 +32,8 @@ from django.db import transaction
 from .forms import PreSetupForm
 from .models import ShopSettings
 from ecommerce.utils import create_default_sections
+from django.utils.text import slugify
+
 
 # ------------------------
 # Helpers
@@ -386,4 +388,4 @@ def pre_setup(request):
     else:
         form = PreSetupForm()
 
-    return render(request, "core/pre_setup.html", {"form": form})
+    return render(request, "ecommerce/pre_setup.html", {"form": form})

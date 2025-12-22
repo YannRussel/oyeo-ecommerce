@@ -25,7 +25,7 @@ class PreSetupMiddleware:
 
         path = request.path
         # autoriser quelques chemins (login admin, static, setup)
-        if any(path.startswith(p) for p in EXEMPT_PATHS) or path.startswith(reverse("pre_setup")):
+        if any(path.startswith(p) for p in EXEMPT_PATHS) or path.startswith(reverse("ecommerce:pre_setup")):
             return self.get_response(request)
 
-        return redirect("pre_setup")
+        return redirect("ecommerce:pre_setup")
