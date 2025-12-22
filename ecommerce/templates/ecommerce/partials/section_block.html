@@ -1,0 +1,118 @@
+{% load static %}
+{# inclusion_tag fournit : section, product_sections, show_see_more (optionnel) #}
+
+{% if section %}
+  {% url 'ecommerce:section_list' section.slug as section_url %}
+{% endif %}
+
+{% if section and product_sections %}
+<section class="product-section" id="section-{{ section.slug }}">
+  <div class="section-header">
+    <h2 class="section-title">{{ section.name }}</h2>
+    {% if show_see_more and section_url %}
+      <a href="{{ section_url }}" class="see-more" title="Voir plus de produits" aria-label="Voir plus de produits">Voir plus →</a>
+    {% elif show_see_more %}
+      <a href="#" class="see-more" title="Voir plus de produits" aria-label="Voir plus de produits">Voir plus →</a>
+    {% endif %}
+  </div>
+
+  <div class="product-carousel-wrapper" tabindex="0" aria-label="{{ section.name }}">
+    <button class="scroll-btn left" aria-label="Faire défiler vers la gauche">←</button>
+
+    <div class="product-grid scroll-container" role="list">
+      {% for ps in product_sections %}
+        {% with p=ps.product %}
+        <article class="product-card" role="listitem" data-product-id="{{ p.pk }}">
+          {# badge promo (optionnel) #}
+          {% if p.promo_label %}
+            <span class="badge">{{ p.promo_label }}</span>
+          {% endif %}
+
+          {# icône favoris (coeur) - état initial dynamique sans expressions interdites #}
+          <svg
+            class="fav-icon{% if user_favorites and p.pk in user_favorites %} favorited{% endif %}"
+            data-product-id="{{ p.pk }}"
+            viewBox="0 0 24 24"
+            preserveAspectRatio="xMidYMid meet"
+            width="28" height="28"
+            role="button"
+            tabindex="0"
+            aria-pressed="{% if user_favorites and p.pk in user_favorites %}true{% else %}false{% endif %}"
+            aria-label="{% if user_favorites and p.pk in user_favorites %}Retirer des favoris{% else %}Ajouter aux favoris{% endif %}"
+            style="overflow:visible;">
+            <path
+              d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+              stroke="#e86429"
+              fill="{% if user_favorites and p.pk in user_favorites %}#e86429{% else %}transparent{% endif %}"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+          </svg>
+
+          {# compteur favoris (optionnel) #}
+          <span class="fav-count" data-product-id="{{ p.pk }}">
+            {% if p.favorites.count %}
+              {{ p.favorites.count }}
+            {% endif %}
+          </span>
+
+          {# image principale (prefetched_main_images si préchargée) #}
+          <div class="img-wrap">
+            {% if p.prefetched_main_images %}
+              <img src="{{ p.prefetched_main_images.0.image.url }}" alt="{{ p.prefetched_main_images.0.alt_text|default:p.name }}">
+            {% else %}
+              {% with imgs=p.images.all %}
+                {% if imgs %}
+                  <img src="{{ imgs.0.image.url }}" alt="{{ imgs.0.alt_text|default:p.name }}">
+                {% else %}
+                  <img src="{% static 'ecommerce/assets/img/fallback.jpg' %}" alt="{{ p.name }}">
+                {% endif %}
+              {% endwith %}
+            {% endif %}
+          </div>
+
+          <div class="card-body">
+            {% if p.brand %}
+              <span class="brand">{{ p.brand.name }}</span>
+            {% else %}
+              <span class="brand">&nbsp;</span>
+            {% endif %}
+
+            <a href="{% url 'ecommerce:product_detail' p.slug %}" class="lienTitleproduct">
+              <h3 class="product-title">{{ p.name }}</h3>
+            </a>
+
+            <div class="rating">
+              {% if p.rating_value %}{{ p.rating_value }}/5 ({{ p.rating_count }}){% endif %}
+            </div>
+
+            <div class="by-text">
+              <span class="by">by</span>
+              <span class="oye">{% if p.seller %}{{ p.seller }}{% endif %}</span>
+            </div>
+
+            <div class="product-footer">
+              <div class="price-group">
+                <span class="price">{{ p.price_current }}{% if p.currency %} {{ p.currency }}{% endif %}</span>
+                {% if p.price_original %}
+                  <span class="original-price">{{ p.price_original }} {{ p.currency }}</span>
+                {% endif %}
+              </div>
+
+              {# état promo lié à la section (méthode callable) #}
+              {% if ps.is_active and ps.is_current %}
+                <span class="promo-label">Promo</span>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+        {% endwith %}
+      {% empty %}
+        <p class="no-products">Aucun produit pour le moment.</p>
+      {% endfor %}
+    </div>
+
+    <button class="scroll-btn right" aria-label="Faire défiler vers la droite">→</button>
+  </div>
+</section>
+{% endif %}

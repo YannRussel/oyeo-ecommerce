@@ -1,0 +1,28 @@
+.container_ {  width: 90%; margin: auto; }
+.container_fluid_ { width: 100%; margin: auto;}
+
+/*********    STYLE GENERAL  ********/
+.enGras{ font-weight: bold;}
+
+body{
+  /* font-family: "Open Sans Condensed"; */
+}
+
+/********* STICKY BAR  ************/
+/* Sticky header */
+.sticky-bar {
+  position: relative; /* position normale avant le scroll */
+  width: 100%;
+  background-color: #ff6600;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+/* Quand la classe .stick est ajoutée au scroll */
+.sticky-bar.stick {
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+

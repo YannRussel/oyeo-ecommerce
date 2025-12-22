@@ -1,0 +1,1076 @@
+
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% block title %}Oyéo – Notre page d'acceuil{% endblock %}
+
+
+
+{% block content %}
+
+    <!-- CROUSSEL  -- SLIDER  -->
+    <!-- mon  -->
+<div class="slider-wrapper">
+    {% for img in images %}
+        <div class="slide-item {% if forloop.first %}active-slide{% endif %}"
+            style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+                   url('{{ img.image.url }}');
+                   background-size: cover; background-position: center;">
+            
+            <div class="slide-content-wrapper">
+                <div class="wrapper-text-principal">
+                    <h1>{{ img.title|linebreaksbr }}</h1>
+                    <p>{{ img.description }}</p>
+                </div>
+
+                <div class="cta-btn text-center">
+                    <button class="btn btn-primary btn-slide py-2" style="width: 260px;">
+                        EXPLORER LES PRODUITS
+                    </button>
+                    <button class="btn btn-outline-light btn-slide-second py-2" style="width: 240px;">
+                        DEMANDER UN SERVICE
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    {% empty %}
+        <div class="slide-item active-slide"
+            style="min-height:300px; background:#ccc; display:flex; align-items:center; justify-content:center;">
+            <p>Aucune image disponible</p>
+        </div>
+    {% endfor %}
+
+    <!-- flèches -->
+    <button class="nav-arrow prev-arrow btn-prev">❮</button>
+    <button class="nav-arrow next-arrow btn-next">❯</button>
+
+    <!-- points -->
+    <div class="slider-dots">
+        {% for img in images %}
+            <button class="dot-button {% if forloop.first %}active-dot{% endif %}"></button>
+        {% endfor %}
+    </div>
+</div>
+    <!-- SYSTEME DE PAIEMENT ET DETAIL  -->
+
+    <div class="bg-light py-2" id="avantageOyeo">
+        <div class="container_">
+            <div class="row text-center text-md-start" id="modalite_securite">
+                <div class="col-6 col-md auto mb-2 mb-md-0">
+                    <i class="fas fa-lock me-2"></i> Paiement sécurisé
+                </div>
+                <div class="col-6 col-md auto mb-2 mb-md-0">
+                    <i class="fas fa-truck me-2"></i> Livraison garantie
+                </div>
+                <div class="col-6 col-md auto mb-2 mb-md-0">
+                    <i class="fas fa-phone me-2"></i> Service client 7j/7
+                </div>
+
+                <div class="col-6 col-md auto mb-2 mb-md-0">
+                    <i class="fas fa-question-circle me-2"></i> FAQ - Toutes nos réponses
+                </div>
+                <div class="col-lg-3 col-6 col-md auto mb-2 mb-md-0">
+                    <i class="fas fa-gift me-2"></i> Livraison offerte dès XXX € d'achat
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- LES PRODUITS  :  -->
+    <!-- SECTION OFFRES DU JOURS -->
+
+    <!-- === SECTION PRODUITS SPONSORISÉS === -->
+
+
+    {% load sections_tags %}
+
+    {% render_section 'offres-du-jours' 8 %}
+
+
+
+
+
+    <!-- Script JS minimal pour le scroll et drag -->
+
+    {% render_section 'tendances-du-moment' 8 %}
+
+    </br>
+    <section class="sponsored">
+        <div class="sponsored-inner">
+            <!-- Colonne texte -->
+            <div class="sponsored-left">
+                <div class="sponsored-label">Sponsorisé</div>
+                <h2 class="sponsored-title">Tommy Hilfiger<br><span class="sponsored-subtitle">Nouvelles
+                        chaussures</span>
+                </h2>
+
+                <a class="sponsored-cta cta-asym" href="#" aria-label="Découvrir la collection">
+                    Découvrir →
+                </a>
+            </div>
+
+            <!-- Colonne image -->
+            <div class="sponsored-right" role="img" aria-label="Visuel Tommy Hilfiger">
+                <!-- Remplace le src par ton image -->
+                <img class="hero-img" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+                    alt="Photo de la collection Tommy Hilfiger">
+            </div>
+        </div>
+    </section>
+
+
+{% render_section 'sponsorise' 8 %}
+
+    </br>
+    </br>
+    <!--End Best Sales-->
+    <div class="container_fluid_">
+        <section class="decouverte">
+            <div class="contenu-section"
+                style="background: url('https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=800&q=60') center; background-size: cover;">
+                <h1>Everyday Fresh &
+                    Clean with Our
+                    Products</h1>
+                <a href="decouvrir.html">Je decouvre <i class="fi-rs-arrow-small-right"></i></a>
+            </div>
+            <div class="contenu-section"
+                style="background: url('https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=800&q=60') center; background-size: cover;">
+                <h1>Everyday Fresh &
+                    Clean with Our
+                    Products</h1>
+                <a href="">Commencer la journée <i class="fi-rs-arrow-small-right"></i></a>
+            </div>
+            <div class="contenu-section"
+                style="background: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60') center; background-size: cover;">
+                <h1>Everyday Fresh &
+                    Clean with Our
+                    Products</h1>
+                <a href="">Je decouvre</a>
+            </div>
+        </section>
+    </div>
+
+    <br>
+
+    <section class="collection5-section">
+        <h2 style="text-align:center; margin-bottom:40px; color:#2b3940; font-weight:700; font-size:2rem;">
+            Découvrez nos univers
+        </h2>
+        <div class="collection5-wrapper">
+            <div class="collection5-container">
+
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1011/400/300" alt="Femmes" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #ff5e00;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Femmes</h4>
+                        <p>Mode & Beauté</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1012/400/300" alt="Hommes" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #3760c9;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Hommes</h4>
+                        <p>Style & Accessoires</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1013/400/300" alt="Enfants" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #009966;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Enfants</h4>
+                        <p>Jeux & Vêtements</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1014/400/300" alt="Maison" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #f5a623;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Maison</h4>
+                        <p>Déco & Mobilier</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1015/400/300" alt="High-Tech" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #8e44ad;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>High-Tech</h4>
+                        <p>Électronique</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1016/400/300" alt="Santé & Beauté" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #2ecc71;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Santé & Beauté</h4>
+                        <p>Bien-être</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1018/400/300" alt="Sport" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #e74c3c;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Sport</h4>
+                        <p>Fitness</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1020/400/300" alt="Supermarché" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #16a085;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Supermarché</h4>
+                        <p>Alimentation</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1020/400/300" alt="Supermarché" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #16a085;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Supermarché</h4>
+                        <p>Alimentation</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+                <div class="collection5-card">
+                    <img src="https://picsum.photos/id/1020/400/300" alt="Supermarché" class="collection5-image" />
+                    <div class="collection5-overlay-bg" style="background-color: #16a085;"></div>
+                    <div class="collection5-overlay-content">
+                        <h4>Supermarché</h4>
+                        <p>Alimentation</p>
+                        <a href="#">Découvrir</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+   {% render_section 'mode-bien-etre' 8 %}
+
+
+{% render_section 'maison-deco-pratique' 8 %}
+
+
+{% render_section 'cuisine-alimentation' 8 %}
+
+
+
+    </br>
+    <section class="promo-banner">
+        <div class="promo-content">
+            <span class="promo-tag p-2 rounded text-md">Découvrez les meilleures marque</span>
+            <h2 class="promo-title" style="color: white;">MARQUE POUR TOUS</h2>
+            <p class="promo-dates">Du 07 au 20 Juillet</p>
+            <h3 class="promo-subtitle">Consultez Nos articles</h3>
+            <ul class="promo-details">
+                <li>Xiaomi Redmi A5 – 6.88″</li>
+                <li>4G – 8/32 Mpx – Garantie 12 Mois</li>
+                <li>Mercredi 16 Juillet à 12h30</li>
+                <li>Uniquement sur l’app</li>
+            </ul>
+        </div>
+
+        <div class="promo-visual ">
+            <div class="price-badge">1 FCFA</div>
+            <div class="promo-image shadow" style="background-image: url('./ressources/img/habit/about-6.png'); background-size: cover;
+  background-position: center; background-repeat: no-repeat;">
+
+            </div>
+            <a href="#" class="promo-btn text-light">Découvrir →</a>
+
+        </div>
+    </section>
+
+
+
+{% render_section 'marque-pour-tous' 8 %}
+
+
+    </br>
+    <section id="occasion-banner" class="occasion-section product-section">
+        <h2>Découvrez les meilleures affaires d'occasion près de chez vous</h2>
+        <p>Donnez une seconde vie à vos objets et faites de bonnes affaires dès aujourd’hui !</p>
+        <div class="occasion-btn-group">
+            <button class="occasion-btn">Je découvre</button>
+        </div>
+    </section>
+
+
+{% render_section 'marque-pour-tous' 8 %}
+
+
+    <hr>
+
+    <div class="container_fluid_">
+        <section id="banners" class="section-p1">
+            <header class="ns-header" style="text-align: center;">
+                <h2 id="ns-services-title enGras" style="color: black; font-size: 40px; font-weight: bold;">Services
+                    Professionnels</h2>
+                <p style="font-size: 20px;">Des solutions sur mesure pour développer votre entreprise et atteindre vos
+                    objectifs.</p>
+            </header>
+            <div class="big-banners">
+                <div class="big-banners-1">
+                    <h4>Avec Oyeo etendez vos limites</h4>
+                    <h2>Besion d'un Professionnel competetent ?</h2>
+                    <span>trouvez facilement un peintre, un prestataire ou un expert pour tous vos besions</span>
+                    <!-- <button class="banner-btn">Learn More</button> -->
+                </div>
+                <div class="big-banners-2">
+                    <h4>Etes vous a l'etranger ? On s'occupe de tout</h4>
+                    <h2>upcomming season</h2>
+                    <span>The best classic dress is on sale at cara</span>
+                    <!-- <button class="banner-btn">Collection</button> -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ====== SECTION UNIVERS ====== -->
+    <!-- services.html
+  Inclure dans <head> : <link rel="stylesheet" href="services.namespace.css">
+-->
+    <section class="ns-services-section" aria-labelledby="ns-services-title" style="margin: auto;">
+        <div class="ns-container">
+            <header class="ns-header">
+                <!-- <h2 id="ns-services-title">Services Professionnels</h2> -->
+                <p style="font-size : 20px; margin-top : 0px;">Découvrez nos prestations disponibles à la demande, pour
+                    vous
+                    ou pour un proche.
+                    </br>Des solutions sur mesure pour développer votre entreprise et atteindre vos objectifs. </p>
+            </header>
+
+            <div class="ns-grid">
+                <!-- 8 cartes (4 colonnes x 2 lignes) -->
+                <!-- Card 1 -->
+                <article class="ns-card" aria-labelledby="ns-s1-title">
+                    <div class="ns-media">
+                        <div class="ns-badge">Populaire</div>
+                        <img src="https://picsum.photos/seed/s1/800/600" alt="Illustration service 1">
+                    </div>
+                    <div class="ns-body">
+                        <div class="ns-title">
+                            <h3 id="ns-s1-title">Développement Web Sur Mesure</h3>
+                            <!-- <div class="ns-price-tag">À partir de 2 500€</div> -->
+                        </div>
+                        <p class="ns-desc">Création de sites web et applications performantes, sécurisées et optimisées.
+                        </p>
+                        <ul class="ns-features">
+                            <li><span class="ns-check">✓</span> Frontend moderne</li>
+                            <li><span class="ns-check">✓</span> Backend évolutif</li>
+                            <li><span class="ns-check">✓</span> Hébergement</li>
+                            <li><span class="ns-check">✓</span> Maintenance</li>
+                        </ul>
+                        <div class="ns-price-row">
+                            <!-- <div><div class="ns-price">À partir de 2 500€</div><small>Projet complet</small></div> -->
+                            <div class="ns-cta"><button class="ns-btn">Contactez-nous</button></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="ns-card" aria-labelledby="ns-s2-title">
+                    <div class="ns-media">
+                        <img src="https://picsum.photos/seed/s2/800/600" alt="Illustration service 2">
+                    </div>
+                    <div class="ns-body">
+                        <div class="ns-title">
+                            <h3 id="ns-s2-title">Consultation E-commerce</h3>
+                        </div>
+                        <p class="ns-desc">Audit stratégique pour optimiser votre boutique et augmenter la conversion.
+                        </p>
+                        <ul class="ns-features">
+                            <li><span class="ns-check">✓</span> Audit UX</li>
+                            <li><span class="ns-check">✓</span> Stratégie</li>
+                            <li><span class="ns-check">✓</span> Tracking</li>
+                            <li><span class="ns-check">✓</span> Roadmap</li>
+                        </ul>
+                        <div class="ns-price-row">
+                            <!-- <div><div class="ns-price">150€/heure</div><small>Consultation</small></div> -->
+                            <div class="ns-cta"><button class="ns-btn">Contactez-nous</button></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="ns-card" aria-labelledby="ns-s3-title">
+                    <div class="ns-media">
+                        <img src="https://picsum.photos/seed/s3/800/600" alt="Illustration service 3">
+                    </div>
+                    <div class="ns-body">
+                        <div class="ns-title">
+                            <h3 id="ns-s3-title">Design Graphique & Branding</h3>
+                        </div>
+                        <p class="ns-desc">Identité visuelle complète : logo, charte et supports imprimés/digitaux.</p>
+                        <ul class="ns-features">
+                            <li><span class="ns-check">✓</span> Logo</li>
+                            <li><span class="ns-check">✓</span> Maquettes</li>
+                            <li><span class="ns-check">✓</span> Print</li>
+                            <li><span class="ns-check">✓</span> Guide</li>
+                        </ul>
+                        <div class="ns-price-row">
+                            <!-- <div><div class="ns-price">À partir de 800€</div><small>Forfait</small></div> -->
+                            <div class="ns-cta"><button class="ns-btn">Contactez-nous</button></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="ns-card" aria-labelledby="ns-s4-title">
+                    <div class="ns-media">
+                        <img src="https://picsum.photos/seed/s4/800/600" alt="Illustration service 4">
+                    </div>
+                    <div class="ns-body">
+                        <div class="ns-title">
+                            <h3 id="ns-s4-title">Marketing Numérique</h3>
+                        </div>
+                        <p class="ns-desc">Acquisition, publicité et SEO pour faire grandir votre trafic.</p>
+                        <ul class="ns-features">
+                            <li><span class="ns-check">✓</span> SEA</li>
+                            <li><span class="ns-check">✓</span> Social Ads</li>
+                            <li><span class="ns-check">✓</span> SEO</li>
+                            <li><span class="ns-check">✓</span> Reporting</li>
+                        </ul>
+                        <div class="ns-price-row">
+                            <div class="ns-cta"><button class="ns-btn">Contactez-nous</button></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="ns-card" aria-labelledby="ns-s5-title">
+                    <div class="ns-media">
+                        <img src="https://picsum.photos/seed/s5/800/600" alt="Illustration service 5">
+                    </div>
+                    <div class="ns-body">
+                        <div class="ns-title">
+                            <h3 id="ns-s5-title">Application Mobile</h3>
+                        </div>
+                        <p class="ns-desc">Applications Android & iOS natives ou cross-platform (React Native).</p>
+                        <ul class="ns-features">
+                            <li><span class="ns-check">✓</span> UX mobile</li>
+                            <li><span class="ns-check">✓</span> API & sync</li>
+                            <li><span class="ns-check">✓</span> Tests</li>
+                            <li><span class="ns-check">✓</span> Déploiement</li>
+                        </ul>
+                        <div class="ns-price-row">
+
+                            <div class="ns-cta"><button class="ns-btn">Contactez-nous</button></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 6 -->
+                <article class="ns-card" aria-labelledby="ns-s6-title">
+                    <div class="ns-media">
+                        <img src="https://picsum.photos/seed/s6/800/600" alt="Illustration service 6">
+                    </div>
+                    <div class="ns-body">
+                        <div class="ns-title">
+                            <h3 id="ns-s6-title">Formation E-commerce</h3>
+                        </div>
+                        <p class="ns-desc">Sessions pratiques pour lancer et gérer votre boutique en ligne.</p>
+                        <ul class="ns-features">
+                            <li><span class="ns-check">✓</span> Modules pratiques</li>
+                            <li><span class="ns-check">✓</span> Exercices</li>
+                            <li><span class="ns-check">✓</span> Support</li>
+                            <li><span class="ns-check">✓</span> Certificat</li>
+                        </ul>
+                        <div class="ns-price-row">
+
+                            <div class="ns-cta"><button class="ns-btn">Contactez-nous</button></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 7 -->
+                <article class="ns-card" aria-labelledby="ns-s7-title">
+                    <div class="ns-media">
+                        <img src="https://picsum.photos/seed/s7/800/600" alt="Illustration service 7">
+                    </div>
+                    <div class="ns-body">
+                        <div class="ns-title">
+                            <h3 id="ns-s7-title">Support & Maintenance</h3>
+                        </div>
+                        <p class="ns-desc">Contrats de support 24/7 pour vos applications critiques.</p>
+                        <ul class="ns-features">
+                            <li><span class="ns-check">✓</span> SLA</li>
+                            <li><span class="ns-check">✓</span> Monitoring</li>
+                            <li><span class="ns-check">✓</span> Patchs</li>
+                            <li><span class="ns-check">✓</span> Backup</li>
+                        </ul>
+                        <div class="ns-price-row">
+                            <!-- <div><div class="ns-price">Sur devis</div><small>Contrat</small></div> -->
+                            <div class="ns-cta"><button class="ns-btn">Contactez-nous</button></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 8 -->
+                <article class="ns-card" aria-labelledby="ns-s8-title">
+                    <div class="ns-media">
+                        <img src="https://picsum.photos/seed/s8/800/600" alt="Illustration service 8">
+                    </div>
+                    <div class="ns-body">
+                        <div class="ns-title">
+                            <h3 id="ns-s8-title">Conseil & Stratégie Digitale</h3>
+                        </div>
+                        <p class="ns-desc">Accompagnement stratégique pour digitaliser et accélérer vos usages.</p>
+                        <ul class="ns-features">
+                            <li><span class="ns-check">✓</span> Roadmap</li>
+                            <li><span class="ns-check">✓</span> Product Strategy</li>
+                            <li><span class="ns-check">✓</span> KPI</li>
+                            <li><span class="ns-check">✓</span> Ateliers</li>
+                        </ul>
+                        <div class="ns-price-row">
+
+                            <div class="ns-cta"><button class="ns-btn">Contactez-nous</button></div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NYOTA: Services carousel ===== -->
+    <!-- ===== NYOTA: Services carousel ===== -->
+    <section class="nyota-services" aria-labelledby="nyota-services-title" style="margin: auto;">
+        <div class="nyota-cta-row">
+            <a class="nyota-cta-btn" href="#">VOIR TOUS NOS SERVICES</a>
+        </div>
+
+        <div class="nyota-services-header">
+            <h2 id="nyota-services-title" class="nyota-services-title">Nos services populaires</h2>
+        </div>
+
+        <div class="nyota-tabs-row">
+            <nav class="nyota-tabs" aria-label="Catégories">
+                <button class="nyota-tab active" type="button" data-filter="all">Tout</button>
+                <button class="nyota-tab" type="button" data-filter="dev">Development & IT</button>
+                <button class="nyota-tab" type="button" data-filter="design">Design & Creative</button>
+                <button class="nyota-tab" type="button" data-filter="marketing">Digital Marketing</button>
+                <button class="nyota-tab" type="button" data-filter="audio">Music & Audio</button>
+                <button class="nyota-tab" type="button" data-filter="video">Video & Animation</button>
+            </nav>
+        </div>
+
+        <div class="nyota-carousel-wrap">
+            <div class="nyota-carousel" role="list">
+                <!-- exemple de carte avec data-category -->
+                <article class="nyota-card" role="listitem" data-category="design">
+                    <div class="nyota-card-thumb">
+                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=60"
+                            alt="Service 1">
+                    </div>
+                    <div class="nyota-card-body">
+                        <div class="nyota-card-kicker">Web & App Design</div>
+                        <h3 class="nyota-card-title">I will design modern websites in figma or adobe xd</h3>
+                        <div class="nyota-card-meta">
+                            <div class="nyota-card-author">
+                                <img src="https://placehold.co/34x34/8a8a8a/ffffff?text=WR" alt="avatar Wanda">
+                                <span>Wanda Russo</span>
+                            </div>
+                            <div class="nyota-card-price">Starting at $983</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- duplique/ajoute d'autres cartes en gardant data-category -->
+                <article class="nyota-card" role="listitem" data-category="design">
+                    <div class="nyota-card-thumb"><img
+                            src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=800&q=60"
+                            alt="">
+                    </div>
+                    <div class="nyota-card-body">
+                        <div class="nyota-card-kicker">Illustration & Art</div>
+                        <h3 class="nyota-card-title">I will create modern flat design illustration</h3>
+                        <div class="nyota-card-meta">
+                            <div class="nyota-card-author"><img
+                                    src="https://placehold.co/34x34/8a8a8a/fff?text=AT"><span>Ali
+                                    Tatum</span></div>
+                            <div class="nyota-card-price">Starting at $640</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="nyota-card" role="listitem" data-category="dev">
+                    <div class="nyota-card-thumb"><img
+                            src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800&q=60"
+                            alt="">
+                    </div>
+                    <div class="nyota-card-body">
+                        <div class="nyota-card-kicker">Design & Creative</div>
+                        <h3 class="nyota-card-title">I will build a fully responsive design in HTML/CSS</h3>
+                        <div class="nyota-card-meta">
+                            <div class="nyota-card-author"><img
+                                    src="https://placehold.co/34x34/8a8a8a/fff?text=EP"><span>Eleonor
+                                    Pena</span></div>
+                            <div class="nyota-card-price">Starting at $820</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="nyota-card" role="listitem" data-category="dev">
+                    <div class="nyota-card-thumb"><img
+                            src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=800&q=60"
+                            alt="">
+                    </div>
+                    <div class="nyota-card-body">
+                        <div class="nyota-card-kicker">Mobile & App</div>
+                        <h3 class="nyota-card-title">I will do mobile app development for ios and android</h3>
+                        <div class="nyota-card-meta">
+                            <div class="nyota-card-author"><img
+                                    src="https://placehold.co/34x34/8a8a8a/fff?text=JR"><span>Jerome
+                                    Bai</span></div>
+                            <div class="nyota-card-price">Starting at $983</div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- autres cartes... -->
+            </div>
+
+            <div class="nyota-carousel-controls" aria-hidden="false">
+                <button class="nyota-carousel-btn prev" aria-label="Précédent">&larr;</button>
+                <button class="nyota-carousel-btn next" aria-label="Suivant">&rarr;</button>
+            </div>
+
+            <div class="nyota-carousel-bullets" aria-hidden="false"></div>
+        </div>
+    </section>
+
+
+    <!-- ===== end services ===== -->
+    <!-- ===== NYOTA: Testimonials ===== -->
+    <section id="nyota-testimonials-section" class="nyota-wrap nyota-testimonials" aria-labelledby="nyota-test-title">
+        <h3 id="nyota-test-title" class="nyota-testimonials-title">Que disent nos meilleurs services — Que disent nos
+            clients ?</h3>
+
+        <div class="nyota-test-cards" role="list">
+            <article class="nyota-test-card" role="listitem" aria-label="Témoignage 1">
+                <div class="nyota-test-rate">★★★★★ <span
+                        style="font-weight:600;color:#6b7280;margin-left:8px;font-size:13px">4.8 (124)</span></div>
+                <p class="nyota-test-text"><strong>Quality of work was excellent</strong><br>J'ai eu une très bonne
+                    expérience
+                    avec l'équipe — pro et rapide.</p>
+                <div class="nyota-test-footer">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <div class="nyota-test-avatar"><img src="https://placehold.co/48x48/ffb6b6/ffffff?text=DD"
+                                alt="avatar Daniel"></div>
+                        <div>
+                            <div style="font-weight:700">Daniel Davis</div>
+                            <div style="font-size:12px;color:#6b7280">7 Days Ago</div>
+                        </div>
+                    </div>
+                    <div style="color:#6b7280;font-size:13px">Service: Electrical</div>
+                </div>
+            </article>
+
+            <article class="nyota-test-card" role="listitem" aria-label="Témoignage 2">
+                <div class="nyota-test-rate">★★★★★ <span
+                        style="font-weight:600;color:#6b7280;margin-left:8px;font-size:13px">4.9 (89)</span></div>
+                <p class="nyota-test-text"><strong>Green Cleaning</strong><br>J'adore leur usage de produits éco sans
+                    compromettre la propreté.</p>
+                <div class="nyota-test-footer">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <div class="nyota-test-avatar"><img src="https://placehold.co/48x48/b6e3ff/ffffff?text=DD"
+                                alt="avatar">
+                        </div>
+                        <div>
+                            <div style="font-weight:700">Daniel Davis</div>
+                            <div style="font-size:12px;color:#6b7280">7 Days Ago</div>
+                        </div>
+                    </div>
+                    <div style="color:#6b7280;font-size:13px">Service: Cleaning</div>
+                </div>
+            </article>
+
+            <article class="nyota-test-card" role="listitem" aria-label="Témoignage 3">
+                <div class="nyota-test-rate">★★★★★ <span
+                        style="font-weight:600;color:#6b7280;margin-left:8px;font-size:13px">4.7 (70)</span></div>
+                <p class="nyota-test-text"><strong>Luxury Car Cleaning</strong><br>Très bonne finition et service
+                    premium.</p>
+                <div class="nyota-test-footer">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <div class="nyota-test-avatar"><img src="https://placehold.co/48x48/d7ffd8/1a1a1a?text=DD"
+                                alt="avatar">
+                        </div>
+                        <div>
+                            <div style="font-weight:700">Daniel Davis</div>
+                            <div style="font-size:12px;color:#6b7280">7 Days Ago</div>
+                        </div>
+                    </div>
+                    <div style="color:#6b7280;font-size:13px">Service: Auto</div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- ===== end testimonials ===== -->
+    <!-- ===== end testimonials ===== -->
+    <!-- ===== NYOTA: Logos ===== -->
+    <!-- ===== NYOTA: Logos ===== -->
+    <div id="nyota-logos-section-uniq" class="nyota-uniq__wrap" aria-label="Partenaires">
+        <div class="nyota-uniq__inner">
+            <div id="nyota-logos-viewport-uniq" class="nyota-uniq__viewport">
+                <div id="nyota-logos-track-uniq" class="nyota-uniq__track">
+                    <!-- ORIGINAL (images en ligne) -->
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Placeholder_view_vector.svg"
+                        alt="Partner 1">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/No-Image-Placeholder.svg"
+                        alt="Partner 2">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/ImagePlaceholder_icon.svg"
+                        alt="Partner 3">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Free_logo.svg" alt="Partner 4">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Placeholder_image.png"
+                        alt="Partner 5">
+
+                    <!-- DUPLICATE for smooth loop -->
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Placeholder_view_vector.svg"
+                        alt="Partner 1">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/No-Image-Placeholder.svg"
+                        alt="Partner 2">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/ImagePlaceholder_icon.svg"
+                        alt="Partner 3">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Free_logo.svg" alt="Partner 4">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Placeholder_image.png"
+                        alt="Partner 5">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===== end logos ===== -->
+
+    <!-- ===== end logos ===== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ******************************************************* -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <br>
+    <section id="newsletter">
+        <div class="newsletter_div">
+            <h3>S'inscrire sur notre newsletter</h3>
+            <h5>Rejoins notre communauté et sois <span class="text-primary"> le premier à découvrir nos offres
+                    exclusives et nos nouvelles
+                    affaires
+                    !</span>
+            </h5>
+        </div>
+        <form action="" class="newsletter_div">
+            <div class="input-group mb-3 w-100 border">
+                <input type="email" class="form-control" placeholder="your email please "
+                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Sign Up</button>
+            </div>
+        </form>
+    </section>
+
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'ecommerce/assets/js/produit.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'ecommerce/assets/js/croussel_home.js' %}"></script>
+    <script src="{% static 'ecommerce/assets/js/mega_menu.js' %}"></script>
+    <script src="{% static 'ecommerce/assets/js/favorites.js' %}"></script>
+
+    <!-- Un script JavaScript -->
+
+        <script>
+
+        function toggleBodyScroll(block) {
+            if (block) {
+                // Bloquer le scroll
+                const scrollY = window.scrollY;
+                document.body.dataset.scrollY = scrollY;
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'relative'; // optionnel, parfois utile
+                document.body.style.top = `-${scrollY}px`;
+            } else {
+                // Débloquer le scroll
+                const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.top = '';
+                window.scrollTo(0, scrollY);
+            }
+        }
+
+        const btnMenu = document.getElementById('menubtn');
+        const btnMenuClose = document.getElementById('menubtnFermer');
+
+        const blocnaviguation = document.getElementById("allnavigationBar");
+        const body = document.body;
+
+        btnMenu.addEventListener('click', () => {
+            blocnaviguation.classList.add("activeDesactive");
+
+            // toggleScroll();body.classList.toggle("body-limited");
+            /*  if (body.classList.contains("no-scroll")) { */
+            // remonte tout en hautwindow.scrollTo(0, 0); 
+            /*  }  */
+            toggleBodyScroll(true);
+        })
+        btnMenuClose.addEventListener('click', () => {
+            blocnaviguation.classList.remove("activeDesactive");
+            toggleBodyScroll(false);
+
+        })
+
+        /* ********************************** */
+        const btnSearch = document.getElementById('searchbtnIcone');
+        const blocSearch = document.querySelector(".blocsearch");
+
+        btnSearch.addEventListener('click', () => {
+            blocSearch.classList.toggle("activeDesactiveSearch");
+        })
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.innerWidth < 982) {
+
+                function initAccordion(btnClass, panelClass, level) {
+                    let buttons = document.getElementsByClassName(btnClass);
+
+                    for (let btn of buttons) {
+                        btn.addEventListener("click", function () {
+                            let panel = this.nextElementSibling;
+
+                            if (!panel || !panel.classList.contains(panelClass)) return;
+
+                            // ---------- NIVEAU 1 ----------
+                            if (level === 1) {
+
+                                // Si ce bouton est déjà actif → fermer et sortir
+                                if (this.classList.contains("active")) {
+                                    this.classList.remove("active");
+                                    panel.style.display = "none";
+
+                                    // Fermer aussi tout le niveau 2 dans ce panel
+                                    panel.querySelectorAll(".panel_n2").forEach(p2 => p2.style.display = "none");
+                                    panel.querySelectorAll(".accordion_n2").forEach(b2 => b2.classList.remove("active"));
+
+                                    return;
+                                }
+
+                                // Fermer tous les panels niveau 1
+                                document.querySelectorAll("." + panelClass).forEach(p => p.style.display = "none");
+                                document.querySelectorAll("." + btnClass).forEach(b => b.classList.remove("active"));
+
+                                // Fermer tous les panels niveau 2
+                                document.querySelectorAll(".panel_n2").forEach(p2 => p2.style.display = "none");
+                                document.querySelectorAll(".accordion_n2").forEach(b2 => b2.classList.remove("active"));
+
+                                // Ouvrir celui demandé
+                                this.classList.add("active");
+                                panel.style.display = "block";
+
+                                return;
+                            }
+
+
+                            // ---------- NIVEAU 2 ----------
+                            if (level === 2) {
+
+                                // Toggle : si déjà ouvert → fermer
+                                if (this.classList.contains("active")) {
+                                    this.classList.remove("active");
+                                    panel.style.display = "none";
+                                    return;
+                                }
+
+                                // Trouver le panel parent de niveau 1
+                                let parentPanel = this.closest(".panel");
+
+                                // Fermer seulement les niveaux 2 dans ce panel parent
+                                parentPanel.querySelectorAll(".panel_n2").forEach(p2 => p2.style.display = "none");
+                                parentPanel.querySelectorAll(".accordion_n2").forEach(b2 => b2.classList.remove("active"));
+
+                                // Ouvrir celui demandé
+                                this.classList.add("active");
+                                panel.style.display = "block";
+                            }
+                        });
+                    }
+                }
+
+
+                /* function applyAccordionAnimations() {
+                    const observer = new MutationObserver((mutations) => {
+                        for (let m of mutations) {
+                            if (m.attributeName === "style") {
+                                let panel = m.target;
+                
+                                if (panel.style.display === "block") {
+                                    panel.classList.add("open");
+                                } else {
+                                    panel.classList.remove("open");
+                                }
+                            }
+                        }
+                    });
+                
+                   
+                    document.querySelectorAll(".panel, .panel_n2").forEach(panel => {
+                        observer.observe(panel, { attributes: true });
+                    });
+                } */
+
+                /* applyAccordionAnimations(); */
+
+
+
+                // ---- Initialisation ----
+                initAccordion("accordion", "panel", 1);          // Niveau 1
+                initAccordion("accordion_n2", "panel_n2", 2);    // Niveau 
+
+
+            }
+        });
+
+        function startTypewriter(elementId, items, speed = 100, eraseSpeed = 50, delayBetween = 1000) {
+            let index = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            const output = document.getElementById(elementId);
+
+            function type() {
+                const current = items[index];
+
+                // Applique la couleur si définie
+                if (current.color) {
+                    output.style.color = current.color;
+                    output.style.fontWeight = 'bolder';
+                    output.style.textTransform = 'Capitalize';
+                }
+
+                if (!isDeleting) {
+                    // Écriture
+                    output.innerHTML = current.icon + " " + current.text.slice(0, charIndex + 1); charIndex++;
+
+                    if (charIndex === current.text.length) {
+                        // Attendre avant d'effacer
+                        isDeleting = true;
+                        setTimeout(type, delayBetween);
+                        return;
+                    }
+                } else {
+                    // Effacement
+                    output.textContent = current.text.slice(0, charIndex - 1);
+                    charIndex--;
+
+                    if (charIndex === 0) {
+                        // Texte suivant
+                        isDeleting = false;
+                        index = (index + 1) % items.length;
+                    }
+                }
+
+                setTimeout(type, isDeleting ? eraseSpeed : speed);
+            }
+
+            type();
+        }
+
+
+
+
+        const messagesMarketing = [
+            {
+                text: "Profitez de nos offres exclusives !",
+                color: "#e63946",
+                icon: "<i class='fas fa-tags'></i>"
+            },
+            {
+                text: "Découvrez nos nouvelles tendances.",
+                color: "#1d3557",
+                icon: "<i class='fas fa-fire'></i>"
+            },
+            {
+                text: "Livraison rapide et paiement sécurisé.",
+                color: "#2a9d8f",
+                icon: "<i class='fas fa-shipping-fast'></i>"
+            },
+            {
+                text: "Nos milliers de clients satisfaits !",
+                color: "#f4a261",
+                icon: "<i class='fas fa-smile'></i>"
+            }
+        ];
+
+
+        // Lancer l'effet
+        startTypewriter("livraison-bloc", messagesMarketing);
+        //initMobileAccordion("navbarre_linkCategorie", "sub-menu-1");
+
+
+    </script>
+{% endblock %}
+    <!-- ****************   CDN JS    ************ -->
+
+
+
+
+
+
+

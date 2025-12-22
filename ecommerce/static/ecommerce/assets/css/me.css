@@ -1,0 +1,22 @@
+.search-wrapper { position: relative; }
+
+.search-input {
+  width: 100%;
+  padding-right: 3.2rem; /* espace pour le bouton */
+  box-sizing: border-box;
+}
+
+.search-icon-btn{
+  position: absolute;
+  right: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* accessible focus */
+.search-icon-btn:focus { outline: 2px solid rgba(0,123,255,0.25); }

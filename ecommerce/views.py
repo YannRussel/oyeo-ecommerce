@@ -1,0 +1,291 @@
+# ecommerce/views.py
+
+import json
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse, HttpResponseBadRequest, Http404
+from django.views.decorators.cache import never_cache
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.utils import timezone
+from django.db.models import Prefetch, Q
+import random
+from django.db.models import Case, When, Value, IntegerField
+
+from .models import (
+    SliderImage,
+    Category,
+    CategorySlugHistory,
+    Product,
+    ProductImage,
+    Section,
+    ProductSection,
+    Favorite,
+)
+
+
+# ------------------------
+# Helpers
+# ------------------------
+def build_breadcrumbs(category):
+    """
+    Construit le fil d’Ariane en remontant la hiérarchie des catégories.
+    Retourne une liste ordered root->leaf : [{label, url}, ...]
+    """
+    crumbs = []
+    current = category
+    while current:
+        crumbs.append({
+            "label": current.name,
+            "url": current.get_absolute_url()
+        })
+        current = current.parent
+    crumbs.reverse()
+    return crumbs
+
+
+def _get_user_favorites_for_product_ids(user, product_ids):
+    """
+    Retourne un set d'ids de produits favoris pour l'utilisateur donné.
+    Si user est anonymous, retourne set() rapidement.
+    """
+    if not user.is_authenticated or not product_ids:
+        return set()
+    return set(Favorite.objects.filter(user=user, product_id__in=product_ids).values_list('product_id', flat=True))
+
+
+def get_leaf_categories(category):
+    """
+    Retourne la liste des catégories feuilles (objets Category)
+    sous `category` (inclut `category` si elle est feuille).
+    """
+    leaves = []
+
+    def walk(cat):
+        children_qs = cat.children.filter(is_active=True)
+        if not children_qs.exists():
+            leaves.append(cat)
+        else:
+            for child in children_qs:
+                walk(child)
+
+    walk(category)
+    return leaves
+
+# ------------------------
+# Accueil
+# ------------------------
+def acceuil(request):
+    """
+    Récupère les images du slider via le manager custom.
+    Passe 'images' au template pour affichage.
+    (Si tu affiches aussi des produits sur l'accueil, on pourrait y ajouter user_favorites)
+    """
+    images = SliderImage.objects.get_slider_images(limit=5)
+
+    context = {
+        'images': images,
+    }
+    return render(request, 'ecommerce/index.html', context)
+
+
+# ------------------------
+# Category detail (overview or product listing)
+# ------------------------
+def category_detail(request, slug):
+    """
+    Affiche les sous-catégories ET/OU les produits d'une catégorie.
+    Les produits listés comprennent ceux dont la primary_category OU la M2M 'categories'
+    est une catégorie feuille descendant de la catégorie demandée.
+    L'affichage des produits est aléatoire et paginé.
+    """
+    category = get_object_or_404(Category, slug=slug, is_active=True)
+    # Sous-catégories directes (pour affichage en haut de page, menu, etc.)
+    children = category.children.filter(is_active=True).order_by('order', 'name')
+    breadcrumbs = build_breadcrumbs(category)
+
+    # --- récupérer les catégories feuilles ---
+    leaf_categories = get_leaf_categories(category)
+    leaf_ids = [c.pk for c in leaf_categories]
+
+    # debug (optionnel) : décommente pour voir dans la console
+    # print("DEBUG leaf_ids for category", category.slug, leaf_ids)
+
+    # --- queryset de base : primary_category OU categories (M2M) ---
+    base_qs = Product.objects.filter(
+        Q(primary_category__in=leaf_ids) | Q(categories__in=leaf_ids),
+        is_active=True
+    ).distinct().select_related('brand', 'primary_category')
+
+    product_ids = list(base_qs.values_list('pk', flat=True))
+
+    if not product_ids:
+        breadcrumbs.append({"label": "0 Articles", "url": None})
+        return render(request, 'ecommerce/categorie.html', {
+            'category': category,
+            'children': children,
+            'products': [],
+            'page_obj': None,
+            'breadcrumbs': breadcrumbs,
+            'user_favorites': set(),
+        })
+
+    # Mélange aléatoire des ids (en Python)
+    random_ids = random.sample(product_ids, k=len(product_ids))
+
+    # Conserver l'ordre aléatoire en SQL via CASE WHEN
+    order_expr = Case(
+        *[When(pk=pk, then=Value(i)) for i, pk in enumerate(random_ids)],
+        output_field=IntegerField()
+    )
+
+    main_img_qs = ProductImage.objects.filter(is_main=True)
+
+    products_qs = (
+        Product.objects.filter(pk__in=random_ids)
+        .annotate(_rand_order=order_expr)
+        .order_by('_rand_order')
+        .prefetch_related(Prefetch('images', queryset=main_img_qs, to_attr='prefetched_main_images'))
+        .select_related('brand', 'primary_category')
+    )
+
+    # pagination (ajuste le nombre par page si besoin)
+    paginator = Paginator(products_qs, 24)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    page_product_ids = [p.pk for p in page_obj.object_list]
+    user_favorites = _get_user_favorites_for_product_ids(request.user, page_product_ids)
+
+    breadcrumbs.append({"label": f"{len(product_ids)} Articles", "url": None})
+
+    return render(request, 'ecommerce/categorie.html', {
+        'category': category,
+        'children': children,
+        'products': page_obj.object_list,  # liste des produits à afficher
+        'page_obj': page_obj,
+        'breadcrumbs': breadcrumbs,
+        'user_favorites': user_favorites,
+    })
+
+# ------------------------
+# Section list (paged)
+# ------------------------
+def section_list(request, slug):
+    """
+    Liste paginée des ProductSection actifs pour une section.
+    Passe page_obj (page d'objets ProductSection) ET product_sections (liste) et user_favorites.
+    """
+    section = get_object_or_404(Section, slug=slug, is_active=True)
+    now = timezone.now()
+
+    # queryset ProductSection valides pour cette section
+    ps_qs = ProductSection.objects.filter(
+        section=section,
+        is_active=True
+    ).filter(
+        Q(start_date__lte=now) | Q(start_date__isnull=True),
+        Q(end_date__gte=now) | Q(end_date__isnull=True)
+    ).select_related('product', 'product__brand').order_by('order', '-created_at')
+
+    # précharger l'image principale si tu utilises ProductImage.is_main
+    main_img_qs = ProductImage.objects.filter(is_main=True)
+    ps_qs = ps_qs.prefetch_related(Prefetch('product__images', queryset=main_img_qs, to_attr='prefetched_main_images'))
+
+    # pagination (ex : 24 produits par page)
+    paginator = Paginator(ps_qs, 24)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    # Récupère les product ids présents sur la page (pour calculer user_favorites)
+    product_ids = [ps.product_id for ps in page_obj.object_list]
+    user_favorites = _get_user_favorites_for_product_ids(request.user, product_ids)
+
+    context = {
+        'section': section,
+        'page_obj': page_obj,          # page d'objets ProductSection
+        'product_sections': page_obj.object_list,  # compatibilité templates
+        'user_favorites': user_favorites,
+    }
+    return render(request, 'ecommerce/section_list.html', context)
+
+
+# ------------------------
+# Product detail
+# ------------------------
+def product_detail(request, slug):
+    """
+    Détail produit : récupère le product par slug et précharge l'image principale.
+    Fournit aussi is_favorited pour le user connecté.
+    """
+    product = get_object_or_404(Product, slug=slug, is_active=True)
+
+    # précharger l'image principale si tu utilises ProductImage.is_main
+    main_img_qs = ProductImage.objects.filter(is_main=True)
+    product = Product.objects.filter(pk=product.pk).prefetch_related(
+        Prefetch('images', queryset=main_img_qs, to_attr='prefetched_main_images')
+    ).select_related('brand', 'primary_category').first()
+
+    if not product:
+        product = get_object_or_404(Product, slug=slug, is_active=True)
+
+    # état favori pour le produit
+    is_favorited = False
+    if request.user.is_authenticated:
+        is_favorited = Favorite.objects.filter(user=request.user, product=product).exists()
+
+    context = {
+        'product': product,
+        'is_favorited': is_favorited,
+    }
+    return render(request, 'ecommerce/product_detail.html', context)
+
+
+# ------------------------
+# Toggle favorite (AJAX)
+# ------------------------
+@require_POST
+@login_required
+def toggle_favorite(request):
+    """
+    Reçoit product_id (POST JSON ou form-data).
+    Retourne JSON : { favorited: bool, count: int }
+    """
+    # support JSON body ou form-data
+    if request.content_type == 'application/json':
+        try:
+            payload = json.loads(request.body.decode())
+        except Exception:
+            return HttpResponseBadRequest("JSON invalide")
+        product_id = payload.get('product_id')
+    else:
+        product_id = request.POST.get('product_id')
+
+    if not product_id:
+        return HttpResponseBadRequest("product_id manquant")
+
+    product = get_object_or_404(Product, pk=product_id)
+
+    fav, created = Favorite.objects.get_or_create(user=request.user, product=product)
+    if not created:
+        # existait déjà -> supprimer (toggle off)
+        fav.delete()
+        favorited = False
+    else:
+        favorited = True
+
+    count = Favorite.objects.filter(product=product).count()
+    return JsonResponse({'favorited': favorited, 'count': count})
+
+
+# ------------------------
+# Menu API (si utilisé)
+# ------------------------
+def menu_api(request):
+    from .context_processors import build_menu_structure
+    return JsonResponse(build_menu_structure(), safe=False, json_dumps_params={'ensure_ascii': False})
+
+# Liens vers cartes cadeaux
+
+def carte_cadeaux(request) :
+    return render(request, 'ecommerce/Oyéo_cartes cadeaux.html')

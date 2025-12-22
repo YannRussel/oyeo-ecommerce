@@ -1,0 +1,16 @@
+from django.urls import path
+from . import views
+
+app_name = "ecommerce" 
+
+urlpatterns = [
+    # Exemple de route
+    path('', views.acceuil, name='acceuil-site'),
+    path('category/<slug:slug>/', views.category_detail, name='category_detail'),
+    path('api/menu/', views.menu_api, name='menu_api'),
+    path('sections/<slug:slug>/', views.section_list, name='section_list'),
+    path('produit/<slug:slug>/', views.product_detail, name='product_detail'),
+    path('favorites/toggle/', views.toggle_favorite, name='toggle_favorite'),
+    # Liens vers cartes cadeaux
+    path('carte-cadeaux', views.carte_cadeaux, name='carte-cadeaux'),
+]

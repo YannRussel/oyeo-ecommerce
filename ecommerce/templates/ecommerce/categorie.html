@@ -1,0 +1,1138 @@
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% block title %}Oyéo – Categorie{% endblock %}
+
+
+{% block extra_css %}
+ <!-- CDN externes (Bootstrap, FontAwesome) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- CSS internes (via static) -->
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/color.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/font.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/top_search_navigation.css' %}">
+
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/home_product.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/categorie_croussel.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/categorie.css' %}">
+
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/general.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<!-- DESIGNATION DE LA CATEGORIE -->
+    <div class="container_">
+        <div class="breadcrumb__links my-3">
+
+            <a href="{% url 'ecommerce:acceuil-site' %}">Acceuil</a>
+
+            {% for crumb in breadcrumbs %}
+            <span class="separator">›</span>
+            {% if crumb.url %}
+            <a href="{{ crumb.url }}" class="{% if forloop.last %}text-primary{% endif %}">
+                {{ crumb.label }}
+            </a>
+            {% else %}
+            <span class="text-muted">{{ crumb.label }}</span>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+
+<!-- CROUSSEL CATEGORIE -->
+
+<!-- ====== Bootstrap Carousel Custom ====== -->
+    <div class="container_ my-2"><!-- slide -->
+        <div id="productCarousel" class="carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
+
+
+            <div class="carousel-inner">
+
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active slide-1">
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <h2>Les Femmes et la mode</h2>
+                            <p class="text-secondary">Découvrez des denière fabrication <br> de la mode feminine.</p>
+                            <a class="btn btn-commande">Commander</a>
+                        </div>
+                        <img src="{./ressources/img/articles/card-image3.jpg}" alt="" srcset=""
+                            class="image_carrousel shadow">
+
+                    </div>
+                </div>
+
+
+                <!-- Slide 2 -->
+                <div class="carousel-item slide-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <h2 class="text-light">Livraison Rapide et Sécurisée</h2>
+                            <p class="text-light">Découvrez des denière fabrication <br> de la mode feminine.</p>
+                            <a class="btn btn-commande">Commander</a>
+                        </div>
+                        <img src="./ressources/img/articles/card-image5.jpg" alt="" srcset=""
+                            class=" image_carrousel shadow">
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item slide-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                            <h2 class="text-light">Fiable et Approuvé partout</h2>
+                            <p class="text-light">Rejoignez une communauté croissante de clients <br> satisfaits et en
+                                bonne santé.</p>
+                            <a class="btn btn-commande">Commander</a>
+                        </div>
+                        <img src="./ressources/img/articles/card-image6.jpg" alt="" srcset=""
+                            class="image_carrousel shadow">
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <!-- Contrôles gauche / droite uniquement -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+
+        </div>
+    </div>
+
+<div class="container_ my-3">
+    <div class="bloc-title-categorie">
+        <h4 class="page-title-categorie py-2" style="font-weight: bold;">
+            {{ category.name }}
+        </h4>
+    </div>
+</div>
+
+<div class="container_ mt-3 mb-2">
+    <div class="filters-wrapper">
+
+        <!-- Bouton gauche -->
+        <button id="scrollLeft" class="scroll-arrow me-3 px-3" disabled>
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <!-- Conteneur scrollable -->
+        <div id="filtersContainer" class="filters-container">
+
+            {# Lien vers la catégorie principale #}
+            <a href="{{ category.get_absolute_url }}" class="btn filter-item">
+                Tous
+            </a>
+
+            {# Sous-catégories dynamiques #}
+            {% for sub in children %}
+                <a href="{{ sub.get_absolute_url }}" class="btn filter-item">
+                    {{ sub.name }}
+                </a>
+            {% empty %}
+                <span class="btn filter-item disabled">
+                    Aucune sous-catégorie
+                </span>
+            {% endfor %}
+
+        </div>
+
+        <!-- Bouton droit -->
+        <button id="scrollRight" class="scroll-arrow ms-3 px-3">
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+    </div>
+</div>
+
+    <div class="container_ container_filtre_marge">
+        <!-- En-tête contenu: titre + filtres -->
+        <form action="">
+            <div class="content-header">
+                <a class="btn " id="filtre_detailler"><i class="fa-solid fa-sliders"></i> Plus de Filtre </a>
+
+                <div class="d-flex  justify-content-between  flex-nowrap">
+                    <div id="bloc_filtre_detailler" class="">
+                        <div  class="d-flex flex-wrap align-items-center filter_block"
+                            role="toolbar" aria-label="Filtres">
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Marque</option>
+                                <option value="">Adidas</option>
+                                <option value="">Nike</option>
+                                <option value="">Jordan</option>
+                            </select>
+
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Taille</option>
+                                <option value="">xl</option>
+                                <option value="">xxl</option>
+                                <option value="">lg</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Couleur</option>
+                                <option value="">Noir </option>
+                                <option value="">Vert</option>
+                                <option value="">Bleu</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Prix</option>
+                                <option value=""> < à 35 $ </option>
+                                <option value=""> > a 50$</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Propriete</option>
+                                <option value=""> Propriete 1 </option>
+                                <option value=""> Propriete 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Style</option>
+                                <option value=""> Style 1 </option>
+                                <option value=""> Style 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Forme</option>
+                                <option value=""> Forme 1 </option>
+                                <option value=""> Forme 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Doublure</option>
+                                <option value=""> Doublure 1 </option>
+                                <option value=""> Doublure 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Matière</option>
+                                <option value=""> Matière 1 </option>
+                                <option value=""> Matière 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Catregorie</option>
+                                <option value=""> Promotion</option>
+                                <option value=""> Nouveauté</option>
+                            </select>
+
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Taille</option>
+                                <option value="">xl</option>
+                                <option value="">xxl</option>
+                                <option value="">lg</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Couleur</option>
+                                <option value="">Noir </option>
+                                <option value="">Vert</option>
+                                <option value="">Bleu</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Prix</option>
+                                <option value="">
+                                    < à 35 $ </option>
+                                <option value=""> > a 50$</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Propriete</option>
+                                <option value=""> Propriete 1 </option>
+                                <option value=""> Propriete 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value=""> Style </option>
+                                <option value=""> Style 1 </option>
+                                <option value=""> Style 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value=""> Forme </option>
+                                <option value=""> Forme 1 </option>
+                                <option value=""> Forme 2 </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="statistiques_recherche"><!-- statistiques_recherche -->
+                        <div class="sous_statistique_recherche justify-content-end">
+                            <div class="border-end "><!--  me-2 -->
+                                <a href="categorie.html" class=" py-2 px-2 text-secondary" style="text-decoration: none;">10 522 resultats </a>
+                                <small class="text-secondary border px-2" style="border-radius: 50px; font-size: 12px;">?</small>
+                            </div>
+
+                            <div class="d-flex statdiv_2 justify-content-start align-items-center">
+                                <span class="text-secondary d-block">Trier par </span>
+                                <button type="submit" class="enGras btn_recommandation ">Recommander▾</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+<!-- LES PRODUITS  -->
+    <div class="container_ my-5">
+        <div class="d-flex justify-content-around align-items-center flex-wrap">
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/about-6.png" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/about-8.png" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/card-image3.jpg" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/card-image6.jpg" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/author-item.jpg" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/banner-image3.jpg" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>n
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/card-item9.jpg" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/maison (2).jpg" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/maison (4).jpg" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit-grid-categorie">
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/maison (1).jpg" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- === SECTION PRODUITS CATEGORIE A LA UNE  === -->
+
+
+    <section class="product-section">
+        <div class="section-header mx-5">
+            <h2 class="section-title">A la une </h2>
+            <a href="./two_page/css.html" class="see-more" title="Voir plus de produits"
+                aria-label="Voir plus de produits">Voir plus →</a>
+        </div>
+
+        <div class="product-carousel-wrapper">
+            <!-- Flèche gauche -->
+            <button class="scroll-btn left">←</button>
+
+            <!-- Conteneur scrollable des cartes -->
+            <div class="product-grid scroll-container">
+                <!-- Carte produit 1 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/about-6.png" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 2 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/card-image3.jpg" alt="Tropical Print Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Nike</span>
+
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Tropical Print Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★☆ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$65</span>
+                                <span class="original-price">$85</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 3 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/card-image5.jpg" alt="Abstract Pattern Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Puma</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Abstract Pattern Shirt</h3>
+                        </a>
+
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$72</span>
+                                <span class="original-price">$90</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 4 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/aliment (1).jpg" alt="Stripe Beach Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Reebok</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Stripe Beach Shirt</h3>
+                        </a>
+                        <div class="rating">★★★☆☆ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$59</span>
+                                <span class="original-price">$75</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 5 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/card-image6.jpg" alt="Vintage Floral Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Levi’s</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Vintage Floral Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★☆ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$110</span>
+                                <span class="original-price">$85</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 6 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/banner-image3.jpg" alt="Navy Blossom Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Uniqlo</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Navy Blossom Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$92</span>
+                                <span class="original-price">$120</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 7 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/f7.jpg" alt="Striped Floral Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Uniqlo</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Striped Floral Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$92</span>
+                                <span class="original-price">$120</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 8 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/img/articles/product-4.jpg" alt="Botanical Print Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Uniqlo</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Botanical Print Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$92</span>
+                                <span class="original-price">$120</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flèche droite -->
+            <button class="scroll-btn right">→</button>
+        </div>
+    </section>
+<!-- ******************************************************* -->
+
+    <section id="newsletter">
+        <div class="newsletter_div">
+            <h3>S'inscrire sur notre newsletter</h3>
+            <h5>Rejoins notre communauté et sois <span class="text-primary"> le premier à découvrir nos offres exclusives et
+                    nos nouvelles
+                    affaires
+                    !</span>
+            </h5>
+        </div>
+        <form action="" class="newsletter_div">
+            <div class="input-group mb-3 w-100 border">
+                <input type="email" class="form-control" placeholder="your email please " aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Sign Up</button>
+            </div>
+        </form>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+
+<!-- ****************   CDN JS    ************ -->
+    <script src="{% static 'ecommerce/assets/js/produit.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const btnMenu = document.getElementById('menubtn');
+        const blocnaviguation = document.getElementById("allnavigationBar");
+        const body = document.body;
+
+        btnMenu.addEventListener('click', () => {
+            blocnaviguation.classList.toggle("activeDesactive");
+            body.classList.toggle("body-limited");
+            /*  if (body.classList.contains("no-scroll")) { */
+            // remonte tout en hautwindow.scrollTo(0, 0); 
+            /*  }  */
+        })
+
+        /* ********************************** */
+        const btnSearch = document.getElementById('searchbtnIcone');
+        const blocSearch = document.querySelector(".blocsearch");
+
+        btnSearch.addEventListener('click', () => {
+            blocSearch.classList.toggle("activeDesactiveSearch");
+
+        })
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.innerWidth < 800) {
+                /*******************************/
+
+                /*  var acc_n1 = document.getElementsByClassName("accordion");
+                var i;
+    
+                for (i = 0; i < acc_n1.length; i++) {
+                    acc_n1[i].addEventListener("click", function () {
+                        /* Toggle between adding and removing the "active" class,
+                        to highlight the button that controls the panel */
+                /* this.classList.toggle("active");
+
+                /* Toggle between hiding and showing the active panel */
+                /*   var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        } */
+
+
+                /************************************************/
+                // je peux ouvrir plusieur ou même moment 
+
+                function closeAllPanels(panelClass) {
+                    let panels = document.querySelectorAll("." + panelClass);
+                    panels.forEach(panel => {
+                        panel.style.display = "none";
+                    });
+                }
+
+
+
+
+                function initAccordion(btnClass, panelClass) {
+                    let buttons = document.getElementsByClassName(btnClass);
+
+
+                    for (let btn of buttons) {
+                        btn.addEventListener("click", function () {
+                            this.classList.toggle("active");
+
+                            // Le panel est l'élément suivant qui contient la classe panelClass
+                            let panel = this.nextElementSibling;
+
+                            // Vérifier que panel a bien la classe souhaitée
+                            if (!panel.classList.contains(panelClass)) return;
+
+                            if (panel.style.display === "block") {
+                                panel.style.display = "none";
+                            } else {
+                                panel.style.display = "block";
+                            }
+                        });
+                    }
+                }
+
+                // il ferme ceux qui son deja ouverte
+                function initAccordionFermetureAuto(btnClass, panelClass) {
+
+                    let buttons = document.querySelectorAll("." + btnClass);
+                    closeAllPanels("panel_n2");
+                    buttons.forEach(btn => {
+                        btn.addEventListener("click", function () {
+
+                            // 1️⃣ Fermer tous les autres accordéons
+                            buttons.forEach(otherBtn => {
+                                if (otherBtn !== btn) {
+                                    otherBtn.classList.remove("active");
+
+                                    let otherPanel = otherBtn.nextElementSibling;
+                                    if (otherPanel && otherPanel.classList.contains(panelClass)) {
+                                        otherPanel.style.display = "none";
+                                    }
+                                }
+                            });
+
+                            // 2️⃣ Ouvrir / fermer celui qui est cliqué
+                            this.classList.toggle("active");
+
+                            let panel = this.nextElementSibling;
+                            if (panel && panel.classList.contains(panelClass)) {
+                                if (panel.style.display === "block") {
+                                    panel.style.display = "none";
+                                } else {
+                                    panel.style.display = "block";
+                                }
+                            }
+                        });
+                    });
+                }
+
+                initAccordion("accordion", "panel");
+                initAccordionFermetureAuto("accordion_n2", "panel_n2");
+            }
+        });
+
+
+
+
+        function startTypewriter(elementId, items, speed = 100, eraseSpeed = 50, delayBetween = 1000) {
+            let index = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            const output = document.getElementById(elementId);
+
+            function type() {
+                const current = items[index];
+
+                // Applique la couleur si définie
+                if (current.color) {
+                    output.style.color = current.color;
+                    output.style.fontWeight = 'bolder';
+                    output.style.textTransform = 'Capitalize';
+                }
+
+                if (!isDeleting) {
+                    // Écriture
+                    output.innerHTML = current.icon + " " + current.text.slice(0, charIndex + 1); charIndex++;
+
+                    if (charIndex === current.text.length) {
+                        // Attendre avant d'effacer
+                        isDeleting = true;
+                        setTimeout(type, delayBetween);
+                        return;
+                    }
+                } else {
+                    // Effacement
+                    output.textContent = current.text.slice(0, charIndex - 1);
+                    charIndex--;
+
+                    if (charIndex === 0) {
+                        // Texte suivant
+                        isDeleting = false;
+                        index = (index + 1) % items.length;
+                    }
+                }
+
+                setTimeout(type, isDeleting ? eraseSpeed : speed);
+            }
+
+            type();
+        }
+
+
+
+
+        const messagesMarketing = [
+            {
+                text: "Profitez de nos offres exclusives !",
+                color: "#e63946",
+                icon: "<i class='fas fa-tags'></i>"
+            },
+            {
+                text: "Découvrez nos nouvelles tendances.",
+                color: "#1d3557",
+                icon: "<i class='fas fa-fire'></i>"
+            },
+            {
+                text: "Livraison rapide et paiement sécurisé.",
+                color: "#2a9d8f",
+                icon: "<i class='fas fa-shipping-fast'></i>"
+            },
+            {
+                text: "Nos milliers de clients satisfaits !",
+                color: "#f4a261",
+                icon: "<i class='fas fa-smile'></i>"
+            }
+        ];
+
+
+        // Lancer l'effet
+        startTypewriter("livraison-bloc", messagesMarketing);
+        //initMobileAccordion("navbarre_linkCategorie", "sub-menu-1");
+
+
+    </script>
+
+
+    <script>
+    const container = document.getElementById('filtersContainer');
+    const btnLeft = document.getElementById('scrollLeft');
+    const btnRight = document.getElementById('scrollRight');
+    const scrollStep = 150; // distance à chaque clic
+
+    function updateButtons() {
+        btnLeft.disabled = container.scrollLeft <= 0;
+        btnRight.disabled = container.scrollLeft + container.clientWidth >= container.scrollWidth - 1;
+    }
+
+    btnLeft.addEventListener('click', () => {
+        container.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        setTimeout(updateButtons, 400);
+    });
+
+    btnRight.addEventListener('click', () => {
+        container.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        setTimeout(updateButtons, 400);
+    });
+
+    container.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', updateButtons);
+    </script>
+{% endblock %}

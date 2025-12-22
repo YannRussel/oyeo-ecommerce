@@ -1,0 +1,140 @@
+{% load static %}
+
+{% with menu_data=mega_menu_categories|default:menu %}
+<ul class="main-categories d-flex align-items-center">
+  {% for cat in menu_data %}
+    <li class="nav-item position-relative {% if cat.is_fixed %}fixed-category{% endif %}">
+      <div class="navbarre_linkCategorie d-flex align-items-center">
+        <a class="desktop_sousCategorie" href="{{ cat.url }}">{{ cat.title }}</a>
+        <a class="navbarre_linkCategorie_fleche" href="{{ cat.url }}" aria-label="Aller à {{ cat.title }}">
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      {# Si la catégorie a des enfants, on affiche le mega-menu full-width #}
+      {% if cat.children %}
+        <div class="mega-panel">
+          <div class="container-fluid">
+            <div class="row">
+
+              {# Topbar : liens rapides vers les sous-catégories #}
+              <div class="col-12 mega-topbar">
+                <nav class="d-flex flex-wrap gap-3 py-2" aria-label="Sous-catégories de {{ cat.title }}">
+                  {% for sub in cat.children %}
+                    <a class="mega-top-link" href="{{ sub.url }}">{{ sub.title }} →</a>
+                  {% endfor %}
+                </nav>
+              </div>
+
+              {# Corps du mega : une colonne par sous-catégorie + colonne "À la une" #}
+              <div class="col-12">
+                <div class="row mega-columns py-3">
+
+                  {# Colonnes des sous-catégories (items_flat utilisé pour simplicité) #}
+                  {% for sub in cat.children %}
+                    <div class="col-md-3 col-sm-6 mb-4">
+                      <h6 class="enGras">{{ sub.title }}</h6>
+
+                      {% if sub.items_flat %}
+                        {% for it in sub.items_flat|slice:":8" %}
+                          <p class="mb-1"><a href="{{ it.url }}">{{ it.title }}</a></p>
+                        {% endfor %}
+
+                        {% if sub.items_flat|length > 8 %}
+                          <p class="mt-2"><a href="{{ sub.url }}">Voir tout →</a></p>
+                        {% endif %}
+                      {% else %}
+                        <p class="text-muted small">Aucun élément</p>
+                      {% endif %}
+
+                    </div>
+                  {% endfor %}
+
+                  {# Colonne "À la une" : on utilise les cards pré-calculées du premier enfant si disponibles #}
+                  <div class="col-md-3 col-sm-12 mb-4">
+                    <h6 class="enGras">À la une</h6>
+                    <div class="row">
+                      {% with first_sub=cat.children.0 %}
+                        {% if first_sub and first_sub.cards %}
+                          {% for card in first_sub.cards|slice:":4" %}
+                            <div class="col-6 mb-3">
+                              <div class="image_navbar shadow-sm"
+                                   style="background-image: url('{% if card.image %}{{ card.image }}{% else %}{% static 'ecommerce/assets/img/fallback.jpg' %}{% endif %}'); height:80px; background-size:cover; background-position:center;">
+                              </div>
+                              <a href="{{ card.url }}" class="d-block mt-1 small">{{ card.title }}</a>
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                          {# fallback : chercher la première sous-catégorie ayant des cards ou items avec image #}
+                          {% with fallback_cards=None %}
+                            {% for s in cat.children %}
+                              {% if s.cards and not fallback_cards %}
+                                {% with fallback_cards=s.cards %}{% endwith %}
+                              {% endif %}
+                            {% endfor %}
+
+                            {% if not fallback_cards %}
+                              {% for s in cat.children %}
+                                {% if s.items_flat %}
+                                  {% for it in s.items_flat %}
+                                    {% if it.image %}
+                                      {% if not fallback_cards %}
+                                        {% with tmplist=[] %}{% endwith %}
+                                        {% with fallback_cards=tmplist %}{% endwith %}
+                                      {% endif %}
+                                      {% with _=fallback_cards.append(it) %}{% endwith %}
+                                    {% endif %}
+                                  {% endfor %}
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+
+                            {% if fallback_cards %}
+                              {% for card in fallback_cards|slice:":4" %}
+                                <div class="col-6 mb-3">
+                                  <div class="image_navbar shadow-sm"
+                                       style="background-image: url('{% if card.image %}{{ card.image }}{% else %}{% static 'ecommerce/assets/img/fallback.jpg' %}{% endif %}'); height:80px; background-size:cover; background-position:center;">
+                                  </div>
+                                  <a href="{{ card.url }}" class="d-block mt-1 small">{{ card.title }}</a>
+                                </div>
+                              {% endfor %}
+                            {% else %}
+                              <p class="small text-muted">Aucun élément à la une</p>
+                            {% endif %}
+
+                          {% endwith %}
+                        {% endif %}
+                      {% endwith %}
+                    </div>
+                  </div>
+
+                </div> {# .mega-columns #}
+              </div> {# .col-12 #}
+            </div> {# .row #}
+          </div> {# .container-fluid #}
+        </div> {# .mega-panel #}
+
+      {% else %}
+        {# Cas simple : petit sous-menu vertical pour catégories non-fixed (ou sans mega) #}
+        {% if cat.children %}
+          <div class="sub-menu-1 panel">
+            <ul class="list-unstyled m-0 p-0 d-flex flex-column">
+              {% for child in cat.children %}
+                <li class="mb-2">
+                  <div class="navbarre_linkSouSCategorie d-flex justify-content-between align-items-center">
+                    <a href="{{ child.url }}">{{ child.title }}</a>
+                    <a class="navbarre_linkSouSCategorie_fleche" href="{{ child.url }}" aria-label="Aller à {{ child.title }}">
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endif %}
+
+    </li>
+  {% endfor %}
+</ul>
+{% endwith %}
