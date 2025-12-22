@@ -22,16 +22,17 @@
   form .row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
   form .full{grid-column:1/-1}
   label.field-label{display:block;font-weight:600;margin-bottom:6px;font-size:14px}
-  input[type=text], input[type=email], input[type=url], textarea, select{
-    width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6edf3;background:transparent;font-size:14px;outline:none
+  input[type=text], input[type=email], input[type=url], input[type=file], textarea, select{
+    width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6edf3;background:transparent;font-size:14px;outline:none;
+    box-sizing:border-box;
   }
   textarea{min-height:120px;resize:vertical}
   .help-text{font-size:12px;color:var(--muted);margin-top:6px}
   .errors{color:#d9534f;font-size:13px;margin-top:6px}
 
-  .actions{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;border-top:1px solid #eef2f6;background:linear-gradient(180deg, transparent, rgba(10,10,10,0.01))}
+  .actions-row{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;border-top:1px solid #eef2f6;background:linear-gradient(180deg, transparent, rgba(10,10,10,0.01))}
   .btn-primary{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;border:none;font-weight:600;cursor:pointer}
-  .btn-ghost{background:transparent;border:1px solid #e6edf3;padding:8px 12px;border-radius:8px;color:var(--muted)}
+  .btn-ghost{background:transparent;border:1px solid #e6edf3;padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer}
 
   @media (max-width:720px){
     form .row{grid-template-columns:1fr}
@@ -45,22 +46,25 @@
       <div class="brand-badge">OY</div>
       <div>
         <h1>Configuration initiale de la boutique</h1>
-        <p class="lead">Remplissez les informations ci‑dessous pour préparer votre boutique. Cette étape ne se fait qu'une seule fois.</p>
+        <p class="lead">Remplissez les informations ci-dessous pour préparer votre boutique. Cette étape ne se fait qu'une seule fois.</p>
       </div>
     </div>
 
     <div class="card-body">
-      <form method="post" novalidate>
+      <form method="post" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="errors">{{ form.non_field_errors }}</div>
+        {% endif %}
 
         <div class="row">
           {# On parcourt les champs du formulaire pour proposer un rendu propre. #}
           {% for field in form %}
-            <div class="{% if field|length > 1 and field.name in ['description','address','bio'] %}full{% endif %}">
+            <div class="{% if field.name == 'description' or field.name == 'address' or field.name == 'bio' %}full{% endif %}">
               <label class="field-label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
 
-              {# Rendu du widget avec classes pour un style cohérent. #}
-              {{ field.as_widget(attrs={"class":""}) }}
+              {{ field }}
 
               {% if field.help_text %}
                 <div class="help-text">{{ field.help_text }}</div>
@@ -73,15 +77,17 @@
           {% endfor %}
         </div>
 
+        <div style="height:18px"></div>
+        <div style="display:flex;justify-content:flex-end;gap:10px">
+          <button type="reset" class="btn-ghost">Annuler</button>
+          <button type="submit" class="btn-primary">Terminer la configuration</button>
+        </div>
       </form>
     </div>
 
-    <div class="actions">
+    <div class="actions-row">
       <div style="font-size:13px;color:var(--muted)">Besoin d'aide ? <a href="#">Consulter la documentation</a></div>
-      <div>
-        <button formmethod="post" type="submit" formnovalidate class="btn-ghost">Annuler</button>
-        <button formmethod="post" type="submit" class="btn-primary">Terminer la configuration</button>
-      </div>
+      <div style="font-size:13px;color:var(--muted)">Astuce : tu peux uploader un logo (champ type file) pour personnaliser la boutique.</div>
     </div>
   </div>
 </div>
