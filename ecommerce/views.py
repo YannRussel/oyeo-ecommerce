@@ -1,6 +1,7 @@
 # ecommerce/views.py
 
 import json
+import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponseBadRequest, Http404
 from django.views.decorators.cache import never_cache
@@ -8,9 +9,8 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.utils import timezone
-from django.db.models import Prefetch, Q
-import random
-from django.db.models import Case, When, Value, IntegerField
+from django.db.models import Prefetch, Q, Case, When, Value, IntegerField
+from django.db.models import F
 
 from .models import (
     SliderImage,
@@ -23,6 +23,15 @@ from .models import (
     Favorite,
 )
 
+# core/views.py
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.db import transaction
+
+from .forms import PreSetupForm
+from .models import ShopSettings
+from ecommerce.utils import create_default_sections
 
 # ------------------------
 # Helpers
@@ -72,6 +81,7 @@ def get_leaf_categories(category):
     walk(category)
     return leaves
 
+
 # ------------------------
 # Accueil
 # ------------------------
@@ -79,7 +89,6 @@ def acceuil(request):
     """
     Récupère les images du slider via le manager custom.
     Passe 'images' au template pour affichage.
-    (Si tu affiches aussi des produits sur l'accueil, on pourrait y ajouter user_favorites)
     """
     images = SliderImage.objects.get_slider_images(limit=5)
 
@@ -98,18 +107,55 @@ def category_detail(request, slug):
     Les produits listés comprennent ceux dont la primary_category OU la M2M 'categories'
     est une catégorie feuille descendant de la catégorie demandée.
     L'affichage des produits est aléatoire et paginé.
+    De plus : calcule une liste 'featured_products' basée sur les enfants directs de la catégorie.
     """
     category = get_object_or_404(Category, slug=slug, is_active=True)
     # Sous-catégories directes (pour affichage en haut de page, menu, etc.)
     children = category.children.filter(is_active=True).order_by('order', 'name')
     breadcrumbs = build_breadcrumbs(category)
 
-    # --- récupérer les catégories feuilles ---
+    # --- récupérer les catégories feuilles (sous la catégorie sélectionnée) ---
     leaf_categories = get_leaf_categories(category)
     leaf_ids = [c.pk for c in leaf_categories]
 
-    # debug (optionnel) : décommente pour voir dans la console
-    # print("DEBUG leaf_ids for category", category.slug, leaf_ids)
+    # --- Produits "A la une" : produits liés aux catégories ENFANTS (et leurs feuilles) ---
+    direct_children = category.children.filter(is_active=True).order_by('order', 'name')
+
+    child_leaf_ids = []
+    for ch in direct_children:
+        leaves = get_leaf_categories(ch)
+        child_leaf_ids.extend([c.pk for c in leaves])
+
+    featured_products = Product.objects.none()
+    featured_favorites = set()
+
+    if child_leaf_ids:
+        featured_base_qs = Product.objects.filter(
+            Q(primary_category__in=child_leaf_ids) | Q(categories__in=child_leaf_ids),
+            is_active=True
+        ).distinct().select_related('brand', 'primary_category')
+
+        featured_ids = list(featured_base_qs.values_list('pk', flat=True))
+        if featured_ids:
+            sample_limit = min(len(featured_ids), 12)
+            sampled_ids = random.sample(featured_ids, k=sample_limit) if len(featured_ids) > sample_limit else featured_ids
+
+            order_expr = Case(
+                *[When(pk=pk, then=Value(i)) for i, pk in enumerate(sampled_ids)],
+                output_field=IntegerField()
+            )
+
+            main_img_qs = ProductImage.objects.filter(is_main=True)
+            featured_products = (
+                Product.objects.filter(pk__in=sampled_ids)
+                .annotate(_rand_order=order_expr)
+                .order_by('_rand_order')
+                .prefetch_related(Prefetch('images', queryset=main_img_qs, to_attr='prefetched_main_images'))
+                .select_related('brand', 'primary_category')
+            )
+
+            featured_product_ids = [p.pk for p in featured_products]
+            featured_favorites = _get_user_favorites_for_product_ids(request.user, featured_product_ids)
 
     # --- queryset de base : primary_category OU categories (M2M) ---
     base_qs = Product.objects.filter(
@@ -128,6 +174,8 @@ def category_detail(request, slug):
             'page_obj': None,
             'breadcrumbs': breadcrumbs,
             'user_favorites': set(),
+            'featured_products': featured_products,
+            'featured_favorites': featured_favorites,
         })
 
     # Mélange aléatoire des ids (en Python)
@@ -166,7 +214,10 @@ def category_detail(request, slug):
         'page_obj': page_obj,
         'breadcrumbs': breadcrumbs,
         'user_favorites': user_favorites,
+        'featured_products': featured_products,
+        'featured_favorites': featured_favorites,
     })
+
 
 # ------------------------
 # Section list (paged)
@@ -285,7 +336,54 @@ def menu_api(request):
     from .context_processors import build_menu_structure
     return JsonResponse(build_menu_structure(), safe=False, json_dumps_params={'ensure_ascii': False})
 
-# Liens vers cartes cadeaux
 
-def carte_cadeaux(request) :
+# Liens vers cartes cadeaux
+def carte_cadeaux(request):
     return render(request, 'ecommerce/Oyéo_cartes cadeaux.html')
+
+# Vue pour la PRE-CONFIGURATION
+
+User = get_user_model()
+
+@transaction.atomic
+def pre_setup(request):
+    # Si déjà configuré -> redirige vers l'accueil
+    if ShopSettings.objects.filter(is_configured=True).exists():
+        return redirect("home")  # adapte le nom de la vue home
+
+    if request.method == "POST":
+        form = PreSetupForm(request.POST)
+        if form.is_valid():
+            # créer le superuser
+            username = form.cleaned_data["admin_username"]
+            email = form.cleaned_data["admin_email"]
+            password = form.cleaned_data["admin_password"]
+
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "Le nom d'utilisateur existe déjà. Choisissez-en un autre.")
+            else:
+                user = User.objects.create_superuser(username=username, email=email, password=password)
+
+                # créer ShopSettings
+                shop = ShopSettings.objects.create(
+                    shop_name=form.cleaned_data["shop_name"],
+                    currency=form.cleaned_data["currency"],
+                    is_configured=True
+                )
+
+                # créer sections par défaut
+                create_default_sections()
+
+                # si tu veux créer des catégories de base, tu peux le faire ici (optionnel)
+                if form.cleaned_data.get("create_default_categories"):
+                    from ecommerce.models import Category
+                    defaults = ["Femme", "Homme", "Enfant", "Électronique"]
+                    for name in defaults:
+                        Category.objects.get_or_create(name=name, slug=slugify(name), defaults={"is_active": True, "is_fixed": True})
+
+                messages.success(request, "Configuration terminée — connectez-vous avec l'administrateur créé.")
+                return redirect("admin:login")
+    else:
+        form = PreSetupForm()
+
+    return render(request, "core/pre_setup.html", {"form": form})

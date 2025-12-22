@@ -405,3 +405,22 @@ class Favorite(models.Model):
 
     def __str__(self):
         return f"{self.user} ♥ {self.product}"
+
+# Pour la preconfiguration
+
+class ShopSettings(models.Model):
+    shop_name = models.CharField(max_length=150)
+    currency = models.CharField(max_length=10, default="USD")
+    country = models.CharField(max_length=100, blank=True)
+    logo = models.ImageField(upload_to="shop/", blank=True, null=True)
+
+    is_configured = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Paramètres boutique"
+        verbose_name_plural = "Paramètres boutique"
+
+    def __str__(self):
+        return self.shop_name or "Shop settings"

@@ -1,0 +1,128 @@
+.decouverte {
+  display: flex;
+ /*  flex-wrap: wrap; */
+ /*  justify-content: space-between; */
+/*   gap: 30px; */
+  width: 100%;
+ /*  margin: auto; */
+ /*  margin-right: 2%;
+  margin-left: 2%; */
+
+  border: 2px solid red;
+}
+
+.decouverte .contenu-section {
+  height: 250px;
+  /* min-width: 500px; */
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+/*   margin-right: 1%;
+  margin-left: 1%; */
+}
+
+.decouverte .contenu-section h1 {
+  font-weight: 400;
+  font-size: 22px;
+  width: 60%;
+  margin-left: 20px;
+  color:var(--white);
+  text-shadow: 2px 1px 3px black;
+}
+
+.decouverte .contenu-section a {
+  text-decoration: none;
+  color: #fdfcfc;
+  background-color: #3e09fca2;
+  width: 200px;
+  padding: 15px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  margin-top: 50px;
+}
+
+@media screen and (max-width:800px) {
+/*   .decouverte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    width: 92%;
+    margin: auto;
+  } */
+
+  .decouverte {
+  display: flex;
+ /*  flex-wrap: wrap; */
+  justify-content: space-between;
+/*   gap: 30px; */
+  width: 100%;
+  margin: auto;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.decouverte .contenu-section {
+  height: 170px;
+  /* min-width: 500px; */
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+   margin-right: 1%;
+  margin-left: 1%;
+   margin-bottom: 15px;
+}
+ .decouverte .contenu-section h1 {     font-size: 17px;}
+  .decouverte .contenu-section a {
+     width: 80%;
+    padding: 8px;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 0px;
+    margin: auto;
+
+}
+/* .decouverte .contenu-section a {
+  text-decoration: none;
+  color: #fdfcfc;
+  background-color: #3e09fca2;
+  width: 200px;
+  padding: 15px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  margin-top: 50px;
+} */
+
+
+/*   .decouverte .contenu-section {
+    height: 200px;
+    min-width:  80%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+  } */
+}
+@media screen and (max-width:500px){
+    .decouverte .contenu-section h1 {     font-size: 17px;}
+    .decouverte .contenu-section a {
+    width: 200px;
+    padding: 8px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+ .decouverte .contenu-section {
+    height: 150px;
+
+  }
+}

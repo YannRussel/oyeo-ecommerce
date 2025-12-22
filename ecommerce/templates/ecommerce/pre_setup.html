@@ -1,0 +1,17 @@
+{% extends "base.html" %} {# ou un template minimal #}
+{% load static %}
+
+{% block content %}
+  <div style="max-width:760px;margin:40px auto;padding:24px;border:1px solid #e6e6e6;border-radius:8px;">
+    <h2>Configuration initiale de la boutique</h2>
+    <p>Remplissez ces informations pour préparer votre boutique. Cette étape sera effectuée une seule fois.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" style="padding:8px 14px;background:#0d6efd;color:#fff;border:none;border-radius:4px;">
+        Terminer la configuration
+      </button>
+    </form>
+  </div>
+{% endblock %}

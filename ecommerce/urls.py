@@ -13,4 +13,5 @@ urlpatterns = [
     path('favorites/toggle/', views.toggle_favorite, name='toggle_favorite'),
     # Liens vers cartes cadeaux
     path('carte-cadeaux', views.carte_cadeaux, name='carte-cadeaux'),
+    path("setup/", views.pre_setup, name="pre_setup"),
 ]
