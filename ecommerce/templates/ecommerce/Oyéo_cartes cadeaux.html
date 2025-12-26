@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<html lang="En">
-<span dir="ltr" lang="pt">  </span>
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Cartes Cadeaux Oyéo</title>
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% block title %}Oyéo – Cartes cadeaux{% endblock %}
+
+{% block extra_css %}
+ <!-- CDN externes (Bootstrap, FontAwesome) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
    <style>
        :root {
@@ -1017,11 +1014,11 @@
         }
 
     </style>
-</head>
+
+{% endblock %}
 
 
-<body>
-
+{% block content %}
 
    <!-- ========== SECTION 1: HERO ========== -->
    <section class="hero-section">
@@ -1341,8 +1338,15 @@
           </picture>
            </div>
    </section>
+   <br>
 <br>
-<br>
+{% endblock %}
+
+
+
+
+
+{% block extra_js %}
 
    <script>
        function selectAmount(btn) {
@@ -1401,7 +1405,5 @@
        });
    </script>
 
-
-</body>
-</html>
+{% endblock %}
 

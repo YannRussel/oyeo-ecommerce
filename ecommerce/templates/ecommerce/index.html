@@ -1,6 +1,7 @@
 
 {% extends "ecommerce/base.html" %}
 {% load static %}
+{% load cloudinary %}
 {% block title %}Oyéo – Notre page d'acceuil{% endblock %}
 
 
@@ -13,7 +14,7 @@
     {% for img in images %}
         <div class="slide-item {% if forloop.first %}active-slide{% endif %}"
             style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-                   url('{{ img.image.url }}');
+                   url('{% cloudinary_url img.image %}');
                    background-size: cover; background-position: center;">
             
             <div class="slide-content-wrapper">
