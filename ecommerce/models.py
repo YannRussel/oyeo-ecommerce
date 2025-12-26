@@ -8,6 +8,39 @@ from django.utils import timezone
 from django.db import transaction
 import random
 
+# Fallback Cloudinary support:
+# Si `cloudinary` est installé et configuré, on utilisera CloudinaryField.
+# Sinon on retombe sur un ImageField classique (upload_to).
+try:
+    from cloudinary.models import CloudinaryField
+except Exception:
+    CloudinaryField = None
+
+
+def make_image_field(upload_to: str = None, folder: str = None, **kwargs):
+    """
+    Retourne une instance de champ d'image:
+    - CloudinaryField('image', folder=folder) si CloudinaryField est dispo
+    - sinon models.ImageField(upload_to=upload_to)
+
+    Exemples: make_image_field(upload_to='slider/', folder='slider')
+    """
+    if CloudinaryField:
+        # CloudinaryField prend généralement un verbose_name en premier argument.
+        # On précise folder pour organiser les ressources Cloudinary.
+        opts = {}
+        if folder:
+            opts['folder'] = folder
+        opts.update(kwargs)
+        return CloudinaryField('image', **opts)
+    else:
+        opts = {}
+        if upload_to:
+            opts['upload_to'] = upload_to
+        opts.update(kwargs)
+        return models.ImageField(**opts)
+
+
 # ---------------------------
 # Classes existantes (Slider, Category, MenuColumn, MenuColumnItem, etc.)
 # ---------------------------
@@ -34,7 +67,8 @@ class SliderImageManager(models.Manager):
 
 
 class SliderImage(models.Model):
-    image = models.ImageField(upload_to='slider/')
+    # utilise CloudinaryField si dispo, sinon ImageField(upload_to='slider/')
+    image = make_image_field(upload_to='slider/', folder='slider', blank=True, null=True)
     title = models.CharField(max_length=150, blank=True)
     description = models.TextField(blank=True)
     selected = models.BooleanField(default=False)
@@ -52,7 +86,8 @@ class Category(models.Model):
         'self', null=True, blank=True, related_name='children', on_delete=models.CASCADE
     )
     description = models.TextField(blank=True)
-    thumbnail = models.ImageField(upload_to='category_thumbs/', blank=True, null=True)
+    # thumbnail -> Cloudinary ou filesystem
+    thumbnail = make_image_field(upload_to='category_thumbs/', folder='category_thumbs', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_fixed = models.BooleanField(default=False, help_text="Garder visible dans la barre principale")
     order = models.PositiveIntegerField(default=0)
@@ -211,7 +246,7 @@ class Brand(models.Model):
     """Marque simple pour les produits"""
     name = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(max_length=140, unique=True, blank=True)
-    logo = models.ImageField(upload_to='brands/', null=True, blank=True)
+    logo = make_image_field(upload_to='brands/', folder='brands', blank=True, null=True)
 
     class Meta:
         ordering = ('name',)
@@ -319,13 +354,14 @@ class Product(models.Model):
 class ProductImage(models.Model):
     """Images liées au produit (une principale possible)"""
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='products/')
+    image = make_image_field(upload_to='products/', folder='products', blank=True, null=True)
     alt_text = models.CharField(max_length=255, blank=True, null=True)
     order = models.PositiveSmallIntegerField(default=0)
     is_main = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('order',)
+
     def __str__(self):
         return f"Image {self.product} ({self.order})"
 
@@ -387,6 +423,7 @@ class ProductSection(models.Model):
             return False
         return True
 
+
 # EOF
 
 # Mettre en place l'etat des produits en favoris
@@ -406,13 +443,14 @@ class Favorite(models.Model):
     def __str__(self):
         return f"{self.user} ♥ {self.product}"
 
+
 # Pour la preconfiguration
 
 class ShopSettings(models.Model):
     shop_name = models.CharField(max_length=150)
     currency = models.CharField(max_length=10, default="USD")
     country = models.CharField(max_length=100, blank=True)
-    logo = models.ImageField(upload_to="shop/", blank=True, null=True)
+    logo = make_image_field(upload_to="shop/", folder="shop", blank=True, null=True)
 
     is_configured = models.BooleanField(default=False)
 

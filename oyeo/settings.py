@@ -21,7 +21,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-REPLACE_THIS_IN_PRO
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 # En prod, mettre tes domaines séparés par des virgules dans la variable ALLOWED_HOSTS
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if h.strip()]
 
 # --------------------------
 # APPS
@@ -91,7 +91,7 @@ if DATABASE_URL:
     DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
 
 # --------------------------
-# PASSWORD VALIDATION
+# AUTH / PASSWORD VALIDATION
 # --------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
@@ -157,6 +157,36 @@ else:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
+
+# --------------------------
+# SECURITY / PROXY / CSRF
+# --------------------------
+# Permettre à Django de détecter le schéma https quand il est passé par un proxy (Render, Heroku, etc.)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# CSRF_TRUSTED_ORIGINS attend des URLs complètes (avec https://)
+CSRF_TRUSTED_ORIGINS = [u.strip() for u in os.getenv(
+    'CSRF_TRUSTED_ORIGINS',
+    'https://oyeo-final.onrender.com'
+).split(',') if u.strip()]
+
+# Paramètres de sécurité activés en production (DEBUG=False)
+if not DEBUG:
+    SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'True') == 'True'
+    SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'True') == 'True'
+    CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'True') == 'True'
+    # HSTS (débuter avec un faible délai, puis augmenter progressivement)
+    SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', '3600'))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'False') == 'True'
+    SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD', 'False') == 'True'
+else:
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    # valeurs par défaut en dev
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
 
 # --------------------------
 # DEFAULT AUTO FIELD
