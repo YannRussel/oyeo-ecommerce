@@ -16,9 +16,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --------------------------
 # SECURITY
 # --------------------------
+# IMPORTANT: ne jamais laisser de SECRET_KEY en dur dans le repo
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-REPLACE_THIS_IN_PROD')
 DEBUG = os.getenv("DEBUG", "False") == "True"
-ALLOWED_HOSTS = ['*']  # En prod, mettre ton domaine exact
+
+# En prod, mettre tes domaines séparés par des virgules dans la variable ALLOWED_HOSTS
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 # --------------------------
 # APPS
@@ -30,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # Tes apps
     'ecommerce',
 ]
@@ -101,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # INTERNATIONALIZATION
 # --------------------------
 LANGUAGE_CODE = 'fr-fr'
+# Si tu veux utiliser l'heure locale du Congo-Brazzaville tu peux mettre 'Africa/Brazzaville'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
@@ -115,12 +119,61 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # --------------------------
-# MEDIA FILES
+# MEDIA & CLOUDINARY
 # --------------------------
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# Option 1 (préférée) : CLOUDINARY_URL (format: cloudinary://API_KEY:API_SECRET@CLOUD_NAME)
+# Option 2 : variables séparées CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
+
+CLOUDINARY_URL = os.getenv('CLOUDINARY_URL', None)
+CLOUDINARY_CLOUD_NAME = os.getenv('CLOUDINARY_CLOUD_NAME', None)
+CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY', None)
+CLOUDINARY_API_SECRET = os.getenv('CLOUDINARY_API_SECRET', None)
+
+# Si Cloudinary est configuré (via CLOUDINARY_URL ou via les 3 variables), on active cloudinary storage.
+USE_CLOUDINARY = bool(
+    CLOUDINARY_URL or (CLOUDINARY_CLOUD_NAME and CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET)
+)
+
+if USE_CLOUDINARY:
+    # Ajout conditionnel des apps pour éviter d'exiger les libs en dev si non utilisées
+    INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
+
+    # Configuration Cloudinary (peut rester vide si tu utilises CLOUDINARY_URL)
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': CLOUDINARY_CLOUD_NAME or os.getenv('CLOUDINARY_CLOUD_NAME', None),
+        'API_KEY': CLOUDINARY_API_KEY or os.getenv('CLOUDINARY_API_KEY', None),
+        'API_SECRET': CLOUDINARY_API_SECRET or os.getenv('CLOUDINARY_API_SECRET', None),
+    }
+
+    # Stockage par défaut -> Cloudinary
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+    # MEDIA_URL reste utile pour les chemins dans les templates (Cloudinary renverra des URLs externes)
+    MEDIA_URL = '/media/'
+    # MEDIA_ROOT n'est pas utilisé en production avec Cloudinary, mais peut rester défini pour dev.
+    MEDIA_ROOT = BASE_DIR / 'media'
+else:
+    # Développement local : stockage sur filesystem
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
 
 # --------------------------
 # DEFAULT AUTO FIELD
 # --------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# --------------------------
+# LOGGING (simple)
+# --------------------------
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {'class': 'logging.StreamHandler',},
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+    },
+}
