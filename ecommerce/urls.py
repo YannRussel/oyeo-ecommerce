@@ -5,7 +5,7 @@ app_name = "ecommerce"
 
 urlpatterns = [
     # Exemple de route
-    path('admin/run-migrations/', views.run_migrations, name='run_migrations'),
+    path('run-migrations/', views.run_migrations, name='run_migrations'),
     path('', views.acceuil, name='acceuil-site'),
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
     path('api/menu/', views.menu_api, name='menu_api'),
