@@ -35,6 +35,33 @@ from ecommerce.utils import create_default_sections
 from django.utils.text import slugify
 
 
+
+from django.http import HttpResponse
+from django.core.management import call_command
+from django.contrib.admin.views.decorators import staff_member_required
+import io
+
+
+def run_migrations(request):
+    """
+    Exécute makemigrations + migrate depuis une URL
+    (réservé aux utilisateurs staff)
+    """
+    output = io.StringIO()
+
+    try:
+        call_command('makemigrations', stdout=output, stderr=output)
+        call_command('migrate', stdout=output, stderr=output)
+    except Exception as e:
+        return HttpResponse(
+            f"<h1>Erreur migration</h1><pre>{str(e)}</pre>",
+            status=500
+        )
+
+    return HttpResponse(
+        "<h1>Migrations exécutées avec succès</h1>"
+        "<pre>" + output.getvalue() + "</pre>"
+    )
 # ------------------------
 # Helpers
 # ------------------------
