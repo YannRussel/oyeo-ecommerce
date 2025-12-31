@@ -416,3 +416,8 @@ def pre_setup(request):
         form = PreSetupForm()
 
     return render(request, "ecommerce/pre_setup.html", {"form": form})
+
+# Vue vers AntiGaspi
+
+def antigaspi(request) :
+    return render(request, 'ecommerce/antigaspi1.html')

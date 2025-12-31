@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SauvePlat - Anti Gaspillage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #2E5C46; 
+            --accent-orange: #F28C28; 
+            --brand-orange: var(--accent-orange);
+            --slide-1: #2E5C46; 
+            --slide-2: #4F8E6A; 
+            --slide-3: #82B994; 
+            --light-bg: #FAF9F6;
+            --white: #FFFFFF;
+            --text-white: var(--white);
+            --text-dark: #1A1A1A;
+            --text-gray: #666666;
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-orange {
+            background-color: var(--accent-orange);
+            color: white;
+        }
+        
+        .btn-orange:hover { background-color: #d97515; }
+
+        .btn-transparent {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid white;
+            margin-left: 10px;
+        }
+
+        .btn-transparent:hover { background-color: rgba(255,255,255,0.4); }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 80px;
+        }
+
+        .section-header h2 { font-size: 2rem; margin-bottom: 10px; }
+        .section-header p { color: var(--text-gray); }
+
+       
+        .hero-header {
+            position: relative;
+            width: 100vw;
+            max-width: none;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            height: 600px; 
+            border-radius: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+           
+            background: 
+                linear-gradient(90deg, 
+                    rgba(22, 60, 45, 0.98) 0%, 
+                    rgba(22, 60, 45, 0.9) 40%, 
+                    rgba(22, 60, 45, 0.3) 100%),
+                url('https://images.unsplash.com/photo-1610348725531-843dff563e2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-white);
+            padding: 0; 
+        }
+
+        
+        .hero-header .hero-content {
+            padding: 40px 0; 
+            max-width: none;
+            width: 100%;
+        }
+
+        
+        .hero-header .hero-content > * {
+            padding: 0 24px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-header .hero-content > * { padding: 0 16px; }
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+            margin-top: 40px;
+            color: var(--text-white);
+        }
+
+        .stat-item h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-white);
+        }
+
+        .stat-item span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 400;
+            display: block;
+            color: rgba(255,255,255,0.9);
+        }
+
+        @media (max-width: 768px) {
+            .hero-header .hero-content { padding: 40px 20px; text-align: center; }
+        }
+
+        /* 1. Badge "Anti-gaspillage..." */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 24px;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            max-width: 100%;
+            width: auto;
+            height: 33px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px); 
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem; 
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 20px;
+            max-width: none;
+            width: 100%;
+            padding: 0 24px;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            max-width: none;
+            width: 100%;
+            margin-bottom: 40px;
+            font-weight: 400;
+            padding: 0 24px;
+        }
+
+        .highlight-orange {
+            color: var(--brand-orange);
+            display: block; 
+        }
+
+      
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+   
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px; 
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--brand-orange);
+            color: white;
+            border: none;
+        }
+
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: white;
+        }
+
+  
+        .partner-highlight {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+       
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+        }
+
+        .stat-item h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-item span {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-weight: 400;
+            display: block;
+        }
+
+     
+        @media (max-width: 768px) {
+            .hero-header {
+                height: auto;
+                padding: 40px 20px;
+                text-align: center;
+                background: linear-gradient(rgba(22, 60, 45, 0.95), rgba(22, 60, 45, 0.95)), url('https://images.unsplash.com/photo-1610348725531-843dff563e2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            }
+            .hero-badge { margin: 0 auto 20px auto; }
+            .hero-title { font-size: 2.2rem; margin: 0 auto 20px auto;}
+            .hero-description { margin: 0 auto 30px auto; }
+            .hero-actions { justify-content: center; flex-direction: column; width: 100%; gap: 15px;}
+            .btn { width: 100%; justify-content: center; }
+            .hero-stats { flex-direction: column; gap: 30px; margin-top: 20px;}
+        }
+   
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            
+            top: calc(24px + 30px);
+            right: -40px; 
+            width: 120px; 
+            height: 4px; 
+            background: rgba(230,230,230,1); 
+            z-index: 0;
+            border-radius: 4px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background: none;
+            width: 280px; 
+            padding: 24px 20px;
+            border-radius: var(--radius);
+            box-shadow:none;
+            transition: none;
+        }
+
+        .step:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,0.08); }
+
+     
+        .steps-container .step {
+            transition: none !important;
+            will-change: auto !important;
+        }
+        .steps-container .step:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .step-badge {
+            position: absolute;
+            left: 45%;
+            top: 20px; 
+            transform: translateX(36px);
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:0.85rem;
+            border:1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+        }
+        
+        .step:nth-child(1) .step-icon { color: var(--primary-green); }
+        .step:nth-child(2) .step-icon { color: var(--accent-orange); border-color: var(--accent-orange); }
+        .step:nth-child(3) .step-icon { color: #A0522D; border-color: #A0522D; }
+        .step:nth-child(4) .step-icon { color: var(--primary-green); }
+
+        /* Paragraphs inside steps: center text and constrain width */
+        .step p {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #666;
+            margin: 8px auto 0;
+            max-width: 320px; 
+            line-height: 1.45;
+        }
+
+     
+        @media (max-width: 700px) {
+            .steps-container { flex-direction: column; gap: 20px; align-items: center; }
+            .step { width: auto; padding: 18px; }
+            .step:not(:last-child)::after { display: none; }
+            .step p { max-width: 360px; }
+        }
+
+   
+
+    
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 18px;
+        }
+
+        .cat-card {
+            background: white;
+            padding: 14px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.18s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cat-card:hover { transform: translateY(-4px); }
+        
+        .cat-icon {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .bg-yellow { background-color: #FFF8E1; color: #FFA000; }
+        .bg-red { background-color: #FFEBEE; color: #D32F2F; }
+        .bg-pink { background-color: #FCE4EC; color: #C2185B; }
+        .bg-green { background-color: #E8F5E9; color: #388E3C; }
+        .bg-blue { background-color: #E3F2FD; color: #1976D2; }
+        .bg-purple { background-color: #F3E5F5; color: #7B1FA2; }
+
+        .cat-card span { display: block; font-size: 0.8rem; color: var(--text-gray); }
+
+        @media (max-width: 480px) {
+        
+            .categories-grid {
+                display: flex;
+                gap: 12px;
+                overflow-x: auto;
+                padding-bottom: 6px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .categories-grid .cat-card { min-width: 140px; flex: 0 0 auto; padding: 12px; }
+            .cat-icon { width: 56px; height: 56px; font-size: 20px; }
+            .cat-card h4 { font-size: 0.95rem; margin: 4px 0; }
+        }
+
+        
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .deal-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .deal-image {
+            height: 200px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .deal-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        .badge-discount {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-orange);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .badge-left {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #FFC107;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .deal-content {
+            padding: 20px;
+        }
+
+        .deal-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .deal-avatar { width: 24px; height: 24px; border-radius: 50%; background: #ddd; }
+
+       
+        .deal-icon {
+            width: 34px;
+            height: 34px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ddd;
+            color: #333;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .deal-time { font-size: 0.8rem; color: var(--text-gray); margin-left: auto; }
+
+        
+        .impact-section {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 60px 0;
+            margin-top: 80px;
+            text-align: center;
+       
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+            align-items: center;
+        }
+
+        .impact-item {
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 8px;
+        }
+
+        .impact-item i { font-size: 2.2rem; margin-bottom: 6px; opacity: 0.95; }
+        .impact-item h3 { font-size: 1.6rem; margin-bottom: 4px; color: white; }
+        .impact-item h4 { font-size: 1rem; margin-bottom: 6px; color: #FFF8E1; }
+        .impact-item p { font-size: 0.9rem; opacity: 0.95; max-width: 220px; text-align:center; }
+
+        @media (max-width: 768px) {
+            .impact-section { padding: 40px 0; }
+            .impact-grid { gap: 18px; }
+            .impact-item i { font-size: 2.6rem; }
+            .impact-item h3 { font-size: 1.4rem; }
+            .impact-item p { max-width: 260px; }
+        }
+
+        @media (max-width: 480px) {
+            .impact-grid { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+            .impact-item { min-width: 180px; flex: 0 0 auto; padding: 10px; }
+            .impact-item i { font-size: 2.8rem; }
+            .impact-item h3 { font-size: 1.25rem; }
+            .impact-item p { font-size: 0.9rem; }
+        }
+
+        
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            align-items: stretch; 
+        }
+
+        .target-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
+        }
+        .target-icon {
+            width: 50px; height: 50px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .t-blue { background: #E3F2FD; color: #1976D2; }
+        .t-green { background: #E8F5E9; color: #388E3C; }
+        .t-orange { background: #FFF3E0; color: #EF6C00; }
+        .t-red { background: #FFEBEE; color: #C62828; }
+        .t-purple { background: #F3E5F5; color: #7B1FA2; }
+
+        
+        @media (min-width: 1200px) {
+            .target-grid { grid-template-columns: repeat(5, 1fr); }
+        }
+
+      
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 320px); 
+            gap: 12px; 
+            justify-content: center;
+        }
+        .reviews-grid .review-card {
+            width: 100%; 
+            background: white;
+            padding: 22px 18px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .quote-icon { font-size: 2.2rem; color: #eee; margin-bottom: 14px; }
+        .stars { color: #FFC107; font-size: 1rem; margin-top: 12px; }
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 14px;
+        }
+        .reviewer img { width: 48px; height: 48px; border-radius: 50%; }
+
+        @media (max-width: 992px) {
+            .reviews-grid { grid-template-columns: repeat(2, 280px); gap: 12px; }
+            .reviews-grid .review-card { padding: 18px; }
+        }
+        @media (max-width: 480px) {
+            .reviews-grid { grid-template-columns: 1fr; gap: 12px; }
+            .reviews-grid .review-card { padding: 14px; }
+            .reviewer img { width: 40px; height: 40px; }
+        }
+
+        
+        .trust-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            opacity: 0.95;
+            flex-wrap: wrap;
+        }
+        .trust-item { text-align: center; max-width: 160px; }
+        .trust-item img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin: 0 auto 10px;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        .trust-stars { color: #FFC107; font-size: 1.05rem; margin-bottom: 6px; }
+        .trust-item small { color: #666; display: block; margin-top: 6px; font-size: 0.85rem; }
+
+        @media (max-width: 480px) {
+            .trust-item img { width: 56px; height: 56px; }
+            .trust-grid { gap: 20px; }
+        }
+
+    
+.reviews-body {
+    background-color: #f8f9fa; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+
+.reviews-container {
+    display: flex;
+    gap: 24px; 
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 12px 20px;
+    margin-top: 22px; 
+    max-width: 100%;
+}
+
+
+.reviews-container > .review-card {
+    width: 260px; 
+    padding: 20px 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.reviews-container > .review-card .review-image-container {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 12px auto;
+    border: 2px solid #f0f0f0;
+}
+.reviews-container > .review-card .review-h3 {
+    font-size: 1rem;
+    margin: 8px 0 6px 0;
+}
+.reviews-container > .review-card .review-star { font-size: 1.1rem; }
+.reviews-container > .review-card .review-score { font-size: 1rem; }
+@media (max-width: 480px) {
+    .reviews-container > .review-card { width: 200px; padding: 12px; }
+    .reviews-container > .review-card .review-image-container { width: 56px; height: 56px; }
+    .reviews-container > .review-card .review-h3 { font-size: 0.95rem; }
+}
+
+/* Style de la carte */
+.review-card {
+    background-color: white;
+    width: 280px;
+    padding: 40px 20px;
+    border-radius: 20px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px); /* Petit effet au survol */
+}
+
+/* Image circulaire */
+.review-image-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #f0f0f0; 
+}
+
+.review-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+
+.review-h3 {
+    margin: 15px 0 10px 0;
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
+.review-card, .commerce-review-card {
+    transition: none !important;
+    will-change: auto !important;
+}
+.review-card:hover, .commerce-review-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+
+.review-image-container, .commerce-review-image-container {
+    transition: none !important;
+}
+
+
+
+.review-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.review-star {
+    color: #ffb400; 
+    font-size: 1.4rem;
+}
+
+.review-score {
+    color: #777; 
+    font-size: 1.1rem;
+}
+    </style>
+    <style>
+ 
+    @media (max-width: 768px) {
+        :root { --container-padding: 16px; }
+        body { font-size: 15px; }
+        .container { padding-left: var(--container-padding); padding-right: var(--container-padding); }
+        h1 { font-size: 1.6rem; }
+        h2 { font-size: 1.15rem; }
+
+   
+        .sauveplat-slider-container .card-inner { display: flex; flex-direction: column; gap: 12px; }
+        .slide .left-col, .slide .right-col { width: 100%; }
+        .slide .right-col { margin-top: 8px; }
+        .slide .right-col ul { padding-left: 0; }
+
+        
+        .deals-grid { grid-template-columns: 1fr; gap: 16px; }
+        .deal-image { height: 140px; }
+        .deal-content h4 { font-size: 1rem; }
+        .deal-footer { gap: 8px; }
+        .btn.small { padding: 6px 10px; font-size: 0.9rem; }
+
+        
+        .reviews-container { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+        .reviews-container > .review-card { min-width: 220px; flex: 0 0 auto; }
+
+        
+        .target-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+        .steps-container { padding-left: 8px; padding-right: 8px; }
+        .step { width: auto; max-width: 100%; margin: 0 auto; }
+
+    
+    .badge i, .list-icon { font-size: 20px; }
+    .badge-text { font-size: 0.95rem; }
+    }
+
+   
+    @media (max-width: 768px) {
+        .slider-content { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .slides-track { display: flex; gap: 12px; }
+        .slides-track .slide { min-width: 100%; flex: 0 0 100%; }
+        .slider-arrow { display: none; }
+    }
+
+    @media (max-width: 420px) {
+        body { font-size: 14px; }
+        h1 { font-size: 1.35rem; }
+        .deal-image { height: 120px; }
+        .btn.small { width: 100%; display: block; }
+        .deal-footer { flex-direction: column; align-items: flex-start; gap: 8px; }
+        .reviews-container > .review-card { min-width: 200px; }
+    }
+    </style>
+</head>
+<body>
+
+    <header class="hero-header">
+        <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fas fa-leaf"></i> 
+            <span>Anti-gaspillage alimentaire au Congo</span>
+        </div>
+
+        <h1 class="hero-title">
+            Sauvez des repas,
+            <span class="highlight-orange">économisez jusqu'à 70%</span>
+        </h1>
+
+        <p class="hero-description">
+            Récupérez les invendus des commerces de Brazzaville et Pointe-Noire à petits prix. Ensemble, réduisons le gaspillage alimentaire.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#" class="btn btn-primary">
+                <i class="fas fa-shopping-bag"></i> 
+                Voir les offres 
+                <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
+            </a>
+            <a href="#" class="btn btn-outline">
+                Je suis commerçant
+            </a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-item">
+                <h4>500+</h4>
+                <span>Repas sauvés</span>
+            </div>
+            <div class="stat-item">
+                <h4>50+</h4>
+                <span>Commerces partenaires</span>
+            </div>
+            <div class="stat-item">
+                <h4>-70%</h4>
+                <span>De réduction moyenne</span>
+            </div>
+        </div>
+    </div>
+
+    </header>
+
+    <section class="container">
+        <div class="section-header">
+        
+            <h2>Comment ça marche ?</h2>
+            <p>4 étapes simples pour sauver des repas</p>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-search"></i></div>
+                <span class="step-badge">1</span>
+                <h3>Trouvez</h3>
+                <p style="font-size:0.9rem; color:#666; margin-top:5px;">Parcourez les offres anti-gaspi des commerces près de chez vous. Filtrez par ville, quartier, type de commerce et budget pour trouver le panier idéal.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-shopping-bag"></i></div>
+                <span class="step-badge">2</span>
+                <h3>Réservez & Payez</h3>
+                <p style="font-size:0.9rem; color:#666; margin-top:5px;">Réservez votre panier surprise en quelques clics. Payez en ligne (Mobile Money, carte) ou choisissez le paiement en magasin selon les options disponibles.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-walking"></i></div>
+                <span class="step-badge">3</span>
+                <h3>Récupérez</h3>
+                <p style="font-size:0.9rem; color:#666; margin-top:5px;">Rendez-vous au commerce à l'heure indiquée avec votre code. Présentez votre code de réservation à la caisse. Le contenu est surprise, mais toujours composé de produits de qualité.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="far fa-smile"></i></div>
+                <span class="step-badge">4</span>
+                <h3>Savourez</h3>
+                <p style="font-size:0.9rem; color:#666; margin-top:5px;">Profitez de produits de qualité à petit prix. Important:Pour éviter le gaspillage, les paniers AntiGaspi sont proposés en quantité limitée et ne sont ni modifiables ni remboursables une fois la commande confirmée.</p>
+            </div>
+        </div>
+    
+
+    <section class="container">
+        <div class="section-header">
+            <h2>Parcourir par catégorie</h2>
+            <p>Trouvez des paniers selon vos préférences</p>
+        </div>
+        <div class="categories-grid">
+            <div class="cat-card">
+                <div class="cat-icon bg-yellow"><i class="fas fa-bread-slice"></i></div>
+                <h4>Boulangerie</h4>
+                <span>12 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-red"><i class="fas fa-utensils"></i></div>
+                <h4>Restaurant</h4>
+                <span>23 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-pink"><i class="fas fa-birthday-cake"></i></div>
+                <h4>Pâtisserie</h4>
+                <span>8 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-green"><i class="fas fa-carrot"></i></div>
+                <h4>Primeur</h4>
+                <span>10 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-blue"><i class="fas fa-shopping-cart"></i></div>
+                <h4>Supermarché</h4>
+                <span>15 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-purple"><i class="fas fa-drumstick-bite"></i></div>
+                <h4>Traiteur</h4>
+                <span>6 offres</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="margin-top: 80px;">
+        <div class="header-row">
+            <div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="background:#F28C28; padding:5px; border-radius:50%; color:white;"><i class="fas fa-bolt"></i></span>
+                    <h2 style="margin:0;">Dernière minute</h2>
+                </div>
+                <p style="margin-left:40px; color:#666;">À récupérer dans les 2 prochaines heures</p>
+            </div>
+            <a href="#" class="btn btn-orange" style="font-size:0.9rem; padding: 8px 16px;">Voir les espaces <i class="fas fa-chevron-right" aria-hidden="true"></i></a>
+        </div>
+
+        <div class="deals-grid">
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="Plat1.jpg" alt="Plat">
+                    <span class="badge-left">Plat du jour</span>
+                    <span class="badge-discount">-40%</span>
+                </div>
+                <div class="deal-content">
+                    <div class="deal-meta">
+                        <i class="fas fa-utensils deal-icon" aria-hidden="true"></i>
+                        <small>La Terrasse</small>
+                    </div>
+                    <h4>Fin de Service - Plats du Jour</h4>
+                    <div style="margin-top:10px; font-size:0.8rem; color:#666;">
+                        <i class="far fa-clock"></i> 14:00 - 15:00 <br>
+                        <i class="fas fa-map-marker-alt"></i> Centre-ville, Brazzaville
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="Plat2.jpg" alt="Dessert">
+                    <span class="badge-left">Pâtisserie</span>
+                    <span class="badge-discount">-50%</span>
+                </div>
+                <div class="deal-content">
+                    <div class="deal-meta">
+                        <i class="fas fa-birthday-cake deal-icon" aria-hidden="true"></i>
+                        <small>Aux Délices</small>
+                    </div>
+                    <h4>Dernière Pâtisseries</h4>
+                    <div style="margin-top:10px; font-size:0.8rem; color:#666;">
+                        <i class="far fa-clock"></i> 18:30 - 19:30 <br>
+                        <i class="fas fa-map-marker-alt"></i> M'oungali, Brazzaville
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="Plat3.jpg" alt="Sandwich">
+                    <span class="badge-left">Traiteur</span>
+                    <span class="badge-discount">-30%</span>
+                </div>
+                <div class="deal-content">
+                    <div class="deal-meta">
+                        <i class="fas fa-hamburger deal-icon" aria-hidden="true"></i>
+                        <small>Snack Express</small>
+                    </div>
+                    <h4>Fermeture - Sandwichs Frais</h4>
+                    <div style="margin-top:10px; font-size:0.8rem; color:#666;">
+                        <i class="far fa-clock"></i> 20:00 - 20:45 <br>
+                        <i class="fas fa-map-marker-alt"></i> Bacongo, Brazzaville
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact-section">
+        <div class="container">
+            <h2>Notre impact ensemble</h2>
+            <p>Chaque panier sauvé compte pour la planète</p>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <i class="fas fa-shopping-basket"></i>
+                    <h3>4,500+</h3>
+                    <h4>Paniers récupérés</h4>
+                    <p>Depuis le lancement</p>
+                </div>
+
+                <div class="impact-item">
+                    <i class="fas fa-users"></i>
+                    <h3>2,200+</h3>
+                    <h4>Communauté active</h4>
+                    <p>Clients et commerçants</p>
+                </div>
+
+                <div class="impact-item">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>69,99%</h3>
+                    <h4>Économies réalisées</h4>
+                    <p>En moyenne par panier</p>
+                </div>
+
+                <div class="impact-item">
+                    <i class="fas fa-heart"></i>
+                    <h3>500+</h3>
+                    <h4>Donateurs</h4>
+                    <p>Contribuent à notre mission</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-header">
+            <h2>Pour qui est SauvePlat ?</h2>
+            <p>Une plateforme pour tous les acteurs de la chaîne alimentaire</p>
+        </div>
+
+        <div class="target-grid">
+            <div class="target-card">
+                <div class="target-icon t-blue"><i class="fas fa-user-friends"></i></div>
+                <h4>Clients</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Achetez des paniers à prix réduit pour vous, ou financez un panier solidaire pour faire un don à une personne ou une association.</p>
+            </div>
+
+            <div class="target-card">
+                <div class="target-icon t-green"><i class="fas fa-store"></i></div>
+                <h4>Commerçants</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Vendez vos invendus, réduisez vos pertes et gagnez de nouveaux clients grâce aux paniers anti-gaspi.</p>
+            </div>
+
+            <div class="target-card">
+                <div class="target-icon t-orange"><i class="fas fa-tractor"></i></div>
+                <h4>Producteurs</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Proposez vos surplus (récoltes, stocks) et vendez directement aux consommateurs ou via des paniers.</p>
+            </div>
+
+            <div class="target-card">
+                <div class="target-icon t-red"><i class="fas fa-heart"></i></div>
+                <h4>Associations</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Recevez des dons (paniers solidaires ou produits) pour soutenir les personnes dans le besoin.</p>
+            </div>
+
+            <div class="target-card">
+                <div class="target-icon t-purple"><i class="fas fa-hand-holding-heart"></i></div>
+                <h4>Donateurs</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Faites un don en finançant un panier solidaire pour aider une personne ou soutenir une association.</p>
+            </div>
+
+        </div>
+    </div>
+    <section class="container" style="background-color:#FAF9F6; padding-top:80px; padding-bottom:30px;">
+        <div class="section-header" style="margin-top:5px;">
+            <h2>Ils nous font confiance</h2>
+            <p>Découvrez les avis de notre communauté</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p style="font-size:0.9rem; color:#555;">"Grâce à SauvePlat, je mange bien tout en faisant des économies. Les paniers sont toujours de qualité et les commerçants sont sympas !"</p>
+                <div class="stars" role="img" aria-label="Note 4 sur 5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marie">
+                    <div>
+                        <h5 style="margin:0;">Marie Ngoma</h5>
+                        <small style="color:#888;">Cliente fidèle</small>
+                    </div>
+                </div>
+                
+            </div>
+             <div class="review-card">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p style="font-size:0.9rem; color:#555;">"SauvePlat nous permet de réduire nos pertes et d'attirer de nouveaux clients. Une solution gagnant-gagnant pour tout le monde."</p>
+                <div class="stars" role="imag"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Jean-Pierre">
+                    <div>
+                        <h5 style="margin:0;">Jean-Pierre Moukala</h5>
+                        <small style="color:#888;">Restaurant partenaire</small>
+                    </div>
+                </div>
+            </div>
+             <div class="review-card">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p style="font-size:0.9rem; color:#555;">"En tant qu'étudiante, le budget est serré. SauvePlat me permet de bien manger sans me ruiner. Je recommande à 100% !"</p>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Solange">
+                    <div>
+                        <h5 style="margin:0;">Solange Bakala</h5>
+                        <small style="color:#888;">Étudiante</small>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+        
+    <div class="section-subheader" style="text-align:center; margin: 30px 0 10px;">
+        <h3 style="margin:0;">Partenaires</h3>
+    </div>
+
+    <div class="reviews-container">
+        
+        <div class="review-card">
+            <div class="review-image-container">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=200&auto=format&fit=crop" alt="Boulangerie">
+            </div>
+            <h3 class="review-h3">Boulangerie du Centre</h3>
+            <div class="review-rating">
+                <span class="review-star">★</span>
+                <span class="review-score">4.5</span>
+            </div>
+        </div>
+
+       
+        <div class="review-card">
+            <div class="review-image-container">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=200&auto=format&fit=crop" alt="Restaurant">
+            </div>
+            <h3 class="review-h3">Restaurant Mami Wata</h3>
+            <div class="review-rating">
+                <span class="review-star">★</span>
+                <span class="review-score">4.8</span>
+            </div>
+        </div>
+
+
+        <div class="review-card">
+            <div class="review-image-container">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200&auto=format&fit=crop" alt="Supermarché">
+            </div>
+            <h3 class="review-h3">Super Marché Kintélé</h3>
+            <div class="review-rating">
+                <span class="review-star">★</span>
+                <span class="review-score">4.2</span>
+            </div>
+        </div>
+    </div>
+
+ </div>
+        </div>
+    </section>
+
+            <style>
+                :root {
+                       
+                        --dark-green: var(--primary-green);
+                        --light-green: var(--primary-green);
+                        --orange: #ff6b2b;
+                        --text-white: #ffffff;
+                }
+
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; padding: 0; }
+
+        .sauveplat-slider-container {
+            display: flex;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            gap: 30px;
+            position: relative; 
+        }
+
+        .slider-content {
+            flex: 1;
+            overflow: hidden; 
+            border-radius: 12px;
+        }
+
+        .slides-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out; 
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            padding: 40px;
+            box-sizing: border-box;
+            color: white; 
+        }
+
+        
+        .slides-track .slide:nth-child(1) {
+            background: linear-gradient(135deg, rgba(242,140,40,0.12), rgba(53, 65, 57, 0.95));
+            color: white;
+        }
+        .slides-track .slide:nth-child(2) {
+            
+            background: linear-gradient(135deg, rgba(217,107,30,0.28), rgba(72, 77, 74, 0.95));
+            color: white;
+        }
+        .slides-track .slide:nth-child(3) {
+            background: linear-gradient(135deg, rgba(242,140,40,0.16), rgba(46,92,70,0.95));
+            color: white;
+        }
+
+       
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.04);
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 8px;
+        }
+        .slide > * { position: relative; z-index: 1; }
+
+        .card-inner {
+            display: flex;
+            gap: 40px;
+        }
+
+        .left-col { flex: 1.2; }
+        .right-col {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+       
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: inherit;
+            background: transparent;
+        }
+
+        .badge svg {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 18px;
+            display: block;
+        }
+        .badge-text {
+            font-size: 0.95rem;
+            font-weight: 300; 
+            color: inherit;
+            line-height: 1;
+        }
+
+        
+        .partner-subtext {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: inherit;
+            line-height: 1.25;
+            margin-top: 8px;
+        }
+
+        h2 { font-size: 28px; margin: 20px 0; }
+
+        .btn-primary {
+            background: var(--orange);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        
+        .btn-partner {
+            font-size: 1.25rem; 
+            padding: 18px 36px;
+            border-radius: 30px;
+            font-weight: 700;
+        }
+        @media (max-width: 768px) {
+            .btn-partner { font-size: 1rem; padding: 12px 20px; }
+        }
+
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 15px; position: relative; padding-left: 25px; font-size: 14px; }
+        li::before { content: '✓'; position: absolute; left: 0; color: var(--orange); font-weight: bold; }
+
+        
+        .right-col ul li::before { content: none; }
+        .right-col .list-icon {
+            color: var(--accent-orange); 
+            margin-right: 10px;
+            font-size: 1.18rem;
+            width: 22px;
+            display:inline-block;
+            text-align:center;
+            vertical-align: middle;
+        }
+
+      
+        .slider-nav {
+            display: flex;
+            flex-direction: row; 
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 18px;
+            overflow-x: auto;
+            padding: 8px 0;
+        }
+
+        .slider-nav::-webkit-scrollbar { height: 8px; }
+        .slider-nav::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 8px; }
+
+        .nav-bar {
+            width: 48px;
+            height: 8px;
+            background: #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            flex: 0 0 auto; 
+        }
+
+        .nav-bar.active {
+            background: #555;
+            width: 72px; 
+        }
+
+        
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.45);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 30;
+            box-shadow: 0 6px 18px rgba(120, 115, 115, 0.18);
+        }
+
+        .slider-arrow.left { left: 8px; }
+        .slider-arrow.right { right: 8px; }
+
+        .slider-arrow:active { transform: translateY(-50%) scale(0.98); }
+    </style>
+</head>
+<body>
+
+    <div class="sauveplat-slider-container">
+        <div class="slider-content">
+            <div class="slides-track" id="slidesTrack">
+                <div class="slide">
+                    <div class="card-inner">
+                        <div class="left-col">
+                            <span class="badge" aria-hidden="false">
+                                <i class="fas fa-store" aria-hidden="true" style="font-size:18px;"></i>
+                                <span class="badge-text">Pour les commerçants</span>
+                            </span>
+                            <h2 class="partner-highlight">Devenez partenaire SauvePlat</h2>
+                            <p class="partner-subtext">Rejoignez notre réseau de commerces engagés contre le gaspillage alimentaire. Simple, rapide et gratuit.</p>
+                            <button class="btn-primary btn-partner">Devenir partenaire</button>
+                        </div>
+                        <div class="right-col">
+                            <ul>
+                                <li><i class="fas fa-store list-icon" aria-hidden="true"></i><strong>Revenus supplémentaires</strong><br><small style="color:white; opacity:0.85;">Monétisez vos invendus au lieu de les jeter</small></li>
+                                <li><i class="fas fa-chart-line list-icon" aria-hidden="true"></i><strong>Nouveaux clients</strong><br><small style="color:white; opacity:0.85;">Attirez une clientèle sensible à l'anti-gaspi</small></li>
+                                <li><i class="fas fa-users list-icon" aria-hidden="true"></i><strong>Impact écologique</strong><br><small style="color:white; opacity:0.85;">Réduisez votre empreinte carbone</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="card-inner">
+                        <div class="left-col">
+                            <span class="badge" aria-hidden="false">
+                                <i class="fas fa-bread-slice" aria-hidden="true" style="font-size:18px;"></i>
+                                <span class="badge-text">Pour boulangers & restaurateurs</span>
+                            </span>
+                            <h2 class="partner-highlight">Vous êtes boulanger, restaurateur ou gérant de supermarché ?</h2>
+                            <p class="partner-subtext">Transformez vos invendus en revenus supplémentaires et attirez de nouveaux clients grâce à nos paniers AntiGaspi.</p>
+                            <button class="btn-primary btn-partner">Devenir partenaire</button>
+                        </div>
+                        <div class="right-col">
+                            <ul>
+                                <li><i class="fas fa-bread-slice list-icon" aria-hidden="true"></i><strong>Réduisez vos pertes</strong><br><small style="color:white; opacity:0.85;">Valorisez vos produits</small></li>
+                                <li><i class="fas fa-utensils list-icon" aria-hidden="true"></i><strong>Générez un chiffre d'affaires</strong><br><small style="color:white; opacity:0.85;">Générez du profit en fin de journée</small></li>
+                                <li><i class="fas fa-users list-icon" aria-hidden="true"></i><strong>Gagnez en visibilité</strong><br><small style="color:white; opacity:0.85;">Gagnez en notoriété locale</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="card-inner">
+                        <div class="left-col">
+                            <span class="badge" aria-hidden="false">
+                                <i class="fas fa-tractor" aria-hidden="true" style="font-size:18px;"></i>
+                                <span class="badge-text">Pour producteurs</span>
+                            </span>
+                            <h2 class="partner-highlight">Producteurs, commerçants, agriculteurs : ne jetez plus, vendez vos surplus</h2>
+                            <p class="partner-subtext">Vous êtes producteur bio, agriculteur ou vendeur de marché ? Liquidez rapidement vos invendus au lieu de les jeter. Proposez vos surplus de fruits, légumes ou produits frais en paniers AntiGaspi et trouvez des acheteurs près de chez vous.</p>
+                            <button class="btn-primary btn-partner">Devenir partenaire</button>
+                        </div>
+                        <div class="right-col">
+                            <ul>
+                                <li><i class="fas fa-tractor list-icon" aria-hidden="true"></i><strong>Valorisez vos surplus</strong><br><small style="color:white; opacity:0.85;">Ne laissez rien se perdre</small></li>
+                                <li><i class="fas fa-seedling list-icon" aria-hidden="true"></i><strong>Récupérez du chiffre d'affaires</strong><br><small style="color:white; opacity:0.85;">Compensez vos coûts de production</small></li>
+                                <li><i class="fas fa-users list-icon" aria-hidden="true"></i><strong>Accédez à une clientèle locale engagée</strong><br><small style="color:white; opacity:0.85;">Accédez à des acheteurs locaux</small></li>
+                            </ul>
+                        </div>
+                
+            </div>
+        </div>
+    </div>
+
+        <button class="slider-arrow left" aria-label="Slide précédente" onclick="prevSlide()">‹</button>
+        <button class="slider-arrow right" aria-label="Slide suivante" onclick="nextSlide()">›</button>
+
+        <div class="slider-nav" role="tablist" aria-label="Navigation des slides">
+            <div class="nav-bar active" role="button" tabindex="0" onclick="goToSlide(0)" onkeydown="if(event.key==='Enter')goToSlide(0)"></div>
+            <div class="nav-bar" role="button" tabindex="0" onclick="goToSlide(1)" onkeydown="if(event.key==='Enter')goToSlide(1)"></div>
+            <div class="nav-bar" role="button" tabindex="0" onclick="goToSlide(2)" onkeydown="if(event.key==='Enter')goToSlide(2)"></div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            const track = document.getElementById('slidesTrack');
+            const slides = document.querySelectorAll('.slide');
+            const navBars = document.querySelectorAll('.nav-bar');
+            let currentSlide = 0;
+            const maxIndex = slides.length - 1;
+            let isPaused = false; 
+
+            function updateUI(index){
+                if(!track) return;
+                track.style.transition = 'transform 350ms ease';
+                track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                navBars.forEach(bar => bar.classList.remove('active'));
+                if(navBars[index]) navBars[index].classList.add('active');
+            }
+
+            window.goToSlide = function(index){
+                if(index < 0) index = 0;
+                if(index > maxIndex) index = maxIndex;
+                currentSlide = index;
+                updateUI(index);
+            }
+
+            window.nextSlide = function(){
+                currentSlide = (currentSlide >= maxIndex) ? 0 : currentSlide + 1;
+                updateUI(currentSlide);
+            }
+
+            window.prevSlide = function(){
+                currentSlide = (currentSlide <= 0) ? maxIndex : currentSlide - 1;
+                updateUI(currentSlide);
+            }
+
+           
+            updateUI(currentSlide);
+
+           
+            const AUTOPLAY_DELAY = 5000;
+            let autoplayTimer = null;
+
+            function startAutoplay(){
+                stopAutoplay();
+                autoplayTimer = setInterval(()=>{
+                    if(!isPaused) nextSlide();
+                }, AUTOPLAY_DELAY);
+            }
+            function stopAutoplay(){
+                if(autoplayTimer){ clearInterval(autoplayTimer); autoplayTimer = null; }
+            }
+
+            const sliderContainer = document.querySelector('.sauveplat-slider-container');
+            if(sliderContainer){
+                sliderContainer.addEventListener('mouseenter', ()=> { isPaused = true; });
+                sliderContainer.addEventListener('mouseleave', ()=> { isPaused = false; });
+                sliderContainer.addEventListener('focusin', ()=> { isPaused = true; });
+                sliderContainer.addEventListener('focusout', ()=> { isPaused = false; });
+            }
+
+            
+            navBars.forEach((bar, i) => {
+                bar.addEventListener('click', () => { window.goToSlide(i); isPaused = true; });
+                bar.addEventListener('keydown', (e)=> { if(e.key === 'Enter'){ window.goToSlide(i); isPaused = true; } });
+            });
+
+            const leftArrow = document.querySelector('.slider-arrow.left');
+            const rightArrow = document.querySelector('.slider-arrow.right');
+            if(leftArrow){ leftArrow.addEventListener('click', ()=>{ prevSlide(); isPaused = true; }); }
+            if(rightArrow){ rightArrow.addEventListener('click', ()=>{ nextSlide(); isPaused = true; }); }
+
+            
+            document.addEventListener('keydown', function(e){
+                if(e.key === 'ArrowRight') { nextSlide(); isPaused = true; }
+                if(e.key === 'ArrowLeft') { prevSlide(); isPaused = true; }
+            });
+
+            
+            if(track) {
+                let touchStartX = 0;
+                let touchDeltaX = 0;
+                let isTouching = false;
+
+                track.addEventListener('touchstart', (e) => {
+                    if(e.touches && e.touches.length === 1){
+                        isTouching = true;
+                        touchStartX = e.touches[0].clientX;
+                        touchDeltaX = 0;
+                        isPaused = true;
+                        track.style.transition = 'none';
+                    }
+                }, {passive:true});
+
+                track.addEventListener('touchmove', (e) => {
+                    if(!isTouching) return;
+                    touchDeltaX = e.touches[0].clientX - touchStartX;
+                  
+                    const percent = (touchDeltaX / track.offsetWidth) * 100;
+                    track.style.transform = 'translateX(' + ( -currentSlide * 100 + -percent ) + '%)';
+                    e.preventDefault();
+                }, {passive:false});
+
+                track.addEventListener('touchend', (e) => {
+                    if(!isTouching) return;
+                    isTouching = false;
+                    track.style.transition = 'transform 300ms ease';
+                    const threshold = 50; 
+                    if(Math.abs(touchDeltaX) > threshold){
+                        if(touchDeltaX < 0) { 
+                            nextSlide();
+                        } else { 
+                            prevSlide();
+                        }
+                    } else {
+                        
+                        updateUI(currentSlide);
+                    }
+                    
+                    setTimeout(()=>{ isPaused = false; }, 1500);
+                }, {passive:true});
+            }
+
+            
+            startAutoplay();
+        })();
+    </script>
+
+  
+</body>
+</html>

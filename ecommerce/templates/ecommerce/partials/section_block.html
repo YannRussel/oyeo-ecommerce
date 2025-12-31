@@ -97,9 +97,9 @@
 
             <div class="product-footer">
               <div class="price-group">
-                <span class="price">{{ p.price_current }}{% if p.currency %} {{ p.currency }}{% endif %}</span>
+                <span class="price" style="font-size: 13px;">{{ p.price_current }}{% if p.currency %} {{ p.currency }}{% endif %}</span>
                 {% if p.price_original %}
-                  <span class="original-price">{{ p.price_original }} {{ p.currency }}</span>
+                  <span class="original-price" style="font-size: 13 px;">{{ p.price_original }} {{ p.currency }}</span>
                 {% endif %}
               </div>
 

@@ -15,4 +15,6 @@ urlpatterns = [
     # Liens vers cartes cadeaux
     path('carte-cadeaux', views.carte_cadeaux, name='carte-cadeaux'),
     path("setup/", views.pre_setup, name="pre_setup"),
+    # Liens vers AntiGaspi
+    path("anti-gaspi", views.antigaspi, name="antigaspi"),
 ]
