@@ -328,8 +328,8 @@ def product_detail(request, slug):
 @login_required
 def toggle_favorite(request):
     """
-    Reçoit product_id (POST JSON ou form-data).
-    Retourne JSON : { favorited: bool, count: int }
+    Toggle favorite via AJAX.
+    Accepte JSON ou form-data. Retourne JSON: {'favorited': bool, 'count': int, 'product_id': id}
     """
     # support JSON body ou form-data
     if request.content_type == 'application/json':
@@ -355,9 +355,7 @@ def toggle_favorite(request):
         favorited = True
 
     count = Favorite.objects.filter(product=product).count()
-    return JsonResponse({'favorited': favorited, 'count': count})
-
-
+    return JsonResponse({'favorited': favorited, 'count': count, 'product_id': product.pk})
 # ------------------------
 # Menu API (si utilisé)
 # ------------------------

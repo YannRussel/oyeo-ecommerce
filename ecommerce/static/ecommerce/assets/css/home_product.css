@@ -149,32 +149,76 @@ color: var(--primary);
 }
 
 /* Positionnement icône favoris */
+/* position & interaction (ton code existant) */
 .fav-icon {
   position: absolute;
   top: 8px;
   right: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.12s ease;
   z-index: 7;
 }
-
-/* Petit zoom au survol */
 .fav-icon:hover {
   transform: scale(1.15);
 }
 
-/* Cœur = contour + remplissage */
+/* style du path par défaut (contour "tomate") */
 .fav-icon path {
-  transition: fill 0.4s ease;
-  fill: transparent;       /* vide par défaut */
-  stroke: var(--primary) /* #e86429; */ ;        /* contour tomate */
+  transition: fill 0.24s ease, stroke 0.24s ease;
+  fill: transparent;                   /* vide par défaut */
+  stroke: var(--primary);              /* ton contour tomate */
   stroke-width: 2;
 }
 
-/* Au hover => remplissage intérieur */
+/* remplissage au hover (ton origine) */
 .fav-icon:hover path {
-  fill: var(--primary) /* #e86429 */;
+  fill: var(--primary);
 }
+
+/* --- Nouveautés : état "favorited" = cœur coloré en bleu --- */
+/* quand l'élément a la classe .favorited on met du bleu */
+.fav-icon.favorited path {
+  fill: #007bff !important;   /* couleur quand aimé */
+  stroke: #007bff !important;
+}
+
+/* nuance au hover si c'est déjà favori */
+.fav-icon.favorited:hover path {
+  fill: #0056b3 !important;
+  stroke: #0056b3 !important;
+}
+
+/* --- Cacher la "barre" compteur indésirable --- */
+/* Option A (recommandée) : cacher complètement le compteur */
+.fav-count {
+  display: none !important;
+}
+
+/* --- Option B (si un jour tu veux garder un petit badge discret) --- */
+/*
+.fav-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: transparent;
+  color: inherit;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.fav-icon.favorited ~ .fav-count {
+  background: #007bff;
+  color: #fff;
+}
+*/
+
 
 /* image */
 .img-wrap { width:100%; height:320px; overflow:hidden; background:#f7f7f7; position:relative; }

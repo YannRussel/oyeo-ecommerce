@@ -87,21 +87,21 @@
             </div>
 
             <!-- SEARCH -->
-<form class="blocsearch" action="#" method="get">
-  <div class="search-wrapper" style="max-width:700px;">
-    <input
-      type="text"
-      name="q"
-      class="form-control search-input"
-      placeholder="Cherchez vos articles..."
-      id="searchInput"
-      value="{{ request.GET.q|default:'' }}"
-    />
-    <button type="submit" class="search-icon-btn" aria-label="Rechercher">
-      <i class="fas fa-search" aria-hidden="true"></i>
-    </button>
-  </div>
-</form>
+            <form class="blocsearch" action="#" method="get">
+              <div class="search-wrapper" style="max-width:700px;">
+                <input
+                  type="text"
+                  name="q"
+                  class="form-control search-input"
+                  placeholder="Cherchez vos articles..."
+                  id="searchInput"
+                  value="{{ request.GET.q|default:'' }}"
+                />
+                <button type="submit" class="search-icon-btn" aria-label="Rechercher">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+              </div>
+            </form>
 
             <!-- ACTIONS -->
             <div class="actions">
@@ -120,7 +120,7 @@
 
                 <!-- COMPTE -->
                 {% if user.is_authenticated %}
-                    <a class="icon" href="#">
+                    <a class="icon" href="{% url 'admin:index' %}">
                         <img src="{% static 'ecommerce/ressources/img/icons/icon-user.svg' %}" alt="Mon compte">
                         <span class="icon_text">Mon compte</span>
                     </a>
@@ -202,7 +202,7 @@
                             {% for card in col.cards %}
                               <div class="col-5">
                                 <div class="image_navbar shadow-sm"
-                                     style="background-image: url('{% if card.image %}{{ card.image }}{% else %}{% static 'ecommerce/assets/img/fallback.jpg' %}{% endif %}');">
+                                     style="background-image: url('{% if card.image %}{{ card.image }}{% else %}{% static 'ecommerce/ressources/img/fallback.jpg' %}{% endif %}');">
                                 </div>
                                 <a href="{{ card.url }}" class="enGras mt-2 d-block">{{ card.title }}</a>
                               </div>

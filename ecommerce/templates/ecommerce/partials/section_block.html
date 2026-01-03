@@ -1,7 +1,6 @@
 {% load static %}
 {% load cloudinary %}
 
-
 {% if section %}
   {% url 'ecommerce:section_list' section.slug as section_url %}
 {% endif %}
@@ -11,30 +10,26 @@
   <div class="section-header">
     <h2 class="section-title">{{ section.name }}</h2>
     {% if show_see_more and section_url %}
-      <a href="{{ section_url }}" class="see-more" title="Voir plus de produits" aria-label="Voir plus de produits">Voir plus →</a>
-    {% elif show_see_more %}
-      <a href="#" class="see-more" title="Voir plus de produits" aria-label="Voir plus de produits">Voir plus →</a>
+      <a href="{{ section_url }}" class="see-more">Voir plus →</a>
     {% endif %}
   </div>
 
   <div class="product-carousel-wrapper" tabindex="0" aria-label="{{ section.name }}">
-    <button class="scroll-btn left" aria-label="Faire défiler vers la gauche">←</button>
+    <button class="scroll-btn left" aria-label="Gauche">←</button>
 
     <div class="product-grid scroll-container" role="list">
       {% for ps in product_sections %}
         {% with p=ps.product %}
         <article class="product-card" role="listitem" data-product-id="{{ p.pk }}">
-          {# badge promo (optionnel) #}
           {% if p.promo_label %}
             <span class="badge">{{ p.promo_label }}</span>
           {% endif %}
 
-          {# icône favoris (coeur) - état initial dynamique sans expressions interdites #}
+          <!-- SVG favori : on a supprimé le compteur -->
           <svg
             class="fav-icon{% if user_favorites and p.pk in user_favorites %} favorited{% endif %}"
             data-product-id="{{ p.pk }}"
             viewBox="0 0 24 24"
-            preserveAspectRatio="xMidYMid meet"
             width="28" height="28"
             role="button"
             tabindex="0"
@@ -44,44 +39,28 @@
             <path
               d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
               stroke="#e86429"
-              fill="{% if user_favorites and p.pk in user_favorites %}#e86429{% else %}transparent{% endif %}"
+              fill="{% if user_favorites and p.pk in user_favorites %}#007bff{% else %}transparent{% endif %}"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"/>
           </svg>
 
-          {# compteur favoris (optionnel) #}
-          <span class="fav-count" data-product-id="{{ p.pk }}">
-            {% if p.favorites.count %}
-              {{ p.favorites.count }}
-            {% endif %}
-          </span>
-
-          {# image principale (prefetched_main_images si préchargée) #}
-<div class="img-wrap">
-    {% if p.prefetched_main_images %}
-        <img src="{% cloudinary_url p.prefetched_main_images.0.image %}" 
-             alt="{{ p.prefetched_main_images.0.alt_text|default:p.name }}">
-    {% else %}
-        {% with imgs=p.images.all %}
-            {% if imgs %}
-                <img src="{% cloudinary_url imgs.0.image %}" 
-                     alt="{{ imgs.0.alt_text|default:p.name }}">
+          <div class="img-wrap">
+            {% if p.prefetched_main_images %}
+                <img src="{% cloudinary_url p.prefetched_main_images.0.image %}" alt="{{ p.prefetched_main_images.0.alt_text|default:p.name }}">
             {% else %}
-                <img src="{% static 'ecommerce/assets/img/fallback.jpg' %}" 
-                     alt="{{ p.name }}">
+                {% with imgs=p.images.all %}
+                    {% if imgs %}
+                        <img src="{% cloudinary_url imgs.0.image %}" alt="{{ imgs.0.alt_text|default:p.name }}">
+                    {% else %}
+                        <img src="{% static 'ecommerce/assets/img/fallback.jpg' %}" alt="{{ p.name }}">
+                    {% endif %}
+                {% endwith %}
             {% endif %}
-        {% endwith %}
-    {% endif %}
-</div>
+          </div>
 
           <div class="card-body">
-            {% if p.brand %}
-              <span class="brand">{{ p.brand.name }}</span>
-            {% else %}
-              <span class="brand">&nbsp;</span>
-            {% endif %}
-
+            <span class="brand">{% if p.brand %}{{ p.brand.name }}{% else %}&nbsp;{% endif %}</span>
             <a href="{% url 'ecommerce:product_detail' p.slug %}" class="lienTitleproduct">
               <h3 class="product-title">{{ p.name }}</h3>
             </a>
@@ -97,13 +76,13 @@
 
             <div class="product-footer">
               <div class="price-group">
-                <span class="price" style="font-size: 13px;">{{ p.price_current }}{% if p.currency %} {{ p.currency }}{% endif %}</span>
+                <span class="price">{{ p.price_current }}{% if p.currency %} {{ p.currency }}{% endif %}</span>
                 {% if p.price_original %}
-                  <span class="original-price" style="font-size: 13 px;">{{ p.price_original }} {{ p.currency }}</span>
+                  <span class="original-price">{{ p.price_original }} {{ p.currency }}</span>
                 {% endif %}
               </div>
 
-              {# état promo lié à la section (méthode callable) #}
+              {# ← REMIS : état promo lié à la section (méthode callable) #}
               {% if ps.is_active and ps.is_current %}
                 <span class="promo-label">Promo</span>
               {% endif %}
@@ -116,7 +95,150 @@
       {% endfor %}
     </div>
 
-    <button class="scroll-btn right" aria-label="Faire défiler vers la droite">→</button>
+    <button class="scroll-btn right" aria-label="Droite">→</button>
   </div>
 </section>
+
 {% endif %}
+
+<!-- =========================
+     CSS minimal / animation
+     (Si tu as un fichier CSS global : copie-colle ces règles dedans)
+     ========================= -->
+<style>
+/* position & look */
+.product-card { position: relative; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 6px 14px rgba(0,0,0,0.04); }
+.fav-icon { position: absolute; top: 8px; right: 8px; cursor: pointer; z-index: 7; transition: transform .18s ease, opacity .12s ease; }
+.fav-icon:hover { transform: scale(1.14); }
+
+/* default path style (tomate contour) */
+.fav-icon path { fill: transparent; stroke: var(--primary); stroke-width: 2; transition: fill .22s ease, stroke .22s ease; }
+.fav-icon:hover path { fill: var(--primary); }
+
+/* favorited = bleu */
+.fav-icon.favorited path { fill: #007bff !important; stroke: #007bff !important; }
+.fav-icon.favorited:hover path { fill: #0056b3 !important; stroke: #0056b3 !important; }
+
+/* petite animation "pop" */
+.fav-icon.pop {
+  transform: scale(1.35);
+  transition: transform 140ms cubic-bezier(.2,.9,.4,1);
+}
+
+/* retirer tout compteur (sécurité) */
+.fav-count { display: none !important; }
+
+/* style simple pour la promo-label */
+.promo-label {
+  display: inline-block;
+  background: #e86429;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  margin-left: 8px;
+}
+</style>
+
+<script>
+(function(){
+  // CSRF helper
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const c = cookies[i].trim();
+        if (c.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(c.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+  const fetchUrl = "{% url 'ecommerce:toggle_favorite' %}";
+
+  function applyPop(el) {
+    el.classList.add('pop');
+    setTimeout(()=> el.classList.remove('pop'), 160);
+  }
+
+  function handleResponseForIcon(icon, data) {
+    if (!data) return;
+    const fav = !!data.favorited;
+    icon.classList.toggle('favorited', fav);
+    icon.setAttribute('aria-pressed', fav ? 'true' : 'false');
+    icon.setAttribute('aria-label', fav ? 'Retirer des favoris' : 'Ajouter aux favoris');
+    if (fav) applyPop(icon);
+  }
+
+  function isLoginRedirect(resp) {
+    // Si Django a redirigé vers login, fetch suit la redirection.
+    if (resp.redirected) return true;
+    const url = (resp.url || '').toLowerCase();
+    return url.indexOf('/accounts/login') !== -1 || url.indexOf('/login') !== -1;
+  }
+
+  function handleToggle(e) {
+    e.preventDefault();
+    const icon = e.currentTarget;
+    const productId = icon.dataset.productId;
+    if (!productId) return;
+
+    if (icon._pending) return;
+    icon._pending = true;
+    icon.style.opacity = '0.7';
+
+    fetch(fetchUrl, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrftoken,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ product_id: productId }),
+      credentials: 'same-origin'
+    })
+    .then(resp => {
+      if (isLoginRedirect(resp)) {
+        // redirection vers login : redirige le navigateur
+        window.location.href = resp.url || ('/accounts/login/?next=' + encodeURIComponent(location.pathname));
+        throw new Error('not authenticated');
+      }
+      if (!resp.ok) {
+        // si la réponse n'est pas JSON : log
+        return resp.text().then(txt => { throw new Error('Erreur: ' + txt); });
+      }
+      return resp.json();
+    })
+    .then(data => {
+      handleResponseForIcon(icon, data);
+    })
+    .catch(err => {
+      console.error('toggle favorite error', err);
+    })
+    .finally(() => {
+      icon._pending = false;
+      icon.style.opacity = '';
+    });
+  }
+
+  function handleKeydown(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.currentTarget.click();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.fav-icon').forEach(function(svg){
+      svg.addEventListener('click', handleToggle);
+      svg.addEventListener('keydown', handleKeydown);
+      svg.setAttribute('tabindex', svg.getAttribute('tabindex') || '0');
+      svg.style.outline = 'none';
+    });
+  });
+})();
+</script>
