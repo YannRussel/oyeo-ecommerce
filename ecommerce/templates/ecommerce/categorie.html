@@ -284,31 +284,25 @@
 
 
 <!-- === SECTION PRODUITS CATEGORIE A LA UNE  === -->
+{% load static %}
 
-
-<section class="product-section">
-
-  <div class="product-carousel-wrapper" role="region" aria-label="Produits à la une">
-    <!-- Flèche gauche -->
-    <button class="scroll-btn left" aria-label="Défiler vers la gauche">←</button>
-
-    <!-- Conteneur scrollable des cartes -->
-    <div class="product-grid scroll-container" tabindex="0">
-      {% for product in featured_products %}
+<div class="container_ my-5">
+  <div class="d-flex justify-content-around align-items-center flex-wrap">
+    {% for product in featured_products %}
+      <div class="produit-grid-categorie">
         <div class="product-card" data-product-id="{{ product.pk }}">
-          <span class="badge">{{ product.primary_category.name }}</span>
+          <span class="badge">
+            {{ product.primary_category.name }}
+          </span>
 
-          {# icône favori : ajoute une classe si favori et expose product-id pour le JS #}
-          <button type="button"
-                  class="fav-btn {% if product.pk in featured_favorites %}is-favorited{% endif %}"
-                  data-product-id="{{ product.pk }}"
-                  aria-pressed="{% if product.pk in featured_favorites %}true{% else %}false{% endif %}"
-                  title="Ajouter aux favoris">
-            <svg class="fav-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-              <path d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
-                    stroke="#e86429" fill="transparent" stroke-width="2"/>
-            </svg>
-          </button>
+          <!-- SVG favori (conservé dans la même position que ton HTML statique) -->
+          <svg class="fav-icon {% if product.pk in featured_favorites %}is-favorited{% endif %}"
+               viewBox="0 0 24 24" width="28" height="28"
+               data-product-id="{{ product.pk }}" role="img" aria-hidden="true">
+            <path
+              d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+              stroke="#e86429" fill="transparent" stroke-width="2" />
+          </svg>
 
           <div class="img-wrap">
             {% if product.prefetched_main_images %}
@@ -346,9 +340,9 @@
 
             <div class="product-footer">
               <div class="price-group">
-                <span class="price">{{ product.current_price }} {{ product.currency }}</span>
+                <span class="price">{{ product.current_price }}{% if product.currency %} {{ product.currency }}{% endif %}</span>
                 {% if product.price_original %}
-                  <span class="original-price">{{ product.price_original }} {{ product.currency }}</span>
+                  <span class="original-price">{{ product.price_original }}{% if product.currency %} {{ product.currency }}{% endif %}</span>
                 {% endif %}
               </div>
               {% if product.promo_label %}
@@ -357,15 +351,13 @@
             </div>
           </div>
         </div>
-      {% empty %}
-        <p class="px-4">Aucun produit à la une pour cette catégorie.</p>
-      {% endfor %}
-    </div>
-
-    <!-- Flèche droite -->
-    <button class="scroll-btn right" aria-label="Défiler vers la droite">→</button>
+      </div>
+    {% empty %}
+      <p class="px-4">Aucun produit à la une pour cette catégorie.</p>
+    {% endfor %}
   </div>
-</section>
+</div>
+
 
 
 <!-- ******************************************************* -->

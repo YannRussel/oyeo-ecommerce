@@ -16,7 +16,12 @@
   padding: 0.35rem 0.6rem;
   cursor: pointer;
   font-size: 1rem;
+  display: none;
 }
 
 /* accessible focus */
 .search-icon-btn:focus { outline: 2px solid rgba(0,123,255,0.25); }
+
+
+/* Correction sur les deux traits sur les produits */
+
