@@ -91,7 +91,6 @@
   width: 32px;
   height: 32px;
   padding: 4px;
-  background: rgba(255,255,255,0.92);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -119,6 +118,123 @@
 .by-text { color:#7b8a84; font-size:0.86rem; }
 .price { font-weight:800; color:#081; }
 .original-price { color:#9aa0a4; text-decoration: line-through; font-size:0.9rem; }
+
+/* Le coté recommandation et le nombre des articles */
+
+/* ===== Statistiques / tri - alignement propre ===== */
+.statistiques_recherche {
+  display: flex;
+  justify-content: flex-end;   /* garde l'ensemble à droite sur grand écran */
+  align-items: center;
+  width: 30%;
+  gap: 1rem;
+  padding: 0.25rem 0;
+}
+
+/* conteneur interne : arrange les deux blocs (compteur + tri) */
+.sous_statistique_recherche {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-end; /* override si Bootstrap ou inline change */
+}
+
+/* bloc compteur (avec la classe border-end) */
+.statistiques_recherche .border-end {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 0.75rem;
+  margin-right: 0.25rem;
+  /* si tu veux vraiment une séparation visuelle conserver border-end (Bootstrap)
+     sinon la règle suivante gère l'apparence de la séparation */
+  border-right: 1px solid rgba(0,0,0,0.06);
+}
+
+/* lien des résultats */
+.statistiques_recherche .border-end a {
+  color: #6c757d;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* petit badge / point d'interrogation */
+.statistiques_recherche .border-end small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 50%;
+  font-size: 12px;
+  color: #6c757d;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* zone tri */
+.statdiv_2 {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* texte "Trier par" */
+.statdiv_2 .text-secondary {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #6c757d;
+}
+
+/* bouton recommandation */
+.enGras.btn_recommandation {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #162226;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.enGras.btn_recommandation:hover,
+.enGras.btn_recommandation:focus {
+  background: rgba(0,0,0,0.03);
+  outline: none;
+}
+
+/* Responsive : sur petits écrans on empile proprement */
+@media (max-width: 768px) {
+  .statistiques_recherche {
+    justify-content: flex-start;
+  }
+  .sous_statistique_recherche {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .statistiques_recherche .border-end {
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    padding-bottom: 0.5rem;
+    margin-right: 0;
+    width: 100%;
+  }
+  .statdiv_2 {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* Pour les filtres */
+
+
 
   </style>
 
@@ -362,21 +478,20 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="statistiques_recherche"><!-- statistiques_recherche -->
-                        <div class="sous_statistique_recherche justify-content-end">
-                            <div class="border-end "><!--  me-2 -->
-                                <a href="categorie.html" class=" py-2 px-2 text-secondary" style="text-decoration: none;">10 522 resultats </a>
-                                <small class="text-secondary border px-2" style="border-radius: 50px; font-size: 12px;">?</small>
-                            </div>
-
-                            <div class="d-flex statdiv_2 justify-content-start align-items-center">
-                                <span class="text-secondary d-block">Trier par </span>
-                                <button type="submit" class="enGras btn_recommandation ">Recommander▾</button>
-                            </div>
+                    <div class="statistiques_recherche">
+                    <div class="sous_statistique_recherche">
+                        <div class="border-end">
+                        <a href="categorie.html" class="result-count">10 522 resultats</a>
+                        <small class="info-badge">?</small>
                         </div>
 
+                        <div class="d-flex statdiv_2">
+                        <span class="text-secondary d-block">Trier par</span>
+                        <button type="submit" class="enGras btn_recommandation">Recommander ▾</button>
+                        </div>
                     </div>
+                    </div>
+
                 </div>
 
             </div>
