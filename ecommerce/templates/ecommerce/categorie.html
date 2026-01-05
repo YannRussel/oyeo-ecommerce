@@ -25,44 +25,33 @@
     /* global */
 
 /* container parent (garde tes classes Bootstrap mais override proprement) */
-/* parent : alignement stable + gap entre colonnes */
 .container_ > .d-flex {
   justify-content: flex-start !important; /* aligner de manière stable */
-  gap: 1.25rem;                            /* espace uniforme entre colonnes */
+  gap: 1.25rem;                             /* espace uniforme entre colonnes */
   align-items: stretch;
   flex-wrap: wrap;
-  box-sizing: border-box;
 }
 
-/* chaque "colonne" (wrapper produit) : 5 colonnes sur grand écran */
+/* chaque "colonne" (ton wrapper produit) : fixe la largeur responsive */
 .produit-grid-categorie {
-  box-sizing: border-box;
-  flex: 0 0 20%;     /* 20% => 5 par ligne */
-  max-width: 20%;
-  min-width: 160px;  /* évite colonne trop petite, ajuste si besoin */
+  flex: 0 0 23%;        /* 4 colonnes environ sur grand écran */
+  max-width: 23%;
+  min-width: 200px;     /* évite colonne trop petite */
   margin-bottom: 1.5rem;
 }
 
-/* responsive breakpoints :
-   - <=1199px : 4 colonnes
-   - <=991px  : 3 colonnes
-   - <=640px  : 2 colonnes
-   - <=420px  : 1 colonne
-*/
-@media (max-width: 1199px) {
-  .produit-grid-categorie { flex: 0 0 25%; max-width: 25%; } /* 4 par ligne */
+/* responsive */
+@media (max-width: 1100px) {
+  .produit-grid-categorie { flex: 0 0 31%; max-width: 31%; } /* 3 par ligne */
 }
-@media (max-width: 991px) {
-  .produit-grid-categorie { flex: 0 0 33.3333%; max-width: 33.3333%; } /* 3 par ligne */
-}
-@media (max-width: 640px) {
+@media (max-width: 800px) {
   .produit-grid-categorie { flex: 0 0 48%; max-width: 48%; } /* 2 par ligne */
 }
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .produit-grid-categorie { flex: 0 0 100%; max-width: 100%; } /* 1 par ligne */
 }
 
-/* ---------- card layout stable (tes règles conservées) ---------- */
+/* card layout stable */
 .product-card {
   width: 100%;
   display: flex;
@@ -74,7 +63,6 @@
   box-shadow: 0 6px 18px rgba(14,20,30,0.06);
   border: 1px solid rgba(0,0,0,0.03);
   min-height: 420px;   /* assure hauteur uniforme si le contenu varie */
-  box-sizing: border-box;
 }
 
 /* image wrapper & image */
@@ -116,7 +104,6 @@
   flex-direction: column;
   gap: 8px;
   flex: 1 1 auto;
-  box-sizing: border-box;
 }
 
 /* s'assurer que l'alt text des images cassées ne casse pas le layout */
@@ -130,7 +117,6 @@
 .by-text { color:#7b8a84; font-size:0.86rem; }
 .price { font-weight:800; color:rgb(39, 38, 38); }
 .original-price { color:#9aa0a4; text-decoration: line-through; font-size:0.9rem; }
-iginal-price { color:#9aa0a4; text-decoration: line-through; font-size:0.9rem; }
 
 /* Le coté recommandation et le nombre des articles */
 
