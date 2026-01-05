@@ -232,7 +232,33 @@
   }
 }
 
-/* Pour les filtres */
+/* Pour le lien et son separator */
+.breadcrumb__links {
+  display: flex;
+  align-items: center;
+  gap: 0;               /* on gère l'espacement via .separator */
+  flex-wrap: wrap;
+  font-size: 0.95rem;   /* assure une taille lisible */
+  color: #6c757d;
+}
+
+.breadcrumb__links a,
+.breadcrumb__links span {
+  display: inline-block;
+  vertical-align: middle;
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumb__links .separator {
+  display: inline-block;      /* assure qu'il n'est pas "none" ou block-level problématique */
+  margin: 0 .6rem;            /* espacement gauche/droite */
+  color: #98a0a6;             /* couleur visible */
+  font-weight: 600;
+  line-height: 1;
+  font-size: 1.05rem;
+}
+
 
 
 
