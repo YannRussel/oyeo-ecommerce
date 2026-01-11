@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SauvePlat - Anti Gaspillage</title>
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% block title %}Oyéo – Anti-Gaspi{% endblock %}
+
+{% block extra_css %}
+
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -854,8 +855,11 @@
         .reviews-container > .review-card { min-width: 200px; }
     }
     </style>
-</head>
-<body>
+{% endblock %}
+
+{% block navigation_bar %}{% endblock %}
+
+{% block content %}
 
     <header class="hero-header">
         <div class="hero-content">
@@ -874,7 +878,7 @@
         </p>
 
         <div class="hero-actions">
-            <a href="#" class="btn btn-primary">
+            <a href="{% url 'ecommerce:voir-offres-antigaspi' %}" class="btn btn-primary">
                 <i class="fas fa-shopping-bag"></i> 
                 Voir les offres 
                 <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
@@ -1503,7 +1507,8 @@
             <div class="nav-bar" role="button" tabindex="0" onclick="goToSlide(2)" onkeydown="if(event.key==='Enter')goToSlide(2)"></div>
         </div>
     </div>
-
+{% endblock %}
+{% block extra_js %}
     <script>
         (function(){
             const track = document.getElementById('slidesTrack');
@@ -1630,6 +1635,4 @@
         })();
     </script>
 
-  
-</body>
-</html>
+  {% endblock %}

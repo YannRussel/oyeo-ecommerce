@@ -17,4 +17,6 @@ urlpatterns = [
     path("setup/", views.pre_setup, name="pre_setup"),
     # Liens vers AntiGaspi
     path("anti-gaspi", views.antigaspi, name="antigaspi"),
+    path("voir-offres-antigaspi", views.voirOffresAntigaspi, name="voir-offres-antigaspi"),
+    path("supermarche-index", views.supermarche, name = "index-supermarche")
 ]

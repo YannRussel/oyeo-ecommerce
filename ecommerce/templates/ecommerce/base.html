@@ -34,6 +34,7 @@
 <body>
 
     <!-- ================= NAVBAR ================= -->
+    {% block topbar %}
     <div class="topbar">
         <div class="container_ d-flex justify-content-between align-items-center py-1">
 
@@ -71,6 +72,7 @@
             </div>
         </div>
     </div>
+    {% endblock %}
 
     <!-- ☰ Menu Header with logo, search and actions -->
 
@@ -80,13 +82,14 @@
         <div class="d-flex justify-content-between align-items-center py-1">
 
             <!-- LOGO -->
-            <div class="logo" aria-label="logo">
-                <a href="#" class="lienTitleproduct" id="logo_oyeo">
+            <div class="logo" aria-label="logo">{% block header_logo %}
+                <a href="{% url 'ecommerce:acceuil-site' %}" class="lienTitleproduct" id="logo_oyeo">
                     <span class="dot">Oy<span>éo</span></span>
                 </a>
-            </div>
+            {% endblock %}</div>
 
             <!-- SEARCH -->
+            {% block header_search %}
             <form class="blocsearch" action="#" method="get">
               <div class="search-wrapper" style="max-width:700px;">
                 <input
@@ -102,9 +105,10 @@
                 </button>
               </div>
             </form>
+            {% endblock %}
 
             <!-- ACTIONS -->
-            <div class="actions">
+            <div class="actions">{% block header_actions %}
 
                 <!-- FAVORIS -->
                 <a class="icon" href="#">
@@ -139,7 +143,7 @@
                 <button id="menubtn" class="btn btn-primary px-3 py-1">
                     ☰
                 </button>
-            </div>
+            {% endblock %}</div>
 
         </div>
     </header>
@@ -147,46 +151,49 @@
 
 
     <!-- ☰ MENU DE NAVIGATION ET CROUSSEL  -->
+{% block navigation_bar %}
 <div id="allnavigationBar" class="shadow-sm" style="width: 100%;">
   <div class="maNavigation" style="width: 100%;">
     <div class="menu-bar" style="width: 100%; font-size: 14px; margin-left: -42px;">
+
       <ul>
         {% for top in menu %}
         <li>
           <div class="navbarre_linkCategorie accordion">
-            <!-- titre cliquable -->
-            <a class="desktop_sousCategorie" href="{% url 'ecommerce:category_detail' top.slug %}">{{ top.title }}</a>
+            <a class="desktop_sousCategorie"
+               href="{% url 'ecommerce:category_detail' top.slug %}">
+              {{ top.title }}
+            </a>
 
-            <!-- flèche : conserve le href (navigation) mais ajoute aria + role pour accessibilité -->
             <a class="navbarre_linkCategorie_fleche"
                href="{{ top.url }}"
                role="button"
                aria-expanded="false"
-               aria-controls="sub-menu-{{ forloop.counter }}"></a>
+               aria-controls="sub-menu-{{ forloop.counter }}">
+            </a>
           </div>
 
-          <!-- panel avec id unique -->
           <div id="sub-menu-{{ forloop.counter }}" class="sub-menu-1 panel">
             <ul>
               {% for sub in top.children %}
               <li>
                 <div class="navbarre_linkSouSCategorie accordion_n2">
-                  <!-- sous-titre cliquable -->
                   <a href="{{ sub.url }}">{{ sub.title }}</a>
 
-                  <!-- flèche sous-catégorie : idem, aria + role + id target -->
                   <a class="navbarre_linkSouSCategorie_fleche"
                      href="{{ sub.url }}"
                      role="button"
                      aria-expanded="false"
-                     aria-controls="sub-menu-2-{{ forloop.parentloop.counter }}-{{ forloop.counter }}"></a>
+                     aria-controls="sub-menu-2-{{ forloop.parentloop.counter }}-{{ forloop.counter }}">
+                  </a>
                 </div>
 
-                <!-- panel_n2 avec id unique -->
-                <div id="sub-menu-2-{{ forloop.parentloop.counter }}-{{ forloop.counter }}" class="sub-menu-2 panel_n2">
+                <div id="sub-menu-2-{{ forloop.parentloop.counter }}-{{ forloop.counter }}"
+                     class="sub-menu-2 panel_n2">
                   <div class="row">
                     {% for col in sub.columns %}
                       <div class="col-sm-3">
+
                         {% if col.heading %}
                           <h6 class="enGras py-2">{{ col.heading }}</h6>
                         {% endif %}
@@ -204,31 +211,35 @@
                                 <div class="image_navbar shadow-sm"
                                      style="background-image: url('{% if card.image %}{{ card.image }}{% else %}{% static 'ecommerce/ressources/img/fallback.jpg' %}{% endif %}');">
                                 </div>
-                                <a href="{{ card.url }}" class="enGras mt-2 d-block">{{ card.title }}</a>
+                                <a href="{{ card.url }}" class="enGras mt-2 d-block">
+                                  {{ card.title }}
+                                </a>
                               </div>
                             {% endfor %}
                           </div>
                         {% endif %}
+
                       </div>
                     {% endfor %}
                   </div>
                 </div>
               </li>
               {% endfor %}
-
-              {# Si tu veux afficher des liens fixes sous le top #}
-              {# <li><a href="">accessoire</a></li> ... #}
             </ul>
           </div>
         </li>
         {% endfor %}
-        <li><a href="#">Supermarché</a></li>
+
+        <li><a href="{% url 'ecommerce:index-supermarche' %}">Supermarché</a></li>
         <li><a href="{% url 'ecommerce:antigaspi' %}">AntiGaspi</a></li>
         <li><a href="{% url 'ecommerce:carte-cadeaux' %}">Carte cadeaux</a></li>
       </ul>
+
     </div>
   </div>
 </div>
+{% endblock navigation_bar %}
+
 
 
 
@@ -236,12 +247,42 @@
     <!-- ================= MAIN CONTENT ================= -->
 
         {% block content %}
-        <!-- Contenu spécifique -->
+
+        {% block content_hero %}{% endblock %}
+
+        {% block breadcrumbs %}{% endblock %}
+
+        {% block category_filters %}{% endblock %}
+
+        <div class="row">
+            <aside class="col-lg-3">{% block sidebar %}
+                <!-- Default sidebar -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Catégories</h5>
+                        <ul class="list-unstyled">
+                            {% for c in menu %}
+                                <li><a href="{% url 'ecommerce:category_detail' c.slug %}">{{ c.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endblock %}</aside>
+
+            <section class="col-lg-9">{% block main %}
+                {% block category_product_grid %}
+                    <!-- Contenu spécifique (grille de produits) -->
+                {% endblock %}
+            {% endblock %}</section>
+        </div>
+
         {% endblock %}
 
 
     <!-- ================= FOOTER ================= -->
+    {% block footer %}
     {% include "ecommerce/partials/footer.html" %}
+    {% endblock %}
 
     <!-- ================= JS ================= -->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
