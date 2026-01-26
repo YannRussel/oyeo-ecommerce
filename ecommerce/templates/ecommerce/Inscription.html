@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OYÉO login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ENjdO4Dr2bkBIFxQpeoYz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    <!-- intl-tel-input (international phone input with country flags) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #1ea34b; /* slightly brighter green for contrast */
+            --bg-orange-gradient: linear-gradient(135deg, #fff7ed 0%, #ffe6cc 100%);
+            --gray-border: #e6e6e6;
+            --input-bg: #ffffff;
+            
+            /* Couleurs spécifiques aux profils (Code 1) */
+            --blue-accent: #e3f2fd; --blue-icon: #2196f3;
+            --green-accent: #e8f5e9; --green-icon: #4caf50;
+            --orange-accent: #fff3e0; --orange-icon: #ff9800;
+            --pink-accent: #fce4ec; --pink-icon: #e91e63;
+            --purple-accent: #f3e5f5; --purple-icon: #9c27b0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: var(--bg-orange-gradient); /* Fond orange de la page connexion */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Conteneur principal (Le téléphone blanc) */
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: white;
+            height: 800px;
+            max-height: 90vh;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 24px;
+            overflow: hidden; /* Important pour cacher les scrollbars moches */
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main back buttons on the primary screen (fixed over the gray background) */
+        .main-back-btn {
+            position: fixed; left: 20px; top: 20px; z-index: 110;
+            width: 40px; height: 40px; border-radius: 10px; border: none;
+            background: #f0f0f0; display:flex; align-items:center; justify-content:center;
+            color: #444; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        .main-back-btn.right { left: auto; right: 20px; }
+        .main-back-btn i { font-size: 1rem; }
+
+        /* --- ÉCRAN PRINCIPAL (Logo + Tabs + Login/Choix) --- */
+        #main-interface {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .app-header {
+            text-align: center;
+            padding: 30px 20px 10px;
+            flex-shrink: 0;
+        }
+
+        .logo-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .logo-text { font-size: 1.8rem; font-weight: 800; color: #2c3e50; }
+        /* Ensure no decorative marks around logo letters */
+        .logo-text, .logo-text::before, .logo-text::after, .logo-area * {
+            background-image: none !important;
+            box-shadow: none !important;
+            text-decoration: none !important;
+            text-shadow: none !important;
+        }
+        .tagline { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 15px; }
+
+        .auth-tabs {
+            display: flex;
+            background-color: #f5f5f5;
+            border-radius: 12px;
+            padding: 5px;
+            margin: 0 20px 20px;
+            flex-shrink: 0;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 700;
+            color: #777;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background-color: white;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Zone de contenu scrollable pour Login et Liste Profils */
+        .scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px 20px;
+            /* Scrollbar invisible */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .scroll-area::-webkit-scrollbar { display: none; }
+
+        /* Contenu des onglets (Caché/Affiché) */
+        .tab-content { display: none; animation: fadeIn 0.3s; }
+        .tab-content.active { display: block; }
+
+        /* --- STYLES COMMUNS (FORMULAIRES & CARTES) --- */
+        .form-group { margin-bottom: 15px; position: relative; }
+        
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background-color: var(--input-bg);
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-green);
+            background-color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Cartes Profils (Style Code 1) */
+        .profile-card {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--gray-border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: white;
+        }
+        .profile-card:hover { transform: translateY(-2px); border-color: #bbb; }
+        
+        .icon-box {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Enhanced circular icon style for specific profile cards */
+        .icon-box.enhanced { width:52px; height:52px; border-radius:50%; margin-right:14px; }
+        .icon-box.enhanced svg { width:24px; height:24px; display:block; }
+        .profile-card.association .icon-box.enhanced { background: linear-gradient(135deg,#ffe6ef,#ffd6e8); color:#a3144a; }
+        .profile-card.don .icon-box.enhanced { background: linear-gradient(135deg,#f3e8ff,#e8d8ff); color:#5b2b8a; }
+
+        /* Couleurs Profils */
+        .client .icon-box { background: var(--blue-accent); color: var(--blue-icon); }
+        .commercant .icon-box { background: var(--green-accent); color: var(--green-icon); }
+        .producteur .icon-box { background: var(--orange-accent); color: var(--orange-icon); }
+        .association .icon-box { background: var(--pink-accent); color: var(--pink-icon); }
+        .don .icon-box { background: var(--purple-accent); color: var(--purple-icon); }
+        /* Restore subtle grey page background for contrast */
+        body {
+            background: #f5f6f7;
+            color-scheme: light;
+        }
+
+        .card-content h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;}
+        .card-content p { font-size: 0.8rem; color: #666; }
+        .arrow { margin-left: auto; color: #ccc; }
+
+        /* Social Login */
+        .divider { display: flex; align-items: center; margin: 20px 0; color: #999; font-size: 0.8rem; }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #eee; }
+        .divider span { padding: 0 10px; }
+        
+        .social-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .social-btn {
+            width: 45px; height: 45px; border-radius: 50%; border: 1px solid #eee;
+            background: white; display: flex; justify-content: center; align-items: center;
+            font-size: 1.1rem; cursor: pointer; color: inherit; text-decoration: none;
+        }
+        /* No hover animation: keep social icons visually fixed */
+        .social-btn.google { color: #DB4437; }
+        .social-btn.facebook { color: #4267B2; }
+        .social-btn.apple { color: #000000; }
+
+        /* Demo Accounts */
+        .demo-section { border-top: 1px solid #f0f0f0; padding-top: 15px; text-align: center; }
+        .demo-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
+        .demo-chip {
+            padding: 5px 10px; border: 1px solid #ddd; border-radius: 15px;
+            font-size: 0.7rem; color: #666; cursor: pointer;
+        }
+
+        /* --- ÉCRANS SECONDAIRES (LES FORMULAIRES SEULS) --- */
+        /* Ils sont cachés par défaut et prennent toute la hauteur par-dessus le reste */
+        .sub-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            z-index: 100;
+            display: none; /* Caché par défaut */
+            flex-direction: column;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .back-btn {
+            background: none; border: none; font-size: 1.1rem; cursor: pointer;
+            color: #555; margin-right: 15px;
+        }
+        .page-title { font-weight: 700; font-size: 1rem; }
+
+        .form-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            scrollbar-width: none;
+        }
+        .form-content::-webkit-scrollbar { display: none; }
+
+        /* Bannières colorées (Comme Code 1) */
+        .banner {
+            padding: 15px; border-radius: 10px; margin-bottom: 20px;
+            display: flex; align-items: center;
+        }
+        .banner .icon-box { background: rgba(255,255,255,0.6); width: 36px; height: 36px; font-size: 1rem; }
+        .banner.client { background: var(--blue-accent); color: #0d47a1; }
+        .banner.producteur { background: var(--orange-accent); color: #e65100; }
+        .banner.commercant { background: var(--green-accent); color: #1b5e20; }
+        .banner.association { background: var(--pink-accent); color: #880e4f; }
+        .banner.don { background: var(--purple-accent); color: #4a148c; }
+
+        .form-row { display: flex; gap: 10px; }
+        .form-row .form-group { flex: 1; }
+
+        .radio-group { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+        .radio-item { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; }
+        .radio-item input[type="radio"] { order: 1; width: 18px; height: 18px; accent-color: var(--primary-green); cursor: pointer; }
+        .radio-item span { order: 2; color: #333; font-weight: 700; }
+
+        .checkbox-group { margin-top: 6px; display: flex; flex-direction: column; gap: 8px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .checkbox-item input[type="checkbox"] { order: 1; width: 18px; height: 18px; accent-color: var(--primary-green); cursor: pointer; }
+        .checkbox-item span { order: 2; color: #333; }
+
+
+        .password-toggle, .toggle-password { position: absolute; right: 15px; top: 38px; color: #999; cursor: pointer; }
+
+        /* Modern 'forgot password' link/button */
+        .link-btn {
+            appearance: none; border: none; background: transparent; color: var(--primary-green);
+            font-weight: 600; font-size: 0.9rem; cursor: pointer; padding: 6px 10px; border-radius: 8px;
+            display: inline-flex; align-items: center; gap: 8px; transition: background 160ms ease, transform 120ms ease;
+        }
+        .link-btn i { font-size: 0.95rem; }
+        .link-btn:hover { background: rgba(0,138,69,0.06); transform: translateY(-1px); }
+        .link-btn:active { transform: translateY(0); }
+
+        /* remember-me removed */
+
+        /* Modern input styles for forms */
+        .form-content .form-group input,
+        .form-content .form-group select {
+            width: 100%; padding: 12px 14px; border: 1px solid #e6e6e6; border-radius: 10px;
+            background: var(--input-bg); box-shadow: none; font-size: 0.95rem; transition: box-shadow 120ms ease, border-color 120ms ease;
+        }
+        .form-content .form-group input:focus,
+        .form-content .form-group select:focus {
+            outline: none; border-color: rgba(0,138,69,0.9); box-shadow: 0 6px 18px rgba(0,138,69,0.06);
+        }
+        .form-content .form-group input.error,
+        .form-content .form-group select.error {
+            border-color: #dc3545; box-shadow: 0 0 0 0.2rem rgba(220,53,69,0.25);
+        }
+        .form-content .form-group label { display:block; margin-bottom:6px; font-weight:700; color:#333; }
+        .form-content .banner.commercant { background: linear-gradient(90deg, rgba(232,245,233,1) 0%, rgba(237,248,240,1) 100%); }
+
+        /* Footer fixed to bottom of the sub-screen; content reserves space so it doesn't shift */
+        .sub-screen .form-content { position: relative; padding-bottom: 128px; }
+        .sub-screen .form-footer {
+            position: absolute; left: 0; right: 0; bottom: 14px;
+            padding: 12px 18px; background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.98));
+            display: flex; justify-content: center; gap: 12px; align-items: center; z-index: 120;
+            box-shadow: 0 -6px 18px rgba(0,0,0,0.04);
+        }
+        .sub-screen .form-footer .submit-btn {
+            width: 100%; max-width: 420px; border-radius: 12px; padding: 12px 18px; background: var(--primary-green); color: white; border: none; font-weight: 800;
+            box-shadow: 0 6px 18px rgba(0,138,69,0.12);
+        }
+
+        /* Override for Commerçant: keep the submit button just below the password field
+           Make footer static within the form flow so it doesn't float at the absolute bottom */
+        #screen-commercant .form-content { padding-bottom: 24px; }
+        #screen-commercant .form-footer {
+            position: static;
+            left: auto; right: auto; bottom: auto;
+            padding: 0; background: transparent; box-shadow: none; z-index: auto;
+            justify-content: flex-start;
+        }
+        #screen-commercant .form-footer .submit-btn {
+            max-width: none; width: 100%; margin-top: 8px; box-shadow: 0 6px 18px rgba(0,138,69,0.08);
+        }
+
+        /* Modern helper icon used next to informational text */
+        .helper-icon {
+            display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 6px;
+        }
+        .helper-symbol {
+            color: var(--primary-green); font-variation-settings: 'FILL' 0, 'wght' 600; font-size: 20px; line-height: 1;
+            display: inline-block; vertical-align: middle;
+        }
+
+        /* Animated curved SVG background */
+        #bg-curves { position: fixed; inset: 0; width:100%; height:100%; pointer-events:none; z-index:0 }
+        .bg-path { fill:none; stroke-width:3.5; stroke-linecap:round; opacity:0.85 }
+        .bg-path.a { stroke: rgba(34,139,230,0.12); }
+        .bg-path.b { stroke: rgba(144,19,254,0.10); stroke-width:4.5 }
+
+        @keyframes moveA {
+            0% { transform: translateX(-6%) translateY(0) }
+            50% { transform: translateX(6%) translateY(4%) }
+            100% { transform: translateX(-6%) translateY(0) }
+        }
+        @keyframes dashA {
+            0% { stroke-dashoffset: 0 }
+            50% { stroke-dashoffset: 180 }
+            100% { stroke-dashoffset: 0 }
+        }
+        @keyframes moveB {
+            0% { transform: translateX(8%) translateY(-4%) }
+            50% { transform: translateX(-8%) translateY(6%) }
+            100% { transform: translateX(8%) translateY(-4%) }
+        }
+
+        .bg-group.a { transform-origin: center; animation: moveA 8s ease-in-out infinite }
+        .bg-path.a { stroke-dasharray: 240; animation: dashA 6s linear infinite; opacity:0.6 }
+        .bg-group.b { transform-origin: center; animation: moveB 10s ease-in-out infinite }
+        .bg-path.b { opacity:0.55 }
+
+        /* Small spinner for buttons */
+        .btn-spinner { display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,0.7); border-top-color: transparent; border-radius:50%; animation: spin .8s linear infinite; vertical-align:middle; margin-left:8px }
+        @keyframes spin { to { transform: rotate(360deg) } }
+
+        /* Performance & accessibility: prefer-reduced-motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .bg-group.a, .bg-group.b, .bg-path.a, .bg-path.b { animation: none !important; transition: none !important; }
+            :root { --bg-curve-opacity: 0.45; }
+        }
+
+        /* Password requirements box */
+        .pw-requirements { margin-top:8px; padding:10px 12px; background:#fbfbfb; border:1px solid #eee; border-radius:8px; font-size:0.85rem; color:#444 }
+        .pw-requirements .rule { display:flex; align-items:center; gap:8px; margin:6px 0 }
+        .pw-requirements .rule .dot { width:10px; height:10px; border-radius:6px; background:#e5e7eb }
+        .pw-requirements .rule.ok .dot { background: #16a34a }
+        .pw-requirements .rule.ok span { color:#16a34a; font-weight:700 }
+        .pw-requirements .rule span { color:#555 }
+
+
+        /* Help FAB on the right with a slide-out panel and chat modal */
+        .help-fab {
+            position: fixed;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-green);
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            display:flex; align-items:center; justify-content:center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+            cursor: pointer; z-index:130;
+        }
+        .help-fab i { font-size:1.2rem }
+
+        .help-panel {
+            position: fixed;
+            right: 86px; /* sits left of FAB */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 260px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            padding: 12px;
+            z-index:129;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .help-panel.visible { display:flex; }
+        .help-panel .hp-title { font-weight:800; color:#222; font-size:0.95rem; }
+        .help-panel .hp-actions { display:flex; flex-direction:column; gap:8px; margin-top:6px }
+        .help-panel .hp-actions button { padding:8px 10px; border-radius:8px; border:none; cursor:pointer; font-weight:700 }
+        .help-panel .hp-actions .email-btn { background:#f3f4f6; color:#111 }
+        .help-panel .hp-actions .chat-btn { background:var(--primary-green); color:white }
+
+        /* Chat modal */
+        .chat-modal-backdrop { position: fixed; inset:0; background: rgba(0,0,0,0.45); display:none; align-items:center; justify-content:center; z-index:140 }
+        .chat-modal-backdrop.visible { display:flex }
+        .chat-modal { width: 360px; max-width: 92%; background:white; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.2); overflow:hidden; display:flex; flex-direction:column }
+        .chat-header { padding:12px; background:var(--primary-green); color:white; font-weight:800 }
+        .chat-body { padding:12px; height:260px; overflow:auto; background:#fafafa; display:flex; flex-direction:column; gap:8px }
+        .chat-input { display:flex; gap:8px; padding:10px; border-top:1px solid #eee }
+        .chat-input input { flex:1; padding:8px 10px; border-radius:8px; border:1px solid #ddd }
+        .chat-msg { max-width:80%; padding:8px 10px; border-radius:10px; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.03) }
+        .chat-msg.user { margin-left:auto; background:var(--primary-green); color:white }
+
+        /* Simple non-blocking toast used for login confirmations */
+        .oyeo-toast{
+            position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(12px);
+            background:rgba(0,0,0,0.8); color:#fff; padding:10px 14px; border-radius:10px; font-weight:700;
+            opacity:0; transition:opacity .22s ease, transform .22s ease; z-index:200;
+        }
+        .oyeo-toast.visible{ opacity:1; transform:translateX(-50%) translateY(0); }
+        .oyeo-toast.error{ background: #dc3545 !important; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Animated background curves -->
+    <svg id="bg-curves" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+        <g class="bg-group a">
+            <path class="bg-path a" d="M -10 80 C 80 10, 220 10, 320 80 S 540 200, 720 140 S 980 20, 1200 120" />
+        </g>
+        <g class="bg-group b">
+            <path class="bg-path b" d="M -20 300 C 60 380, 200 220, 360 300 S 620 420, 820 360 S 1000 280, 1280 360" />
+        </g>
+    </svg>
+
+    <button class="main-back-btn" onclick="history.back()" title="Retour">
+        <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <button class="main-back-btn right" onclick="history.forward()" title="Avant" aria-label="Avant">
+        <i class="fa-solid fa-arrow-right"></i>
+    </button>
+
+    <div class="app-container">
+
+        <div id="main-interface">
+            
+            <div class="app-header">
+                <div class="logo-area">
+                    <div class="logo-text">OYÉO</div>
+                </div>
+                <p class="tagline"> Connectez-vous ou créez votre compte. Pour suivre vos commandes, accéder à vos avantages, et profiter de vos offres exclusives.</p>
+            </div>
+
+            <div class="auth-tabs">
+                <div class="tab active" onclick="switchTab('login')">Connexion</div>
+                <div class="tab" onclick="switchTab('register')">Inscription</div>
+            </div>
+
+            <div class="scroll-area">
+                
+                <div id="tab-login" class="tab-content active">
+                    <form>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input id="loginEmail" type="email" placeholder="votre@email.com">
+                        </div>
+                        <!-- téléphone supprimé pour la section Connexion -->
+                        <div class="form-group">
+                            <label>Mot de passe</label>
+                            <input type="password" id="loginPass" placeholder="........">
+                            <i class="fa-regular fa-eye password-toggle" onclick="togglePass('loginPass')"></i>
+                        </div>
+                        <div style="text-align:right; margin-top:8px;">
+                            <button type="button" class="link-btn" onclick="forgotPassword()"><i class="fa-solid fa-key"></i>Mot de passe oublié ?</button>
+                        </div>
+                        <button type="button" class="submit-btn" onclick="performLogin()">Se connecter</button>
+                    </form>
+
+                    <div class="divider"><span>Ou continuer avec</span></div>
+                    <div class="social-buttons">
+                        <a class="social-btn google" href="/auth/google" role="button" aria-label="Se connecter avec Google" title="Se connecter avec Google"><i class="fa-brands fa-google" aria-hidden="true"></i></a>
+                        <a class="social-btn facebook" href="/auth/facebook" role="button" aria-label="Se connecter avec Facebook" title="Se connecter avec Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                        <a class="social-btn apple" href="/auth/apple" role="button" aria-label="Se connecter avec Apple" title="Se connecter avec Apple" rel="noopener noreferrer"><i class="fa-brands fa-apple" aria-hidden="true"></i></a>
+                    </div>
+
+                    <div class="demo-section">
+                        <button type="button" class="link-btn" onclick="toggleHelpPanel()" style="position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; color:white; background-color: var(--primary-green); border-radius: 50%; padding: 0; box-shadow: 0 4px 12px rgba(0,138,69,0.3); font-weight: 600; border: none; display: flex; align-items: center; justify-content: center; z-index: 100;"><i class="fa-solid fa-circle-info" style="font-size: 1.2rem;"></i></button>
+                        <div class="help-panel inline" id="helpPanelBottom" role="region" aria-label="Aide rapide" style="margin-top:5px; padding:8px; border-radius:6px; background:#f9f9f9; border:1px solid #eee; display:none;">
+                            <div style="font-size:0.8rem; color:#555; margin-bottom:6px;">Choisissez une option :</div>
+                            <div style="display:flex; gap:8px;">
+                                <button class="chat-btn" onclick="openChat()" style="flex:1; padding:6px 8px; border-radius:4px; border:none; background:var(--primary-green); color:white; font-size:0.75rem; font-weight:600; cursor:pointer;">Chat</button>
+                                <button class="email-btn" onclick="openMail()" style="flex:1; padding:6px 8px; border-radius:4px; border:none; background:#f0f0f0; color:#333; font-size:0.75rem; font-weight:600; cursor:pointer;">Email</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-register" class="tab-content">
+                    <p style="text-align:center; color:#666; margin-bottom:15px; font-size:0.9rem;">
+                        Choisissez votre profil
+                    </p>
+
+                    <div class="profile-card client" onclick="openForm('screen-client')">
+                        <div class="icon-box"><i class="fa-regular fa-user"></i></div>
+                        <div class="card-content">
+                            <h3>Je suis un Client</h3>
+                            <p>Achetez des paniers anti-gaspi</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+
+                    <div class="profile-card commercant" onclick="openForm('screen-commercant')">
+                        <div class="icon-box"><i class="fa-solid fa-store"></i></div>
+                        <div class="card-content">
+                            <h3>Je suis Commerçant</h3>
+                            <p>Vendez vos invendus</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+
+                    <div class="profile-card producteur" onclick="openForm('screen-producteur')">
+                        <div class="icon-box"><i class="fa-solid fa-seedling"></i></div>
+                        <div class="card-content">
+                            <h3>Je suis Producteur</h3>
+                            <p>Proposez vos produits frais</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+
+                    <div class="profile-card association" onclick="openForm('screen-association')">
+                        <div class="icon-box enhanced" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M12.1 21s-7.6-4.7-9.6-7.1C.7 11.6 2 7.9 5 6.6c1.6-.7 3.3-.2 4.1.6.8-.8 2.5-1.3 4.1-.6 3 1.3 4.3 5 2.5 7.3-2 2.4-9 7.1-9 7.1z"/></svg>
+                        </div>
+                        <div class="card-content">
+                            <h3>Je suis une Association</h3>
+                            <p>Recevez des dons alimentaires</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+
+                    <div class="profile-card don" onclick="openForm('screen-don')">
+                        <div class="icon-box enhanced" aria-hidden="true">
+                            <i class="fa-solid fa-hand-holding" style="font-size:22px; line-height:1;"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Je veux faire un don</h3>
+                            <p>Donnez biens et nourriture</p>
+                        </div>
+                        <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                    </div>
+
+                </div>
+
+                <!-- LOGIN TEMPLATES FOR EACH PROFILE -->
+                <div id="login-client" class="sub-screen">
+                    <div class="top-nav">
+                        <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                        <div class="page-title">Connexion — Client</div>
+                    </div>
+                    <div class="form-content">
+                        <form onsubmit="handleProfileLogin(event,'client')">
+                            <div class="form-group"><label>Email</label><input id="login_client_email" type="email" required></div>
+                            <div class="form-group"><label>Mot de passe</label><input id="login_client_pass" type="password" required></div>
+                            <div class="form-footer"><button type="submit" class="submit-btn">Se connecter</button></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="login-commercant" class="sub-screen">
+                    <div class="top-nav">
+                        <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                        <div class="page-title">Connexion — Commerçant</div>
+                    </div>
+                    <div class="form-content">
+                        <form onsubmit="handleProfileLogin(event,'commercant')">
+                            <div class="form-group"><label>Email professionnel</label><input id="login_commercant_email" type="email" required></div>
+                            <div class="form-group"><label>Identifiant magasin</label><input id="login_commercant_shop" type="text" placeholder="Ex: Boulangerie JBN"></div>
+                            <div class="form-group"><label>Mot de passe</label><input id="login_commercant_pass" type="password" required></div>
+                            <div class="form-footer"><button type="submit" class="submit-btn">Se connecter</button></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="login-producteur" class="sub-screen">
+                    <div class="top-nav">
+                        <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                        <div class="page-title">Connexion — Producteur</div>
+                    </div>
+                    <div class="form-content">
+                        <form onsubmit="handleProfileLogin(event,'producteur')">
+                            <div class="form-group"><label>Email</label><input id="login_producteur_email" type="email" required></div>
+                            <div class="form-group"><label>Nom de l'exploitation (optionnel)</label><input id="login_producteur_farm" type="text" placeholder="Ferme Mouamba"></div>
+                            <div class="form-group"><label>Mot de passe</label><input id="login_producteur_pass" type="password" required></div>
+                            <div class="form-footer"><button type="submit" class="submit-btn">Se connecter</button></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="login-association" class="sub-screen">
+                    <div class="top-nav">
+                        <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                        <div class="page-title">Connexion — Association</div>
+                    </div>
+                    <div class="form-content">
+                        <form onsubmit="handleProfileLogin(event,'association')">
+                            <div class="form-group"><label>Email</label><input id="login_association_email" type="email" required></div>
+                            <div class="form-group"><label>Nom de l'association (optionnel)</label><input id="login_association_name" type="text" placeholder="Association Solidarité Congo"></div>
+                            <div class="form-group"><label>Mot de passe</label><input id="login_association_pass" type="password" required></div>
+                            <div class="form-footer"><button type="submit" class="submit-btn">Se connecter</button></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="login-donateur" class="sub-screen">
+                    <div class="top-nav">
+                        <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                        <div class="page-title">Connexion — Donateur</div>
+                    </div>
+                    <div class="form-content">
+                        <form onsubmit="handleProfileLogin(event,'donateur')">
+                            <div class="form-group"><label>Email</label><input id="login_donateur_email" type="email" required></div>
+                            <div class="form-group"><label>Mot de passe</label><input id="login_donateur_pass" type="password" required></div>
+                            <div class="form-footer"><button type="submit" class="submit-btn">Se connecter</button></div>
+                        </form>
+                        <p style="text-align:center; color:#666; margin-top:12px;">Ou <button class="link-btn" onclick="openForm('screen-don')">Donner sans compte</button></p>
+                    </div>
+                </div>
+        </div>
+
+        <div id="screen-client" class="sub-screen">
+            <div class="top-nav">
+                <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                <div class="page-title">Inscription Client</div>
+            </div>
+            <div class="form-content">
+                <div class="banner client">
+                    <div class="icon-box"><i class="fa-regular fa-user"></i></div>
+                    <div class="banner-text">
+                        <h3 style="font-size:0.95rem;">Compte Client</h3>
+                        <p style="font-size:0.8rem;">Profitez des offres</p>
+                    </div>
+                </div>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group"><label>Nom *</label><input type="text" placeholder="Nzinga"></div>
+                        <div class="form-group"><label>Prénom *</label><input type="text" placeholder="Boris"></div>
+                    </div>
+                    <div class="form-group"><label>Email *</label><input type="email" placeholder="vous@exemple.com"></div>
+                    <div class="form-group"><label>Téléphone</label><input type="tel" class="phone-input" placeholder="06 123 4567"></div>
+                    <div class="form-group"><label>Mot de passe *</label><input id="client-pass" class="pw-require" type="password" placeholder="Créez un mot de passe (8+ caractères)"><i class="fa-regular fa-eye toggle-password" onclick="togglePass('client-pass')"></i>
+                        <div class="pw-requirements" data-for="client-pass" aria-hidden="false">
+                            <div class="rule" data-rule="upper"><span class="dot"></span><span>Une lettre majuscule (A‑Z)</span></div>
+                            <div class="rule" data-rule="lower"><span class="dot"></span><span>Une lettre minuscule (a‑z)</span></div>
+                            <div class="rule" data-rule="digit"><span class="dot"></span><span>Un chiffre (0‑9)</span></div>
+                            <div class="rule" data-rule="special"><span class="dot"></span><span>Un caractère spécial (!@#...)</span></div>
+                            <div class="rule" data-rule="length"><span class="dot"></span><span>Au moins 8 caractères</span></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Créer mon compte</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="screen-producteur" class="sub-screen">
+            <div class="top-nav">
+                <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                <div class="page-title">Changer de profil</div>
+            </div>
+            <div class="form-content">
+                <div class="banner producteur">
+                    <div class="icon-box"><i class="fa-solid fa-seedling"></i></div>
+                    <div class="banner-text">
+                        <h3 style="font-size:0.95rem;">Inscription Producteur</h3>
+                        <p style="font-size:0.8rem;">Proposez vos récoltes directement</p>
+                    </div>
+                </div>
+                <form onsubmit="handleSubmit(event, 'producteur')">
+                    <div class="form-group"><label>Nom complet *</label><input type="text" placeholder="Jean Mouamba" required></div>
+                    <div class="form-group"><label>Nom de l'exploitation / Ferme</label><input type="text" placeholder="Ferme Mouamba"></div>
+                    <div class="form-group">
+                        <label>Type de production *</label>
+                        <select required>
+                            <option value="">Que produisez-vous ?</option>
+                            <option>Fruits</option>
+                            <option>Légumes</option>
+                            <option>Viande / Volaille</option>
+                            <option>Poisson</option>
+                            <option>Miel / Produits apicoles</option>
+                            <option>Production mixte</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Email *</label><input type="email" placeholder="votre@exemple.com" required></div>
+                    <div class="form-group"><label>Téléphone (optionnel)</label><input type="tel" class="phone-input" placeholder="06 123 4567"></div>
+                    <div class="form-group"><label>Mot de passe *</label><input id="producteur-pass" class="pw-require" type="password" placeholder="Créez un mot de passe (8+ caractères)" required><i class="fa-regular fa-eye toggle-password" onclick="togglePass('producteur-pass')"></i>
+                        <div class="pw-requirements" data-for="producteur-pass" aria-hidden="false">
+                            <div class="rule" data-rule="upper"><span class="dot"></span><span>Une lettre majuscule (A‑Z)</span></div>
+                            <div class="rule" data-rule="lower"><span class="dot"></span><span>Une lettre minuscule (a‑z)</span></div>
+                            <div class="rule" data-rule="digit"><span class="dot"></span><span>Un chiffre (0‑9)</span></div>
+                            <div class="rule" data-rule="special"><span class="dot"></span><span>Un caractère spécial (!@#...)</span></div>
+                            <div class="rule" data-rule="length"><span class="dot"></span><span>Au moins 8 caractères</span></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Envoyer ma demande</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="screen-commercant" class="sub-screen">
+            <div class="top-nav">
+                <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                <div class="page-title">Changer de profil</div>
+            </div>
+            <div class="form-content">
+                <div class="banner commercant">
+                    <div class="icon-box"><i class="fa-solid fa-store"></i></div>
+                    <div class="banner-text">
+                        <h3 style="font-size:0.95rem;">Inscription Commerçant</h3>
+                        <p style="font-size:0.8rem;">Demande soumise à validation</p>
+                    </div>
+                </div>
+                <form id="commercantForm" onsubmit="handleMerchantSignup(event)">
+                    <div class="form-row">
+                        <div class="form-group"><label for="commercant_nom">Nom *</label><input id="commercant_nom" name="nom" type="text" placeholder="Akili" required></div>
+                        <div class="form-group"><label for="commercant_prenom">Prénom *</label><input id="commercant_prenom" name="prenom" type="text" placeholder="Jean" required></div>
+                    </div>
+                    <div class="form-group"><label>Nom du commerce ou Quartier *</label><input type="text" placeholder="Boulangerie JBN / Mfilou" required></div>
+                    <div class="form-group">
+                        <label>Type d'activité *</label>
+                        <select id="commercant_activity" name="activity" required>
+                            <option value="">Sélectionnez votre activité</option>
+                            <option>Boulangerie</option>
+                            <option>Épicerie</option>
+                            <option>Restaurant </option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="commercant_zone">Zone *</label><select id="commercant_zone" name="zone" required><option value="">Choisissez une zone</option><option>Rurale</option><option>Urbaine</option></select></div>
+                        <div class="form-group"><label for="commercant_ville">Ville *</label>
+                            <select id="commercant_ville" name="ville" required>
+                                <option value="">Choisissez une ville</option>
+                                <option>Brazzaville</option>
+                                <option>Pointe-Noire</option>
+                                <option>Dolisie</option>
+                                <option>Nkayi</option>
+                                <option>Quesso</option>
+                                <option>Autre ville</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="background:#fafafa; padding:12px; border-radius:10px; font-size:0.9rem; color:#555; margin:12px 0 6px; display:flex; gap:12px; align-items:center;">
+                        <div class="helper-icon">
+                            <span class="material-symbols-rounded helper-symbol" aria-hidden="true">hourglass_empty</span>
+                        </div>
+                        <div>Votre demande sera examinée sous 24‑48h. Un administrateur vous contactera par email.</div>
+                    </div>
+                    <div class="form-group"><label for="commercant_email">Email *</label><input id="commercant_email" name="email" type="email" placeholder="votre@exemple.com" required></div>
+                    <div class="form-group"><label for="commercant_phone">Téléphone (optionnel)</label><input id="commercant_phone" name="phone" type="tel" class="phone-input" placeholder="06 123 4567"></div>
+                    <div class="form-group"><label for="commercant-pass">Mot de passe *</label><input id="commercant-pass" class="pw-require" name="password" type="password" placeholder="Créez un mot de passe (8+ caractères)" required><i class="fa-regular fa-eye toggle-password" onclick="togglePass('commercant-pass')"></i>
+                        <div class="pw-requirements" data-for="commercant-pass" aria-hidden="false">
+                            <div class="rule" data-rule="upper"><span class="dot"></span><span>Une lettre majuscule (A‑Z)</span></div>
+                            <div class="rule" data-rule="lower"><span class="dot"></span><span>Une lettre minuscule (a‑z)</span></div>
+                            <div class="rule" data-rule="digit"><span class="dot"></span><span>Un chiffre (0‑9)</span></div>
+                            <div class="rule" data-rule="special"><span class="dot"></span><span>Un caractère spécial (!@#...)</span></div>
+                            <div class="rule" data-rule="length"><span class="dot"></span><span>Au moins 8 caractères</span></div>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <button type="submit" class="submit-btn" id="commercantSubmit" aria-live="polite">
+                            <span class="btn-label">Envoyer ma demande</span>
+                            <span class="btn-spinner" aria-hidden="true" style="display:none"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="screen-association" class="sub-screen">
+            <div class="top-nav">
+                <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                <div class="page-title">Changer de profil</div>
+            </div>
+            <div class="form-content">
+                <div class="banner association">
+                    <div class="icon-box"><i class="fa-regular fa-heart"></i></div>
+                    <div class="banner-text">
+                        <h3 style="font-size:0.95rem;">Inscription Association</h3>
+                        <p style="font-size:0.8rem;">Recevez des dons alimentaires</p>
+                    </div>
+                </div>
+                <form>
+                    <div class="form-group"><label>Nom du responsable *</label><input type="text" placeholder="Jean Mouamba"></div>
+                    <div class="form-group"><label>Nom de l'association *</label><input type="text" placeholder="Association Solidarité Congo"></div>
+                    <div class="form-group"><label>Numéro d'enregistrement / Numéro fiscal *</label><input type="text" placeholder="Ex: 123456789"></div>
+                    <div class="form-group"><label>Ville *</label>
+                        <select>
+                            <option>Choisissez une ville</option>
+                            <option>Brazzaville</option>
+                            <option>Pointe-Noire</option>
+                            <option>Dolisie</option>
+                            <option>Nkayi</option>
+                            <option>Quesso</option>
+                            <option>Autre ville</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Description</label><input type="text" placeholder="Aide aux familles démunies, distribution de repas..."></div>
+                    <div class="form-group"><label>Email *</label><input type="email" placeholder="votre@exemple.com"></div>
+                    <div class="form-group"><label>Téléphone (optionnel)</label><input type="tel" class="phone-input" placeholder="06 123 4567"></div>
+                    <div class="form-group"><label>Mot de passe *</label><input id="association-pass" class="pw-require" type="password" placeholder="Créez un mot de passe (8+ caractères)"><i class="fa-regular fa-eye toggle-password" onclick="togglePass('association-pass')"></i>
+                        <div class="pw-requirements" data-for="association-pass" aria-hidden="false">
+                            <div class="rule" data-rule="upper"><span class="dot"></span><span>Une lettre majuscule (A‑Z)</span></div>
+                            <div class="rule" data-rule="lower"><span class="dot"></span><span>Une lettre minuscule (a‑z)</span></div>
+                            <div class="rule" data-rule="digit"><span class="dot"></span><span>Un chiffre (0‑9)</span></div>
+                            <div class="rule" data-rule="special"><span class="dot"></span><span>Un caractère spécial (!@#...)</span></div>
+                            <div class="rule" data-rule="length"><span class="dot"></span><span>Au moins 8 caractères</span></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Créer mon compte</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="screen-don" class="sub-screen" style="display:none;">
+            <div class="top-nav">
+                <button class="back-btn" onclick="closeForm()"><i class="fa-solid fa-arrow-left"></i></button>
+                <div class="page-title">Changer de profil</div>
+            </div>
+            <div class="form-content">
+                <style>
+                    
+                    .mobile-container-don * { box-sizing: border-box; }
+                    .mobile-container-don { background-color: white; width: 100%; max-width: 680px; border-radius: 10px; padding: 20px; }
+                    .mobile-container-don .header { display:flex; align-items:center; margin-bottom:12px; color:#444; font-weight:600; }
+                    .mobile-container-don .header i { margin-right:12px; cursor:pointer; }
+                    .mobile-container-don .banner { background-color:#f8f0fe; border-radius:12px; padding:12px; display:flex; align-items:center; margin-bottom:12px; }
+                    .mobile-container-don .icon-box { background-color:#ede9fe; color:#9333ea; width:40px; height:40px; border-radius:8px; display:flex;justify-content:center;align-items:center;margin-right:12px;font-size:1.1rem; }
+                    .mobile-container-don label { display:block; font-size:13px; font-weight:600; color:#333; margin-bottom:6px; margin-top:12px; }
+                    .mobile-container-don input[type="text"], .mobile-container-don input[type="tel"], .mobile-container-don input[type="email"], .mobile-container-don select, .mobile-container-don textarea { box-sizing: border-box; display: block; width:100%; padding:10px 12px; border:1px solid #ddd; border-radius:6px; font-size:14px; color:#555; outline:none; }
+                    .mobile-container-don .row .col input[type="text"],
+                    .mobile-container-don .row .col input[type="tel"],
+                    .mobile-container-don .row .col select { height:44px; }
+                    .mobile-container-don input:focus, .mobile-container-don select:focus, .mobile-container-don textarea:focus { border-color:#1ea34b; }
+                    .mobile-container-don .row { display:flex; gap:12px; }
+                    .mobile-container-don .col { flex:1; min-width:0; }
+                    .mobile-container-don .radio-group, .mobile-container-don .checkbox-group { margin-top:8px; }
+                    .mobile-container-don .radio-item, .mobile-container-don .checkbox-item { display:flex; align-items:center; margin-bottom:8px; font-size:13px; color:#333; }
+                    .mobile-container-don .radio-item input, .mobile-container-don .checkbox-item input { order: 1; margin-right:10px; cursor: pointer; }
+                    .mobile-container-don .radio-item label, .mobile-container-don .checkbox-item label { order: 2; margin: 0; cursor: pointer; }
+                    .mobile-container-don input[type="radio"], .mobile-container-don input[type="checkbox"] { accent-color:#1ea34b; width:16px; height:16px; margin-right:10px; cursor:pointer; }
+                    .mobile-container-don .checkbox-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+                    .mobile-container-don textarea { resize:none; height:80px; }
+                    .mobile-container-don .password-container { position: relative; }
+                    .mobile-container-don .password-container input[type="password"] { padding-right:42px; }
+                    .mobile-container-don .password-container .toggle-password {
+                        position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+                        font-size: 1.05rem; color: #777; cursor: pointer; line-height: 1;
+                    }
+                    .mobile-container-don .info-message { background-color:#f8f0fe; color:#6b21a8; padding:12px; border-radius:8px; font-size:12px; margin-top:12px; line-height:1.4; }
+                    .mobile-container-don .btn-submit { width:100%; background-color:#26a256; color:white; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:600; cursor:pointer; margin-top:16px; }
+                    .mobile-container-don .btn-submit:hover { background-color:#1e8544; }
+                </style>
+
+
+                <div class="mobile-container-don">
+
+                    <div class="banner">
+                        <div class="icon-box"><i class="fa-solid fa-gift"></i></div>
+                        <div class="banner-text">
+                            <h3 style="color:#6b21a8; font-size:16px; margin:0 0 4px 0;">Don Solidaire</h3>
+                            <p style="color:#9333ea; font-size:13px; margin:0;">Faites un don de biens</p>
+                        </div>
+                    </div>
+
+                    <form id="donationForm">
+                        <div class="row">
+                            <div class="col">
+                                <label>Nom *</label>
+                                <input type="text" placeholder="Mouamba" required>
+                            </div>
+                            <div class="col">
+                                <label>Prénom *</label>
+                                <input type="text" placeholder="Jean" required>
+                            </div>
+                        </div>
+
+                        <!-- Téléphone supprimé selon demande -->
+
+                        <div class="row">
+                            <div class="col">
+                                <label>Ville *</label>
+                                <select required>
+                                    <option value="">Ville</option>
+                                    <option>Brazzaville</option>
+                                    <option>Pointe-Noire</option>
+                                    <option>Dolisie</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label>Quartier *</label>
+                                <input type="text" placeholder="Poto-Poto" required>
+                            </div>
+                        </div>
+
+                        <label>Adresse précise</label>
+                        <input type="text" placeholder="Av de la Paix, n°25">
+
+                        <label>Mode de remise du don *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" name="delivery" id="dropoff" checked>
+                                <label for="dropoff" style="margin:0; font-weight:400;">Je viens déposer moi-même</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="delivery" id="pickup">
+                                <label for="pickup" style="margin:0; font-weight:400;">Je souhaite qu'on passe récupérer le don</label>
+                            </div>
+                        </div>
+
+                        <label>Contenu du don *</label>
+                        <div class="checkbox-grid">
+                            <div class="checkbox-item"><input type="checkbox" id="clothes"><label for="clothes" style="margin:0; font-weight:400;">Vêtements</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="shoes"><label for="shoes" style="margin:0; font-weight:400;">Chaussures</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="food"><label for="food" style="margin:0; font-weight:400;">Nourriture</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="hygiene"><label for="hygiene" style="margin:0; font-weight:400;">Produits d'hygiène</label></div>
+                            <div class="checkbox-item"><input type="checkbox" id="other"><label for="other" style="margin:0; font-weight:400;">Autre</label></div>
+                        </div>
+
+                        <label>Détails du don</label>
+                        <textarea placeholder="Précisez les tailles, quantités, type de produits..."></textarea>
+
+                        <label>Bénéficiaire</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" name="beneficiary" id="sauveplat" checked>
+                                <label for="sauveplat" style="margin:0; font-weight:400;">Laisser SauvePlat choisir l'association bénéficiaire</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" name="beneficiary" id="choose">
+                                <label for="choose" style="margin:0; font-weight:400;">Je souhaite choisir une association</label>
+                            </div>
+                        </div>
+
+                        <div class="info-message"><i class="fa-solid fa-heart"></i> Merci pour votre générosité ! Votre don sera transmis à des personnes dans le besoin.</div>
+
+                        <label for="don_email">Email *</label>
+                        <input id="don_email" type="email" class="don-email" placeholder="votre@email.com" required>
+
+                        <label for="don_phone">Téléphone *</label>
+                        <input id="don_phone" type="tel" class="phone-input" placeholder="06 123 4567" required>
+
+                        <button type="submit" class="btn-submit">Envoyer ma demande de Don</button>
+                    </form>
+                </div>
+
+                <script>
+                    (function(){
+                        const form = document.getElementById('donationForm');
+                        if(form){
+                            form.addEventListener('submit', function(e){
+                                e.preventDefault();
+                                alert('Compte créé avec succès ! Merci pour votre don.');
+                                closeForm();
+                            });
+                        }
+                    })();
+                </script>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="help-panel" id="helpPanel" role="region" aria-label="Aide rapide">
+        <div class="hp-title">Besoin d'aide ?</div>
+        <div style="font-size:0.85rem; color:#555">Choisissez une option pour nous contacter</div>
+        <div class="hp-actions">
+            <button class="chat-btn" onclick="openChat()">Chat en ligne</button>
+            <button class="email-btn" onclick="openMail()">Envoyer un email</button>
+        </div>
+    </div>
+
+    <div class="chat-modal-backdrop" id="chatBackdrop">
+        <div class="chat-modal" role="dialog" aria-label="Chat d'assistance">
+            <div class="chat-header">Chat d'assistance <button style="float:right; background:transparent; border:none; color:white; font-weight:700; cursor:pointer" onclick="closeChat()">Fermer</button></div>
+            <div class="chat-body" id="chatBody"></div>
+            <div class="chat-input">
+                <input id="chatInput" placeholder="Écrivez votre message...">
+                <button onclick="sendChat()" style="background:var(--primary-green); color:white; border:none; padding:8px 12px; border-radius:8px; font-weight:700">Envoyer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password reset modal (for demo / inline reset) -->
+    <div class="chat-modal-backdrop" id="resetBackdrop" style="display:none">
+        <div class="chat-modal" role="dialog" aria-label="Réinitialisation de mot de passe">
+            <div class="chat-header">Réinitialiser le mot de passe <button style="float:right; background:transparent; border:none; color:white; font-weight:700; cursor:pointer" onclick="closeResetModal()">Fermer</button></div>
+            <div class="chat-body">
+                <form id="resetForm">
+                    <div style="margin-bottom:10px;"><label for="reset_email" style="font-weight:700">Email</label><input id="reset_email" type="email" placeholder="votre@email.com" required style="width:100%; padding:8px; border:1px solid #eee; border-radius:6px"></div>
+                    <div style="margin-bottom:8px;"><label for="reset_pass" style="font-weight:700">Nouveau mot de passe</label><input id="reset_pass" class="pw-require" type="password" placeholder="Nouvel mot de passe" required style="width:100%; padding:8px; border:1px solid #eee; border-radius:6px"></div>
+                    <div style="margin-bottom:12px;"><label for="reset_pass_confirm" style="font-weight:700">Confirmer le mot de passe</label><input id="reset_pass_confirm" type="password" placeholder="Confirmer" required style="width:100%; padding:8px; border:1px solid #eee; border-radius:6px"></div>
+                    <div class="pw-requirements" data-for="reset_pass" style="margin-bottom:10px">
+                        <div class="rule" data-rule="upper"><span class="dot"></span><span>Une lettre majuscule (A‑Z)</span></div>
+                        <div class="rule" data-rule="lower"><span class="dot"></span><span>Une lettre minuscule (a‑z)</span></div>
+                        <div class="rule" data-rule="digit"><span class="dot"></span><span>Un chiffre (0‑9)</span></div>
+                        <div class="rule" data-rule="special"><span class="dot"></span><span>Un caractère spécial (!@#...)</span></div>
+                        <div class="rule" data-rule="length"><span class="dot"></span><span>Au moins 8 caractères</span></div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button type="button" onclick="closeResetModal()" style="flex:1; padding:8px; border-radius:6px; border:1px solid #eee; background:#f3f4f6">Annuler</button>
+                        <button type="submit" style="flex:1; padding:8px; border-radius:6px; border:none; background:var(--primary-green); color:white">Réinitialiser</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleProfileLogin(e, profile){
+            e.preventDefault();
+            const emailId = 'login_' + profile + '_email';
+            const passId = 'login_' + profile + '_pass';
+            const emailEl = document.getElementById(emailId);
+            const passEl = document.getElementById(passId);
+            const email = emailEl ? emailEl.value.trim() : '';
+            const pass = passEl ? passEl.value : '';
+            if(!email || !pass){
+                alert('Veuillez renseigner votre email et mot de passe.');
+                return;
+            }
+            // Try profile login via AUTH_ENDPOINT/profile if available, else fallback local check
+            (async function(){
+                if(window.AUTH_ENDPOINT){
+                    const url = window.AUTH_ENDPOINT.replace(/\/$/, '') + '/profile';
+                    try{
+                        const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, password: pass, profile }), credentials: 'same-origin' });
+                        const data = await res.json().catch(()=>({}));
+                        if(res.ok){
+                            showToast(data.message || 'Connexion réussie');
+                            closeForm();
+                            if(data.next) window.location.href = data.next;
+                        } else {
+                            showToast(data.error || 'Email ou mot de passe incorrect.', 'error');
+                        }
+                    } catch(err){
+                        console.error(err);
+                        showToast('Erreur réseau. Réessayez.', 'error');
+                    }
+                } else {
+                    if(pass.length < 8){
+                        showToast('Mot de passe incorrect.', 'error');
+                    } else {
+                        showToast('Connexion réussie — ' + profile);
+                        closeForm();
+                    }
+                }
+            })();
+        }
+    </script>
+
+    <script>
+        // --- 1. GESTION DES ONGLETS (Connexion / Inscription) ---
+        function switchTab(tabName) {
+            // Mettre à jour l'apparence des boutons (gris/blanc)
+            const tabs = document.querySelectorAll('.tab');
+            if(tabName === 'login') {
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+                document.getElementById('tab-login').classList.add('active');
+                document.getElementById('tab-register').classList.remove('active');
+            } else {
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+                document.getElementById('tab-login').classList.remove('active');
+                document.getElementById('tab-register').classList.add('active');
+            }
+        }
+
+        // --- 2. GESTION DES ÉCRANS (Afficher/Cacher les formulaires) ---
+        
+        function openForm(screenId) {
+            // 1. Cacher l'interface principale (Logo + Tabs)
+            document.getElementById('main-interface').style.display = 'none';
+            
+            // 2. Afficher l'écran demandé
+            const screen = document.getElementById(screenId);
+            screen.style.display = 'flex';
+        }
+
+        function closeForm() {
+            // 1. Cacher tous les sous-écrans
+            const screens = document.querySelectorAll('.sub-screen');
+            screens.forEach(s => s.style.display = 'none');
+
+            // 2. Réafficher l'interface principale
+            document.getElementById('main-interface').style.display = 'flex';
+        }
+
+        // --- 3. OEIL MOT DE PASSE ---
+        function togglePass(id) {
+            const input = document.getElementById(id);
+            const icon = input.nextElementSibling;
+            if(input.type === "password"){
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // --- MOT DE PASSE OUBLIÉ ---
+        function forgotPassword() {
+            // Open a small modal allowing the user to enter their email and a new password.
+            openResetModal();
+        }
+
+        // --- SOCIAL LOGIN (Redirect to backend OAuth endpoints) ---
+        function socialLogin(provider){
+            const endpoints = {
+                google: '/auth/google',
+                facebook: '/auth/facebook'
+            };
+            const url = endpoints[provider] || '/';
+            // Start OAuth flow by redirecting the browser to the backend endpoint
+            window.location.href = url;
+        }
+
+        // --- GESTION SOUMISSION FORMULAIRES ---
+        function handleSubmit(event, type) {
+            event.preventDefault();
+            const form = event.target;
+            // Clear previous errors
+            form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+            // Check validity
+            if (!form.checkValidity()) {
+                // Add error class to invalid fields
+                form.querySelectorAll(':invalid').forEach(el => el.classList.add('error'));
+                return; // Stop submission
+            }
+            // Simulation d'envoi
+            alert(`Demande ${type} envoyée avec succès ! Vous recevrez un email de confirmation.`);
+            // Optionnel : fermer le formulaire ou rediriger
+            closeForm();
+        }
+    </script>
+    <script>
+        // Live validation: mark required empty fields red on blur and remove on input
+        (function(){
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('focusout', (e) => {
+                    const t = e.target;
+                    if((t.tagName === 'INPUT' || t.tagName === 'SELECT' || t.tagName === 'TEXTAREA') && t.required){
+                        if(!t.value || (t.type === 'checkbox' && !t.checked)){
+                            t.classList.add('error');
+                        }
+                    }
+                }, true);
+
+                form.addEventListener('input', (e) => {
+                    const t = e.target;
+                    if((t.tagName === 'INPUT' || t.tagName === 'SELECT' || t.tagName === 'TEXTAREA') && t.required){
+                        if(t.checkValidity()) t.classList.remove('error');
+                    }
+                }, true);
+
+                form.addEventListener('change', (e) => {
+                    const t = e.target;
+                    if(t.tagName === 'SELECT' && t.required){
+                        if(t.checkValidity()) t.classList.remove('error');
+                        else t.classList.add('error');
+                    }
+                });
+            });
+        })();
+
+        // Modernized merchant signup handler: disables button, shows spinner, validates and shows toast
+        async function handleMerchantSignup(event){
+            event.preventDefault();
+            const form = document.getElementById('commercantForm');
+            const submit = document.getElementById('commercantSubmit');
+            if(!form) return;
+            // mark invalid fields if any
+            if(!form.checkValidity()){
+                form.querySelectorAll(':invalid').forEach(el => el.classList.add('error'));
+                showToast('Veuillez compléter les champs requis.', 'error');
+                return;
+            }
+            // disable + spinner
+            submit.disabled = true;
+            const label = submit.querySelector('.btn-label');
+            const spinner = submit.querySelector('.btn-spinner');
+            if(label) label.style.display = 'none';
+            if(spinner) spinner.style.display = 'inline-block';
+
+            try{
+                // Simulate network request; replace with real fetch when backend is available
+                await new Promise(resolve => setTimeout(resolve, 900));
+                showToast('Demande envoyée. Un administrateur vous contactera par email.');
+                closeForm();
+            } catch(err){
+                console.error('Merchant signup error', err);
+                showToast('Erreur lors de l\'envoi. Réessayez.', 'error');
+            } finally{
+                submit.disabled = false;
+                if(label) label.style.display = '';
+                if(spinner) spinner.style.display = 'none';
+            }
+        }
+    </script>
+    <!-- intl-tel-input JS (international phone input) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+        // Password requirements validation (applies to inputs with class 'pw-require')
+        (function(){
+            const rules = {
+                upper: /[A-Z]/,
+                lower: /[a-z]/,
+                digit: /[0-9]/,
+                special: /[^A-Za-z0-9]/,
+                length: /.{8,}/
+            };
+
+            function updateRules(input){
+                const val = input.value || '';
+                const box = input.parentElement.querySelector('.pw-requirements');
+                if(!box) return;
+                Object.keys(rules).forEach(key => {
+                    const node = box.querySelector(`.rule[data-rule="${key}"]`);
+                    if(!node) return;
+                    if(rules[key].test(val)) node.classList.add('ok'); else node.classList.remove('ok');
+                });
+            }
+
+            // Expose helper to validate a password string
+            window.validatePassword = function(val){
+                return Object.keys(rules).every(k => rules[k].test(val || ''));
+            };
+
+            // Attach listeners to all pw-require inputs (callable later for dynamically added inputs)
+            window.attachPwListeners = function(){
+                document.querySelectorAll('input.pw-require').forEach(inp => {
+                    if(!inp.dataset.pwAttached){
+                        inp.addEventListener('input', () => updateRules(inp));
+                        inp.dataset.pwAttached = '1';
+                    }
+                    updateRules(inp);
+                });
+            };
+
+            // Initial attach
+            window.attachPwListeners();
+
+            // Global submit guard: prevent form submit when pw requirements not met
+            document.addEventListener('submit', function(e){
+                const form = e.target;
+                const pw = form.querySelector('input.pw-require');
+                if(!pw) return; // nothing to check
+                const val = pw.value || '';
+                const allOk = window.validatePassword(val);
+                if(!allOk){
+                    e.preventDefault();
+                    showToast('Le mot de passe doit contenir une majuscule, une minuscule, un chiffre, un caractère spécial et au moins 8 caractères.', 'error');
+                    pw.classList.add('error');
+                    pw.focus();
+                }
+            }, true);
+        })();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const inputs = document.querySelectorAll('.phone-input');
+            inputs.forEach(function(input){
+                if(window.intlTelInput){
+                    window.intlTelInput(input, {
+                        initialCountry: 'auto',
+                        separateDialCode: true,
+                        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
+                        geoIpLookup: function(success){
+                            fetch('https://ipapi.co/json').then(res=>res.json()).then(data=>{
+                                success(data.country_code);
+                            }).catch(()=>{
+                                success('FR');
+                            });
+                        }
+                    });
+                } else {
+                    // Fallback: simple datalist of common country codes
+                    if(!document.getElementById('country-codes')){
+                        const dl = document.createElement('datalist');
+                        dl.id = 'country-codes';
+                        ['+33 France','+242 Congo (Brazzaville)','+243 RDC','+241 Gabon','+225 Côte d’Ivoire','+229 Bénin','+228 Togo','+237 Cameroun','+226 Burkina Faso','+234 Nigeria'].forEach(function(item){
+                            const opt = document.createElement('option'); opt.value = item; dl.appendChild(opt);
+                        });
+                        document.body.appendChild(dl);
+                    }
+                    input.setAttribute('list','country-codes');
+                }
+            });
+        });
+    </script>
+    <script>
+        function toggleHelpPanel(){
+            const panel = document.getElementById('helpPanel');
+            panel.classList.toggle('visible');
+        }
+        function openMail(){
+            const email = 'support@oyeo.example';
+            const subject = encodeURIComponent('Besoin d\'aide - Inscription');
+            window.location.href = `mailto:${email}?subject=${subject}`;
+        }
+        function openChat(){
+            document.getElementById('chatBackdrop').classList.add('visible');
+            document.getElementById('helpPanel').classList.remove('visible');
+            const body = document.getElementById('chatBody');
+            if(body.innerHTML.trim() === ''){
+                appendSystemMessage('Bonjour ! Comment pouvons-nous vous aider aujourd\'hui ?');
+            }
+            // focus input
+            setTimeout(()=>document.getElementById('chatInput').focus(),200);
+        }
+        function openResetModal(prefillEmail){
+            const back = document.getElementById('resetBackdrop');
+            const email = document.getElementById('reset_email');
+            const pass = document.getElementById('reset_pass');
+            const confirm = document.getElementById('reset_pass_confirm');
+            if(prefillEmail && email) email.value = prefillEmail;
+            if(pass) pass.value = '';
+            if(confirm) confirm.value = '';
+            back.style.display = 'flex';
+            // ensure password listeners attached
+            if(window.attachPwListeners) window.attachPwListeners();
+            setTimeout(()=>{ if(document.getElementById('reset_pass')) document.getElementById('reset_pass').focus(); }, 120);
+        }
+        function closeResetModal(){
+            const back = document.getElementById('resetBackdrop');
+            if(back) back.style.display = 'none';
+        }
+
+        // Handle reset form submit
+        (function(){
+            const form = document.getElementById('resetForm');
+            if(!form) return;
+            form.addEventListener('submit', async function(e){
+                e.preventDefault();
+                const email = document.getElementById('reset_email').value.trim();
+                const pass = document.getElementById('reset_pass').value;
+                const confirm = document.getElementById('reset_pass_confirm').value;
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if(!re.test(email)) { showToast('Adresse email invalide.', 'error'); return; }
+                if(pass !== confirm){ showToast('Les mots de passe ne correspondent pas.', 'error'); return; }
+                if(!window.validatePassword || !window.validatePassword(pass)){
+                    showToast('Le mot de passe ne respecte pas les règles.', 'error');
+                    return;
+                }
+                // If backend endpoint exists, call it
+                if(window.PASSWORD_RESET_ENDPOINT){
+                    try{
+                        const res = await fetch(window.PASSWORD_RESET_ENDPOINT, {
+                            method: 'POST', headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, password: pass }), credentials: 'same-origin'
+                        });
+                        const data = await res.json().catch(()=>({}));
+                        if(res.ok){ showToast(data.message || 'Mot de passe réinitialisé.'); closeResetModal(); }
+                        else { showToast(data.error || 'Impossible de réinitialiser.', 'error'); }
+                    } catch(err){ console.error(err); showToast('Erreur réseau.', 'error'); }
+                    return;
+                }
+                // Demo fallback
+                showToast('Mot de passe réinitialisé (mode démo).');
+                closeResetModal();
+            });
+        })();
+        function closeChat(){
+            document.getElementById('chatBackdrop').classList.remove('visible');
+        }
+        function appendSystemMessage(text){
+            const body = document.getElementById('chatBody');
+            const el = document.createElement('div'); el.className = 'chat-msg'; el.innerText = text; body.appendChild(el); body.scrollTop = body.scrollHeight;
+        }
+        function appendUserMessage(text){
+            const body = document.getElementById('chatBody');
+            const el = document.createElement('div'); el.className = 'chat-msg user'; el.innerText = text; body.appendChild(el); body.scrollTop = body.scrollHeight;
+        }
+        function sendChat(){
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim(); if(!text) return; appendUserMessage(text); input.value='';
+            // simulate reply
+            setTimeout(()=>appendSystemMessage('Merci, nous avons reçu votre message. Un conseiller vous répondra bientôt.'),800);
+        }
+        // Enable sending chat on Enter (without Shift)
+        (function(){
+            const input = document.getElementById('chatInput');
+            if(input){
+                input.addEventListener('keydown', function(e){
+                    if(e.key === 'Enter' && !e.shiftKey){
+                        e.preventDefault();
+                        sendChat();
+                    }
+                });
+            }
+        })();
+    </script>
+    <script>
+        function openHelp(){
+            // simple contact action: open mail client
+            const email = 'support@oyeo.example';
+            const subject = encodeURIComponent('Besoin d\'aide - Inscription');
+            window.location.href = `mailto:${email}?subject=${subject}`;
+        }
+    </script>
+    <script>
+        function showToast(message, type){
+            const t = document.createElement('div');
+            t.className = 'oyeo-toast';
+            if(type === 'error') t.classList.add('error');
+            t.textContent = message;
+            document.body.appendChild(t);
+            requestAnimationFrame(() => t.classList.add('visible'));
+            setTimeout(() => { t.classList.remove('visible'); setTimeout(() => t.remove(), 260); }, 2400);
+            console.log('toast:', type || 'info', message);
+        }
+
+        async function performLogin(){
+            const emailEl = document.getElementById('loginEmail');
+            const passEl = document.getElementById('loginPass');
+            const email = emailEl ? emailEl.value.trim() : '';
+            const pass = passEl ? passEl.value : '';
+
+            if(!email || !pass){
+                alert('Veuillez renseigner votre email et mot de passe.');
+                return;
+            }
+
+            // If an AUTH endpoint is provided by the app, use it
+            if(window.AUTH_ENDPOINT){
+                try{
+                    const res = await fetch(window.AUTH_ENDPOINT, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password: pass }),
+                        credentials: 'same-origin'
+                    });
+                    const data = await res.json().catch(() => ({}));
+                    if(res.ok){
+                        showToast(data.message || ('Connexion réussie — ' + email));
+                        // optional: redirect when backend indicates next URL
+                        if(data.next) window.location.href = data.next;
+                    } else {
+                        showToast(data.error || 'Email ou mot de passe incorrect.', 'error');
+                    }
+                } catch(err){
+                    showToast('Erreur réseau. Réessayez.', 'error');
+                    console.error('performLogin error', err);
+                }
+                return;
+            }
+
+            // Fallback local validation: require minimal password length
+            if(pass.length < 8){
+                showToast('Mot de passe incorrect.', 'error');
+                return;
+            }
+            showToast('Connexion réussie — ' + email);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQTa1mYQm0h7sVb1rKq6c6tJrV0sKc5e8bKqv1i5QZ5p1V6f5E1pQf7h2H2a9f3K" crossorigin="anonymous"></script>
+</body>
+</html>

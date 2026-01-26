@@ -18,5 +18,7 @@ urlpatterns = [
     # Liens vers AntiGaspi
     path("anti-gaspi", views.antigaspi, name="antigaspi"),
     path("voir-offres-antigaspi", views.voirOffresAntigaspi, name="voir-offres-antigaspi"),
-    path("supermarche-index", views.supermarche, name = "index-supermarche")
+    path("supermarche-index", views.supermarche, name = "index-supermarche"),
+    # Vue Inscription
+    path("inscription", views.inscription, name = "vue-inscription")
 ]

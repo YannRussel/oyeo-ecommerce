@@ -1,0 +1,435 @@
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% block title %}Oyéo – Page AntiGaspi{% endblock %}
+
+{% block extra_css %}
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/antigaspi1.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+    <header class="hero-header">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-leaf"></i> 
+                <span>Anti-gaspillage alimentaire au Congo</span>
+            </div>
+
+            <h1 class="hero-title">
+                Sauvez des repas,
+                <span class="highlight-orange">économisez jusqu'à 70%</span>
+            </h1>
+
+            <p class="hero-description">
+                Récupérez les invendus des commerces de Brazzaville et Pointe-Noire à petits prix. Ensemble, réduisons le gaspillage alimentaire.
+            </p>
+
+            <div class="hero-actions">
+                <a href="{% url 'ecommerce:voir-offres-antigaspi' %}" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i> 
+                    Voir les offres 
+                    <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
+                </a>
+                <a href="#" class="btn btn-outline" >
+                    Je suis commerçant
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h4>500+</h4>
+                    <span>Repas sauvés</span>
+                </div>
+                <div class="stat-item">
+                    <h4>50+</h4>
+                    <span>Commerces partenaires</span>
+                </div>
+                <div class="stat-item">
+                    <h4>-70%</h4>
+                    <span>De réduction moyenne</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="section-header">
+            <h2>Comment ça marche ?</h2>
+            <p>4 étapes simples pour sauver des repas</p>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-search"></i></div>
+                <span class="step-badge">1</span>
+                <h3>Trouvez</h3>
+                <p>Parcourez les offres anti-gaspi des commerces près de chez vous. Filtrez par ville, quartier, type de commerce et budget pour trouver le panier idéal.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-shopping-bag"></i></div>
+                <span class="step-badge">2</span>
+                <h3>Réservez & Payez</h3>
+                <p>Réservez votre panier surprise en quelques clics. Payez en ligne (Mobile Money, carte) ou choisissez le paiement en magasin selon les options disponibles.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-walking"></i></div>
+                <span class="step-badge">3</span>
+                <h3>Récupérez</h3>
+                <p>Rendez-vous au commerce à l'heure indiquée avec votre code. Présentez votre code de réservation à la caisse. Le contenu est surprise, mais toujours composé de produits de qualité.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="far fa-smile"></i></div>
+                <span class="step-badge">4</span>
+                <h3>Savourez</h3>
+                <p>Profitez de produits de qualité à petit prix. Important: Pour éviter le gaspillage, les paniers AntiGaspi sont proposés en quantité limitée.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-header">
+            <h2>Parcourir par catégorie</h2>
+            <p>Trouvez des paniers selon vos préférences</p>
+        </div>
+        <div class="categories-grid">
+            <div class="cat-card">
+                <div class="cat-icon bg-yellow"><i class="fas fa-bread-slice"></i></div>
+                <h4>Boulangerie</h4>
+                <span>12 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-red"><i class="fas fa-utensils"></i></div>
+                <h4>Restaurant</h4>
+                <span>23 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-pink"><i class="fas fa-birthday-cake"></i></div>
+                <h4>Pâtisserie</h4>
+                <span>8 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-green"><i class="fas fa-carrot"></i></div>
+                <h4>Primeur</h4>
+                <span>10 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-blue"><i class="fas fa-shopping-cart"></i></div>
+                <h4>Supermarché</h4>
+                <span>15 offres</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon bg-purple"><i class="fas fa-drumstick-bite"></i></div>
+                <h4>Traiteur</h4>
+                <span>6 offres</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="margin-top: 80px;">
+        <div class="header-row">
+            <div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="background:#F28C28; padding:5px; border-radius:50%; color:white;"><i class="fas fa-bolt"></i></span>
+                    <h2 style="margin:0;">Dernière minute</h2>
+                </div>
+                <p style="margin-left:40px; color:#666;">À récupérer dans les 2 prochaines heures</p>
+            </div>
+            <a href="#" class="btn btn-orange" style="font-size:0.9rem; padding: 8px 16px;">Voir les espaces <i class="fas fa-chevron-right" aria-hidden="true"></i></a>
+        </div>
+
+        <div class="deals-grid">
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="Plat1.jpg" alt="Plat">
+                    <span class="badge-left">Plat du jour</span>
+                    <span class="badge-discount">-40%</span>
+                </div>
+                <div class="deal-content">
+                    <div class="deal-meta">
+                        <i class="fas fa-utensils deal-icon" aria-hidden="true"></i>
+                        <small>La Terrasse</small>
+                    </div>
+                    <h4>Fin de Service - Plats du Jour</h4>
+                    <div style="margin-top:10px; font-size:0.8rem; color:#666;">
+                        <i class="far fa-clock"></i> 14:00 - 15:00 <br>
+                        <i class="fas fa-map-marker-alt"></i> Centre-ville, Brazzaville
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="Plat2.jpg" alt="Dessert">
+                    <span class="badge-left">Pâtisserie</span>
+                    <span class="badge-discount">-50%</span>
+                </div>
+                <div class="deal-content">
+                    <div class="deal-meta">
+                        <i class="fas fa-birthday-cake deal-icon" aria-hidden="true"></i>
+                        <small>Aux Délices</small>
+                    </div>
+                    <h4>Dernière Pâtisseries</h4>
+                    <div style="margin-top:10px; font-size:0.8rem; color:#666;">
+                        <i class="far fa-clock"></i> 18:30 - 19:30 <br>
+                        <i class="fas fa-map-marker-alt"></i> M'oungali, Brazzaville
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card">
+                <div class="deal-image">
+                    <img src="Plat3.jpg" alt="Sandwich">
+                    <span class="badge-left">Traiteur</span>
+                    <span class="badge-discount">-30%</span>
+                </div>
+                <div class="deal-content">
+                    <div class="deal-meta">
+                        <i class="fas fa-hamburger deal-icon" aria-hidden="true"></i>
+                        <small>Snack Express</small>
+                    </div>
+                    <h4>Fermeture - Sandwichs Frais</h4>
+                    <div style="margin-top:10px; font-size:0.8rem; color:#666;">
+                        <i class="far fa-clock"></i> 20:00 - 20:45 <br>
+                        <i class="fas fa-map-marker-alt"></i> Bacongo, Brazzaville
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact-section">
+        <div class="container">
+            <h2>Notre impact ensemble</h2>
+            <p>Chaque panier sauvé compte pour la planète</p>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <i class="fas fa-shopping-basket"></i>
+                    <h3>4,500+</h3>
+                    <h4>Paniers récupérés</h4>
+                    <p>Depuis le lancement</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-users"></i>
+                    <h3>2,200+</h3>
+                    <h4>Communauté active</h4>
+                    <p>Clients et commerçants</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>69,99%</h3>
+                    <h4>Économies réalisées</h4>
+                    <p>En moyenne par panier</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-heart"></i>
+                    <h3>500+</h3>
+                    <h4>Donateurs</h4>
+                    <p>Contribuent à notre mission</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-header">
+            <h2>Pour qui est SauvePlat ?</h2>
+            <p>Une plateforme pour tous les acteurs de la chaîne alimentaire</p>
+        </div>
+
+        <div class="target-grid">
+            <div class="target-card">
+                <div class="target-icon t-blue"><i class="fas fa-user-friends"></i></div>
+                <h4>Clients</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Achetez des paniers à prix réduit pour vous, ou financez un panier solidaire.</p>
+            </div>
+            <div class="target-card">
+                <div class="target-icon t-green"><i class="fas fa-store"></i></div>
+                <h4>Commerçants</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Vendez vos invendus, réduisez vos pertes et gagnez de nouveaux clients.</p>
+            </div>
+            <div class="target-card">
+                <div class="target-icon t-orange"><i class="fas fa-tractor"></i></div>
+                <h4>Producteurs</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Proposez vos surplus (récoltes, stocks) et vendez directement aux consommateurs.</p>
+            </div>
+            <div class="target-card">
+                <div class="target-icon t-red"><i class="fas fa-heart"></i></div>
+                <h4>Associations</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Recevez des dons pour soutenir les personnes dans le besoin.</p>
+            </div>
+            <div class="target-card">
+                <div class="target-icon t-purple"><i class="fas fa-hand-holding-heart"></i></div>
+                <h4>Donateurs</h4>
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;">Faites un don en finançant un panier solidaire.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="background-color:#FAF9F6; padding-top:80px; padding-bottom:30px;">
+        <div class="section-header" style="margin-top:5px;">
+            <h2>Ils nous font confiance</h2>
+            <p>Découvrez les avis de notre communauté</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p style="font-size:0.9rem; color:#555;">"Grâce à SauvePlat, je mange bien tout en faisant des économies. Les paniers sont toujours de qualité !"</p>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marie">
+                    <div>
+                        <h5 style="margin:0;">Marie Ngoma</h5>
+                        <small style="color:#888;">Cliente fidèle</small>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p style="font-size:0.9rem; color:#555;">"SauvePlat nous permet de réduire nos pertes et d'attirer de nouveaux clients. Une solution gagnant-gagnant."</p>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Jean-Pierre">
+                    <div>
+                        <h5 style="margin:0;">Jean-Pierre Moukala</h5>
+                        <small style="color:#888;">Restaurant partenaire</small>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p style="font-size:0.9rem; color:#555;">"Le budget étudiant est serré. SauvePlat me permet de bien manger sans me ruiner."</p>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Solange">
+                    <div>
+                        <h5 style="margin:0;">Solange Bakala</h5>
+                        <small style="color:#888;">Étudiante</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-subheader" style="text-align:center; margin: 30px 0 10px;">
+            <h3 style="margin:0;">Partenaires</h3>
+        </div>
+
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="review-image-container">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=200&auto=format&fit=crop" alt="Boulangerie">
+                </div>
+                <h3 class="review-h3">Boulangerie du Centre</h3>
+                <div class="review-rating">
+                    <span class="review-star">★</span>
+                    <span class="review-score">4.5</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-image-container">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=200&auto=format&fit=crop" alt="Restaurant">
+                </div>
+                <h3 class="review-h3">Restaurant Mami Wata</h3>
+                <div class="review-rating">
+                    <span class="review-star">★</span>
+                    <span class="review-score">4.8</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-image-container">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=200&auto=format&fit=crop" alt="Supermarché">
+                </div>
+                <h3 class="review-h3">Super Marché Kintélé</h3>
+                <div class="review-rating">
+                    <span class="review-star">★</span>
+                    <span class="review-score">4.2</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="sauveplat-slider-container">
+        <div class="slider-content">
+            <div class="slides-track" id="slidesTrack">
+                <div class="slide">
+                    <div class="card-inner">
+                        <div class="left-col">
+                            <span class="badge" aria-hidden="false">
+                                <i class="fas fa-store" aria-hidden="true" style="font-size:18px;"></i>
+                                <span class="badge-text">Pour les commerçants</span>
+                            </span>
+                            <h2 class="partner-highlight">Devenez partenaire SauvePlat</h2>
+                            <p class="partner-subtext">Rejoignez notre réseau de commerces engagés contre le gaspillage alimentaire. Simple, rapide et gratuit.</p>
+                            <button class="btn-primary btn-partner">Devenir partenaire</button>
+                        </div>
+                        <div class="right-col">
+                            <ul>
+                                <li><i class="fas fa-store list-icon"></i><strong>Revenus supplémentaires</strong><br><small style="color:white; opacity:0.85;">Monétisez vos invendus</small></li>
+                                <li><i class="fas fa-chart-line list-icon"></i><strong>Nouveaux clients</strong><br><small style="color:white; opacity:0.85;">Attirez une clientèle sensible</small></li>
+                                <li><i class="fas fa-users list-icon"></i><strong>Impact écologique</strong><br><small style="color:white; opacity:0.85;">Réduisez votre empreinte carbone</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="card-inner">
+                        <div class="left-col">
+                            <span class="badge" aria-hidden="false">
+                                <i class="fas fa-bread-slice" aria-hidden="true" style="font-size:18px;"></i>
+                                <span class="badge-text">Pour boulangers & restaurateurs</span>
+                            </span>
+                            <h2 class="partner-highlight">Vous êtes boulanger ou restaurateur ?</h2>
+                            <p class="partner-subtext">Transformez vos invendus en revenus supplémentaires et attirez de nouveaux clients grâce à nos paniers AntiGaspi.</p>
+                            <button class="btn-primary btn-partner">Devenir partenaire</button>
+                        </div>
+                        <div class="right-col">
+                            <ul>
+                                <li><i class="fas fa-bread-slice list-icon"></i><strong>Réduisez vos pertes</strong><br><small style="color:white; opacity:0.85;">Valorisez vos produits</small></li>
+                                <li><i class="fas fa-utensils list-icon"></i><strong>Générez du profit</strong><br><small style="color:white; opacity:0.85;">En fin de journée</small></li>
+                                <li><i class="fas fa-users list-icon"></i><strong>Gagnez en visibilité</strong><br><small style="color:white; opacity:0.85;">Notoriété locale</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="card-inner">
+                        <div class="left-col">
+                            <span class="badge" aria-hidden="false">
+                                <i class="fas fa-tractor" aria-hidden="true" style="font-size:18px;"></i>
+                                <span class="badge-text">Pour producteurs</span>
+                            </span>
+                            <h2 class="partner-highlight">Ne jetez plus, vendez vos surplus</h2>
+                            <p class="partner-subtext">Vous êtes producteur bio ou agriculteur ? Liquidez rapidement vos invendus. Proposez vos surplus en paniers AntiGaspi.</p>
+                            <button class="btn-primary btn-partner">Devenir partenaire</button>
+                        </div>
+                        <div class="right-col">
+                            <ul>
+                                <li><i class="fas fa-tractor list-icon"></i><strong>Valorisez vos surplus</strong><br><small style="color:white; opacity:0.85;">Ne laissez rien se perdre</small></li>
+                                <li><i class="fas fa-seedling list-icon"></i><strong>Récupérez du CA</strong><br><small style="color:white; opacity:0.85;">Compensez vos coûts</small></li>
+                                <li><i class="fas fa-users list-icon"></i><strong>Clientèle locale</strong><br><small style="color:white; opacity:0.85;">Acheteurs engagés</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="slider-arrow left" aria-label="Slide précédente" onclick="prevSlide()">‹</button>
+        <button class="slider-arrow right" aria-label="Slide suivante" onclick="nextSlide()">›</button>
+
+        <div class="slider-nav" role="tablist" aria-label="Navigation des slides">
+            <div class="nav-bar active" role="button" tabindex="0" onclick="goToSlide(0)" onkeydown="if(event.key==='Enter')goToSlide(0)"></div>
+            <div class="nav-bar" role="button" tabindex="0" onclick="goToSlide(1)" onkeydown="if(event.key==='Enter')goToSlide(1)"></div>
+            <div class="nav-bar" role="button" tabindex="0" onclick="goToSlide(2)" onkeydown="if(event.key==='Enter')goToSlide(2)"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'ecommerce/assets/js/antigaspi1.js' %}"></script>
+{% endblock %}

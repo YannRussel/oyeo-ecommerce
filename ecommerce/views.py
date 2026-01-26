@@ -418,13 +418,19 @@ def pre_setup(request):
 # Vue vers AntiGaspi
 
 def antigaspi(request) :
-    return render(request, 'ecommerce/antigaspi1.html')
+    return render(request, 'ecommerce/antigaspi.html')
 
 def voirOffresAntigaspi(request) :
 
-    return render(request, 'ecommerce/antigaspi-voir-offres.html', {})
+    return render(request, 'ecommerce/antigaspi2.html', {})
 
 # Vue supermarché
 
 def supermarche(request) :
     return render(request, 'ecommerce/supermarche.html')
+
+# Vue Inscription
+
+def inscription(request) :
+    
+    return render(request, 'ecommerce/inscription.html')
