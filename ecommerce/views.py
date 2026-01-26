@@ -434,3 +434,8 @@ def supermarche(request) :
 def inscription(request) :
     
     return render(request, 'ecommerce/inscription.html')
+
+# Vue de diaspora
+
+def diaspora(request) :
+    return render(request, 'ecommerce/diaspora.html')

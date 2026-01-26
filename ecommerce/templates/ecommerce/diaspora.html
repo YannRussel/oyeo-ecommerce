@@ -1,0 +1,380 @@
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% block title %}Service Diaspora - Gestion à distance{% endblock %}
+
+{% block extra_css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/diaspora.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <header class="hero">
+        <div class="container">
+            <h1>Des services fiables pour vous et vos proches</h1>
+            <p>Que vous soyez au pays ou à l'étranger, Oyéo organise pour vous des prestations de services avec des professionnels qualifiés.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-blue">Demander un service</button>
+                <button class="btn btn-outline">Être rappelé(e)</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="services-nav container section-bg-light">
+        <h2>Ce que vous pouvez faire depuis l'étranger</h2>
+        <p style="margin-top:-30px; margin-bottom:40px; color:#666;">Où que vous viviez aujourd'hui, en Europe, en Amérique ou ailleurs prenez soin de vos proches simplement et en toute transparence.</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon-box"><i class="fas fa-shopping-cart"></i></div>
+                <h3>Commander des courses pour votre famille</h3>
+                <p>Remplissez un panier en ligne avec des produits alimentaires essentiels. Nous livrons ou préparons la commande pour retrait en magasin.</p>
+                <a href="#" class="link-arrow">Commencer →</a>
+            </div>
+            <div class="service-card">
+                <div class="icon-box"><i class="fas fa-gift"></i></div>
+                <h3>Envoyer des cartes cadeaux</h3>
+                <p>Offrez une carte cadeau pour que vos proches choisissent ce dont ils ont besoin, quand ils en ont besoin.</p>
+                <a href="#" class="link-arrow">Commencer →</a>
+            </div>
+            <div class="service-card">
+                <div class="icon-box"><i class="fas fa-people-carry"></i></div>
+                <h3>Réserver des services à domicile</h3>
+                <p>Organisez des prestations de ménage, réparations,aide administrative ou accompagnement pour vos proches.</p>
+                <a href="#" class="link-arrow">Commencer →</a>
+            </div>
+            <div class="service-card">
+                <div class="icon-box"><i class="fas fa-heart"></i></div>
+                <h3>Les soutenir régulièrement</h3>
+                <p>Créez une routine simple : envoyez des courses ou des cartes cadeaux chaque mois.</p>
+                <a href="#" class="link-arrow">Commencer →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section section-bg-cream">
+        <div class="container comparison-layout">
+            <div class="comparison-content">
+                <h2>Conçu pour la Diaspora, pensé pour votre tranquillité</h2>
+                <p style="margin: 20px 0;">Envoyer de l'argent n'est pas toujours la meilleure solution.
+Vous ne savez jamais vraiment comment il sera utilisé. Notre plateforme vous offre un moyen direct et transparent de soutenir votre famille avec de vrais produits et services.</p>
+                
+                <div class="feature-list">
+                    <div><i class="fas fa-check"></i> Fini l'envoi d'argent sans visibilité</div>
+                    <div><i class="fas fa-shield-alt"></i> Aucun risque de mauvaise utilisation</div>
+                    <div><i class="fas fa-star"></i> Impact direct : vrais produits et services</div>
+                    <div><i class="fas fa-sync"></i> Suivi transparent et confirmation</div>
+                </div>
+            </div>
+
+            <div class="price-cards">
+                <div style="color:var(--primary-orange); font-size: 2rem; margin-bottom:20px;"><i class="fas fa-globe" style="color:#666666;"></i></div>
+                <h3>Votre soutien, leur réalité</h3>
+                <div style="margin-top:20px;">
+                    <div class="price-item">
+                        <strong>50€</strong>
+                        <span>= Une semaine de courses complète</span>
+                    </div>
+                    <div class="price-item">
+                        <strong>30€</strong>
+                        <span>= Un ménage complet de la maison</span>
+                    </div>
+                    <div class="price-item">
+                        <strong>15€</strong>
+                        <span>= Une démarche administrative réalisée</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works-simple section-bg-light">
+        <div class="container">
+            <h3>Comment cela fonctionne pour la diaspora?</h3>
+            <div class="steps-row">
+                <div class="step-simple">
+                    <div class="step-circle">1</div>
+                    <h4>Créez votre compte</h4>
+                    <p style="font-size:0.8rem; color:#666;">Inscrivez-vous avec votre adresse e-mail, votre pays de résidence et complétez votre profil. Vous accédez alors à l'espace dédié à la diaspora.</p>
+                </div>
+                <div class="step-simple">
+                    <div class="step-circle">2</div>
+                    <h4>Ajoutez vos proches au Pays</h4>
+                    <p style="font-size:0.8rem; color:#666;">Enregistrez les bénéficiaires : nom, ville, numéro de téléphone et éventuellement le type de lien (parents, amis, etc.). Ce sont eux qui recevront les courses, les produits ou les prestations.</p>
+                </div>
+                <div class="step-simple">
+                    <div class="step-circle">3</div>
+                    <h4>Choisissez ce que vous voulez envoyer</h4>
+                    <div class="step-body-left" style="font-size:0.8rem; color:#666;">
+                        <p>Depuis la plateforme, vous sélectionnez :</p>
+                        <ul class="bulleted">
+                            <li>des achats / courses en ligne (paniers, produits du quotidien, offres anti-gaspi),</li>
+                            <li>une prestation de service (travaux, réparation, ménage, aide à domicile, etc.),</li>
+                            <li>ou une carte cadeau / crédit d'achat à utiliser chez nos partenaires.</li>
+                        </ul>
+                        <p style="margin:0;">Les commerçants et prestataires vendent en ligne sur Oyéo : vous n'avez plus qu'à choisir.</p>
+                    </div>
+                </div>
+                <div class="step-simple">
+                    <div class="step-circle">4</div>
+                    <h4>Payez en ligne en toute sécurité</h4>
+                    <p style="font-size:0.8rem; color:#666;">Validez votre commande et réglez depuis l'étranger avec votre moyen de paiement habituel. Le paiement est sécurisé et automatiquement transféré vers les prestataires et commerces locaux.</p>
+                </div>
+                <div class="step-simple">
+                    <div class="step-circle">5</div>
+                    <h4>Nous gérons tout sur place</h4>
+                    <p style="font-size:0.8rem; color:#666;">Nous préparons la commande ou organisons l'intervention du prestataire, puis nous informons vos proches. Ils reçoivent leurs produits, récupèrent leur commande anti-gaspi ou bénéficient du service réservé, et vous pouvez suivre l'état de la commande depuis votre espace.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="special-diaspora section-bg-cream">
+        <div class="container" style="text-align:center; margin-bottom:40px;">
+            <span class="badge">Spécial Diaspora</span>
+            <h2 style="margin-top:10px;">Vous vivez à l'étranger ? Nous gérons les services pour vos proches.</h2>
+        </div>
+        
+        <div class="container details-grid">
+            <div class="detail-box">
+                <h3>Pourquoi ce service ?</h3>
+                <p style="font-size:0.9rem; margin-bottom:20px;">Vous êtes loin, mais vous voulez que vos proches soient bien pris en charge.</p>
+                <ul class="check-list">
+                    <li><i class="fas fa-check-circle"></i> <div><strong>Tranquillité d'esprit :</strong> Vous êtes loin, mais quelqu'un s'en occupe.</div></li>
+                    <li><i class="fas fa-check-circle"></i> <div><strong>Prestataires vérifiés :</strong> Sélection rigoureuse et qualité.</div></li>
+                    <li><i class="fas fa-check-circle"></i> <div><strong>Transparence totale :</strong> Retour d'information après chaque mission.</div></li>
+                </ul>
+            </div>
+            <div class="detail-box">
+                <h3>Exemples concrets</h3>
+                <ul class="check-list" style="margin-top:20px;">
+                    <li><i class="far fa-check-circle"></i> Organiser un ménage complet pour vos parents</li>
+                    <li><i class="far fa-check-circle"></i> Envoyer un prestataire pour un problème d'eau</li>
+                    <li><i class="far fa-check-circle"></i> Mandater quelqu'un pour un RDV médical</li>
+                    <li><i class="far fa-check-circle"></i> Déléguer une démarche administrative</li>
+                    <li><i class="far fa-check-circle"></i> Préparer la maison avant votre retour</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-visual section-bg-light">
+        <div class="container">
+            <div class="process-header">
+                <h3>Comment ça se passe si je suis à l'étranger ?</h3>
+                <p style="margin-bottom:6px; color:var(--text-light)">Un processus simple et sécurisé.</p>
+            </div>
+
+            <div class="process-container" style="border:none; padding:0; gap:30px; align-items:stretch;">
+                <div style="flex:1">
+                    <div class="process-grid">
+                        <div class="step-card">
+                            <div class="step-badge">1</div>
+                            <div class="step-body">
+                                <h4>Demandez pour un proche</h4>
+                                <p>Remplissez une demande claire en indiquant le bénéficiaire et la prestation souhaitée.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-badge">2</div>
+                            <div class="step-body">
+                                <h4>Estimation claire</h4>
+                                <p>Nous envoyons un devis détaillé avec coûts et délais avant toute action.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-badge">3</div>
+                            <div class="step-body">
+                                <h4>Validation & paiement</h4>
+                                <p>Validez le devis et payez en ligne en toute sécurité (carte bancaire).</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card">
+                            <div class="step-badge">4</div>
+                            <div class="step-body">
+                                <h4>Prestation & rapport</h4>
+                                <p>Nous réalisons la mission et vous envoyons un rapport complet (photos, commentaires).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="process-cta">
+                        <button class="btn btn-primary">Demander un service</button>
+                    </div>
+                </div>
+
+                <div class="process-img" style="flex:0.9">
+                    <img src="Cash.jpg" alt="Processus Illustration" loading="lazy">
+                    <div class="process-whatsapp">
+                        <button class="btn btn-outline-dark"><i class="fab fa-whatsapp" style="color:#25D366; margin-right:8px;"></i>Parler sur WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="payments-trust section-bg-cream">
+        <div class="container">
+            <h2>Paiements sécurisés, prestataires de confiance, suivi de vos projets</h2>
+            <p>Que ce soit pour vos proches au pays, vos biens ou vous-même lors de vos séjours, Oyéo sécurise vos paiements, sélectionne les prestataires et vous offre un espace de suivi en temps réel.</p>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Paiements 100 % sécurisés</h4>
+                    <p>Payez en toute confiance avec vos cartes internationales ou vos moyens de paiement en ligne. Vos paiements sont protégés, que ce soit pour des courses, des services ou un projet complet (travaux, rénovation, etc.), pour vous ou pour votre famille.</p>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-user-check"></i>
+                    <h4>Prestataires sélectionnés et contrôlés</h4>
+                    <p>Tous nos prestataires sont vérifiés: identité, expérience, réputation. Nous travaillons uniquement avec des professionnels locaux de confiance, que ce soit pour une simple intervention, des livraisons régulières ou un projet plus long.</p>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-truck"></i>
+                    <h4>Espace projet & suivi en temps réel</h4>
+                    <p>Pour toutes les prestations de service (travaux, rénovation, aide à domicile, maintenance, etc.), vous disposez d'un espace dédié : suivi de l'avancement du projet, étapes et comptes-rendus, documents, photos, devis et factures, échanges avec l'équipe locale. Depuis l'étranger, vous voyez où en est votre projet en temps réel et  sans devoir être sur place.</p>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-wallet"></i>
+                    <h4>Appareils multiples</h4>
+                    <p>Payez en XAF (FCFA ), EUR, USD, GBP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-bar container section-bg-light">
+        <h3>Pourquoi nous choisir ?</h3>
+        <div class="features-row" style="margin-top:40px;">
+            <div class="feature-mini">
+                <i class="fas fa-chart-line" style="color:#666666;"></i>
+                <h4>Prix compétitifs</h4>
+                <p style="font-size:0.8rem;">Meilleurs prix du marché.</p>
+            </div>
+            <div class="feature-mini">
+                <i class="fas fa-ribbon" style="color:#666666;"></i>
+                <h4>Qualité garantie</h4>
+                <p style="font-size:0.8rem;">Produits frais sélectionnés.</p>
+            </div>
+            <div class="feature-mini">
+                <i class="fas fa-clock" style="color:#666666;"></i>
+                <h4>Livraison rapide</h4>
+                <p style="font-size:0.8rem;">En 24h avec créneaux.</p>
+            </div>
+            <div class="feature-mini">
+                <i class="fas fa-globe" style="color:#666666;"></i>
+                <h4>Service Diaspora</h4>
+                <p style="font-size:0.8rem;">Soutenez votre famille.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-dark section-bg-transparent">
+        <div class="container">
+            <h2>Prêt à commencer ?</h2>
+            <p style="margin-bottom:30px;">Inscrivez-vous maintenant et profitez de -10% sur la première commande.</p>
+            <a href="../Login&Inscript/Inscription.html" class="btn btn-blue">Créer un compte</a>
+            <button class="btn btn-blue">Commencer mes courses</button>
+        </div>
+    </section>
+
+    <section class="testimonials container section-bg-light">
+        <h2 style="text-align:center; margin-bottom:10px;">La diaspora nous fait confiance dans le monde entier</h2>
+        <p style="text-align:center; margin-bottom:40px; color:#666;">Découvrez ce que disent nos clients</p>
+        
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>« Je peux enfin prendre soin de ma mère à Dakar sans m'inquiéter. Le service de ménage est excellent. »</p>
+                <div class="author">Aminata K.</div>
+                <div class="location">Paris, France</div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>« Envoyer des courses à mes parents n'a jamais été aussi simple. Ils adorent recevoir des produits frais. »</p>
+                <div class="author">Samuel O.</div>
+                <div class="location">Londres, Royaume-Uni</div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>« Les cartes-cadeaux sont parfaites pour les anniversaires. Mes frères et sœurs peuvent choisir exactement ce dont ils ont besoin. »</p>
+                <div class="author">Fatou M.</div>
+                <div class="location">New York, États-Unis</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section container section-bg-cream">
+        <h2 style="text-align:center; margin-bottom:40px;">Foire aux questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">Puis-je payer avec une carte bancaire étrangère ?</div>
+            <div class="faq-answer">Oui, vous pouvez payer avec la plupart des cartes bancaires internationales (Visa, Mastercard, Amex).</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Comment ma famille recevra-t-elle sa commande ?</div>
+            <div class="faq-answer">Ils reçoivent un SMS ou un message WhatsApp avec les détails de la commande ou le code carte cadeau.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Que se passe-t-il en cas de problème avec la commande ?</div>
+            <div class="faq-answer">Notre équipe d'assistance locale aide directement votre famille à résoudre tout problème.</div>
+        </div>
+
+        <div class="final-cta-wrapper">
+            <div class="final-cta-content">
+                <div class="final-cta">
+                    <i class="fas fa-globe" style="font-size:3rem; margin-bottom:20px; color:#666666;"></i>
+                    <h2>Prêt à subvenir aux besoins de votre famille ?</h2>
+                    <p style="margin-bottom:30px;">Envoyez des courses ou des cartes-cadeaux dès aujourd'hui !</p>
+                    <div>
+                        <button class="btn btn-blue">Commencez vos achats</button>
+                        <button class="btn btn-sec">Envoyer une carte-cadeau</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section section-bg-light">
+        <div class="contact-form">
+            <h2 style="text-align:center;">Besoin d'aide ou une demande particulière ?</h2>
+            <p style="text-align:center; color:#666; margin-bottom:30px;">Notre équipe est là pour vous accompagner.</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Message envoyé !');">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Votre nom</label>
+                        <input type="text" placeholder="Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label>Pays de résidence</label>
+                        <input type="text" placeholder="France, États-Unis...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Votre message</label>
+                    <textarea rows="4" placeholder="Décrivez votre besoin..."></textarea>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary" style="flex:1;">Envoyer le message</button>
+                    <button type="button" class="btn btn-whatsapp" style="flex:1;"><i class="fab fa-whatsapp" style="color:#666666;"></i> Discuter sur WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'ecommerce/assets/js/diaspora.js' %}"></script>
+{% endblock %}
+

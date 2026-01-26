@@ -20,5 +20,7 @@ urlpatterns = [
     path("voir-offres-antigaspi", views.voirOffresAntigaspi, name="voir-offres-antigaspi"),
     path("supermarche-index", views.supermarche, name = "index-supermarche"),
     # Vue Inscription
-    path("inscription", views.inscription, name = "vue-inscription")
+    path("inscription", views.inscription, name = "vue-inscription"),
+    # Vue diaspora
+    path("diaspora", views.diaspora, name = "vue-diaspora")
 ]
