@@ -1,0 +1,298 @@
+/** slider réécrit avec classes uniques */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+}
+
+.slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s ease-in-out, visibility 1.2s;
+}
+
+.slide-item.active-slide {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+.wrapper-text-principal {
+  max-width: 50%;
+}
+
+.slide-content-wrapper {
+
+ /* bottom: 30%;
+  left: 10%; */
+  margin-top: 6%;
+  margin-left: 9%;
+  margin-right: 9%;
+
+  animation: slideFadeUp 1s ease forwards;
+}
+
+.slide-content-wrapper h1 {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.slide-content-wrapper p {
+  font-size: 1.6rem;
+  margin: 20px 0px;
+}
+
+.slide-content-wrapper .cta-btn {
+  margin-top: 1.5rem;
+}
+
+.cta-btn button {
+  width: 200px;
+  margin: 10px;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.3rem;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.3s;
+  border-radius: 100px;
+}
+
+.nav-arrow:hover {
+  background: var(--primary);
+}
+
+.nav-arrow.prev-arrow {
+  left: 20px;
+}
+
+.nav-arrow.next-arrow {
+  right: 20px;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.dot-button {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 15;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot-button.active-dot {
+  background-color: var(--primary);
+}
+
+/* Animation du contenu */
+@keyframes slideFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width : 1400px) {
+  .slider-wrapper {
+    height: 50vh;
+  }
+
+  .slide-content-wrapper h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  #modalite_securite {
+    display: flex;
+    justify-content: space-between;
+    font-size: .8rem;
+  }
+}
+
+
+
+@media screen and (max-width : 1024px) {
+ .slider-wrapper {
+    height: 45vh;
+   
+   }
+
+  .wrapper-text-principal {
+    max-width: 100%;
+    text-align: center;
+    /* border: 1px solid rgb(0, 0, 0); */
+  }
+
+  .slide-content-wrapper h1 {
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+
+  .slide-content-wrapper p {
+    font-size: 1.2rem;
+  }
+
+
+  .cta-btn {
+    width: 100%;
+    margin: auto;
+    position:absolute;
+  }
+
+  .cta-btn button {
+    font-size: 12px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width : 800px) {
+  .slider-wrapper {
+    height: 40vh;
+/*     border: 1px solid red;
+ */  }
+  #modalite_securite div {
+    width: 30%;
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  .slide-content-wrapper {
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    
+  }
+
+  .cta-btn button {
+    font-size: 12px;
+    width: 200px;
+    margin: 4px;
+    width: 60%;
+  }
+}
+
+
+
+
+@media screen and (max-width : 700px) {
+    .slider-wrapper {
+    height: 30vh;
+/*     border: 1px solid red;
+ */  }
+  .slider-dots {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+  #modalite_securite div {
+    width: 50%;
+  }
+
+  #modalite_securite div:nth-child(5) {
+    width: 80%;
+
+  }
+
+  #modalite_securite div:nth-child(4) {
+    width: 50%;
+    overflow-y: hidden;
+    height: 25px;
+
+  }
+.cta-btn{
+/*   border: 2px solid black;
+ */  position: relative;
+}
+  .cta-btn button {
+    font-size: 12px;
+    /* width: 100px; */
+    /* position: absolute; */
+    margin-bottom: 2px;
+    width: 100%!important;
+  }
+
+  .slide-content-wrapper {
+
+    margin-top: 3%;
+    margin-left: 15%;
+    margin-right: 15%;
+/*     border:2px solid red;
+ */  }
+
+
+
+  .slide-content-wrapper h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+   .slide-content-wrapper p {
+    font-size: .9rem;
+  
+  }
+
+
+  .nav-arrow {
+
+    padding: 0rem .8rem;
+    font-size: 1.5rem;
+
+  }
+
+  .nav-arrow.prev-arrow {
+    left: 5px;
+  }
+
+  .nav-arrow.next-arrow {
+    right: 5px;
+  }
+
+}

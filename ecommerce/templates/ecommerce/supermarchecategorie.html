@@ -1,0 +1,1741 @@
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% block title %}Oyéo – Page des categories des Supermarches{% endblock %}
+
+{% block extra_css %}
+
+    <!-- ============================================================================================= -->
+    <!-- **************************   STYLES EXTERNES CDN  ******************************************* -->
+    <!-- ============================================================================================= -->
+    <!-- boostrap ---------------------------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- icone  font-awesome  version 6.5.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <!-- ============================================================================================= -->
+    <!-- **************************   STYLES GENERAUX  *********************************************** -->
+    <!-- ============================================================================================= -->
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ResetAll.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/Color.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/FontSizeAll.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/WidthAll.css' %}">
+
+    <!-- ============================================================================================= -->
+    <!-- **************************   STYLES PAGES REPETITIVES  ************************************** -->
+    <!-- ============================================================================================= -->
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/TopBar.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/MiddleBar.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/Footer.css' %}">
+
+    <!-- ============================================================================================= -->
+    <!-- **************************   STYLES PROPRE DE LA PAGE ACTUELLE  ***************************** -->
+    <!-- ============================================================================================= -->
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/SupermarcheCategorie.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ProductsModelOne.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/Categorie.css' %}">
+
+
+        .filter-item:hover,  .filter_block select:hover {
+            background: linear-gradient(to right,rgba(0, 204, 153, 0.267) ,rgba(153, 255, 102, 0.26))!important;
+            color: black;
+            border: 2px solid linear-gradient(to right,rgba(0, 204, 153, 0.267) ,rgba(153, 255, 102, 0.26))!important; 
+        }
+
+{% endblock %}
+
+{% block navigation_bar %}{% endblock %}
+
+{% block content %}
+
+
+     <!-- BARRE TOP -->
+     <div id="topbarre" class="bg-success">
+        <div id="topbarre_bloc">
+            <a href="#" class="btn btn-sm active "> <span class="topbarre_emojie">🎁</span> Tous les rayons</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🥕</span> Fruits & Légumes</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🥩</span> Produits laitiers & Fromages</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🩹</span> Boulangerie et gateaux</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🎁</span> Tous les rayons</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🥕</span> Fruits & Légumes</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🥩</span> Produits laitiers & Fromages</a>
+         
+             <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🩹</span> Boulangerie et gateaux</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🎁</span> Tous les rayons</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🥕</span> Fruits & Légumes</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie">🥩</span> Produits laitiers & Fromages</a>
+         
+        </div>
+        
+     </div>
+
+   
+    <!-- DESIGNATION DE LA CATEGORIE -->
+    <div class="container_n1 ">
+        <div class="breadcrumb__links my-3">
+            <a href="index.html">Home</a>
+            <span class="separator">›</span>
+            <a href="#" class=" text-secondary"> Fruits & Légume</a>
+           <!--  <a href="categorie.html" class=" text-primary">Femme</a>
+ -->
+        </div>
+    </div>
+
+    <!-- /* *************************************  BLOC BANNIER ************************* */ -->
+    <div id="bloc_bannier_supermarche">
+        
+            <div class="bannier_supermarche_bloc_image">
+                <img src="./ressources/icons/🥦.png" alt="" class="img-fluid" srcset="">
+            </div>
+            <div class="bannier_supermarche_bloc_text">
+                <div class="titre_bloc">
+                    <span class="titre">Fruits & Légumes</span>
+                    <span class="badge_fruit">Fruis Frais</span>
+                </div>
+                <span class="text_n1 text-success">Fraicheur garantie , qualité au quotidien</span>
+                <p class="text-secondary">Découvrez notre meilleur selection de fruits et légumes frais , locaux et de saison. Livrés chaque <br>jour pour une fraiheur optimale</p>
+
+                <div class="bloc_btn">
+                    <a href="#">Produit locaux</a>
+                    <a href="#">Bios diponible</a>
+                    <a href="#">Fraicheur garantie</a>
+                </div>
+                <p class="text-secondary">1 produit disponible</p>
+                
+            </div>
+    </div>
+
+
+    <!-- /* *************************************  BLOC MINI BLOC LIVRASON ************************* */ -->
+    <div id="mini_section_livraison">
+            <div class="mini_sous_section ">
+                <div class="containeur_mini_sous">
+                <i class="fa-solid fa-truck-fast icone_mini_section"></i>
+                <div class="mini_sous_section_text">
+                    <p class="mini_sous_section_titre">2ème à 50%</p>
+                    <p class="mini_sous_section_detail text-secondary">Sur une selection</p>
+                </div>
+                </div>
+            </div>
+
+            <div class="mini_sous_section ">
+                 <div class="containeur_mini_sous">
+                <i class="fa-solid fa-truck-fast icone_mini_section"></i>
+                <div class="mini_sous_section_text">
+                    <p class="mini_sous_section_titre">Livraison offerte </p>
+                    <p class="mini_sous_section_detail text-secondary">Dès 50€ d'achat</p>
+                </div>
+                </div>
+            </div>
+
+            <div class="mini_sous_section ">
+                <div class="containeur_mini_sous">
+                    <i class="fa-solid fa-tags  icone_mini_section"></i>
+                    <div class="mini_sous_section_text">
+                        <p class="mini_sous_section_titre">Click & Collect</p>
+                        <p class="mini_sous_section_detail text-secondary ">Prêt en 2h</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mini_sous_section ">
+                <div class="containeur_mini_sous">
+                <i class="fa-solid fa-tags  icone_mini_section"></i>
+                <div class="mini_sous_section_text">
+                    <p class="mini_sous_section_titre">Point Fidélité x2</p>
+                    <p class="mini_sous_section_detail text-secondary">Cette semaine</p>
+                </div>
+                </div>
+            </div>
+    </div>
+
+
+   
+
+
+
+
+
+
+
+
+    <div class="container_n1 mt-3 mb-2">
+        <div class="filters-wrapper ">
+            <!-- Bouton gauche -->
+            <button id="scrollLeft" class="scroll-arrow me-3  px-3" disabled>
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+            <!-- Conteneur scrollable -->
+            <div id="filtersContainer" class="filters-container ">
+                <a href="#" class="btn  filter-item">Tous</a>
+                <a href="#" class="btn  filter-item">Fruits Frais</a>
+                <a href="#" class="btn filter-item">Légumes Frais</a>
+                <a href="#" class="btn  filter-item">Herbes & aromates</a>
+                <a href="#" class="btn  filter-item">Salades & préparations</a>
+                <a href="#" class="btn filter-item">Fruis secs & a coque</a>
+                <a href="#" class="btn  filter-item">Bio & local</a>
+                <a href="#" class="btn  filter-item">Produits naturels</a>
+                <a href="#" class="btn filter-item">Maternité</a>
+                <a href="#" class="btn  filter-item">Soins du visage</a>
+                <a href="#" class="btn filter-item">Vitamines</a>
+                <a href="#" class="btn  filter-item">Hygiène</a>
+                <a href="#" class="btn filter-item">Produits naturels</a>
+                <a href="#" class="btn filter-item">Maternité</a>
+                <a href="#" class="btn  filter-item">Soins du visage</a>
+                <a href="#" class="btn  filter-item">Soins du visage</a>
+                <a href="#" class="btn filter-item">Vitamines</a>
+                <a href="#" class="btn  filter-item">Hygiène</a>
+                <a href="#" class="btn filter-item">Produits naturels</a>
+                <a href="#" class="btn filter-item">Maternité</a>
+                <a href="#" class="btn  filter-item">Soins du visage</a>
+            </div>
+
+            <!-- Bouton droit -->
+            <button id="scrollRight" class="scroll-arrow ms-3 px-3">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+
+     <div class="container_n1 container_filtre_marge">
+        <!-- En-tête contenu: titre + filtres -->
+        <form action="">
+            <div class="content-header">
+                <a class="btn " id="filtre_detailler"><i class="fa-solid fa-sliders"></i> Plus de Filtre </a>
+
+                <div class="d-flex  justify-content-between  flex-nowrap">
+                    <div id="bloc_filtre_detailler" class="">
+                        <div  class="d-flex flex-wrap align-items-center filter_block"
+                            role="toolbar" aria-label="Filtres">
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Marque</option>
+                                <option value="">Adidas</option>
+                                <option value="">Nike</option>
+                                <option value="">Jordan</option>
+                            </select>
+
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Taille</option>
+                                <option value="">xl</option>
+                                <option value="">xxl</option>
+                                <option value="">lg</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Couleur</option>
+                                <option value="">Noir </option>
+                                <option value="">Vert</option>
+                                <option value="">Bleu</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Prix</option>
+                                <option value=""> < à 35 $ </option>
+                                <option value=""> > a 50$</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Propriete</option>
+                                <option value=""> Propriete 1 </option>
+                                <option value=""> Propriete 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Style</option>
+                                <option value=""> Style 1 </option>
+                                <option value=""> Style 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Forme</option>
+                                <option value=""> Forme 1 </option>
+                                <option value=""> Forme 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Doublure</option>
+                                <option value=""> Doublure 1 </option>
+                                <option value=""> Doublure 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Matière</option>
+                                <option value=""> Matière 1 </option>
+                                <option value=""> Matière 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Catregorie</option>
+                                <option value=""> Promotion</option>
+                                <option value=""> Nouveauté</option>
+                            </select>
+
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Taille</option>
+                                <option value="">xl</option>
+                                <option value="">xxl</option>
+                                <option value="">lg</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Couleur</option>
+                                <option value="">Noir </option>
+                                <option value="">Vert</option>
+                                <option value="">Bleu</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Prix</option>
+                                <option value="">
+                                    < à 35 $ </option>
+                                <option value=""> > a 50$</option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value="">Propriete</option>
+                                <option value=""> Propriete 1 </option>
+                                <option value=""> Propriete 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value=""> Style </option>
+                                <option value=""> Style 1 </option>
+                                <option value=""> Style 2 </option>
+                            </select>
+                            <select class="form-select d-inline-block w-auto" name="" id="">
+                                <option value=""> Forme </option>
+                                <option value=""> Forme 1 </option>
+                                <option value=""> Forme 2 </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="statistiques_recherche"><!-- statistiques_recherche -->
+                        <div class="sous_statistique_recherche justify-content-end">
+                            <div class="border-end "><!--  me-2 -->
+                                <a href="categorie.html" class=" py-2 px-2 text-secondary" style="text-decoration: none;">10 522 resultats </a>
+                                <small class="text-secondary border px-2" style="border-radius: 50px; font-size: 12px;">?</small>
+                            </div>
+
+                            <div class="d-flex statdiv_2 justify-content-start align-items-center">
+                                <span class="text-secondary d-block">Trier par </span>
+                                <button type="submit" class="enGras btn_recommandation ms-2">Recommander▾</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- LES PRODUITS  -->
+    <div class="container_n1 my-5">
+        <div class="product-grid-simple"><!-- d-flex justify-content-around align-items-center flex-wrap -->
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/about-6.png" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!--  </div> -->
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/about-8.png" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/card-image3.jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!--  </div>
+ -->
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/card-image6.jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!--   </div> -->
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/card-image2.jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!--  </div> -->
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/author-item.jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/maison (1).jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/banner-image3.jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!--  </div> -->
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/card-item9.jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!--   </div> -->
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/maison (2).jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/maison (4).jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+            <!--  <div class="produit-grid-categorie"> -->
+            <div class="product-card">
+                <span class="badge">Vegetable</span>
+                <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <path
+                        d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                        stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+                <div class="img-wrap">
+                    <img src="./ressources/image/articles/maison (1).jpg" alt="Floral Summer Shirt">
+                </div>
+                <div class="card-body">
+                    <span class="brand">Adidas</span>
+                    <a href="#" class="lienTitleproduct">
+                        <h3 class="product-title">Floral Summer Shirt</h3>
+                    </a>
+                    <div class="rating">★★★★★ (372)</div>
+                    <div class="by-text">
+                        <span class="by">by</span>
+                        <span class="oye">Oyeo</span>
+                    </div>
+                    <div class="product-footer">
+                        <div class="price-group">
+                            <span class="price">$78</span>
+                            <span class="original-price">$100</span>
+                        </div>
+                        <span class="promo-label">Promo</span>
+                    </div>
+                </div>
+            </div>
+            <!--  </div> -->
+        </div>
+    </div>
+
+
+
+    <!-- === SECTION PRODUITS CATEGORIE A LA UNE  === -->
+
+
+    <section class="product-section">
+        <div class="section-header mx-5">
+            <h2 class="section-title">A la une </h2>
+            <a href="./two_page/css.html" class="see-more" title="Voir plus de produits"
+                aria-label="Voir plus de produits">Voir plus →</a>
+        </div>
+
+        <div class="product-carousel-wrapper">
+            <!-- Flèche gauche -->
+            <button class="scroll-btn left">←</button>
+
+            <!-- Conteneur scrollable des cartes -->
+            <div class="product-grid scroll-container">
+                <!-- Carte produit 1 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/image/articles/about-6.png" alt="Floral Summer Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Adidas</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Floral Summer Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$78</span>
+                                <span class="original-price">$100</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 2 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/image/articles/card-image3.jpg" alt="Tropical Print Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Nike</span>
+
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Tropical Print Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★☆ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$65</span>
+                                <span class="original-price">$85</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 3 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/image/articles/card-image5.jpg" alt="Abstract Pattern Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Puma</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Abstract Pattern Shirt</h3>
+                        </a>
+
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$72</span>
+                                <span class="original-price">$90</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 4 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/image/articles/aliment (1).jpg" alt="Stripe Beach Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Reebok</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Stripe Beach Shirt</h3>
+                        </a>
+                        <div class="rating">★★★☆☆ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$59</span>
+                                <span class="original-price">$75</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 5 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/image/articles/card-image6.jpg" alt="Vintage Floral Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Levi’s</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Vintage Floral Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★☆ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$110</span>
+                                <span class="original-price">$85</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 6 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/image/articles/banner-image3.jpg" alt="Navy Blossom Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Uniqlo</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Navy Blossom Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$92</span>
+                                <span class="original-price">$120</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 7 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/image/articles/f7.jpg" alt="Striped Floral Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Uniqlo</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Striped Floral Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$92</span>
+                                <span class="original-price">$120</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte produit 8 -->
+                <div class="product-card">
+                    <span class="badge">Vegetable</span>
+                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                        <path
+                            d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                            stroke="#e86429" fill="transparent" stroke-width="2" />
+                    </svg>
+                    <div class="img-wrap">
+                        <img src="./ressources/image/articles/product-4.jpg" alt="Botanical Print Shirt">
+                    </div>
+                    <div class="card-body">
+                        <span class="brand">Uniqlo</span>
+                        <a href="#" class="lienTitleproduct">
+                            <h3 class="product-title">Botanical Print Shirt</h3>
+                        </a>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div class="by-text">
+                            <span class="by">by</span>
+                            <span class="oye">Oyeo</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="price-group">
+                                <span class="price">$92</span>
+                                <span class="original-price">$120</span>
+                            </div>
+                            <span class="promo-label">Promo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flèche droite -->
+            <button class="scroll-btn right">→</button>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <!-- ***************************   SECTION PRODUIT DEALS OF DAYS *************************** -->
+
+    <div id="bloc_produitdealofdays_supermarche">
+        <h2 class="titre_principal">Deals of the days</h2>
+        <div id="sous_bloc_produitdealofdays_supermarche">
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday" style="background-image: url('./ressources/image/banner/banner-6.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary qte">500 gram</small></div>
+
+                        <div class="pricePlusAdd ">
+                            <div>
+                                <span class="newPrice">$5.51</span>
+                                <span class="oldPrice">$7.45</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday" style="background-image: url('./ressources/image/banner/banner-5.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$10.87</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday" style="background-image: url('./ressources/image/banner/banner-4.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$11.56</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday" style="background-image: url('./ressources/image/banner/banner-7.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$5.05</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday" style="background-image: url('./ressources/image/banner/banner-16.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary qte">500 gram</small></div>
+
+                        <div class="pricePlusAdd ">
+                            <div>
+                                <span class="newPrice">$5.51</span>
+                                <span class="oldPrice">$7.45</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday" style="background-image: url('./ressources/image/banner/banner-11.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$10.87</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday" style="background-image: url('./ressources/image/banner/banner-13.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$11.56</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday" style="background-image: url('./ressources/image/banner/banner-19.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$5.05</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+
+        </div>
+    </div>
+
+
+
+    <!-- ******* bloc des produits les plus acheté ******************* -->
+
+    <div id="bloc_produitLesPlusAchete">
+         <h2 class="titre_principal">Les plus achetés</h2>
+         <div id="sousbloc_produitLesPlusAchete">
+            <div class="produit_produitLesPlusAchete">
+                <div class="bloc_image_produit_produitLesPlusAchete" style="background-image: url('./ressources/image/habit/product-3-1.jpg'); background-size: cover; background-position: center;">
+                    <div class="bloc_type_reduction_produitLesPlusAchete d-flex justify-content-between">
+                        <div class="type_produitLesPlusAchete">local</div>
+                        <div class="reduction_produitLesPlusAchete">20%</div>
+                    </div>
+                </div>
+                <div class="bloc_description_produit_produitLesPlusAchete">
+                    <div class="text_desciptive text-secondary">Nos regions ont du talent</div>
+                    <div class="text_titre">Tomate rondes</div>
+                    <div class="text_qte text-secondary">520mg</div>
+
+                    <div class="blocEnd_description d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="price">2.49$</div>
+                            <div class="priceUnite text-secondary">2.49$/kg</div>
+                        </div>
+                        <button class="btn btn-sm "><i class="fa-solid fa-cart-shopping"></i>   </button>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="produit_produitLesPlusAchete">
+                <div class="bloc_image_produit_produitLesPlusAchete" style="background-image: url('./ressources/image/habit/n4.jpg'); background-size: cover; background-position: center;">
+                    <div class="bloc_type_reduction_produitLesPlusAchete d-flex justify-content-between">
+                        <div class="type_produitLesPlusAchete">local</div>
+                        <div class="reduction_produitLesPlusAchete">20%</div>
+                    </div>
+                </div>
+                <div class="bloc_description_produit_produitLesPlusAchete">
+                    <div class="text_desciptive text-secondary">Nos regions ont du talent</div>
+                    <div class="text_titre">Tomate rondes</div>
+                    <div class="text_qte text-secondary">520mg</div>
+
+                    <div class="blocEnd_description d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="price">2.49$</div>
+                            <div class="priceUnite text-secondary">2.49$/kg</div>
+                        </div>
+                        <button class="btn btn-sm "><i class="fa-solid fa-cart-shopping"></i>   </button>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="produit_produitLesPlusAchete">
+                <div class="bloc_image_produit_produitLesPlusAchete" style="background-image: url('./ressources/image/habit/n7.jpg'); background-size: cover; background-position: center;">
+                    <div class="bloc_type_reduction_produitLesPlusAchete d-flex justify-content-between">
+                        <div class="type_produitLesPlusAchete">local</div>
+                        <div class="reduction_produitLesPlusAchete">20%</div>
+                    </div>
+                </div>
+                <div class="bloc_description_produit_produitLesPlusAchete">
+                    <div class="text_desciptive text-secondary">Nos regions ont du talent</div>
+                    <div class="text_titre">Tomate rondes</div>
+                    <div class="text_qte text-secondary">520mg</div>
+
+                    <div class="blocEnd_description d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="price">2.49$</div>
+                            <div class="priceUnite text-secondary">2.49$/kg</div>
+                        </div>
+                        <button class="btn btn-sm "><i class="fa-solid fa-cart-shopping"></i>   </button>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="produit_produitLesPlusAchete">
+                <div class="bloc_image_produit_produitLesPlusAchete" style="background-image: url('./ressources/image/habit/f7.jpg'); background-size: cover; background-position: center;">
+                    <div class="bloc_type_reduction_produitLesPlusAchete d-flex justify-content-between">
+                        <div class="type_produitLesPlusAchete">local</div>
+                        <div class="reduction_produitLesPlusAchete">-10%</div>
+                    </div>
+                </div>
+                <div class="bloc_description_produit_produitLesPlusAchete">
+                    <div class="text_desciptive text-secondary">Nos regions ont du talent</div>
+                    <div class="text_titre">Tomate rondes</div>
+                    <div class="text_qte text-secondary">520mg</div>
+
+                    <div class="blocEnd_description d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="price">2.49$</div>
+                            <div class="priceUnite text-secondary">2.49$/kg</div>
+                        </div>
+                        <button class="btn btn-sm "><i class="fa-solid fa-cart-shopping"></i>   </button>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="produit_produitLesPlusAchete">
+                <div class="bloc_image_produit_produitLesPlusAchete" style="background-image: url('./ressources/image/habit/product-1-1.jpg'); background-size: cover; background-position: center;">
+                    <div class="bloc_type_reduction_produitLesPlusAchete d-flex justify-content-between">
+                        <div class="type_produitLesPlusAchete">Bio</div>
+                       
+                    </div>
+                </div>
+                <div class="bloc_description_produit_produitLesPlusAchete">
+                    <div class="text_desciptive text-secondary">Nos regions ont du talent</div>
+                    <div class="text_titre">Tomate rondes</div>
+                    <div class="text_qte text-secondary">520mg</div>
+
+                    <div class="blocEnd_description d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="price">2.49$</div>
+                            <div class="priceUnite text-secondary">2.49$/kg</div>
+                        </div>
+                        <button class="btn btn-sm "><i class="fa-solid fa-cart-shopping"></i>   </button>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="produit_produitLesPlusAchete">
+                <div class="bloc_image_produit_produitLesPlusAchete" style="background-image: url('./ressources/image/habit/product-4-1.jpg'); background-size: cover; background-position: center;">
+                    <div class="bloc_type_reduction_produitLesPlusAchete d-flex justify-content-between">
+                        <div class="type_produitLesPlusAchete">local</div>
+                        <div class="reduction_produitLesPlusAchete">20%</div>
+                    </div>
+                </div>
+                <div class="bloc_description_produit_produitLesPlusAchete">
+                    <div class="text_desciptive text-secondary">Nos regions ont du talent</div>
+                    <div class="text_titre">Tomate rondes</div>
+                    <div class="text_qte text-secondary">520mg</div>
+
+                    <div class="blocEnd_description d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="price">2.49$</div>
+                            <div class="priceUnite text-secondary">2.49$/kg</div>
+                        </div>
+                        <button class="btn btn-sm "><i class="fa-solid fa-cart-shopping"></i>   </button>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="produit_produitLesPlusAchete">
+                <div class="bloc_image_produit_produitLesPlusAchete" style="background-image: url('./ressources/image/habit/product-2-1.jpg'); background-size: cover; background-position: center;">
+                    <div class="bloc_type_reduction_produitLesPlusAchete d-flex justify-content-between">
+                        <div class="type_produitLesPlusAchete">local</div>
+                        <div class="reduction_produitLesPlusAchete">20%</div>
+                    </div>
+                </div>
+                <div class="bloc_description_produit_produitLesPlusAchete">
+                    <div class="text_desciptive text-secondary">Nos regions ont du talent</div>
+                    <div class="text_titre">Tomate rondes</div>
+                    <div class="text_qte text-secondary">520mg</div>
+
+                    <div class="blocEnd_description d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="price">2.49$</div>
+                            <div class="priceUnite text-secondary">2.49$/kg</div>
+                        </div>
+                        <button class="btn btn-sm "><i class="fa-solid fa-cart-shopping"></i>   </button>
+                        
+                    </div>
+                </div>
+            </div>
+
+   
+
+         </div>
+    </div>
+
+
+
+
+    <!-- ============================================================================================= -->
+    <!-- ***********************☰**  NEWS LETTER                 ************************* -->
+    <!-- ============================================================================================= -->
+    <br>
+    <div style="  background-color: rgba(238, 238, 238, 0.658);">
+        <div class="container_n1">
+            <section id="newsletter">
+                <div class="newsletter_div">
+                    <h3>S'inscrire sur notre newsletter</h3>
+                    <h5>Rejoins notre communauté et sois <span class="text-primary"> le premier à découvrir nos offres
+                            exclusives et nos nouvelles
+                            affaires
+                            !</span>
+                    </h5>
+                </div>
+                <form action="" class="newsletter_div">
+                    <div class="input-group mb-3 w-100 border">
+                        <input type="email" class="form-control" placeholder="your email please "
+                            aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Sign Up</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+
+    <!-- ============================================================================================= -->
+    <!-- **************************   SCRIPTS EXTERNES CDN  ************************************* -->
+    <!-- ============================================================================================= -->
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <!-- ============================================================================================= -->
+    <!-- **************************   SCRIPTS PAGES REPETITIVES  ************************************* -->
+    <!-- ============================================================================================= -->
+    <!-- script du premier modele de caroussel  :  home------->
+    <script src="assets/js/partials/MiddleBar.js"></script>
+    <!-- contient les fonction js qui doivent etre imperativementsur toutes les page du site ------->
+    <script src="assets/js/partials/Footer.js"></script>
+      <!-- Produit modele HOme page------->
+    <script src="./assets/js/partials/ProductsModelOne.js"></script>
+
+
+    <script>
+        const container = document.getElementById('filtersContainer');
+        const btnLeft = document.getElementById('scrollLeft');
+        const btnRight = document.getElementById('scrollRight');
+        const scrollStep = 150; // distance à chaque clic
+
+        function updateButtons() {
+            btnLeft.disabled = container.scrollLeft <= 0;
+            btnRight.disabled = container.scrollLeft + container.clientWidth >= container.scrollWidth - 1;
+        }
+
+        btnLeft.addEventListener('click', () => {
+            container.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+            setTimeout(updateButtons, 400);
+        });
+
+        btnRight.addEventListener('click', () => {
+            container.scrollBy({ left: scrollStep, behavior: 'smooth' });
+            setTimeout(updateButtons, 400);
+        });
+
+        container.addEventListener('scroll', updateButtons);
+        window.addEventListener('resize', updateButtons);
+    </script>
+
+{% endblock %}

@@ -429,6 +429,12 @@ def voirOffresAntigaspi(request) :
 def supermarche(request) :
     return render(request, 'ecommerce/supermarche.html')
 
+def suepermarche_rayon(request) :
+    return render(request, 'ecommerce/supermarcherayon.html')
+
+def supermarche_cat(request) :
+    return render(request, 'ecommerce/supermarchecategorie.html')
+
 # Vue Inscription
 
 def inscription(request) :

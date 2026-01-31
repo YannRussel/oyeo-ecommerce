@@ -1,8 +1,6 @@
 {% extends "ecommerce/base.html" %}
 {% load static %}
-{% block title %}Oyéo – Page Supermarche{% endblock %}
-
-
+{% block title %}Oyéo – Page Rayon des Supermarches{% endblock %}
 
 {% block extra_css %}
 
@@ -24,331 +22,139 @@
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/Supermarche.css' %}">
 
 
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/SupermacheRayon.css' %}">
+
+
 
 {% endblock %}
 
 {% block navigation_bar %}{% endblock %}
+    <!-- style des produits  :  home-->
+
+
 
 {% block content %}
-    
 
-    <!-- =====================================   BANNIER  ============================================== -->
+        <!-- BARRE TOP -->
+    <div id="topbarre" class="bg-success">
+        <div id="topbarre_bloc">
+            <a href="supermarcheCategorie.html" class="btn btn-sm active "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/bebe.svg" alt=""></span> Tous les rayons</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/rougealevre.svg" alt=""></span> Hygiène et beauté</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/savon.svg" alt=""></span> Entretien & maison</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/animale.svg" alt=""></span> Animalerie</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"> <img
+                        src="ressources/icons/ettiquette.svg" alt=""></span> Promotions</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/etoile.svg" alt=""></span> Nouveauté</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/promo.svg" alt=""></span> Laverie & Séchage</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img src="ressources/icons/bebe.svg"
+                        alt=""></span> Bébé & enfant</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/savon.svg" alt=""></span> Hygiène et beauté</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/savon.svg" alt=""></span> Entretien & maison</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/savon.svg" alt=""></span> Animalerie</a>
+            <a href="#" class="btn btn-sm "> <span class="topbarre_emojie"><img
+                        src="ressources/icons/savon.svg" alt=""></span> Promotions</a>
 
-    <div id="supermarche_bannier">
-        <div id="bloc_container_supermarche_bannier">
-            <div id="sousbloc_container_supermarche_bannier_one">
-                <div class="livraison_ville">
-                    <i class="fa-solid fa-bolt"></i> Livraison en 2h Paris
-                </div>
-
-                <h1 class="titre_principal">
-                    Vos cours en <span> ligne ,</span> <span>fraîcheur garantie</span>
-                </h1>
-                <p>Plus de <strong>15 000 produits </strong> frais, locaux et de qualité. Livraison <span> rapide , prix
-                        bas garantis et service client exceptionnel.</span></p>
-
-                <div class="bloc_btn">
-                    <a href="{% url 'ecommerce:rayon-supermarche' %}" class="btn btn-success "><span>Faire mes courses </span><i
-                            class="fa-solid fa-arrow-right"></i></a>
-                    <a href="#" class="btn btn-outline-success "><span>Voir les promos </span> <span
-                            class="promo_btn">-50%</span></a>
-                </div>
-
-                <div class="bloc_card">
-                    <div class="card_element">
-                        <span class="icon icone_one">
-                            <i class="fa-solid fa-truck"></i>
-                        </span>
-                        <div class="card_description">
-                            <div class="card_description_title">
-                                Livraison rapide
-                            </div>
-                            <p>En 2h à Paris</p>
-
-                        </div>
-
-                    </div>
-                    <div class="card_element">
-                        <span class="icon icone_two">
-                            <i class="fa-solid fa-clock"></i>
-                        </span>
-                        <div class="card_description">
-                            <div class="card_description_title">
-                                Ouvert 24h/24
-                            </div>
-                            <p>Commandez quand vous voulez</p>
-
-                        </div>
-
-                    </div>
-                    <div class="card_element">
-                        <span class="icon icone_three">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </span>
-                        <div class="card_description">
-                            <div class="card_description_title">
-                                Qualité garantie
-                            </div>
-                            <p>satisfait ou remboursé</p>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div id="sousbloc_container_supermarche_bannier_two">
-
-                <div class="nbr_avis">
-                    <i class="fa-solid fa-star"></i>
-                    <div>
-                        <span>4.8/5</span>
-                        <small>+10k avis</small>
-                    </div>
-                </div>
-
-                <img src="./ressources/image/img/online2-top-ub_800x1000jouet-de-noel-2025-s42.webp" alt=""
-                    class="image_bannier">
-
-                <div class="nbr_produit ">
-                    <i class="fa-solid fa-circle"></i>
-                    <div>
-                        <span>15 000 + produits</span>
-                        <small>Disponible maintenant</small>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
     </div>
 
 
+    <!-- MINI MENU DES FILTRE / TRIE -->
+    <div class="mini_menu_filtre_trie ">
+        <form action="" method="get">
+            <div class="d-flex justify-content-between">
+                <div class="mini_menu_filtre_trie_bloc_trie">
+                    <label for="" class="d-block mb-2">Trier par :</label>
+                    <select name="" id="" class="form-select">
+                        <option value="pertinence">Pertinence</option>
+                        <option value="pertinence">Plus luxieuse</option>
+                        <option value="pertinence">Plus chèr</option>
+                    </select>
+                </div>
 
-    <!-- ===================================== SECTION :  FEATURED CATEGORIES =========================== -->
-    <div id="bloc_featured_categorie">
+                <div class="mini_menu_filtre_trie_bloc_trie">
+                    <label for="" class="d-block mb-2">Marque :</label>
+                    <select name="" id="" class="form-select">
+                        <option value="pertinence">Toutes les marques</option>
+                        <option value="pertinence">Adidas</option>
+                        <option value="pertinence">Nike</option>
+                    </select>
+                </div>
 
-        <div class="d-flex justify-content-between">
-            <h2 class="titre_principal">Featured Categories</h2>
-            <div>
-                <!-- Bouton gauche -->
-                <button id="scrollLeft" class="scroll-arrow me-3  px-3" disabled>
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <!-- Bouton droit -->
-                <button id="scrollRight" class="scroll-arrow ms-3 px-3">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-        <div class="filters-wrapper ">
-            <!-- Conteneur scrollable -->
-            <div id="filtersContainer" class="filters-container ">
-                <a class="filter-item" href="{% url 'ecommerce:cat-supermarche' %}">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>14 items</p>
-                </a>
+                <div class="mini_menu_filtre_trie_bloc_trie" style="position: relative; ">
+                    <label class="form-label mb-0">Note minimum :</label>
 
-                <a class="filter-item">
-                    <img src="./ressources/icons/2.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Peace</h3>
-                    <p>18 items</p>
-                </a>
+                    <div class="range-container" style="position: relative;">
+                        <!-- L'indicateur qui bouge -->
+                        <div id="rangeTooltip" class="range-tooltip">10</div>
 
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Organic Kiwic</h3>
-                    <p>52 items</p>
-                </a>
+                        <input type="range" class="custom-range-slider" min="0" max="25" value="10" id="noteRange">
+                    </div>
 
-                <a class="filter-item">
-                    <img src="./ressources/icons/3.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
+                    <div class="d-flex justify-content-between" style="margin-top: -8px;">
+                        <small class="text-muted">0.00$</small>
+                        <small class="text-muted">25.00$</small>
+                    </div>
+                </div>
 
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
+                <div class="mini_menu_filtre_trie_bloc_trie">
+                    <label for="" class="d-block mb-2">Note minimun :</label>
+                    <select name="" id="" class="form-select">
+                        <option value="pertinence">Toutes les notes</option>
+                        <option value="pertinence">15</option>
+                        <option value="pertinence">3</option>
+                    </select>
+                </div>
 
-                <a class="filter-item">
-                    <img src="./ressources/icons/2.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
 
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>14 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/2.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Peace</h3>
-                    <p>18 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Organic Kiwic</h3>
-                    <p>52 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/3.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/2.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>14 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/2.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Peace</h3>
-                    <p>18 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Organic Kiwic</h3>
-                    <p>52 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/3.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/2.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>14 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/2.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Peace</h3>
-                    <p>18 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Organic Kiwic</h3>
-                    <p>52 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/3.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/1.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
-
-                <a class="filter-item">
-                    <img src="./ressources/icons/2.JPG" alt="" class="image_mini_filtre">
-                    <h3 class="filter-item-titre">Cake & Milk</h3>
-                    <p>25 items</p>
-                </a>
+                <div class="mini_menu_filtre_trie_bloc_trie">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="">
+                            En promotion
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                        <label class="form-check-label" for="">
+                            Bio
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                        <label class="form-check-label" for="">
+                            En stock
+                        </label>
+                    </div>
+                </div>
 
             </div>
-        </div>
+        </form>
 
     </div>
-
-    <!-- ============== SECTION :  PRODUIT DISPONIBLE , LIVRAISON EXPRESS , CLIENT SATISFAIT ============ -->
-
-    <div id="bloc_disponible_livraisonexpress_cltsatisfait">
-
-        <div id="sous_bloc_disponible_livraisonexpress_cltsatisfait">
-            <div class="element_disponible_livraisonexpress_cltsatisfait">
-                <div class="valeur">
-                    15 000 +
-                </div>
-                <div class="text_descriptif">
-                    Produits disponibles
-                </div>
-            </div>
-            <div class="element_disponible_livraisonexpress_cltsatisfait">
-                <div class="valeur">
-                    2h
-                </div>
-                <div class="text_descriptif">
-                    Livraison express
-                </div>
-            </div>
-            <div class="element_disponible_livraisonexpress_cltsatisfait">
-                <div class="valeur">
-                    50 000 +
-                </div>
-                <div class="text_descriptif">
-                    clients satisfaits
-                </div>
-            </div>
-            <div class="element_disponible_livraisonexpress_cltsatisfait">
-                <div class="valeur">
-                   4.8/5
-                </div>
-                <div class="text_descriptif">
-                   Note moyenne
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-
-
 
     <!-- /* *************************************  SECTION TOUT NOS PRODUITS ************************* */ -->
 
     <div id="bloc_toutnosproduits_supermarcheRayon">
-        <p class="text-secondary  text-center my-10" style="font-size: 1.3rem; width: 50%; margin: auto;">Decouvrez notre selection spéciale des produits frais et de qualités, choisie avec soin pour vous offrir le meilleur  </p>
-       <!--  <div class="d-flex justify-content-between ">
+        <div class="d-flex justify-content-between ">
             <div class="" style="width: 430px;">
-                <h2 class="titre_principal">Tous nos produits</h2>
-                <span class="text-secondary">30 produits</span>
+                 <h2 class="titre_principal">Tous nos produits</h2>
+                 <span class="text-secondary">30 produits</span>
             </div>
             <div class="btn_retour">
                 <a href=""> <i class="fa-solid fa-arrow-left"></i> Retour à l'acceuil</a>
             </div>
-        </div> -->
+        </div>
 
 
 
@@ -358,12 +164,9 @@
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/banner/b7.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -371,15 +174,14 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
@@ -390,12 +192,9 @@
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/occas.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -403,15 +202,14 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
@@ -423,12 +221,9 @@
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/card-item4.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -436,32 +231,28 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
             </div>
 
 
-
+            
             <div class="produit_toutnosproduits">
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/card-item9.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -469,33 +260,29 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
             </div>
+     
 
 
-
-
+            
             <div class="produit_toutnosproduits">
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/n8.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -503,15 +290,14 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
@@ -519,16 +305,13 @@
 
 
 
-            <div class="produit_toutnosproduits">
+                <div class="produit_toutnosproduits">
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/card-item7.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -536,15 +319,14 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
@@ -555,12 +337,9 @@
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/card-item5.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -568,15 +347,14 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
@@ -588,12 +366,9 @@
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/n1.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -601,32 +376,28 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
             </div>
 
 
-
+            
             <div class="produit_toutnosproduits">
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/b2.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -634,33 +405,29 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
             </div>
+     
 
 
-
-
+            
             <div class="produit_toutnosproduits">
                 <div class="bloc_image_produit_toutnosproduits"
                     style="background-image: url('./ressources/image/habit/f4.jpg'); background-size: cover; background-position: center;">
                     <div class="bloc_type_reduction_toutnosproduits">
-                        <div class="type_toutnosproduits text-white"> <img
-                                src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
-                        <div class="reduction_toutnosproduits text-white"><img
-                                src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
-                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio
-                        </div>
+                        <div class="type_toutnosproduits text-white"> <img src="./ressources/icons/ettiquette.svg" alt=""> Promo</div>
+                        <div class="reduction_toutnosproduits text-white"><img src="./ressources/icons/etoile2.svg" alt=""> Vedette </div>
+                        <div class="bg-warning text-white"><img src="./ressources/icons/herbe.svg" alt=""> Bio</div>
                     </div>
                 </div>
                 <div class="bloc_description_produit_toutnosproduits">
@@ -668,15 +435,14 @@
                     <div class="text_titre">Pommes Golden Bio</div>
                     <div class="text_qte text-secondary">Pack 12X100mg</div>
 
-                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt=""
-                            class="image_etoile_toutnosproduits"> 4.8 (124)</div>
+                    <div class="bloc_etoile_toutnosproduits"><img src="./ressources/icons/etoile2.svg" alt="" class="image_etoile_toutnosproduits"> 4.8 (124)</div>
 
 
                     <div class="blocEnd_description d-flex  align-items-center">
-
-                        <div class="price">2.49$</div>
-                        <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
-
+                       
+                            <div class="price">2.49$</div>
+                            <div class="ps-2 priceUnite text-secondary"> 2.49$/kg</div>
+                        
 
                     </div>
                 </div>
@@ -740,7 +506,7 @@
 
                     <div class="bloc_description_dealofday">
                         <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
-                        <div class="rating"><span class="etoile">★★★★★</span> (372)</div>
+                        <div class="rating">★★★★★ (372)</div>
                         <div><small class="text-secondary qte">500 gram</small></div>
 
                         <div class="pricePlusAdd ">
@@ -800,7 +566,7 @@
 
                     <div class="bloc_description_dealofday">
                         <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
-                        <div class="rating"><span class="etoile">★★★★★</span> (372)</div>
+                        <div class="rating">★★★★★ (372)</div>
                         <div><small class="text-secondary">500 gram</small></div>
 
                         <div class="pricePlusAdd">
@@ -860,7 +626,7 @@
 
                     <div class="bloc_description_dealofday">
                         <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
-                        <div class="rating"><span class="etoile">★★★★★</span> (372)</div>
+                        <div class="rating">★★★★★ (372)</div>
                         <div><small class="text-secondary">500 gram</small></div>
 
                         <div class="pricePlusAdd">
@@ -919,7 +685,7 @@
 
                     <div class="bloc_description_dealofday">
                         <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
-                        <div class="rating"><span class="etoile">★★★★★</span> (372)</div>
+                        <div class="rating">★★★★★ (372)</div>
                         <div><small class="text-secondary">500 gram</small></div>
 
                         <div class="pricePlusAdd">
@@ -937,6 +703,7 @@
             <div class="produit_dealofday">
                 <div class="bloc_image_dealofday"
                     style="background-image: url('./ressources/image/banner/banner-16.png'); background-size: cover; background-position: center;">
+
                 </div>
                 <div class="bloc_text_dealofday">
                     <div class="bloc_stat_dealofday">
@@ -976,7 +743,7 @@
 
                     <div class="bloc_description_dealofday">
                         <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
-                        <div class="rating"><span class="etoile">★★★★★</span> (372)</div>
+                        <div class="rating">★★★★★ (372)</div>
                         <div><small class="text-secondary qte">500 gram</small></div>
 
                         <div class="pricePlusAdd ">
@@ -988,13 +755,187 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
 
 
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday"
+                    style="background-image: url('./ressources/image/banner/banner-11.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$10.87</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
 
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday"
+                    style="background-image: url('./ressources/image/banner/banner-13.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$11.56</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="produit_dealofday">
+                <div class="bloc_image_dealofday"
+                    style="background-image: url('./ressources/image/banner/banner-19.png'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="bloc_text_dealofday">
+                    <div class="bloc_stat_dealofday">
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Days
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Hours
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Mins
+                            </span>
+                        </div>
+                        <div class="sous_stat">
+                            <span class="nombre">
+                                58
+                            </span>
+                            <span class="description">
+                                Secs
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bloc_description_dealofday">
+                        <p>Seed of change Organic Quinaa, Brown & , Red Rice</p>
+                        <div class="rating">★★★★★ (372)</div>
+                        <div><small class="text-secondary">500 gram</small></div>
+
+                        <div class="pricePlusAdd">
+                            <div>
+                                <span class="newPrice">$2.51</span>
+                                <span class="oldPrice">$5.05</span>
+                            </div>
+                            <button class="btn btn-sm ">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
         </div>
@@ -1002,84 +943,10 @@
 
 
 
-
-       <!-- ============== SECTION :  categorie quatre ============ -->
-
-    <div id="bloc_categorie_four">
-
-        <div id="sous_bloc_categorie_four">
-
-
-            <div class="element_categorie_four">
-                <img src="./ressources/icons/1.JPG" alt="" class="img_element_categorie_four">
-                <div class="bloc_descriptif">
-                     <h6>Everyday Fresh <span> with Our Products</span></h6>
-                    <div>Go to a reputable  supplied</div>
-                </div>
-            </div>
-            <div class="element_categorie_four">
-                <img src="./ressources/icons/2.JPG" alt="" class="img_element_categorie_four">
-                <div class="bloc_descriptif">
-                    <h6>Everyday Fresh <span> with Our Products</span></h6>
-                    <div>Go to a reputable  supplied</div>
-                </div>
-            </div>
-            <div class="element_categorie_four">
-                <img src="./ressources/icons/3.JPG" alt="" class="img_element_categorie_four">
-                <div class="bloc_descriptif">
-                    <h6>Everyday Fresh <span> with Our Products</span></h6>
-                    <div>Go to a reputable  supplied</div>
-                </div>
-            </div>
-            <div class="element_categorie_four">
-                <img src="./ressources/icons/2.JPG" alt="" class="img_element_categorie_four">
-                <div class="bloc_descriptif">
-                     <h6>Everyday Fresh <span> with Our Products</span></h6>
-                    <div>Go to a reputable  supplied</div>
-                </div>
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- ******************************** bloc des produits les plus acheté ******************* -->
+    <!-- ******* bloc des produits les plus acheté ******************* -->
 
     <div id="bloc_produitLesPlusAchete">
-
-
-        <div class="d-flex bloc_titre justify-content-between align-items-center">
-            <div>
-                    <h2 class="titre_principal"> <span class="topbarre_emojie"><img
-                        src="ressources/icons/ettiquette.svg" alt=""></span> Promotions de la semaines </h2>
-                    <P class="text-secondary">Profitez de nos meilleurs offres avant qu'il ne soit trop tard</P>
-
-            </div>
-            <a href="#" class="btn btn-sm btn-success"> voir toutes nos promos </a>
-        </div>
-
-
-
-
-
-
-
-
-
+        <h2 class="titre_principal">Les plus achetés</h2>
         <div id="sousbloc_produitLesPlusAchete">
             <div class="produit_produitLesPlusAchete">
                 <div class="bloc_image_produit_produitLesPlusAchete"
@@ -1272,27 +1139,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- ============================================================================================= -->
     <!-- ***********************☰**  NEWS LETTER                 ************************* -->
     <!-- ============================================================================================= -->
@@ -1320,6 +1166,7 @@
     </div>
 
 
+
 {% endblock %}
 
 
@@ -1335,33 +1182,38 @@
     <!-- ============================================================================================= -->
     <!-- **************************   SCRIPTS PAGES REPETITIVES  ************************************* -->
     <!-- ============================================================================================= -->
+    <!-- script du premier modele de caroussel  :  home------->
     <script src="{% static 'ecommerce/assets/js/partials/MiddleBar.js' %}"></script>
     <!-- fonctions JS communes à toutes les pages -->
     <script src="{% static 'ecommerce/assets/js/partials/Footer.js' %}"></script>
 
+     <!-- range js -->
+    <script>
+        const rangeInput = document.getElementById('noteRange');
+        const tooltip = document.getElementById('rangeTooltip');
 
-      <script>
-        const container = document.getElementById('filtersContainer');
-        const btnLeft = document.getElementById('scrollLeft');
-        const btnRight = document.getElementById('scrollRight');
-        const scrollStep = 150; // distance à chaque clic
+        function updateRange() {
+            const val = rangeInput.value;
+            const min = rangeInput.min ? rangeInput.min : 0;
+            const max = rangeInput.max ? rangeInput.max : 100;
 
-        function updateButtons() {
-            btnLeft.disabled = container.scrollLeft <= 0;
-            btnRight.disabled = container.scrollLeft + container.clientWidth >= container.scrollWidth - 1;
+            // 1. Calcul de la position du curseur en pourcentage
+            const newVal = Number(((val - min) * 100) / (max - min));
+
+            // 2. Coloration de la barre (partie gauche)
+            rangeInput.style.background = `linear-gradient(to right, rgb(31, 148, 119) ${newVal}%, #dee2e6 ${newVal}%)`;
+
+            // 3. Positionnement de la bulle
+            tooltip.innerHTML = val;
+            // On ajuste légèrement le calcul pour que la bulle soit centrée sur le rond
+            tooltip.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
         }
 
-        btnLeft.addEventListener('click', () => {
-            container.scrollBy({ left: -scrollStep, behavior: 'smooth' });
-            setTimeout(updateButtons, 400);
-        });
+        rangeInput.addEventListener('input', updateRange);
 
-        btnRight.addEventListener('click', () => {
-            container.scrollBy({ left: scrollStep, behavior: 'smooth' });
-            setTimeout(updateButtons, 400);
-        });
-
-        container.addEventListener('scroll', updateButtons);
-        window.addEventListener('resize', updateButtons);
+        // Initialisation
+        updateRange();
     </script>
+
+
 {% endblock %}

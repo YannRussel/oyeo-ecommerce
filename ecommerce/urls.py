@@ -19,6 +19,8 @@ urlpatterns = [
     path("anti-gaspi", views.antigaspi, name="antigaspi"),
     path("voir-offres-antigaspi", views.voirOffresAntigaspi, name="voir-offres-antigaspi"),
     path("supermarche-index", views.supermarche, name = "index-supermarche"),
+    path("supermarche-rayon", views.suepermarche_rayon, name = "rayon-supermarche"),
+    path("supermarche-categorie", views.supermarche_cat, name = "cat-supermarche"),
     # Vue Inscription
     path("inscription", views.inscription, name = "vue-inscription"),
     # Vue diaspora
