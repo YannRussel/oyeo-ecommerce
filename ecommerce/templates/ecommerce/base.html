@@ -50,13 +50,11 @@
 </head>
 
 <body>
-
-    <!-- ================= NAVBAR ================= -->
-    {% block topbar %}
+    <!-- ============================================================================================= -->
+    <!-- **************************   BARRE SITE TOP :                   ***************************** -->
+    <!-- ============================================================================================= -->
     <div class="topbar">
-        <div class="container_ d-flex justify-content-between align-items-center py-1">
-
-
+        <div class="container_n1 d-flex justify-content-between align-items-center py-1">
             <!-- Liens gauche -->
             <div class="lienshaut">
                 <a href="#">
@@ -65,12 +63,11 @@
                 </a>
                 <a href="#" class="text">Vendez sur Oyéo</a>
                 <a href="#" class="text">Guide des tailles</a>
-
             </div>
 
             <!-- Bloc central : livraison -->
-            <div id="livraison-bloc" class="livraison-bloc ">
-                Livraison gratuite à partir de 50 €</span>
+            <div id="livraison-bloc" class="livraison-bloc">
+                Livraison gratuite à partir de 50 €
             </div>
 
             <!-- Bloc droit : service client, langue, devise -->
@@ -79,187 +76,175 @@
                     <i class="fas fa-phone"></i> <span class="text">Service client : 06 521 57 58</span>
                 </a>
 
-
                 <!-- Devise -->
                 <div class="devise-choix d-flex align-items-center">
                     <select id="select-devise" class="form-select form-select-sm" style="width: 80px;">
-                        <option value="EUR">EUR (€)</option>
-                        <option value="XAF">FCFA</option>
+                        <option value="EUR"{% if request.GET.devise == "EUR" %} selected{% endif %}>EUR (€)</option>
+                        <option value="XAF"{% if request.GET.devise == "XAF" %} selected{% endif %}>FCFA</option>
                     </select>
                 </div>
             </div>
         </div>
     </div>
-    {% endblock %}
 
-    <!-- ☰ Menu Header with logo, search and actions -->
+    <!-- ============================================================================================= -->
+    <!-- ***********************☰**   BARRE SITE MIDDLE :                  ************************** -->
+    <!-- ============================================================================================= -->
+    <div id="smallMenu">
+        <div class="container_n1">
+            <header class="">
+                <div class="d-flex justify-content-between align-items-center py-1 ">
+                    <div class="logo" aria-label="logo">
+                        {# backend: lien vers l'accueil (ne modifie pas la structure ni les classes) #}
+                        <a href="{% url 'ecommerce:acceuil-site' %}" class="lienTitleproduct" id="logo_oyeo">
+                            <span class="dot">Oy<span>éo</span></span>
+                        </a>
+                    </div>
 
+                    {# Search form : method GET, conserve classes et structure — valeur préremplie depuis request.GET.q #}
+                    <form class="blocsearch " action="" method="get">
+                        <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Cherchez vos articles..."
+                              aria-label="Recherche"
+                              aria-describedby="basic-addon2"
+                              id="searchInput"
+                              name="q"
+                              value="{{ request.GET.q|default:'' }}"
+                            />
+                            <div class="input-group-append">
+                                <button class="btn border" id="btnSearch" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
 
-<div class="container_fluid_" id="smallMenu">
-    <header>
-        <div class="d-flex justify-content-between align-items-center py-1">
+                    <div class="actions" aria-hidden="false">
+                        <a class="icon" href="#">
+                            <img src="{% static 'ecommerce/ressources/icons/icon-heart.svg' %}" alt="Mon icône">
+                            <span class="icon_text">Favoris</span>
+                        </a>
 
-            <!-- LOGO -->
-            <div class="logo" aria-label="logo">{% block header_logo %}
-                <a href="{% url 'ecommerce:acceuil-site' %}" class="lienTitleproduct" id="logo_oyeo">
-                    <span class="dot">Oy<span>éo</span></span>
-                </a>
-            {% endblock %}</div>
+                        <a class="icon" href="#" style="position: relative;">
+                            <img src="{% static 'ecommerce/ressources/icons/icon-cart.svg' %}" alt="Mon icône">
+                            <span class="icon_text">Panier</span>
+                        </a>
 
-            <!-- SEARCH -->
-            {% block header_search %}
-            <form class="blocsearch" action="#" method="get">
-              <div class="search-wrapper" style="max-width:700px;">
-                <input
-                  type="text"
-                  name="q"
-                  class="form-control search-input"
-                  placeholder="Cherchez vos articles..."
-                  id="searchInput"
-                  value="{{ request.GET.q|default:'' }}"
-                />
-                <button type="submit" class="search-icon-btn" aria-label="Rechercher">
-                  <i class="fas fa-search" aria-hidden="true"></i>
-                </button>
-              </div>
-            </form>
-            {% endblock %}
+                        {# Connexion / Mon compte selon authentification #}
+                        {% if user.is_authenticated %}
+                            <a class="icon" href="{% url 'admin:index' %}">
+                                <img src="{% static 'ecommerce/ressources/icons/icon-user.svg' %}" alt="Mon compte">
+                                <span class="icon_text">Mon compte</span>
+                            </a>
+                        {% else %}
+                            <a class="icon" href="{% url 'ecommerce:vue-inscription' %}">
+                                <img src="{% static 'ecommerce/ressources/icons/icon-user.svg' %}" alt="Connexion">
+                                <span class="icon_text">Connexion</span>
+                            </a>
+                        {% endif %}
 
-            <!-- ACTIONS -->
-            <div class="actions">{% block header_actions %}
-
-                <!-- FAVORIS -->
-                <a class="icon" href="#">
-                    <img src="{% static 'ecommerce/ressources/img/icons/icon-heart.svg' %}" alt="Favoris">
-                    <span class="icon_text">Favoris</span>
-                </a>
-
-                <!-- PANIER -->
-                <a class="icon" href="#" style="position: relative;">
-                    <img src="{% static 'ecommerce/ressources/img/icons/icon-cart.svg' %}" alt="Panier">
-                    <span class="icon_text">Panier</span>
-                </a>
-
-                <!-- COMPTE -->
-                {% if user.is_authenticated %}
-                    <a class="icon" href="{% url 'admin:index' %}">
-                        <img src="{% static 'ecommerce/ressources/img/icons/icon-user.svg' %}" alt="Mon compte">
-                        <span class="icon_text">Mon compte</span>
-                    </a>
-                {% else %}
-                    <a class="icon" href="{% url 'ecommerce:vue-inscription' %}">
-                        <img src="{% static 'ecommerce/ressources/img/icons/icon-user.svg' %}" alt="Connexion">
-                        <span class="icon_text">Connexion</span>
-                    </a>
-                {% endif %}
-
-                <!-- MOBILE BUTTONS -->
-                <button id="searchbtnIcone" class="btn btn-warning px-3 py-1">
-                    <i class="fa fa-search"></i>
-                </button>
-
-                <button id="menubtn" class="btn btn-primary px-3 py-1">
-                    ☰
-                </button>
-            {% endblock %}</div>
-
+                        <button id="searchbtnIcone" class="btn btn-xl btn-warning px-3 py-1"><i class="fa fa-search"></i></button>
+                        <button id="menubtn" class="btn btn-xl btn-primary px-3 py-1">☰</button>
+                    </div>
+                </div>
+            </header>
         </div>
-    </header>
-</div>
-
-
-    <!-- ☰ MENU DE NAVIGATION ET CROUSSEL  -->
-{% block navigation_bar %}
-<div id="allnavigationBar" class="shadow-sm" style="width: 100%;">
-  <div class="maNavigation" style="width: 100%;">
-    <div class="menu-bar" style="width: 100%; font-size: 14px; margin-left: -42px;">
-
-      <ul>
-        {% for top in menu %}
-        <li>
-          <div class="navbarre_linkCategorie accordion">
-            <a class="desktop_sousCategorie"
-               href="{% url 'ecommerce:category_detail' top.slug %}">
-              {{ top.title }}
-            </a>
-
-            <a class="navbarre_linkCategorie_fleche"
-               href="{{ top.url }}"
-               role="button"
-               aria-expanded="false"
-               aria-controls="sub-menu-{{ forloop.counter }}">
-            </a>
-          </div>
-
-          <div id="sub-menu-{{ forloop.counter }}" class="sub-menu-1 panel">
-            <ul>
-              {% for sub in top.children %}
-              <li>
-                <div class="navbarre_linkSouSCategorie accordion_n2">
-                  <a href="{{ sub.url }}">{{ sub.title }}</a>
-
-                  <a class="navbarre_linkSouSCategorie_fleche"
-                     href="{{ sub.url }}"
-                     role="button"
-                     aria-expanded="false"
-                     aria-controls="sub-menu-2-{{ forloop.parentloop.counter }}-{{ forloop.counter }}">
-                  </a>
-                </div>
-
-                <div id="sub-menu-2-{{ forloop.parentloop.counter }}-{{ forloop.counter }}"
-                     class="sub-menu-2 panel_n2">
-                  <div class="row">
-                    {% for col in sub.columns %}
-                      <div class="col-sm-3">
-
-                        {% if col.heading %}
-                          <h6 class="enGras py-2">{{ col.heading }}</h6>
-                        {% endif %}
-
-                        {% if col.items %}
-                          {% for it in col.items %}
-                            <p><a href="{{ it.url }}">{{ it.title }}</a></p>
-                          {% endfor %}
-                        {% endif %}
-
-                        {% if col.cards %}
-                          <div class="row d-flex justify-content-between">
-                            {% for card in col.cards %}
-                              <div class="col-5">
-                                <div class="image_navbar shadow-sm"
-                                     style="background-image: url('{% if card.image %}{{ card.image }}{% else %}{% static 'ecommerce/ressources/img/fallback.jpg' %}{% endif %}');">
-                                </div>
-                                <a href="{{ card.url }}" class="enGras mt-2 d-block">
-                                  {{ card.title }}
-                                </a>
-                              </div>
-                            {% endfor %}
-                          </div>
-                        {% endif %}
-
-                      </div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </li>
-        {% endfor %}
-        <li><a href="{% url 'ecommerce:vue-diaspora' %}">Diaspora</a></li>
-        <li><a href="{% url 'ecommerce:index-supermarche' %}">Supermarché</a></li>
-        <li><a href="{% url 'ecommerce:antigaspi' %}">AntiGaspi</a></li>
-        <li><a href="{% url 'ecommerce:carte-cadeaux' %}">Carte cadeaux</a></li>
-      </ul>
-
     </div>
-  </div>
-</div>
-{% endblock navigation_bar %}
 
+    <!-- ============================================================================================= -->
+    <!-- ***********************☰**   BARRE NAVIGATION :                  ************************* -->
+    <!-- ============================================================================================= -->
+    <div id="allnavigationBar" class=" shadow-sm  ">
+        <div id="bloc_phone_header_navigation">
+            <div class="d-flex justify-content-between align-items-center   border-bottom ">
+                <div class="logo" aria-label="logo">
+                    <a href="{% url 'ecommerce:acceuil-site' %}" class="lienTitleproduct" id="logo_oyeo">
+                        <span class="dot">Oy<span>éo</span></span>
+                    </a>
+                </div>
+                <button id="menubtnFermer" class="btn btn-xl btn-danger px-3 py-1">X</button>
+            </div>
+        </div>
 
+        <div class="maNavigationn">
+            <div class="menu-bar" style="width: 100%; font-size: 14px; margin-left: -42px;">
+                <ul>
+                    {# Backend dynamique : menu, enfants, colonnes, cartes (conserve toutes les classes) #}
+                    {% for top in menu %}
+                    <li>
+                      <div class="navbarre_linkCategorie accordion">
+                        <a class="desktop_sousCategorie" href="{% url 'ecommerce:category_detail' top.slug %}">{{ top.title }}</a>
 
+                        <a class="navbarre_linkCategorie_fleche"
+                           href="{{ top.url }}"
+                           role="button"
+                           aria-expanded="false"
+                           aria-controls="sub-menu-{{ forloop.counter }}">
+                        </a>
+                      </div>
+
+                      <div id="sub-menu-{{ forloop.counter }}" class="sub-menu-1 panel">
+                        <ul>
+                          {% for sub in top.children %}
+                          <li>
+                            <div class="navbarre_linkSouSCategorie accordion_n2">
+                              <a href="{{ sub.url }}">{{ sub.title }}</a>
+
+                              <a class="navbarre_linkSouSCategorie_fleche"
+                                 href="{{ sub.url }}"
+                                 role="button"
+                                 aria-expanded="false"
+                                 aria-controls="sub-menu-2-{{ forloop.parentloop.counter }}-{{ forloop.counter }}">
+                              </a>
+                            </div>
+
+                            <div id="sub-menu-2-{{ forloop.parentloop.counter }}-{{ forloop.counter }}" class="sub-menu-2 panel_n2">
+                              <div class="row">
+                                {% for col in sub.columns %}
+                                  <div class="col-sm-3">
+                                    {% if col.heading %}
+                                      <h6 class="enGras py-2">{{ col.heading }}</h6>
+                                    {% endif %}
+
+                                    {% if col.items %}
+                                      {% for it in col.items %}
+                                        <p><a href="{{ it.url }}">{{ it.title }}</a></p>
+                                      {% endfor %}
+                                    {% endif %}
+
+                                    {% if col.cards %}
+                                      <div class="row d-flex justify-content-between">
+                                        {% for card in col.cards %}
+                                          <div class="col-5">
+                                            <div class="image_navbar shadow-sm"
+                                                 style="background-image: url('{% if card.image %}{{ card.image }}{% else %}{% static 'ecommerce/ressources/img/fallback.jpg' %}{% endif %}');">
+                                            </div>
+                                            <a href="{{ card.url }}" class="enGras mt-2 d-block">{{ card.title }}</a>
+                                          </div>
+                                        {% endfor %}
+                                      </div>
+                                    {% endif %}
+                                  </div>
+                                {% endfor %}
+                              </div>
+                            </div>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </li>
+                    {% endfor %}
+
+                    {# éléments statiques restants (gardés) #}
+                    <li><a href="{% url 'ecommerce:vue-diaspora' %}">Diaspora</a></li>
+                    <li><a href="{% url 'ecommerce:index-supermarche' %}">Supermarché</a></li>
+                    <li><a href="{% url 'ecommerce:antigaspi' %}">AntiGaspi</a></li>
+                    <li><a href="{% url 'ecommerce:carte-cadeaux' %}">Carte cadeaux</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
 
     <!-- ================= MAIN CONTENT ================= -->
