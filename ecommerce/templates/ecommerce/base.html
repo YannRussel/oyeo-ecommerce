@@ -238,10 +238,13 @@
                     {% endfor %}
 
                     {# éléments statiques restants (gardés) #}
+                        <li><a href="{% url 'ecommerce:index-supermarche' %}">Supermarché</a></li>
+                        <li><a href="{% url 'ecommerce:antigaspi' %}">AntiGaspi</a></li>
+                        <li><a href="{% url 'ecommerce:carte-cadeaux' %}">Carte cadeaux</a></li>
                     <li><a href="{% url 'ecommerce:vue-diaspora' %}">Diaspora</a></li>
-                    <li><a href="{% url 'ecommerce:index-supermarche' %}">Supermarché</a></li>
-                    <li><a href="{% url 'ecommerce:antigaspi' %}">AntiGaspi</a></li>
-                    <li><a href="{% url 'ecommerce:carte-cadeaux' %}">Carte cadeaux</a></li>
+            
+                    
+                    
                 </ul>
             </div>
         </div>
