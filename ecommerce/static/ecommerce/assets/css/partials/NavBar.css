@@ -428,10 +428,20 @@
 
 /* ===== REDUIRE ESPACE BARRE NOIRE ===== */
 
+/* ===== ALIGNER LA BARRE NOIRE AVEC LA CATEGORIE (ex: Femmes) ===== */
+
 .menu-bar ul li .sub-menu-1 ul{
   display: flex;
-  justify-content: center;   /* centre le bloc */
-  gap: 15px;                 /* 🔥 contrôle l'espacement ici */
+
+  /* 🔥 Aligne au début du parent au lieu du centre */
+  justify-content: flex-start;
+
+  /* espace entre les items */
+  gap: 15px;
+
+  /* IMPORTANT : supprime marge auto qui recentre */
+  margin-left: 0;
+  padding-left: 145px;   /* ajuste si tu veux coller pile avec "Femmes" */
 }
 
 /* compacte chaque item */
@@ -445,3 +455,4 @@
   padding: 6px 8px;
   white-space: nowrap;
 }
+
