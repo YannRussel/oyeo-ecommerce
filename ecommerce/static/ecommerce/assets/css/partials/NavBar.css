@@ -427,6 +427,43 @@
 
 
 
+/* ===== NAV TOP CATEGORIES (desktop) ===== */
+.maNavigationn .menu-bar > ul{
+  display: flex;
+  align-items: center;
+
+  /* IMPORTANT: ne pas étirer les liens sur toute la largeur */
+  justify-content: flex-start;
+
+  /* Espacement entre catégories (réduis/augmente ici) */
+  gap: 22px;
+
+  /* Espace à gauche/droite pour éviter "Femme" collé et garder marge à droite */
+  padding: 0 18px;
+
+  margin: 0;
+  list-style: none;
+}
+
+.maNavigationn .menu-bar > ul > li{
+  flex: 0 0 auto;
+}
+
+.maNavigationn .menu-bar > ul > li > a{
+  display: block;
+  padding: 12px 6px;     /* réduit l'espace “interne” */
+  white-space: nowrap;   /* évite le retour à la ligne */
+}
+
+/* Option: si ça déborde sur petits écrans */
+@media (max-width: 992px){
+  .maNavigationn .menu-bar > ul{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 0 12px;
+  }
+}
 
 
 
