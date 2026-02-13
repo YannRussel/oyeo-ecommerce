@@ -431,7 +431,7 @@
 .menu-bar ul li .sub-menu-1 ul{
   display: flex;
   justify-content: center;   /* centre le bloc */
-  gap: 20px;                 /* 🔥 contrôle l'espacement ici */
+  gap: 15px;                 /* 🔥 contrôle l'espacement ici */
 }
 
 /* compacte chaque item */
