@@ -433,10 +433,10 @@
   align-items: center;
 
   /* IMPORTANT: ne pas étirer les liens sur toute la largeur */
-  justify-content: flex-start;
+    justify-content: center;
 
   /* Espacement entre catégories (réduis/augmente ici) */
-  gap: 22px;
+  gap: 30px;
 
   /* Espace à gauche/droite pour éviter "Femme" collé et garder marge à droite */
   padding: 0 18px;
