@@ -422,7 +422,7 @@ def antigaspi(request) :
 
 def voirOffresAntigaspi(request) :
 
-    return render(request, 'ecommerce/antigaspi2.html', {})
+    return render(request, 'ecommerce/offres_antigaspi.html', {})
 
 # Vue supermarché
 

@@ -1,0 +1,160 @@
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% block title %}Oyéo – Voir les offres anti gaspi{% endblock %}
+
+{% block extra_css %}
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/antigaspi2.css' %}">
+
+{% endblock %}
+
+
+{% block navigation_bar %}{% endblock %}
+
+{% block content %}
+
+    <header>
+        <div class="header-content">
+            <h1><i class="fas fa-leaf"></i> Paniers AntiGaspi <span style="font-size:0.6em; background:#4cd137; padding:2px 6px; border-radius:4px;">Nouveau</span></h1>
+            <p>Récupérez des paniers surprise à petit prix et évitez le gaspillage alimentaire</p>
+            <p class="header-stat">Déjà 124 paniers sauvés du gaspillage ce mois-ci</p>
+        </div>
+    </header>
+
+    <section class="filters-container">
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <button id="nav-prev" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:#2c9c6a;">&#8592;</button>
+            <button id="nav-next" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:#2c9c6a;">&#8594;</button>
+        </div>
+        <div class="top-pills" id="pills-group-1" style="margin-bottom:10px;">
+            <div class="pill active">Tous</div>
+            <div class="pill">Supermarchés & épiceries</div>
+            <div class="pill">Boulangeries & pâtisseries</div>
+            <div class="pill">Restaurants & snacks</div>
+            <div class="pill">Fruits & légumes</div>
+        </div>
+
+        <div class="top-pills" id="pills-group-2" style="margin-bottom:10px;">
+            <div class="pill">Petit-déjeuner</div>
+            <div class="pill">Déjeuner / Diner</div>
+            <div class="pill">Patisserie / Viennoiseries</div>
+            <div class="pill">Mix supermarché</div>
+        </div>
+
+        <div class="dropdown-row">
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <div class="dropdown-btn">Date
+                    <select class="dropdown-select" id="filter-date" style="border:none; background:transparent; margin-left:8px;">
+                        <option value="">Indifférent</option>
+                        <option>Aujourd'hui</option>
+                        <option>Demain</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-btn">Créneau
+                    <select class="dropdown-select" id="filter-creneau" style="border:none; background:transparent; margin-left:8px;">
+                        <option value="">Tous</option>
+                        <option>Matin</option>
+                        <option>Midi</option>
+                        <option>Soir</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-btn">Budget
+                    <select class="dropdown-select" id="filter-budget" style="border:none; background:transparent; margin-left:8px;">
+                        <option value="all">Tous les budgets</option>
+                        <option value="lt2000">Moins de 2 000 FCFA</option>
+                        <option value="2000-5000">2 000 - 5 000 FCFA</option>
+                        <option value="gt5000">Plus de 5 000 FCFA</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-btn">Réduction
+                    <select class="dropdown-select" id="filter-reduc" style="border:none; background:transparent; margin-left:8px;">
+                        <option value="all">Toutes</option>
+                        <option value="30">Au moins -30%</option>
+                        <option value="50">Au moins -50%</option>
+                        <option value="60">Au moins -60%</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:8px; align-items:center; margin-left:12px;">
+                <button id="reset-filters" class="dropdown-btn" style="background:#eee;">Réinitialiser</button>
+                <div class="results-count">10 522 résultats</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="location-bar" style="background:white; padding: 15px; border-radius:8px; margin-bottom:20px;">
+            <div>
+                <label style="display:block; font-size:0.75rem; font-weight:600; margin-bottom:5px;">Ville (Congo-Brazzaville)</label>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <select class="city-select">
+                        <option>Toutes les villes du Congo</option>
+                        <option>Brazzaville</option>
+                        <option>Kinkala</option>
+                        <option>Mindouli</option>
+                        <option>Kindamba</option>
+                        <option>Nkayi</option>
+                        <option>Madingou</option>
+                        <option>Makoua</option>
+                        <option>Impfondo</option>
+                        <option>Gamboma</option>
+                        <option>Ouesso</option>
+                        <option>Owando</option>
+                        <option>Oyo</option>
+                        <option>Loango</option>
+                        <option>Mossendjo</option>
+                        <option>Gamboma</option>
+                        <option>Makoua</option>
+                        <option>Pointe-Noire</option>
+                        <option>Dolisie</option>
+                    </select>
+                    <button id="detect-location" style="padding:10px 16px; background: linear-gradient(135deg, var(--primary-green), var(--btn-green)); color:white; border:none; border-radius:25px; cursor:pointer; font-size:0.85rem; font-weight:600; box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3); transition: all 0.3s ease; display:flex; align-items:center; gap:8px;"><i class="fas fa-map-marker-alt"></i> Détecter ma position</button>
+                </div>
+            </div>
+            <div>
+                <span style="font-size:0.75rem; color:#7f8c8d;">Trier par :</span>
+                <select class="sort-select">
+                    <option>Recommandé</option>
+                    <option>Les plus proches</option>
+                    <option>Prix croissant</option>
+                    <option>Prix décroissant</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <h3 style="margin-bottom:15px; font-size:1.1rem; color:#444;">Les offres du moment</h3>
+        <div class="grid" id="product-grid"></div>
+
+        <h3 style="margin-bottom:15px; font-size:1.1rem; color:#444;">Nouveautés à Brazzaville</h3>
+        <div class="grid" id="product-grid-2"></div>
+
+        <div class="section-header">
+            <i class="fas fa-map-marker-alt section-icon"></i>
+            <div>
+                <div class="section-title">Près de chez vous</div>
+                <div style="font-size:0.8rem; color:#777;">Les paniers à récupérer dans votre quartier</div>
+            </div>
+            <button class="btn-see-more">Voir plus <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="grid" id="nearby-grid"></div>
+    </main>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'ecommerce/assets/js/antigaspi2.js' %}"></script>
+    <!-- Popper + Bootstrap JS (placed before any inline scripts that might rely on Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-zMT6x4k2VZ0k3Q1Q6r7YqvX1H1v1Y2Z3a4b5c6d7e8f9g0h1i2j3k4l5m6n7o8p9" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoYz1TQ4rKX1p6Y5s6e7f8g9h0i1j2k3l4m5n6o7p8q9r0s" crossorigin="anonymous"></script>
+{% endblock %}
+
+
+    
