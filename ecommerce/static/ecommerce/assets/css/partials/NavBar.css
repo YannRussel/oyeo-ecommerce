@@ -1,5 +1,5 @@
 /* ============================================================
-   NAVBAR PRINCIPALE
+   NAVBAR CONTAINER
    ============================================================ */
 
 .maNavigationn {
@@ -13,16 +13,18 @@
     width: 100%;
 }
 
-/* MENU PRINCIPAL (Femmes, Hommes, etc.) */
+/* ============================================================
+   MENU PRINCIPAL (Femmes, Hommes...)
+   ============================================================ */
 
 .maNavigationn .menu-bar > ul {
     display: flex;
-    justify-content: flex-start; /* aligné à gauche */
+    justify-content: flex-start;
     align-items: center;
-    gap: 30px;
+    gap: 28px;
     list-style: none;
     margin: 0;
-    padding: 0 18px; /* padding de référence */
+    padding: 0 18px;
 }
 
 .maNavigationn .menu-bar > ul > li {
@@ -37,6 +39,7 @@
     font-weight: 500;
     padding: 14px 0;
     display: inline-block;
+    transition: color 0.2s ease;
 }
 
 .maNavigationn .menu-bar > ul > li > a:hover {
@@ -44,7 +47,7 @@
 }
 
 /* ============================================================
-   BARRE NOIRE (SOUS MENU NIVEAU 1)
+   SOUS-MENU NIVEAU 1 (BARRE NOIRE)
    ============================================================ */
 
 .sub-menu-1 {
@@ -54,37 +57,36 @@
     top: 100%;
     width: 100%;
     background: #000814;
-    padding: 10px 0;
+    padding: 8px 0;
     display: none;
     z-index: 999;
 }
 
-/* Affichage au hover */
+/* affichage au hover */
 .maNavigationn .menu-bar > ul > li:hover > .sub-menu-1 {
     display: block;
 }
 
-/* Liste sous catégories */
+/* Liste des sous-catégories */
 
 .sub-menu-1 > ul {
     display: flex;
-    flex-wrap: wrap;               /* ✅ retour à la ligne */
+    flex-wrap: wrap;            /* retour ligne si trop d’items */
     row-gap: 6px;
-    column-gap: 14px;
+    column-gap: 16px;
     list-style: none;
     margin: 0;
-    padding-left: 18px;            /* aligné avec menu principal */
-    padding-right: 18px;
+    padding: 8px 18px;
     max-width: 100%;
-    overflow: hidden;              /* empêche débordement */
+    overflow: hidden;
 }
 
 /* Items */
 
 .sub-menu-1 > ul > li {
     flex: 0 0 auto;
-    max-width: 180px;              /* limite largeur */
-    padding: 6px 10px;
+    max-width: 200px;
+    padding: 6px 8px;
 }
 
 .sub-menu-1 > ul > li > a {
@@ -94,7 +96,7 @@
     font-size: 14px;
 
     overflow: hidden;
-    text-overflow: ellipsis;       /* ... si trop long */
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
@@ -103,7 +105,7 @@
 }
 
 /* ============================================================
-   SOUS MENU NIVEAU 2 (mega menu interne)
+   SOUS-MENU NIVEAU 2 (MEGA MENU)
    ============================================================ */
 
 .sub-menu-2 {
@@ -114,7 +116,7 @@
     width: 100%;
     display: none;
     padding: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
 }
 
 .sub-menu-1 li:hover > .sub-menu-2 {
@@ -128,6 +130,7 @@
 .sub-menu-2 h6 {
     font-weight: 600;
     font-size: 14px;
+    margin-bottom: 8px;
 }
 
 .sub-menu-2 p {
@@ -144,7 +147,7 @@
     color: #0d6efd;
 }
 
-/* Images cartes */
+/* Cartes images */
 
 .image_navbar {
     height: 80px;
@@ -154,23 +157,32 @@
 }
 
 /* ============================================================
-   MOBILE
+   RESPONSIVE MOBILE
    ============================================================ */
 
 @media (max-width: 992px) {
 
-    /* Scroll horizontal si trop d'items */
+    /* Menu principal scroll horizontal */
+    .maNavigationn .menu-bar > ul {
+        overflow-x: auto;
+        gap: 18px;
+        padding: 0 12px;
+        scrollbar-width: thin;
+    }
+
+    /* Sous-catégories scroll horizontal */
     .sub-menu-1 > ul {
         flex-wrap: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
-        scrollbar-width: thin;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        gap: 12px;
+        padding: 10px 12px;
     }
 
     .sub-menu-1 > ul > li {
-        max-width: none;
         flex: 0 0 auto;
+        max-width: none;
     }
-
 }
