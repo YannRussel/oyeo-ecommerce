@@ -238,34 +238,10 @@
                     {% endfor %}
 
                     {# éléments statiques restants (gardés) #}
-{# éléments statiques (même structure que le reste) #}
-<li>
-  <div class="navbarre_linkCategorie accordion">
-    <a class="desktop_sousCategorie" href="{% url 'ecommerce:index-supermarche' %}">Supermarché</a>
-    <a class="navbarre_linkCategorie_fleche" href="{% url 'ecommerce:index-supermarche' %}"></a>
-  </div>
-</li>
-
-<li>
-  <div class="navbarre_linkCategorie accordion">
-    <a class="desktop_sousCategorie" href="{% url 'ecommerce:antigaspi' %}">AntiGaspi</a>
-    <a class="navbarre_linkCategorie_fleche" href="{% url 'ecommerce:antigaspi' %}"></a>
-  </div>
-</li>
-
-<li>
-  <div class="navbarre_linkCategorie accordion">
-    <a class="desktop_sousCategorie" href="{% url 'ecommerce:carte-cadeaux' %}">Carte cadeaux</a>
-    <a class="navbarre_linkCategorie_fleche" href="{% url 'ecommerce:carte-cadeaux' %}"></a>
-  </div>
-</li>
-
-<li>
-  <div class="navbarre_linkCategorie accordion">
-    <a class="desktop_sousCategorie" href="{% url 'ecommerce:vue-diaspora' %}">Diaspora</a>
-    <a class="navbarre_linkCategorie_fleche" href="{% url 'ecommerce:vue-diaspora' %}"></a>
-  </div>
-</li>
+                        <li><a href="{% url 'ecommerce:index-supermarche' %}">Supermarché</a></li>
+                        <li><a href="{% url 'ecommerce:antigaspi' %}">AntiGaspi</a></li>
+                        <li><a href="{% url 'ecommerce:carte-cadeaux' %}">Carte cadeaux</a></li>
+                    <li><a href="{% url 'ecommerce:vue-diaspora' %}">Diaspora</a></li>
             
                     
                     
