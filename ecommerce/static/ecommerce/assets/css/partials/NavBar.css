@@ -1,4 +1,3 @@
-@@ -1,458 +1,458 @@
 /*========= MENU DE NAVIGATION ==================================================*/
 
 .navbarre_linkSouSCategorie_fleche,
@@ -15,21 +14,12 @@
 .desktop_Categorie {
   display: inline-block;
 }
-.desktop_Categorie_mono, .desktop_sousCategorie_mono{
+.desktop_Categorie_mono,
+.desktop_sousCategorie_mono {
   text-align: center;
   display: inline-block;
 }
 
-/*.menu-bar {
-  text-transform: capitalize;
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-  height: 48px;
-}*/
 .accordion {
   transition: 0.4s;
 }
@@ -44,10 +34,6 @@
   top: 0;
   z-index: 16;
   background-color: rgb(255, 255, 255);
-
-  /*  padding-left: 4%;
-          padding-right: 4%; */
-
   width: 100%;
   margin: auto;
 }
@@ -55,7 +41,6 @@
 .menu-bar a {
   text-decoration: none;
   color: var(--black);
-  /* border: 1px solid red; */
   width: 100%;
   transition: 0.3s;
 }
@@ -67,48 +52,43 @@
   top: 0;
   left: 0;
 
-  width: 80%;
-  width: 90%;
-  /* a mettre a 100% sur mobile */
+  /* important : on force un “container” stable pour aligner le sous-menu */
+  width: 100% !important;
+  max-width: 1500px;         /* ajuste si tu veux (ex: 1400px) */
+  margin: 0 auto !important;
+
   z-index: 1000;
   background-color: rgb(255, 255, 255);
-
   height: 47px;
-  margin: auto;
-  /* border: 2px solid yellow; */
 }
 
 .menu-bar ul {
-  /* display:inline-block; */
   display: flex;
   width: 100%;
   list-style: none;
   align-items: center;
-
-  /* justify-content: space-between; */
-  /* border: 1px solid red; */
   margin: 0;
-  padding: 0;
+  padding: 0 18px;           /* ✅ marge interne = point de départ “Femme” */
+  gap: 30px;                 /* ✅ espace entre Femmes/Homme/... */
 }
 
-.desktop_Categorie, .navbarre_linkSouSCategorie {
+.desktop_Categorie,
+.navbarre_linkSouSCategorie {
   text-align: center !important;
 }
 
 .menu-bar ul li {
   display: block;
-  /* padding: 12px  1% ;  */
-  /* width: fit-content;*/
-  /* padding-left: 12px; */
-  flex: 1;
-  /* width: 10%; */
-  /* border: 1px solid green;  */
+  flex: 0 0 auto;            /* ✅ ne plus étirer en pleine largeur */
   padding-top: 10px;
   padding-bottom: 10px;
-  /* text-align: center  ; */
-  /* a enlever sur le mobile  :  marge gauche droite*/
-  /*flex-grow: 1; flex-shrink: 1;*/
   transition: 0.3s ease-in-out;
+}
+
+.menu-bar ul li a {
+  display: block;
+  padding: 12px 6px;
+  white-space: nowrap;
 }
 
 .menu-bar ul li a:hover {
@@ -131,49 +111,60 @@
   display: none;
 }
 
-/* ======================= FIX: COLLER LA BARRE NOIRE AU MENU PRINCIPAL ======================= */
+/* ======================= FIX: BARRE NOIRE FULL, CONTENU ALIGNÉ AU MENU ======================= */
 .menu-bar ul li:hover .sub-menu-1 {
   background-color: var(--bg-naviguation);
   display: block;
   position: absolute;
+
   left: 0;
   right: 0;
   width: 100%;
 
-  /* AVANT: margin-top: 13px; (créait le vide) */
   margin-top: 0;
   top: 100%;
 }
 
-/* Sous-menu niveau 1 : réduire l'espacement vertical */
+/* ✅ Sous-menu niveau 1 : contenu “container” + wrap (ne déborde jamais) */
 .menu-bar ul li .sub-menu-1 ul {
-  display: inline-flex;
-  /* a mettre en  inline-block sur mobile*/
-  text-align: left;
+  display: flex;
+  align-items: center;
+
+  /* ✅ le contenu commence exactement au même endroit que “Femme” */
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 6px 18px;
+
+  /* ✅ si beaucoup d'items : retour à la ligne au lieu de sortir de l’écran */
+  flex-wrap: wrap;
+
+  gap: 14px 18px;     /* row-gap / col-gap */
   list-style: none;
-  list-style-type: 0;
-  transition: .1s ease-in-out all;
+  transition: 0.1s ease-in-out all;
+}
 
-  /* ✅ compact */
+/* ✅ items niveau 1 compacts */
+.menu-bar ul li .sub-menu-1 ul li {
+  flex: 0 0 auto;
   padding: 4px 0;
-  margin: 0;
 }
 
-/* ✅ compact items niveau 1 */
-.menu-bar ul li .sub-menu-1 ul li{
-  padding: 6px 12px;
+/* ✅ lien niveau 1 compact + pas de retour à la ligne dans un mot */
+.menu-bar ul li .sub-menu-1 ul li a {
+  display: block;
+  padding: 6px 10px;
+  white-space: nowrap;
 }
 
+/* ======================= NIVEAU 2 ======================= */
 .sub-menu-2 {
   display: none;
 }
 
-/* ======================= FIX: SOUS-MENU NIVEAU 2 PLUS COMPACT + SANS GAP ======================= */
 .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 {
   background-color: #ffffff;
   border-bottom: 5px solid var(--bg-naviguation);
 
-  /* AVANT: padding: 15px; margin-top: 10px; */
   padding: 8px;
   margin-top: 0;
 
@@ -182,9 +173,10 @@
   left: 0;
   right: 0;
   width: 100%;
+
   max-height: 60vh;
   overflow-y: auto;
-  transition: .1s ease-in-out all;
+  transition: 0.1s ease-in-out all;
 }
 
 .menu-bar ul li .sub-menu-1 ul li .sub-menu-2 ul {
@@ -194,7 +186,6 @@
   list-style-type: 0;
 }
 
-/* .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div div p a, */
 .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div a {
   color: var(--black) !important;
 }
@@ -214,7 +205,7 @@
   background-size: cover;
   height: 120px;
   background-position: center;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .bloc_img_article_menu {
@@ -222,7 +213,7 @@
 }
 
 .image_navbar:hover {
-  transform: scale(.95);
+  transform: scale(0.95);
 }
 
 @media (hover: none) {
@@ -232,24 +223,39 @@
 }
 
 /* pour les taille a partir de : 1400 */
-@media screen and (max-width : 1390px) {
+@media screen and (max-width: 1390px) {
   .menu-bar {
     font-size: 13px;
-    /*  width: 95%; */
-    /* a mettre a 100% sur mobile */
+  }
+  .menu-bar ul {
+    gap: 20px;
+    padding: 0 14px;
+  }
+  .menu-bar ul li .sub-menu-1 ul {
+    padding: 6px 14px;
   }
 }
 
-@media screen and (max-width : 1290px) {
+@media screen and (max-width: 1290px) {
   .menu-bar {
     font-size: 11.5px;
-    /* width: 98%; */
-    /* a mettre a 100% sur mobile */
+  }
+  .menu-bar ul {
+    gap: 16px;
   }
 }
 
-@media screen and (max-width : 980px) {
+/* ✅ Sur écrans moyens : si la ligne est trop longue, on autorise le scroll horizontal du menu du haut */
+@media (max-width: 992px) {
+  .menu-bar ul {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+  }
+}
 
+/* ======================= MOBILE (inchangé globalement) ======================= */
+@media screen and (max-width: 980px) {
   .navbarre_linkSouSCategorie_fleche,
   .navbarre_linkCategorie_fleche {
     display: inline-block;
@@ -257,7 +263,9 @@
   }
 
   .phone_Categorie,
-  .phone_sousCategorie, .desktop_Categorie_mono ,  .desktop_sousCategorie_mono{
+  .phone_sousCategorie,
+  .desktop_Categorie_mono,
+  .desktop_sousCategorie_mono {
     display: inline-block;
     text-align: left;
   }
@@ -278,14 +286,8 @@
     display: block;
   }
 
-  #bloc_phone_header_navigation {
-    display: block;
-  }
-
   #allnavigationBar {
-    /* border-top-right-radius: 10px; */
     border-bottom-right-radius: 100px;
-    /*     border: 2px solid red; */
     box-shadow: var(--bs-shadow-lg, 0 1rem 3rem rgba(117, 92, 92, 0.527)) !important;
 
     margin-left: -110%;
@@ -299,7 +301,7 @@
     top: 0px;
     padding-right: 12px;
 
-    transition: .2s ease-in-out all;
+    transition: 0.2s ease-in-out all;
     background-color: #ffffff;
   }
 
@@ -309,7 +311,6 @@
 
   .maNavigation {
     height: 90vh;
-    /*   background-color: #088178; */
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -317,29 +318,27 @@
   .menu-bar {
     position: static;
     width: 100%;
+    max-width: none;
     height: auto;
     font-size: 16px;
-    /*  background-color: #815b08; */
-    /*  border: 5px solid rgb(255, 89, 47); */
   }
 
   .menu-bar ul {
     display: block;
     width: 100%;
     padding-left: 3%;
+    gap: 0;
+    overflow: visible;
   }
 
   .menu-bar ul li {
     display: block;
     padding: 6px 0px;
-    /* padding-left: 15px; */
     margin-bottom: 3px;
     transition: 0.3s ease-in-out;
   }
 
-  .menu-bar ul li:hover .sub-menu-1
-  /* .menu-bar ul li .sub-menu-1 */
-  {
+  .menu-bar ul li:hover .sub-menu-1 {
     display: none;
     position: static;
     width: 100%;
@@ -356,8 +355,9 @@
     display: block;
     text-align: left;
     margin: 0;
-    /* padding: 15px 0px; */
     border-left: 1px solid silver;
+    padding: 0;
+    max-width: none;
   }
 
   .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div div h6 {
@@ -367,15 +367,11 @@
 
   .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div div p {
     font-size: 15px;
-    margin-bottom: 3px
+    margin-bottom: 3px;
   }
 
-  .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2
-  /* .menu-bar ul li .sub-menu-1 ul li .sub-menu-2 */
-  {
+  .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 {
     background-color: #ffffff;
-    /* border-bottom: 2px solid var(--bg-naviguation);
-    border-top: 2px solid var(--bg-naviguation); */
     border-left: 1px solid silver;
     padding: 15px 5px;
     display: none;
@@ -387,73 +383,4 @@
     overflow-y: auto;
     transition: all 0.2s ease-out;
   }
-}
-
-/* ===== NAV TOP CATEGORIES (desktop) ===== */
-.maNavigationn .menu-bar > ul{
-  display: flex;
-  align-items: center;
-
-  /* IMPORTANT: ne pas étirer les liens sur toute la largeur */
-  justify-content: center;
-
-  /* Espacement entre catégories (réduis/augmente ici) */
-  gap: 30px;
-
-  /* Espace à gauche/droite pour éviter "Femme" collé et garder marge à droite */
-  padding: 0 18px;
-
-  margin: 0;
-  list-style: none;
-}
-
-.maNavigationn .menu-bar > ul > li{
-  flex: 0 0 auto;
-}
-
-.maNavigationn .menu-bar > ul > li > a{
-  display: block;
-  padding: 12px 6px;     /* réduit l'espace “interne” */
-  white-space: nowrap;   /* évite le retour à la ligne */
-}
-
-/* Option: si ça déborde sur petits écrans */
-@media (max-width: 992px){
-  .maNavigationn .menu-bar > ul{
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    gap: 16px;
-    padding: 0 12px;
-  }
-}
-
-/* ===== REDUIRE ESPACE BARRE NOIRE ===== */
-
-/* ===== ALIGNER LA BARRE NOIRE AVEC LA CATEGORIE (ex: Femmes) ===== */
-
-.menu-bar ul li .sub-menu-1 ul{
-  display: flex;
-
-  /* 🔥 Aligne au début du parent au lieu du centre */
-  justify-content: flex-start;
-
-  /* espace entre les items */
-  gap: 15px;
-
-  /* IMPORTANT : supprime marge auto qui recentre */
-  margin-left: 0;
-  padding-left: 145px;   /* ajuste si tu veux coller pile avec "Femmes" */
-  
-}
-
-/* compacte chaque item */
-.menu-bar ul li .sub-menu-1 ul li{
-  flex: 0 0 auto;
-  padding: 4px 6px;          /* réduit la largeur interne */
-}
-
-/* réduit padding du lien */
-.menu-bar ul li .sub-menu-1 ul li a{
-  padding: 6px 8px;
-  white-space: nowrap;
 }
