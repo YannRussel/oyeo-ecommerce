@@ -457,3 +457,59 @@
   padding: 6px 8px;
   white-space: nowrap;
 }
+
+/* =========================
+   FIX "image 2"
+   1) La barre noire est CADRÉE sur le menu
+   2) Les sous-catégories commencent sous "Femmes"
+   ========================= */
+
+/* Le conteneur de référence pour les absolute */
+.maNavigationn .menu-bar{
+  position: relative; /* IMPORTANT */
+}
+
+/* (Optionnel mais recommandé) : le menu principal n'est pas centré,
+   il démarre à gauche (comme ton image 2) */
+.maNavigationn .menu-bar > ul{
+  justify-content: flex-start !important; /* au lieu de center */
+  gap: 30px;                 /* garde ton spacing */
+  padding: 0 18px;           /* marge identique pour le menu ET la barre noire */
+}
+
+/* Annule l'ancien flex:1 sur les <li> (sinon ça étire et fausse l’alignement) */
+.maNavigationn .menu-bar > ul > li{
+  flex: 0 0 auto !important;
+}
+
+/* Barre noire (niveau 1) : cadrée sur la largeur de .menu-bar */
+.maNavigationn .menu-bar > ul > li > .sub-menu-1{
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;      /* 100% DU .menu-bar, pas du viewport */
+  margin-top: 0 !important;
+  top: 100%;
+}
+
+/* Liste des sous-catégories dans la barre noire :
+   commence exactement au même "start" que le menu principal */
+.maNavigationn .menu-bar > ul > li > .sub-menu-1 > ul{
+  justify-content: flex-start !important;
+  padding-left: 18px !important; /* même padding que le menu principal */
+  margin-left: 0 !important;
+  gap: 15px;
+}
+
+/* Supprime ton ancien hack (padding-left:145px) en le neutralisant */
+.menu-bar ul li .sub-menu-1 ul{
+  padding-left: 18px !important;
+}
+
+/* Petites optimisations visuelles (facultatif) */
+.maNavigationn .menu-bar > ul > li > .sub-menu-1 > ul > li{
+  flex: 0 0 auto !important;
+  padding: 6px 10px !important;
+}
+.maNavigationn .menu-bar > ul > li > .sub-menu-1 > ul > li > a{
+  white-space: nowrap;
+}
