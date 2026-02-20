@@ -59,6 +59,8 @@
   padding: 0 18px;            /* petite marge interne */
   gap: 30px;
   list-style: none;
+      justify-content: center;   /* centre le groupe */
+    gap: 20px;   
 }
 
 /* ✅ IMPORTANT : enlever le padding du LI (c’est ça qui créait le gap) */
