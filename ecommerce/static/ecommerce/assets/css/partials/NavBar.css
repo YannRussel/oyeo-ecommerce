@@ -1,515 +1,176 @@
-@@ -1,458 +1,458 @@
-/*========= MENU DE NAVIGATION ==================================================*/
+/* ============================================================
+   NAVBAR PRINCIPALE
+   ============================================================ */
 
-.navbarre_linkSouSCategorie_fleche,
-.navbarre_linkCategorie_fleche {
-  display: none;
+.maNavigationn {
+    background: #ffffff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
-.phone_Categorie,
-.phone_sousCategorie {
-  display: none;
+.maNavigationn .menu-bar {
+    position: relative; /* IMPORTANT pour cadrer la barre noire */
+    width: 100%;
 }
 
-.desktop_sousCategorie,
-.desktop_Categorie {
-  display: inline-block;
-}
-.desktop_Categorie_mono, .desktop_sousCategorie_mono{
-  text-align: center;
-  display: inline-block;
-}
+/* MENU PRINCIPAL (Femmes, Hommes, etc.) */
 
-/*.menu-bar {
-  text-transform: capitalize;
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-  height: 48px;
-}*/
-.accordion {
-  transition: 0.4s;
+.maNavigationn .menu-bar > ul {
+    display: flex;
+    justify-content: flex-start; /* aligné à gauche */
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0 18px; /* padding de référence */
 }
 
-.active,
-.accordion:hover {
-  color: #e98400;
+.maNavigationn .menu-bar > ul > li {
+    position: relative;
+    flex: 0 0 auto;
 }
 
-#allnavigationBar {
-  position: sticky;
-  top: 0;
-  z-index: 16;
-  background-color: rgb(255, 255, 255);
-
-  /*  padding-left: 4%;
-          padding-right: 4%; */
-
-  width: 100%;
-  margin: auto;
+.maNavigationn .menu-bar > ul > li > a,
+.desktop_sousCategorie {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    padding: 14px 0;
+    display: inline-block;
 }
 
-.menu-bar a {
-  text-decoration: none;
-  color: var(--black);
-  /* border: 1px solid red; */
-  width: 100%;
-  transition: 0.3s;
+.maNavigationn .menu-bar > ul > li > a:hover {
+    color: #0d6efd;
 }
 
-.menu-bar {
-  font-size: 15px;
-  text-transform: capitalize;
-  position: sticky;
-  top: 0;
-  left: 0;
-
-  width: 80%;
-  width: 90%;
-  /* a mettre a 100% sur mobile */
-  z-index: 1000;
-  background-color: rgb(255, 255, 255);
-
-  height: 47px;
-  margin: auto;
-  /* border: 2px solid yellow; */
-}
-
-.menu-bar ul {
-  /* display:inline-block; */
-  display: flex;
-  width: 100%;
-  list-style: none;
-  align-items: center;
-
-  /* justify-content: space-between; */
-  /* border: 1px solid red; */
-  margin: 0;
-  padding: 0;
-}
-
-.desktop_Categorie, .navbarre_linkSouSCategorie {
-  text-align: center !important;
-}
-
-.menu-bar ul li {
-  display: block;
-  /* padding: 12px  1% ;  */
-  /* width: fit-content;*/
-  /* padding-left: 12px; */
-  flex: 1;
-  /* width: 10%; */
-  /* border: 1px solid green;  */
-  padding-top: 10px;
-  padding-bottom: 10px;
-  /* text-align: center  ; */
-  /* a enlever sur le mobile  :  marge gauche droite*/
-  /*flex-grow: 1; flex-shrink: 1;*/
-  transition: 0.3s ease-in-out;
-}
-
-.menu-bar ul li a:hover {
-  color: var(--primary);
-}
-
-.menu-bar ul li:hover .sub-menu-1 a {
-  color: #ffffff;
-}
-
-.menu-bar ul li .sub-menu-1 ul li .sub-menu-2 div div a:hover {
-  color: var(--primary) !important;
-}
-
-.menu-bar ul li ul li a:hover {
-  color: var(--primary_hover) !important;
-}
+/* ============================================================
+   BARRE NOIRE (SOUS MENU NIVEAU 1)
+   ============================================================ */
 
 .sub-menu-1 {
-  display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    width: 100%;
+    background: #000814;
+    padding: 10px 0;
+    display: none;
+    z-index: 999;
 }
 
-/* ======================= FIX: COLLER LA BARRE NOIRE AU MENU PRINCIPAL ======================= */
-.menu-bar ul li:hover .sub-menu-1 {
-  background-color: var(--bg-naviguation);
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100%;
-
-  /* AVANT: margin-top: 13px; (créait le vide) */
-  margin-top: 0;
-  top: 100%;
+/* Affichage au hover */
+.maNavigationn .menu-bar > ul > li:hover > .sub-menu-1 {
+    display: block;
 }
 
-/* Sous-menu niveau 1 : réduire l'espacement vertical */
-.menu-bar ul li .sub-menu-1 ul {
-  display: inline-flex;
-  /* a mettre en  inline-block sur mobile*/
-  text-align: left;
-  list-style: none;
-  list-style-type: 0;
-  transition: .1s ease-in-out all;
+/* Liste sous catégories */
 
-  /* ✅ compact */
-  padding: 4px 0;
-  margin: 0;
+.sub-menu-1 > ul {
+    display: flex;
+    flex-wrap: wrap;               /* ✅ retour à la ligne */
+    row-gap: 6px;
+    column-gap: 14px;
+    list-style: none;
+    margin: 0;
+    padding-left: 18px;            /* aligné avec menu principal */
+    padding-right: 18px;
+    max-width: 100%;
+    overflow: hidden;              /* empêche débordement */
 }
 
-/* ✅ compact items niveau 1 */
-.menu-bar ul li .sub-menu-1 ul li{
-  padding: 6px 12px;
+/* Items */
+
+.sub-menu-1 > ul > li {
+    flex: 0 0 auto;
+    max-width: 180px;              /* limite largeur */
+    padding: 6px 10px;
 }
+
+.sub-menu-1 > ul > li > a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;       /* ... si trop long */
+    white-space: nowrap;
+}
+
+.sub-menu-1 > ul > li > a:hover {
+    color: #0d6efd;
+}
+
+/* ============================================================
+   SOUS MENU NIVEAU 2 (mega menu interne)
+   ============================================================ */
 
 .sub-menu-2 {
-  display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #ffffff;
+    width: 100%;
+    display: none;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* ======================= FIX: SOUS-MENU NIVEAU 2 PLUS COMPACT + SANS GAP ======================= */
-.menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 {
-  background-color: #ffffff;
-  border-bottom: 5px solid var(--bg-naviguation);
-
-  /* AVANT: padding: 15px; margin-top: 10px; */
-  padding: 8px;
-  margin-top: 0;
-
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-height: 60vh;
-  overflow-y: auto;
-  transition: .1s ease-in-out all;
+.sub-menu-1 li:hover > .sub-menu-2 {
+    display: block;
 }
 
-.menu-bar ul li .sub-menu-1 ul li .sub-menu-2 ul {
-  display: block;
-  text-align: left;
-  list-style: none;
-  list-style-type: 0;
+.sub-menu-2 .row {
+    margin: 0;
 }
 
-/* .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div div p a, */
-.menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div a {
-  color: var(--black) !important;
+.sub-menu-2 h6 {
+    font-weight: 600;
+    font-size: 14px;
 }
 
-.menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div div p {
-  color: var(--black) !important;
-  padding: 1px 0px;
-  margin-bottom: 3px;
+.sub-menu-2 p {
+    margin: 4px 0;
 }
 
-.menu-bar ul li .sub-menu-1 ul li .sub-menu-2 div div p:hover,
-.menu-bar ul li .sub-menu-1 ul li .sub-menu-2 div div p a:hover {
-  color: var(--primary) !important;
+.sub-menu-2 a {
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
 }
+
+.sub-menu-2 a:hover {
+    color: #0d6efd;
+}
+
+/* Images cartes */
 
 .image_navbar {
-  background-size: cover;
-  height: 120px;
-  background-position: center;
-  transition: .3s;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 6px;
 }
 
-.bloc_img_article_menu {
-  margin-bottom: 15px;
-}
+/* ============================================================
+   MOBILE
+   ============================================================ */
 
-.image_navbar:hover {
-  transform: scale(.95);
-}
+@media (max-width: 992px) {
 
-@media (hover: none) {
-  .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 {
-    display: none;
-  }
-}
+    /* Scroll horizontal si trop d'items */
+    .sub-menu-1 > ul {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+    }
 
-/* pour les taille a partir de : 1400 */
-@media screen and (max-width : 1390px) {
-  .menu-bar {
-    font-size: 13px;
-    /*  width: 95%; */
-    /* a mettre a 100% sur mobile */
-  }
-}
+    .sub-menu-1 > ul > li {
+        max-width: none;
+        flex: 0 0 auto;
+    }
 
-@media screen and (max-width : 1290px) {
-  .menu-bar {
-    font-size: 11.5px;
-    /* width: 98%; */
-    /* a mettre a 100% sur mobile */
-  }
-}
-
-@media screen and (max-width : 980px) {
-
-  .navbarre_linkSouSCategorie_fleche,
-  .navbarre_linkCategorie_fleche {
-    display: inline-block;
-    text-align: right;
-  }
-
-  .phone_Categorie,
-  .phone_sousCategorie, .desktop_Categorie_mono ,  .desktop_sousCategorie_mono{
-    display: inline-block;
-    text-align: left;
-  }
-
-  .desktop_sousCategorie,
-  .desktop_Categorie {
-    display: none;
-  }
-
-  .navbarre_linkCategorie,
-  .navbarre_linkSouSCategorie {
-    padding-right: 20px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  #bloc_phone_header_navigation {
-    display: block;
-  }
-
-  #bloc_phone_header_navigation {
-    display: block;
-  }
-
-  #allnavigationBar {
-    /* border-top-right-radius: 10px; */
-    border-bottom-right-radius: 100px;
-    /*     border: 2px solid red; */
-    box-shadow: var(--bs-shadow-lg, 0 1rem 3rem rgba(117, 92, 92, 0.527)) !important;
-
-    margin-left: -110%;
-    position: fixed;
-    z-index: 1002;
-    height: 100%;
-
-    left: 0%;
-    width: 100%;
-    right: 1px;
-    top: 0px;
-    padding-right: 12px;
-
-    transition: .2s ease-in-out all;
-    background-color: #ffffff;
-  }
-
-  .activeDesactive {
-    margin-left: 0% !important;
-  }
-
-  .maNavigation {
-    height: 90vh;
-    /*   background-color: #088178; */
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .menu-bar {
-    position: static;
-    width: 100%;
-    height: auto;
-    font-size: 16px;
-    /*  background-color: #815b08; */
-    /*  border: 5px solid rgb(255, 89, 47); */
-  }
-
-  .menu-bar ul {
-    display: block;
-    width: 100%;
-    padding-left: 3%;
-  }
-
-  .menu-bar ul li {
-    display: block;
-    padding: 6px 0px;
-    /* padding-left: 15px; */
-    margin-bottom: 3px;
-    transition: 0.3s ease-in-out;
-  }
-
-  .menu-bar ul li:hover .sub-menu-1
-  /* .menu-bar ul li .sub-menu-1 */
-  {
-    display: none;
-    position: static;
-    width: 100%;
-    margin-top: 12px;
-    transition: all 0.2s ease-out;
-    background-color: white;
-  }
-
-  .menu-bar ul li:hover .sub-menu-1 a {
-    color: #040718;
-  }
-
-  .menu-bar ul li .sub-menu-1 ul {
-    display: block;
-    text-align: left;
-    margin: 0;
-    /* padding: 15px 0px; */
-    border-left: 1px solid silver;
-  }
-
-  .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div div h6 {
-    font-size: 15px;
-    color: #088178;
-  }
-
-  .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2 div div p {
-    font-size: 15px;
-    margin-bottom: 3px
-  }
-
-  .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2
-  /* .menu-bar ul li .sub-menu-1 ul li .sub-menu-2 */
-  {
-    background-color: #ffffff;
-    /* border-bottom: 2px solid var(--bg-naviguation);
-    border-top: 2px solid var(--bg-naviguation); */
-    border-left: 1px solid silver;
-    padding: 15px 5px;
-    display: none;
-    position: static;
-
-    width: 100%;
-    margin-top: 5px;
-    max-height: 80vh;
-    overflow-y: auto;
-    transition: all 0.2s ease-out;
-  }
-}
-
-/* ===== NAV TOP CATEGORIES (desktop) ===== */
-.maNavigationn .menu-bar > ul{
-  display: flex;
-  align-items: center;
-
-  /* IMPORTANT: ne pas étirer les liens sur toute la largeur */
-  justify-content: center;
-
-  /* Espacement entre catégories (réduis/augmente ici) */
-  gap: 30px;
-
-  /* Espace à gauche/droite pour éviter "Femme" collé et garder marge à droite */
-  padding: 0 18px;
-
-  margin: 0;
-  list-style: none;
-}
-
-.maNavigationn .menu-bar > ul > li{
-  flex: 0 0 auto;
-}
-
-.maNavigationn .menu-bar > ul > li > a{
-  display: block;
-  padding: 12px 6px;     /* réduit l'espace “interne” */
-  white-space: nowrap;   /* évite le retour à la ligne */
-}
-
-/* Option: si ça déborde sur petits écrans */
-@media (max-width: 992px){
-  .maNavigationn .menu-bar > ul{
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    gap: 16px;
-    padding: 0 12px;
-  }
-}
-
-/* ===== REDUIRE ESPACE BARRE NOIRE ===== */
-
-/* ===== ALIGNER LA BARRE NOIRE AVEC LA CATEGORIE (ex: Femmes) ===== */
-
-.menu-bar ul li .sub-menu-1 ul{
-  display: flex;
-
-  /* 🔥 Aligne au début du parent au lieu du centre */
-  justify-content: flex-start;
-
-  /* espace entre les items */
-  gap: 15px;
-
-  /* IMPORTANT : supprime marge auto qui recentre */
-  margin-left: 0;
-  padding-left: 145px;   /* ajuste si tu veux coller pile avec "Femmes" */
-  
-}
-
-/* compacte chaque item */
-.menu-bar ul li .sub-menu-1 ul li{
-  flex: 0 0 auto;
-  padding: 4px 6px;          /* réduit la largeur interne */
-}
-
-/* réduit padding du lien */
-.menu-bar ul li .sub-menu-1 ul li a{
-  padding: 6px 8px;
-  white-space: nowrap;
-}
-
-/* =========================
-   FIX "image 2"
-   1) La barre noire est CADRÉE sur le menu
-   2) Les sous-catégories commencent sous "Femmes"
-   ========================= */
-
-/* Le conteneur de référence pour les absolute */
-.maNavigationn .menu-bar{
-  position: relative; /* IMPORTANT */
-}
-
-/* (Optionnel mais recommandé) : le menu principal n'est pas centré,
-   il démarre à gauche (comme ton image 2) */
-.maNavigationn .menu-bar > ul{
-  justify-content: flex-start !important; /* au lieu de center */
-  gap: 30px;                 /* garde ton spacing */
-  padding: 0 18px;           /* marge identique pour le menu ET la barre noire */
-}
-
-/* Annule l'ancien flex:1 sur les <li> (sinon ça étire et fausse l’alignement) */
-.maNavigationn .menu-bar > ul > li{
-  flex: 0 0 auto !important;
-}
-
-/* Barre noire (niveau 1) : cadrée sur la largeur de .menu-bar */
-.maNavigationn .menu-bar > ul > li > .sub-menu-1{
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;      /* 100% DU .menu-bar, pas du viewport */
-  margin-top: 0 !important;
-  top: 100%;
-}
-
-/* Liste des sous-catégories dans la barre noire :
-   commence exactement au même "start" que le menu principal */
-.maNavigationn .menu-bar > ul > li > .sub-menu-1 > ul{
-  justify-content: flex-start !important;
-  padding-left: 18px !important; /* même padding que le menu principal */
-  margin-left: 0 !important;
-  gap: 15px;
-}
-
-/* Supprime ton ancien hack (padding-left:145px) en le neutralisant */
-.menu-bar ul li .sub-menu-1 ul{
-  padding-left: 18px !important;
-}
-
-/* Petites optimisations visuelles (facultatif) */
-.maNavigationn .menu-bar > ul > li > .sub-menu-1 > ul > li{
-  flex: 0 0 auto !important;
-  padding: 6px 10px !important;
-}
-.maNavigationn .menu-bar > ul > li > .sub-menu-1 > ul > li > a{
-  white-space: nowrap;
 }
