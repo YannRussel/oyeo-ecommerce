@@ -384,3 +384,108 @@
     transition: all 0.2s ease-out;
   }
 }
+
+/* ================== FIX ALIGNEMENT MENU PRINCIPAL (pas de 2e ligne) ================== */
+.menu-bar ul{
+  flex-wrap: nowrap !important;         /* ✅ interdit le retour à la ligne */
+  overflow-x: auto !important;          /* ✅ si trop d'items => scroll horizontal */
+  overflow-y: hidden !important;
+  align-items: center !important;       /* ✅ tous sur la même hauteur */
+  white-space: nowrap !important;
+}
+
+.menu-bar ul li{
+  display: flex !important;
+  align-items: center !important;       /* ✅ corrige le “décalage” vertical */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.menu-bar ul li a{
+  display: flex !important;
+  align-items: center !important;
+  height: 47px;                         /* ✅ même hauteur que .menu-bar */
+  line-height: 1 !important;            /* ✅ stop baseline weird */
+  padding: 0 10px !important;
+}
+
+/* (optionnel) scrollbar discret */
+.menu-bar ul::-webkit-scrollbar{ height: 6px; }
+.menu-bar ul::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.18); border-radius: 10px; }
+
+/* ================== FIX BARRE NOIRE SOUS-CATEGORIES (fine) ================== */
+.menu-bar ul li:hover .sub-menu-1{
+  top: 100%;
+}
+
+/* ✅ Barre fine : petite hauteur + contenu centré */
+.menu-bar ul li .sub-menu-1 ul{
+  max-width: 1500px;
+  margin: 0 auto;
+
+  padding: 0 18px !important;           /* ✅ retire l’épaisseur */
+  min-height: 36px;                     /* ✅ petite barre */
+  gap: 10px 14px !important;
+  align-items: center !important;
+
+  flex-wrap: wrap !important;           /* ✅ si beaucoup => retour ligne */
+}
+
+.menu-bar ul li .sub-menu-1 ul li{
+  padding: 0 !important;
+}
+
+.menu-bar ul li .sub-menu-1 ul li a{
+  padding: 0 10px !important;
+  height: 36px;                         /* ✅ même hauteur que la barre */
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* ================== BARRE NOIRE SOUS-CATEGORIES VERSION FINE ================== */
+
+.menu-bar ul li:hover .sub-menu-1{
+  top: 100%;
+  padding: 0 !important;
+}
+
+/* Barre noire compacte */
+.menu-bar ul li .sub-menu-1 ul{
+  max-width: 1500px;
+  margin: 0 auto;
+
+  padding: 0 18px !important;   /* uniquement horizontal */
+  height: 34px;                 /* ✅ hauteur fine */
+  
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  flex-wrap: nowrap;            /* pas de double ligne */
+  overflow-x: auto;             /* si beaucoup => scroll */
+}
+
+/* Items */
+.menu-bar ul li .sub-menu-1 ul li{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Liens */
+.menu-bar ul li .sub-menu-1 ul li a{
+  height: 34px;                 /* même hauteur que la barre */
+  display: flex;
+  align-items: center;
+  padding: 0 10px !important;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Scrollbar discret */
+.menu-bar ul li .sub-menu-1 ul::-webkit-scrollbar{
+  height: 4px;
+}
+.menu-bar ul li .sub-menu-1 ul::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
