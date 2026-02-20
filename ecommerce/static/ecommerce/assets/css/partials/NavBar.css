@@ -1,188 +1,86 @@
-/* ============================================================
-   NAVBAR CONTAINER
-   ============================================================ */
+/* =========================================================
+   COMPORTEMENT "IMAGE 2" (barre noire cadrée + scroll si besoin)
+   ========================================================= */
 
-.maNavigationn {
-    background: #ffffff;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+/* 1) On cadre le menu et la barre sur la même largeur */
+.maNavigationn .menu-bar{
+  position: relative !important;
+  max-width: 1320px;        /* ajuste: 1200 / 1280 / 1400 */
+  margin: 0 auto !important; /* centre le bloc */
+  padding: 0 18px;          /* marge intérieure */
 }
 
-.maNavigationn .menu-bar {
-    position: relative; /* IMPORTANT pour cadrer la barre noire */
-    width: 100%;
+/* Le UL principal reste dans le cadre */
+.maNavigationn .menu-bar > ul{
+  padding: 0 !important;
+  margin: 0 !important;
+  justify-content: flex-start !important;  /* comme ton exemple */
 }
 
-/* ============================================================
-   MENU PRINCIPAL (Femmes, Hommes...)
-   ============================================================ */
-
-.maNavigationn .menu-bar > ul {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 28px;
-    list-style: none;
-    margin: 0;
-    padding: 0 18px;
+/* 2) Barre noire (niveau 1) : même cadre que le menu */
+.menu-bar ul li .sub-menu-1{
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 100% !important;
+  width: 100% !important;         /* 100% du .menu-bar cadré */
+  background: #111 !important;    /* barre noire */
+  padding: 0 !important;
+  margin-top: 0 !important;
+  border-left: 0 !important;
+  z-index: 9999 !important;
 }
 
-.maNavigationn .menu-bar > ul > li {
-    position: relative;
-    flex: 0 0 auto;
-}
+/* 3) Sous-catégories : une ligne + scroll horizontal si trop */
+.menu-bar ul li .sub-menu-1 ul{
+  display: flex !important;
+  flex-wrap: nowrap !important;     /* ✅ reste sur 1 ligne */
+  align-items: center !important;
+  justify-content: flex-start !important;
 
-.maNavigationn .menu-bar > ul > li > a,
-.desktop_sousCategorie {
-    text-decoration: none;
-    color: #222;
-    font-weight: 500;
-    padding: 14px 0;
-    display: inline-block;
-    transition: color 0.2s ease;
-}
+  gap: 22px !important;
+  padding: 12px 18px !important;   /* même “air” que ton image */
+  margin: 0 !important;
 
-.maNavigationn .menu-bar > ul > li > a:hover {
-    color: #0d6efd;
-}
-
-/* ============================================================
-   SOUS-MENU NIVEAU 1 (BARRE NOIRE)
-   ============================================================ */
-
-.sub-menu-1 {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    width: 100%;
-    background: #000814;
-    padding: 8px 0;
-    display: none;
-    z-index: 999;
-}
-
-/* affichage au hover */
-.maNavigationn .menu-bar > ul > li:hover > .sub-menu-1 {
-    display: block;
-}
-
-/* Liste des sous-catégories */
-
-.sub-menu-1 > ul {
-    display: flex;
-    flex-wrap: wrap;            /* retour ligne si trop d’items */
-    row-gap: 6px;
-    column-gap: 16px;
-    list-style: none;
-    margin: 0;
-    padding: 8px 18px;
-    max-width: 100%;
-    overflow: hidden;
+  overflow-x: auto !important;     /* ✅ si beaucoup d’items */
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
 /* Items */
-
-.sub-menu-1 > ul > li {
-    flex: 0 0 auto;
-    max-width: 200px;
-    padding: 6px 8px;
+.menu-bar ul li .sub-menu-1 ul li{
+  flex: 0 0 auto !important;
+  width: auto !important;
+  padding: 0 !important;
 }
 
-.sub-menu-1 > ul > li > a {
-    display: block;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+/* Liens : pas de retour ligne, propre */
+.menu-bar ul li .sub-menu-1 ul li a{
+  display: inline-block !important;
+  color: #fff !important;
+  white-space: nowrap !important;  /* ✅ reste propre */
+  text-decoration: none !important;
+  font-size: 15px !important;
+  opacity: .95;
 }
 
-.sub-menu-1 > ul > li > a:hover {
-    color: #0d6efd;
+/* Hover (optionnel) */
+.menu-bar ul li .sub-menu-1 ul li a:hover{
+  opacity: 1;
+  text-decoration: underline;
 }
 
-/* ============================================================
-   SOUS-MENU NIVEAU 2 (MEGA MENU)
-   ============================================================ */
-
-.sub-menu-2 {
-    position: absolute;
-    left: 0;
-    top: 100%;
-    background: #ffffff;
-    width: 100%;
-    display: none;
-    padding: 20px;
-    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+/* 4) IMPORTANT: on neutralise TON ancien style qui met en colonne à gauche */
+@media screen and (max-width: 1390px){
+  .menu-bar ul li .sub-menu-1 ul{
+    display: flex !important;
+    border-left: 0 !important;
+  }
 }
-
-.sub-menu-1 li:hover > .sub-menu-2 {
-    display: block;
-}
-
-.sub-menu-2 .row {
-    margin: 0;
-}
-
-.sub-menu-2 h6 {
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.sub-menu-2 p {
-    margin: 4px 0;
-}
-
-.sub-menu-2 a {
-    text-decoration: none;
-    color: #333;
-    font-size: 13px;
-}
-
-.sub-menu-2 a:hover {
-    color: #0d6efd;
-}
-
-/* Cartes images */
-
-.image_navbar {
-    height: 80px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 6px;
-}
-
-/* ============================================================
-   RESPONSIVE MOBILE
-   ============================================================ */
-
-@media (max-width: 992px) {
-
-    /* Menu principal scroll horizontal */
-    .maNavigationn .menu-bar > ul {
-        overflow-x: auto;
-        gap: 18px;
-        padding: 0 12px;
-        scrollbar-width: thin;
-    }
-
-    /* Sous-catégories scroll horizontal */
-    .sub-menu-1 > ul {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        gap: 12px;
-        padding: 10px 12px;
-    }
-
-    .sub-menu-1 > ul > li {
-        flex: 0 0 auto;
-        max-width: none;
-    }
+@media screen and (max-width: 980px){
+  .menu-bar ul li .sub-menu-1 ul{
+    display: flex !important;
+    border-left: 0 !important;
+  }
 }
