@@ -58,27 +58,24 @@
             <!-- Liens gauche -->
             <div class="lienshaut">
                 <a href="#">
-                    <i class="fas fa-download" aria-hidden="true"></i> <span class="text">Télécharger
+                     <span class="text">Télécharger
                         l'application</span>
                 </a>
                 <a href="#" class="text">Vendez sur Oyéo</a>
-                <a href="#" class="text">Guide des tailles</a>
+
             </div>
 
-            <!-- Bloc central : livraison -->
-            <div id="livraison-bloc" class="livraison-bloc">
-                Livraison gratuite à partir de 50 €
-            </div>
+
 
             <!-- Bloc droit : service client, langue, devise -->
             <div class="d-flex align-items-center gap-3">
                 <a href="tel:+123456789" class="service-client">
-                    <i class="fas fa-phone"></i> <span class="text">Service client : 06 521 57 58</span>
+                     <span class="text">Service client : 06 521 57 58</span>
                 </a>
 
                 <!-- Devise -->
                 <div class="devise-choix d-flex align-items-center">
-                    <select id="select-devise" class="form-select form-select-sm" style="width: 80px;">
+                    <select id="select-devise" class="form-select form-select-sm" style="width: 80px; background-image: none; border: none; box-shadow: none; outline: none;">
                         <option value="EUR"{% if request.GET.devise == "EUR" %} selected{% endif %}>EUR (€)</option>
                         <option value="XAF"{% if request.GET.devise == "XAF" %} selected{% endif %}>FCFA</option>
                     </select>
