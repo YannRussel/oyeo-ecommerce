@@ -1,27 +1,28 @@
 /**********************************************
 ************************ TOP BAR **************
 ***********************************************/
+
 .topbar {
-  background-color: rgba(13, 195, 250, 0.082);
-  color: gray;
+  background-color: #192232 !important;
+  color: #ffffff !important;
   font-size: .8rem;
 }
 
 .topbar .service-client {
-  color: #040718;
+  color: #ffffff !important;
   text-decoration: none;
   transition: 0.5s;
 }
 
 .topbar .lienshaut a {
-  color: #040718;
+  color: #ffffff !important;
   text-decoration: none;
   transition: 0.5s;
 }
 
 .topbar .lienshaut a span,
 .service-client span {
-  color: #040718;
+  color: #ffffff !important;
 }
 
 .topbar .lienshaut a:nth-child(2) {
@@ -35,11 +36,17 @@
   /* text-decoration: underline; */
 }
 .topbar #select-devise{
-    background-color: rgba(13, 195, 250, 0);
+    background-color: rgba(13, 195, 250, 0) !important;
     border: none;
     padding-left: 10px;
     padding-right: 14px;
     padding-top: 5px;
+    color: #ffffff !important;
+}
+
+/* force white text for options too */
+.topbar #select-devise option {
+    color: #000000; /* some browsers ignore color on options; keep default black for legibility */
 }
 
 .livraison-bloc {
@@ -53,8 +60,8 @@
 @media screen and (max-width : 950px) {
   /*=========== topbar ============*/
   .topbar {
-    background-color: rgba(13, 195, 250, 0.082);
-    color: gray;
+    background-color: #192232 !important;
+    color: #ffffff !important;
     font-size: .8rem;
   }
 
