@@ -7,6 +7,21 @@
 
 {% block content %}
 
+    <style>
+        /* Force override slider arrows */
+        .slider-wrapper .nav-arrow {
+            font-size: 1.2rem !important;
+            width: 35px !important;
+            height: 35px !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 50% !important;
+            line-height: 1 !important;
+        }
+    </style>
+
     <!-- CROUSSEL  -- SLIDER  -->
     <!-- mon  -->
 <div class="slider-wrapper">
@@ -44,12 +59,14 @@
     <button class="nav-arrow prev-arrow btn-prev">❮</button>
     <button class="nav-arrow next-arrow btn-next">❯</button>
 
-    <!-- points -->
+    <!-- points : retiéres -->
+    <!--
     <div class="slider-dots">
         {% for img in images %}
             <button class="dot-button {% if forloop.first %}active-dot{% endif %}"></button>
         {% endfor %}
     </div>
+    -->
 </div>
     <!-- SYSTEME DE PAIEMENT ET DETAIL  -->
 
