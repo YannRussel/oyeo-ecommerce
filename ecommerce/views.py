@@ -318,7 +318,7 @@ def product_detail(request, slug):
         'product': product,
         'is_favorited': is_favorited,
     }
-    return render(request, 'ecommerce/product_detail.html', context)
+    return render(request, 'ecommerce/produit_detail.html', context)
 
 
 # ------------------------

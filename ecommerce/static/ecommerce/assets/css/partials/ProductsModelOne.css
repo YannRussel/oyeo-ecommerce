@@ -165,7 +165,7 @@ color: var(--primary);
 
 /* Cœur = contour + remplissage */
 .fav-icon path {
-  /* transition: fill 0.4s ease; */
+  transition: fill 0.4s ease;
   fill: transparent;       /* vide par défaut */
   stroke: var(--primary) /* #e86429; */ ;        /* contour tomate */
   stroke-width: 2;
@@ -175,6 +175,13 @@ color: var(--primary);
 .fav-icon:hover path {
   fill: var(--primary) /* #e86429 */;
 }
+
+/* ETAT FAVORIS ACTIF (classe ajoutée par JS ou Django) */
+.fav-icon.favorited path {
+  fill: var(--primary) !important;
+  stroke: var(--primary) !important;
+}
+
 
 /* image */
 .img-wrap { width:100%; height:320px; overflow:hidden; background:#f7f7f7; position:relative; }

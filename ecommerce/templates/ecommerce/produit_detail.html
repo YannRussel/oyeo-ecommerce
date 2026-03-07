@@ -1973,7 +1973,11 @@
             <div class="produit-grid-categorie">
                 <div class="product-card">
                     <span class="badge">Vegetable</span>
-                    <svg class="fav-icon" viewBox="0 0 24 24" width="28" height="28">
+                    <!-- Dynamic Favorite Button for Main Product -->
+                    <svg class="fav-icon {% if is_favorited %}favorited{% endif %}" 
+                         viewBox="0 0 24 24" width="28" height="28"
+                         data-product-id="{{ product.pk }}"
+                         role="button" tabindex="0">
                         <path
                             d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
                             stroke="#e86429" fill="transparent" stroke-width="2" />
@@ -2912,6 +2916,17 @@
 
 
     </script>
+    
+    <!-- FAVORIS SCRIPT -->
+    <script>
+        // Variables globales pour le script favorites.js
+        window.USER_IS_AUTHENTICATED = {{ user.is_authenticated|yesno:"true,false" }};
+        window.CSRF_TOKEN = "{{ csrf_token }}";
+    </script>
+    <!-- Inclure le script favorites.js -->
+    <script src="{% static 'ecommerce/assets/js/favorites.js' %}"></script>
+    <!-- Charger static si pas déjà fait en haut -->
+    {% load static %}
 
 
 </body>

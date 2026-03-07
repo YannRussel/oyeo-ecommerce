@@ -28,7 +28,7 @@
 
           <!-- SVG favori : on a supprimé le compteur -->
           <svg
-            class="fav-icon{% if user_favorites and p.pk in user_favorites %} favorited{% endif %}"
+            class="fav-icon {% if user_favorites and p.pk in user_favorites %}favorited{% endif %}"
             data-product-id="{{ p.pk }}"
             viewBox="0 0 24 24"
             width="28" height="28"
@@ -40,10 +40,10 @@
             <path
               d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
               stroke="#e86429"
-              fill="{% if user_favorites and p.pk in user_favorites %}#007bff{% else %}transparent{% endif %}"
+              fill="transparent"
               stroke-width="2"
               stroke-linecap="round"
-              stroke-linejoin="round"/>
+              stroke-linecap="round"/>
           </svg>
 
           <div class="img-wrap">
