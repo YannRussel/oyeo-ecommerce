@@ -1,0 +1,193 @@
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% load currency_tags %}
+
+{% block title %}{{ section.name }} - Oyéo{% endblock %}
+
+{% block extra_css %}
+  <!-- Reuse structure and styles from categorie.html -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ResetAll.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/Color.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/FontSizeAll.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/WidthAll.css' %}">
+  
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/TopBar.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/MiddleBar.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/NavBar.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/Footer.css' %}">
+  
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ProductsModelOne.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/Categorie.css' %}">
+  
+  <style>
+      .container_ > .d-flex {
+        justify-content: flex-start !important;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+      }
+      .produit-grid-categorie {
+         /* Ensure grid items behave nicely */
+         margin-bottom: 20px;
+      }
+      .pagination {
+          justify-content: center;
+          margin-top: 2rem;
+      }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">{{ section.name }}</h1>
+    
+    {% if page_obj %}
+        <div class="d-flex justify-content-start align-items-stretch flex-wrap gap-4">
+            {% for ps in page_obj %}
+                {% with product=ps.product %}
+                <div class="produit-grid-categorie">
+                    <div class="product-card" data-product-id="{{ product.pk }}">
+                      <!-- Badge -->
+                      {# If section has specific logic for badges, used here. Or reuse product category #}
+                      <span class="badge">
+                        {{ product.primary_category.name|default:section.name }}
+                      </span>
+            
+                      <!-- Favorite Icon -->
+                      {# Check favs #}
+                      <svg class="fav-icon {% if product.pk in user_favorites %}favorited{% endif %}"
+                           viewBox="0 0 24 24" width="28" height="28"
+                           data-product-id="{{ product.pk }}" role="img" aria-hidden="true"
+                           onclick="toggleFavorite(event, '{{ product.pk }}')">
+                        <path
+                          d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                          stroke="#e86429" fill="{% if product.pk in user_favorites %}#e86429{% else %}transparent{% endif %}" stroke-width="2" />
+                      </svg>
+            
+                      <!-- Image -->
+                      <div class="img-wrap">
+                        <a href="{{ product.get_absolute_url }}">
+                            {% if product.prefetched_main_images %}
+                              <img src="{{ product.prefetched_main_images.0.image.url }}" alt="{{ product.name }}">
+                            {% elif product.images.first %}
+                              <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                              <img src="{% static 'ecommerce/ressources/img/fallback.jpg' %}" alt="Image indisponible">
+                            {% endif %}
+                        </a>
+                      </div>
+            
+                      <div class="card-body">
+                        <span class="brand">{% if product.brand %}{{ product.brand.name }}{% endif %}</span>
+            
+                        <a href="{{ product.get_absolute_url }}" class="lienTitleproduct" title="{{ product.name }}">
+                          <h3 class="product-title">{{ product.name }}</h3>
+                        </a>
+            
+                        <div class="rating">
+                          {% if product.rating_count %}
+                            <span style="color: gold;">★</span> {{ product.rating_value }} ({{ product.rating_count }})
+                          {% else %}
+                            <span class="text-muted">—</span>
+                          {% endif %}
+                        </div>
+            
+                        <div class="by-text">
+                          <span class="by">by</span>
+                          <span class="oye">{{ product.seller|default:"Oyeo" }}</span>
+                        </div>
+            
+                        <div class="product-footer">
+                          <div class="price-group">
+                            <span class="price">
+                                {% if product.discount_price %}
+                                    {{ product.discount_price|convert_price:request.currency }} 
+                                    {% if request.currency == 'XAF' %}FCFA{% else %}€{% endif %}
+                                {% else %}
+                                    {{ product.price|convert_price:request.currency }}
+                                    {% if request.currency == 'XAF' %}FCFA{% else %}€{% endif %}
+                                {% endif %}
+                            </span>
+                            {% if product.discount_price %}
+                                <span class="old-price">
+                                    {{ product.price|convert_price:request.currency }}
+                                    {% if request.currency == 'XAF' %}FCFA{% else %}€{% endif %}
+                                </span>
+                            {% endif %}
+                          </div>
+                          
+                          <div class="cart-btn-wrap">
+                            <button class="cart-btn" aria-label="Ajouter au panier">
+                                <img src="{% static 'ecommerce/ressources/icons/icon-cart.svg' %}" alt="panier" width="20">
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Précédent</a></li>
+            {% endif %}
+            
+            {% for i in page_obj.paginator.page_range %}
+              {% if page_obj.number == i %}
+              <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+              {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Suivant</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+        {% endif %}
+
+    {% else %}
+        <div class="alert alert-info">Aucun produit dans cette section pour le moment.</div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function toggleFavorite(event, productId) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        fetch("{% url 'ecommerce:toggle_favorite' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams({ product_id: productId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "added") {
+                event.target.closest('svg').querySelector('path').setAttribute("fill", "#e86429");
+                event.target.closest('svg').classList.add("favorited");
+            } else if (data.status === "removed") {
+                event.target.closest('svg').querySelector('path').setAttribute("fill", "transparent");
+                event.target.closest('svg').classList.remove("favorited");
+            } else if (data.status === "unauthenticated") {
+                alert("Veuillez vous connecter pour gérer vos favoris.");
+                window.location.href = "{% url 'ecommerce:vue-inscription' %}";
+            }
+        })
+        .catch(err => console.error(err));
+    }
+</script>
+{% endblock %}
