@@ -182,3 +182,4 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 # DEFAULTS
 # -------------------------------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGIN_URL = 'ecommerce:vue-inscription'
