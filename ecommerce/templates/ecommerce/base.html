@@ -107,12 +107,56 @@
                 </a>
 
                 <!-- Devise -->
-                <div class="devise-choix d-flex align-items-center">
-                    <select id="select-devise" class="form-select form-select-sm" style="width: 80px; background-image: none; border: none; box-shadow: none; outline: none;">
-                        <option value="EUR"{% if request.GET.devise == "EUR" %} selected{% endif %}>EUR (€)</option>
-                        <option value="XAF"{% if request.GET.devise == "XAF" %} selected{% endif %}>FCFA</option>
-                    </select>
+                <div class="devise-choix dropdown">
+                    <button class="btn btn-link text-white text-decoration-none dropdown-toggle p-0" type="button" id="deviseDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: inherit; box-shadow: none;">
+                        {% if request.GET.devise == "XAF" %}FCFA{% else %}EUR (€){% endif %}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="deviseDropdown" style="min-width: auto;">
+                        {% if request.GET.devise == "XAF" %}
+                            <li><a class="dropdown-item" href="#" onclick="setDevise('EUR'); return false;">EUR (€)</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="#" onclick="setDevise('XAF'); return false;">FCFA</a></li>
+                        {% endif %}
+                    </ul>
                 </div>
+                <script>
+                    function setDevise(d) {
+                        const u = new URL(window.location.href);
+                        u.searchParams.set('devise', d);
+                        window.location.href = u.toString();
+                    }
+                </script>
+                <style>
+                    /* Show dropdown on hover without clicking */
+                    .devise-choix {
+                        position: relative;
+                        padding-bottom: 2px; /* Connects hover area to menu */
+                    }
+                    .devise-choix:hover .dropdown-menu {
+                        display: block;
+                        margin-top: 0;
+                    }
+                    /* Background matching TopBar for seamless look + Z-index for visibility */
+                    .devise-choix .dropdown-menu {
+                        background-color: #192232 !important; 
+                        border: none !important;
+                        box-shadow: none !important;
+                        padding: 0;
+                        z-index: 9999;
+                    }
+                    /* Text styling */
+                    .devise-choix .dropdown-item, 
+                    .devise-choix .btn {
+                        color: #ffffff !important;
+                        background-color: transparent !important;
+                        opacity: 1 !important;
+                        padding: 5px 10px; /* Restore padding for clickability */
+                    }
+                    /* Slight hover effect for items */
+                    .devise-choix .dropdown-item:hover {
+                        background-color: rgba(255, 255, 255, 0.1) !important;
+                    }
+                </style>
             </div>
         </div>
     </div>
