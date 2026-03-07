@@ -7,6 +7,8 @@ urlpatterns = [
     # Exemple de route
     path('run-migrations/', views.run_migrations, name='run_migrations'),
     path('', views.acceuil, name='acceuil-site'),
+    path('search/', views.search_view, name='search'),
+    path('search/autocomplete/', views.search_autocomplete, name='search_autocomplete'),
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
     path('api/menu/', views.menu_api, name='menu_api'),
     path('sections/<slug:slug>/', views.section_list, name='section_list'),

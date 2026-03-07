@@ -238,8 +238,8 @@
                         </a>
                     </div>
 
-                    {# Search form : method GET, conserve classes et structure — valeur préremplie depuis request.GET.q #}
-                    <form class="blocsearch " action="" method="get">
+                    {# Search form : method GET #}
+                    <form class="blocsearch" action="{% url 'ecommerce:search' %}" method="get" style="position: relative;">
                         <div class="input-group">
                             <input
                               type="text"
@@ -250,6 +250,7 @@
                               id="searchInput"
                               name="q"
                               value="{{ request.GET.q|default:'' }}"
+                              autocomplete="off"
                             />
                             <button class="btn border" id="btnSearch" type="submit">
                                 <!-- inline SVG search icon (outline style) -->
@@ -259,6 +260,8 @@
                                 </svg>
                             </button>
                         </div>
+                        <!-- Autocomplete Results Container -->
+                        <div id="searchResults" class="list-group position-absolute w-100 shadow-sm" style="top: 100%; z-index: 1050; display: none; background: white; border-radius: 0 0 8px 8px; max-height: 400px; overflow-y: auto;"></div>
                     </form>
 
                     <div class="actions" aria-hidden="false">
@@ -472,5 +475,90 @@
 
     
 
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("searchInput");
+      const resultsContainer = document.getElementById("searchResults");
+      let searchTimeout;
+  
+      if (searchInput && resultsContainer) {
+        searchInput.addEventListener("input", function () {
+          const query = this.value.trim();
+          
+          clearTimeout(searchTimeout);
+          
+          if (query.length < 2) {
+            resultsContainer.style.display = "none";
+            resultsContainer.innerHTML = "";
+            return;
+          }
+  
+          searchTimeout = setTimeout(() => {
+            fetch(`{% url 'ecommerce:search_autocomplete' %}?q=${encodeURIComponent(query)}`)
+              .then(response => {
+                  if (!response.ok) throw new Error("Network response was not ok");
+                  return response.json();
+              })
+              .then(data => {
+                resultsContainer.innerHTML = "";
+                
+                if (data.length > 0) {
+                  data.forEach(item => {
+                    const a = document.createElement("a");
+                    a.href = item.url;
+                    a.className = "list-group-item list-group-item-action d-flex align-items-center gap-2";
+                    a.style.cursor = "pointer";
+  
+                    // Image ou icône
+                    let iconHtml = '';
+                    if (item.image) {
+                        iconHtml = `<img src="${item.image}" alt="" style="width: 40px; height: 40px; object-fit: contain;">`;
+                    } else {
+                        iconHtml = `<div class="bg-light d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; border-radius: 4px;"><i class="fa-solid fa-magnifying-glass text-muted"></i></div>`;
+                    }
+                    
+                    // Prix si présent
+                    let priceHtml = '';
+                    if (item.price) {
+                        priceHtml = `<span class="fw-bold ms-auto text-success" style="font-size: 0.9rem;">${item.price}</span>`;
+                    }
+                    
+                    a.innerHTML = `
+                      ${iconHtml}
+                      <div class="flex-grow-1" style="line-height: 1.2;">
+                        <span class="d-block fw-semibold text-dark" style="font-size: 0.95rem;">${item.value}</span>
+                        <small class="text-muted" style="font-size: 0.75rem;">${item.type}</small>
+                      </div>
+                      ${priceHtml}
+                    `;
+  
+                    resultsContainer.appendChild(a);
+                  });
+                  resultsContainer.style.display = "block";
+                } else {
+                  resultsContainer.innerHTML = `
+                    <div class="list-group-item text-center text-muted">
+                      <small>Aucun résultat trouvé</small>
+                    </div>
+                  `;
+                  resultsContainer.style.display = "block";
+                }
+              })
+              .catch(error => {
+                console.error("Erreur autocomplétion:", error);
+                // Fallback silencieux, on ne casse pas l'UI
+              });
+          }, 300); // délai 300ms
+        });
+  
+        // Fermer si clic dehors
+        document.addEventListener("click", function (e) {
+          if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+            resultsContainer.style.display = "none";
+          }
+        });
+      }
+    });
+    </script>
 </body>
 </html>

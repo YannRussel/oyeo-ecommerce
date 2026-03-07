@@ -1,0 +1,196 @@
+{% extends "ecommerce/base.html" %}
+{% load static %}
+{% load currency_tags %}
+{% block title %}Oyéo – Recherche : {{ query }}{% endblock %}
+
+{% block extra_css %}
+  <!-- Same CSS as category -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ResetAll.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/Color.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/FontSizeAll.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/WidthAll.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/TopBar.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/MiddleBar.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/NavBar.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/Footer.css' %}">
+  <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ProductsModelOne.css' %}">
+
+  <style>
+      .container_ > .d-flex {
+        justify-content: flex-start !important;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+      }
+      .produit-grid-categorie {
+         background: #fff;
+         border-radius: 8px;
+         overflow: hidden;
+         border: 1px solid #f0f0f0;
+         width: 250px;
+         transition: box-shadow 0.3s;
+      }
+      .produit-grid-categorie:hover {
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      .product-card {
+          padding: 10px;
+      }
+      .img-wrap {
+          height: 200px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 10px;
+          overflow: hidden;
+      }
+      .img-wrap img {
+          max-height: 100%;
+          max-width: 100%;
+          object-fit: contain;
+      }
+      .fav-icon {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
+          z-index: 5;
+          background: rgba(255,255,255,0.7);
+          border-radius: 50%;
+          padding: 3px;
+      }
+      .product-title {
+          font-size: 1rem;
+          font-weight: 600;
+          margin-bottom: 5px;
+          color: #333;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          height: 2.5em;
+      }
+      .price {
+          font-weight: bold;
+          color: #1a1a1a;
+          font-size: 1.1rem;
+      }
+  </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container_ my-3">
+        <div class="breadcrumb__links my-3">
+            <a href="{% url 'ecommerce:acceuil-site' %}">Accueil</a>
+            <span class="separator">›</span>
+            <span class="text-muted">Recherche</span>
+             <span class="separator">›</span>
+            <span class="text-primary">"{{ query }}"</span>
+        </div>
+    </div>
+
+    <div class="container_ my-3">
+        <div class="bloc-title-categorie">
+            <h4 class="page-title-categorie py-2" style="font-weight: bold;">
+                Résultats pour : "{{ query }}"
+            </h4>
+            <p>{{ products.paginator.count }} produit(s) trouvé(s)</p>
+        </div>
+    </div>
+
+    <div class="container_ my-5">
+      <div class="d-flex justify-content-start align-items-stretch flex-wrap">
+        {% for product in products %}
+          <div class="produit-grid-categorie mb-4" style="margin-right: 15px; position: relative;">
+                 
+                  <!-- SVG favori -->
+                  <svg class="fav-icon {% if product.pk in user_favorites_ids %}favorited{% endif %}"
+                     viewBox="0 0 24 24" width="30" height="30"
+                     data-product-id="{{ product.pk }}" role="img" aria-label="Ajouter aux favoris">
+                  <path
+                    d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
+                    stroke="#e86429" fill="transparent" stroke-width="2" />
+                </svg>
+
+             <div class="product-card">
+                 <a href="{{ product.get_absolute_url }}" style="text-decoration: none;">
+                  <div class="img-wrap">
+                    {% if product.thumbnail %}
+                         <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        {# Fallback si pas de thumbnail, chercher dans images #}
+                         {% with img=product.images.first %}
+                             {% if img %}
+                                <img src="{{ img.image.url }}" alt="{{ product.name }}">
+                             {% else %}
+                                <img src="{% static 'ecommerce/ressources/img/logo-oyeo.png' %}" alt="Placeholder">
+                             {% endif %}
+                         {% endwith %}
+                    {% endif %}
+                  </div>
+                 
+                  <div class="card-body p-2">
+                    <span class="brand text-muted" style="font-size: 0.8rem;">{% if product.brand %}{{ product.brand.name }}{% endif %}</span>
+
+                    <h3 class="product-title">{{ product.name }}</h3>
+
+                    <div class="product-footer d-flex justify-content-between align-items-center mt-2">
+                      <div class="price-group">
+                        <span class="price">
+                           {{ product.current_price|convert_price:request.currency }}
+                           {% if request.currency == 'XAF' %}FCFA{% else %}€{% endif %}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                 </a>
+            </div>
+          </div>
+        {% empty %}
+          <div class="col-12 text-center py-5">
+              <h3>Aucun résultat trouvés pour "{{ query }}"</h3>
+              <p>Essayez avec d'autres mots-clés ou vérifiez l'orthographe.</p>
+          </div>
+        {% endfor %}
+      </div>
+      
+      <!-- Pagination -->
+      {% if is_paginated %}
+        <nav aria-label="Page navigation" class="mt-4">
+          <ul class="pagination request_pagination justify-content-center">
+            {% if products.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?q={{ query }}&page={{ products.previous_page_number }}">Précédent</a>
+              </li>
+            {% endif %}
+            
+            {% for num in products.paginator.page_range %}
+               {% if products.number == num %}
+                 <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+               {% else %}
+                 <li class="page-item"><a class="page-link" href="?q={{ query }}&page={{ num }}">{{ num }}</a></li>
+               {% endif %}
+            {% endfor %}
+
+            {% if products.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?q={{ query }}&page={{ products.next_page_number }}">Suivant</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+      {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'ecommerce/assets/js/favorites.js' %}"></script>
+<script>
+    // Initialize favorites visual state if needed
+    document.addEventListener("DOMContentLoaded", function () {
+         refreshFavoritesUI();
+    });
+</script>
+{% endblock %}

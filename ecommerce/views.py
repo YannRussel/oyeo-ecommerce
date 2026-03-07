@@ -445,3 +445,77 @@ def inscription(request) :
 
 def diaspora(request) :
     return render(request, 'ecommerce/diaspora.html')
+
+
+# ------------------------
+# Search Views
+# ------------------------
+def search_view(request):
+    """
+    Vue de recherche globale.
+    """
+    query = request.GET.get('q')
+    category_slug = request.GET.get('category')
+    
+    products = Product.objects.filter(is_active=True)
+    
+    if category_slug:
+        products = products.filter(primary_category__slug=category_slug)
+
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) | 
+            Q(short_description__icontains=query) |
+            Q(long_description__icontains=query)
+        ).distinct()
+    
+    paginator = Paginator(products, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'products': page_obj,
+        'query': query,
+        'page_obj': page_obj,
+    }
+    return render(request, 'ecommerce/search_results.html', context)
+
+
+def search_autocomplete(request):
+    """
+    Retourne des suggestions JSON pour l'autocomplétion.
+    """
+    from django.urls import reverse
+    
+    query = request.GET.get('q', '')
+    if len(query) < 2:
+        return JsonResponse([], safe=False)
+        
+    results = []
+    
+    # 1. Catégories
+    categories = Category.objects.filter(name__icontains=query, is_active=True)[:3]
+    for c in categories:
+        url = reverse('ecommerce:category_detail', args=[c.slug])
+        results.append({
+            'value': c.name,
+            'url': url,
+            'type': 'Categorie'
+        })
+
+    # 2. Produits
+    products = Product.objects.filter(
+        Q(name__icontains=query) | Q(short_description__icontains=query) | Q(long_description__icontains=query),
+        is_active=True
+    ).select_related('primary_category')[:5]
+    
+    for p in products:
+        results.append({
+            'value': p.name,
+            'url': p.get_absolute_url(),
+            'type': 'Produit',
+            'price': str(p.current_price() if callable(p.current_price) else p.price_current), 
+            'image': p.thumbnail.url if p.thumbnail else None
+        })
+        
+    return JsonResponse(results, safe=False)
