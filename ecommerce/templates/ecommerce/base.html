@@ -20,6 +20,7 @@
 
    
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     
 
@@ -37,7 +38,7 @@
 
     
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/Home.css' %}">
-    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/CarousselOne.css' %}">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/CarousselOne.css' %}?v=6">
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ProductsModelOne.css' %}">
     
     <!-- FAVORIS SCRIPT -->
@@ -46,9 +47,7 @@
         window.USER_IS_AUTHENTICATED = {{ user.is_authenticated|yesno:"true,false" }};
         window.CSRF_TOKEN = "{{ csrf_token }}";
         {% if user.is_authenticated %}
-            // Inject initial count from context processor or standard query
-            // Since we don't have a dedicated context processor for this count yet, 
-            // we will query it via the related manager directly in the template.
+       
             window.USER_FAVORITES_COUNT = {{ user.favorites.count }};
         {% else %}
             window.USER_FAVORITES_COUNT = 0;
