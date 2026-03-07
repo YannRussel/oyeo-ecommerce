@@ -53,10 +53,32 @@
 
     <!-- Quick global typography enforcement -->
     <style>
-        /* apply Quicksand everywhere except footer */
-        html, body, *:not(.site-footer):not(.site-footer *) {
-            font-family: 'Quicksand', sans-serif !important;
+        /* final typography enforcement: apply Quicksand but preserve footer and icon fonts */
+        body, body *:not(.site-footer):not(.site-footer *) {
+          font-family: 'Quicksand', sans-serif !important;
         }
+
+        /* Preserve footer typography */
+        .site-footer, .site-footer * {
+          font-family: "Segoe UI", Roboto, sans-serif !important;
+        }
+
+        /* Restore Font Awesome fonts for icon classes so icons render correctly */
+        .fa, .fas, .fa-solid {
+          font-family: "Font Awesome 6 Free" !important;
+          font-weight: 900 !important;
+        }
+        .far, .fa-regular {
+          font-family: "Font Awesome 6 Free" !important;
+          font-weight: 400 !important;
+        }
+        .fab, .fa-brands {
+          font-family: "Font Awesome 6 Brands" !important;
+          font-weight: 400 !important;
+        }
+
+        /* SVGs and images should remain unaffected */
+        svg, img { font-family: initial !important; }
     </style>
 </head>
 
@@ -122,9 +144,13 @@
                               name="q"
                               value="{{ request.GET.q|default:'' }}"
                             />
-                            <div class="input-group-append">
-                                <button class="btn border" id="btnSearch" type="submit"><i class="fas fa-search"></i></button>
-                            </div>
+                            <button class="btn border" id="btnSearch" type="submit">
+                                <!-- inline SVG search icon (outline style) -->
+                                <svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
                         </div>
                     </form>
 
@@ -152,7 +178,9 @@
                             </a>
                         {% endif %}
 
-                        <button id="searchbtnIcone" class="btn btn-xl btn-warning px-3 py-1"><i class="fa fa-search"></i></button>
+                        <button id="searchbtnIcone" class="btn btn-xl btn-warning px-3 py-1">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width:1em;height:1em;"><path fill="currentColor" d="M505 442.7L405.3 343c28.4-34.5 45.7-78.2 45.7-125.9C451 96.5 354.5 0 234.5 0S18 96.5 18 217.1 114.5 434.1 234.5 434.1c47.7 0 91.4-17.3 125.9-45.7l99.7 99.7c4.5 4.5 10.6 7 17 7s12.5-2.5 17-7c9.4-9.4 9.4-24.6 0-33.9z"></path></svg>
+                            </button>
                         <button id="menubtn" class="btn btn-xl btn-primary px-3 py-1">☰</button>
                     </div>
                 </div>
@@ -329,11 +357,5 @@
 
     {% block extra_js %}{% endblock %}
 
-    <!-- final global typography enforcement (ensures Quicksand even after other CSS) -->
-    <style>
-        *:not(.site-footer):not(.site-footer *) {
-            font-family: 'Quicksand', sans-serif !important;
-        }
-    </style>
 </body>
 </html>

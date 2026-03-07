@@ -75,7 +75,28 @@
   border-top-right-radius: 50px;
   border-left: none!important;
   padding: 8px 15px !important;
-  background-color:white;
+  background-color: white;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: 1; 
+  color: #ced4da; /* Exact match to border color */
+  border-color: #ced4da;
+  z-index: 5;
+  min-width: 40px;
+}
+
+#btnSearch:hover {
+  color: #6c757d; /* darker on hover */
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+}
+
+#btnSearch svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
 }
 
 
@@ -198,6 +219,10 @@ header {
   #btnSearch{
     border-bottom-right-radius: 50px;
     border-top-right-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height:1;
   }
 
 
@@ -244,6 +269,10 @@ header {
 
      border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    line-height:1;
   }
 
   .activeDesactiveSearch {

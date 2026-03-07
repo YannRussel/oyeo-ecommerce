@@ -63,11 +63,6 @@ const messagesMarketing = [
         icon: "<i class='fas fa-fire'></i>"
     },
     {
-        text: "Livraison rapide et paiement sécurisé.",
-        color: "#2a9d8f",
-        icon: "<i class='fas fa-shipping-fast'></i>"
-    },
-    {
         text: "Nos milliers de clients satisfaits !",
         color: "#f4a261",
         icon: "<i class='fas fa-smile'></i>"
