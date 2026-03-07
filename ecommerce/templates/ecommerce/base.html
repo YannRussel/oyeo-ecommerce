@@ -89,19 +89,26 @@
     <div class="topbar">
         <div class="container_n1 d-flex justify-content-between align-items-center py-1">
             <!-- Liens gauche -->
-            <div class="lienshaut">
+            <div class="lienshaut d-flex align-items-center flex-shrink-0 text-nowrap">
                 <a href="#">
-                     <span class="text">Télécharger
-                        l'application</span>
+                     <span class="text">Télécharger l'application</span>
                 </a>
-                <a href="#" class="text">Vendez sur Oyéo</a>
-
+                <a href="#" class="text ms-3">Vendez sur Oyéo</a>
             </div>
 
-
+            <!-- Scrolling Text (Marquee) -->
+            <div class="d-none d-lg-block flex-grow-1 mx-4 overflow-hidden" style="white-space: nowrap;">
+                <marquee direction="right" scrollamount="5" style="color: #ff4d4d; font-weight: 600; font-size: 0.85rem; width: 100%;">
+                    Profitez de nos offres exclusives &nbsp;&nbsp;•&nbsp;&nbsp; 
+                    Découvrez nos nouvelles tendances &nbsp;&nbsp;•&nbsp;&nbsp; 
+                    Livraison rapide &nbsp;&nbsp;•&nbsp;&nbsp; 
+                    Remboursement garanti en cas de souci &nbsp;&nbsp;•&nbsp;&nbsp; 
+                    Service client 24h/7j
+                </marquee>
+            </div>
 
             <!-- Bloc droit : service client, langue, devise -->
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3 flex-shrink-0 text-nowrap">
                 <a href="tel:+123456789" class="service-client">
                      <span class="text">Service client : 06 521 57 58</span>
                 </a>
