@@ -76,6 +76,8 @@
   color: var(--black);
   transition: 0.3s;
   white-space: nowrap;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
 }
 
 /* Ton wrapper HTML (div.navbarre_linkCategorie) — on lui donne la hauteur du menu blanc */
@@ -89,6 +91,15 @@
 .navbarre_linkCategorie > a.desktop_sousCategorie{
   display: inline-block;
   padding: 12px 6px;
+  font-family: 'Quicksand', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.desktop_Categorie_mono,
+.phone_Categorie,
+.phone_sousCategorie {
+  font-family: 'Quicksand', sans-serif !important;
+  font-weight: 700 !important;
 }
 
 /* Hover */
@@ -106,7 +117,7 @@
   width: 100%;         /* largeur du UL (pas écran) */
   top: 100%;
   margin-top: -1px;    /* ✅ COLLE (supprime la ligne/gap) */
-  background-color: var(--bg-naviguation);
+  background-color: #192232;
 }
 
 /* Sous-catégories alignées à gauche */
@@ -129,6 +140,20 @@
 .menu-bar ul li .sub-menu-1 ul li a{
   color: #fff;
   white-space: nowrap;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400; /* Regular for sub-menu items */
+}
+
+/* Ensure sub-menu 2 items are also regular */
+.sub-menu-2 a,
+.sub-menu-2 p,
+.sub-menu-2 h6 {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+} 
+
+.sub-menu-2 h6 {
+  font-weight: 600; /* Slightly bolder for headers inside sub-menu if desired, or 400 if strictly regular */
 }
 
 .menu-bar ul li .sub-menu-1 ul li a:hover{
@@ -141,7 +166,7 @@
 
 .menu-bar ul li .sub-menu-1 ul li:hover .sub-menu-2{
   background-color: #fff;
-  border-bottom: 5px solid var(--bg-naviguation);
+  border-bottom: 5px solid #192232;
   padding: 10px;
   display: block;
   position: absolute;

@@ -1,7 +1,6 @@
 
 {% extends "ecommerce/base.html" %}
 {% load static %}
-{% load cloudinary %}
 {% block title %}Oyéo – Notre page d'acceuil{% endblock %}
 
 
@@ -28,7 +27,7 @@
     {% for img in images %}
         <div class="slide-item {% if forloop.first %}active-slide{% endif %}"
             style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-                   url('{% cloudinary_url img.image %}');
+                   url('{{ img.image.url }}');
                    background-size: cover; background-position: center;">
             
             <div class="slide-content-wrapper">
@@ -537,7 +536,8 @@
 <script src="{% static 'ecommerce/assets/js/partials/NavBar.js' %}"></script>
 <script src="{% static 'ecommerce/assets/js/partials/Footer.js' %}"></script>
 <script src="{% static 'ecommerce/assets/js/partials/FiltreSlider.js' %}"></script>
-<script src="{% static 'ecommerce/assets/js/partials/FiltreList.js' %}"></script>
+<script src="{% static 'ecommerce/assets/js/partials/FiltreList.js' %}?v=1"></script>
+<script src="{% static 'ecommerce/assets/js/partials/CarousselOne.js' %}?v=2"></script>
 
 
     

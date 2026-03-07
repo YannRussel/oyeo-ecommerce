@@ -88,7 +88,7 @@
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer;
-  z-index: 5;
+  z-index: 100; /* Increased z-index to be above content wrapper */
   transition: background 0.3s;
   border-radius: 50% !important; /* Perfect circle */
 }
