@@ -98,7 +98,7 @@
 
             <!-- Scrolling Text (Marquee) -->
             <div class="d-none d-lg-block flex-grow-1 mx-4 overflow-hidden" style="white-space: nowrap;">
-                <marquee direction="right" scrollamount="5" style="color: #ff4d4d; font-weight: 600; font-size: 0.85rem; width: 100%;">
+                <marquee direction="right" scrollamount="5" style="color: #ff4d4d; font-weight: 700; font-size: 0.85rem; width: 100%; font-family: 'Quicksand', sans-serif !important;">
                     Profitez de nos offres exclusives &nbsp;&nbsp;•&nbsp;&nbsp; 
                     Découvrez nos nouvelles tendances &nbsp;&nbsp;•&nbsp;&nbsp; 
                     Livraison rapide &nbsp;&nbsp;•&nbsp;&nbsp; 
@@ -116,10 +116,10 @@
                 <!-- Devise -->
                 <div class="devise-choix dropdown">
                     <button class="btn btn-link text-white text-decoration-none dropdown-toggle p-0" type="button" id="deviseDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: inherit; box-shadow: none;">
-                        {% if request.GET.devise == "XAF" %}FCFA{% else %}EUR (€){% endif %}
+                        {% if request.currency == "XAF" %}FCFA{% else %}EUR (€){% endif %}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="deviseDropdown" style="min-width: auto;">
-                        {% if request.GET.devise == "XAF" %}
+                        {% if request.currency == "XAF" %}
                             <li><a class="dropdown-item" href="#" onclick="setDevise('EUR'); return false;">EUR (€)</a></li>
                         {% else %}
                             <li><a class="dropdown-item" href="#" onclick="setDevise('XAF'); return false;">FCFA</a></li>
@@ -132,6 +132,9 @@
                         u.searchParams.set('devise', d);
                         window.location.href = u.toString();
                     }
+                </script>
+                <script>
+                    window.CURRENT_CURRENCY = "{{ request.currency|default:'XAF' }}";
                 </script>
                 <style>
                     /* Show dropdown on hover without clicking */

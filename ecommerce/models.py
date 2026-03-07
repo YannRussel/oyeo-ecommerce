@@ -280,7 +280,7 @@ class Product(models.Model):
 
     price_current = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     price_original = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    currency = models.CharField(max_length=8, default='USD')
+    currency = models.CharField(max_length=8, default='XAF')
 
     is_active = models.BooleanField(default=True)
     stock = models.IntegerField(default=0)  # quantité disponible, si pertinent

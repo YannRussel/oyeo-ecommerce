@@ -1,5 +1,6 @@
 {% extends "ecommerce/base.html" %}
 {% load static %}
+{% load currency_tags %}
 {% block title %}Oyéo – Categorie{% endblock %}
 
 
@@ -596,9 +597,23 @@
 
             <div class="product-footer">
               <div class="price-group">
-                <span class="price">{{ product.current_price }}{% if product.currency %} {{ product.currency }}{% endif %}</span>
+                <span class="price">
+                  {{ product.current_price|convert_price:request.currency }}
+                  {% if request.currency == 'XAF' %}
+                    FCFA
+                  {% else %}
+                    €
+                  {% endif %}
+                </span>
                 {% if product.price_original %}
-                  <span class="original-price">{{ product.price_original }}{% if product.currency %} {{ product.currency }}{% endif %}</span>
+                  <span class="original-price">
+                    {{ product.price_original|convert_price:request.currency }}
+                    {% if request.currency == 'XAF' %}
+                        FCFA
+                    {% else %}
+                        €
+                    {% endif %}
+                  </span>
                 {% endif %}
               </div>
               {% if product.promo_label %}

@@ -32,6 +32,22 @@ function createCard(product) {
     const remainingText = product.remaining ? `<span class="items-left">${product.remaining} restants</span>` : '';
     const catStyle = product.categoryColor ? `background-color:${product.categoryColor}; color:white;` : '';
 
+    // Gestion Devise
+    let displayPrice = product.price;
+    let displayOldPrice = product.oldPrice;
+
+    if (window.CURRENT_CURRENCY === 'EUR') {
+        const val = parsePrice(product.price);
+        const oldVal = parsePrice(product.oldPrice);
+        
+        if (!isNaN(val)) {
+            displayPrice = (val / 655.957).toFixed(2).replace('.', ',') + " €";
+        }
+        if (!isNaN(oldVal)) {
+            displayOldPrice = (oldVal / 655.957).toFixed(2).replace('.', ',') + " €";
+        }
+    }
+
     return `
         <div class="card">
             <div class="card-image-container">
@@ -47,10 +63,10 @@ function createCard(product) {
                 <div class="info-row"><i class="fas fa-map-marker-alt"></i> ${product.location}</div>
                 <div class="price-section">
                     <div>
-                        <span class="price-new">${product.price}</span>
+                        <span class="price-new">${displayPrice}</span>
                         <div style="display:inline-block">
                             <span style="font-size:0.6rem; color:#999; display:block; line-height:1;">Valeur réelle</span>
-                            <span class="price-old">${product.oldPrice}</span>
+                            <span class="price-old">${displayOldPrice}</span>
                         </div>
                     </div>
                     ${remainingText}

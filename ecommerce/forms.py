@@ -2,9 +2,8 @@
 from django import forms
 
 CURRENCY_CHOICES = [
-    ("USD", "USD"),
-    ("EUR", "EUR"),
-    ("XAF", "XAF"),
+    ("XAF", "FCFA (XAF)"),
+    ("EUR", "Euro (EUR)"),
 ]
 
 class PreSetupForm(forms.Form):
@@ -15,7 +14,7 @@ class PreSetupForm(forms.Form):
 
     # Boutique
     shop_name = forms.CharField(label="Nom de la boutique", max_length=150)
-    currency = forms.ChoiceField(label="Devise", choices=CURRENCY_CHOICES, initial="USD")
+    currency = forms.ChoiceField(label="Devise", choices=CURRENCY_CHOICES, initial="XAF")
 
     # Catégories de base (optionnel)
     create_default_categories = forms.BooleanField(

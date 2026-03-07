@@ -63,9 +63,9 @@
 
                 <!-- Devise -->
                 <div class="devise-choix d-flex align-items-center">
-                    <select id="select-devise" class="form-select form-select-sm" style="width: 80px;">
-                        <option value="EUR">EUR (€)</option>
-                        <option value="XAF">FCFA</option>
+                    <select id="select-devise" class="form-select form-select-sm" style="width: 80px;" onchange="const u = new URL(window.location.href); u.searchParams.set('devise', this.value); window.location.href = u.toString();">
+                        <option value="XAF" {% if request.currency == 'XAF' %}selected{% endif %}>FCFA</option>
+                        <option value="EUR" {% if request.currency == 'EUR' %}selected{% endif %}>EUR (€)</option>
                     </select>
                 </div>
             </div>
