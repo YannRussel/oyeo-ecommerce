@@ -40,13 +40,19 @@
         cancelAnimationFrame(momentumID);
       }
 
-      function momentumLoop() {
+/*       function momentumLoop() {
         slider.scrollLeft += velocity;
         velocity *= 0.95;
         if (Math.abs(velocity) > 0.5) {
           momentumID = requestAnimationFrame(momentumLoop);
         }
+      } */
+      
+        function momentumLoop() {
+        // Disabled momentum for static feel
+        return;
       }
+
 
       // Flèches
       wrapper.querySelectorAll('.scroll-btn').forEach(btn => {
@@ -54,7 +60,8 @@
           cancelMomentumTracking();
           const direction = btn.classList.contains('left') ? -1 : 1;
           const cardWidth = slider.querySelector('.product-card').offsetWidth + 16;
-          slider.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+          // behavior: auto removes the smooth scrolling animation
+          slider.scrollBy({ left: direction * cardWidth, behavior: 'auto' });
         });
       });
     });

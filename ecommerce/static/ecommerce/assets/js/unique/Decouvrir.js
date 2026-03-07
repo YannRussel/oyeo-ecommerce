@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnRight.addEventListener("click", () => {
         container.scrollBy({
             left: scrollAmount,
-            behavior: "smooth"
+            behavior: "auto"
         });
     });
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnLeft.addEventListener("click", () => {
         container.scrollBy({
             left: -scrollAmount,
-            behavior: "smooth"
+            behavior: "auto"
         });
     });
 

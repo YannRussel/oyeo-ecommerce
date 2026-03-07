@@ -23,26 +23,19 @@
 
     
 
-      <!-- ============================================================================================= -->
-      <!-- **************************   STYLES GENERAUX  *********************************************** -->
-      <!-- ============================================================================================= -->
+   
       <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ResetAll.css' %}">
       <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/Color.css' %}">
       <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/FontSizeAll.css' %}">
       <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/WidthAll.css' %}">
 
-      <!-- ============================================================================================= -->
-    <!-- **************************   STYLES PAGES REPETITIVES  ************************************** -->
-    <!-- ============================================================================================= -->
+      
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/TopBar.css' %}">
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/MiddleBar.css' %}">
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/NavBar.css' %}">
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/Footer.css' %}">
 
-    <!-- ============================================================================================= -->
-    <!-- **************************   STYLES PROPRE DE LA PAGE ACTUELLE  ***************************** -->
-    <!-- ============================================================================================= -->
-    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/animate.css' %}">
+    
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/Home.css' %}">
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/CarousselOne.css' %}">
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ProductsModelOne.css' %}">
@@ -79,6 +72,50 @@
 
         /* SVGs and images should remain unaffected */
         svg, img { font-family: initial !important; }
+        /* ------------------------------------------------------------------ */
+        /* Disable animations/transitions for product cards and related items  */
+        /* Ensures all product listings render statically (no fades/zooms)    */
+        /* ------------------------------------------------------------------ */
+        .product-card, .product-card *,
+        .product-section .product-card, .product-section .card,
+        .card, .card *,
+        .img-wrap img,
+        .collection5-card, .collection5-card *,
+        .product-grid .product-card,
+        .product-grid-simple .product-card {
+          animation: none !important;
+          -webkit-animation: none !important;
+          transition: none !important;
+          -webkit-transition: none !important;
+          transform: none !important;
+        }
+
+        /* Explicitly disable hover transforms */
+        .product-card:hover,
+        .product-card:hover .img-wrap img,
+        .card:hover,
+        .collection5-card:hover .collection5-image,
+        .fav-icon:hover {
+          transform: none !important;
+          box-shadow: var(--card-shadow) !important; /* Keep original shadow or remove if desired, usually static shadow is fine */
+        }
+
+        /* Disable common animation helper classes (animate.css, old 'animated') */
+        .product-card .animate__animated, .card .animate__animated,
+        .product-card .animated, .card .animated,
+        .animate__animated, .animated {
+          animation: none !important;
+          -webkit-animation: none !important;
+          animation-duration: 0s !important;
+          animation-delay: 0s !important;
+          opacity: 1 !important;
+        }
+
+        /* Prevent transforms on product images (hover effects) */
+        .product-card img, .product-card .img-wrap img, .card img {
+          transform: none !important;
+          -webkit-transform: none !important;
+        }
     </style>
 </head>
 

@@ -549,12 +549,12 @@ span {
   object-fit: cover;
   filter: brightness(0.75);
   z-index: 1;
-  transition: transform 0.3s ease;
+  /* transition: transform 0.3s ease; */
 }
 
-.collection5-card:hover .collection5-image {
+/* .collection5-card:hover .collection5-image {
   transform: scale(1.05);
-}
+} */
 
 .collection5-overlay-bg {
   position: absolute;
