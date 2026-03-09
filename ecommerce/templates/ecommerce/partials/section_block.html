@@ -47,12 +47,12 @@
           </svg>
 
           <div class="img-wrap">
-            {% if p.prefetched_main_images %}
-                <img src="{% cloudinary_url p.prefetched_main_images.0.image %}" alt="{{ p.prefetched_main_images.0.alt_text|default:p.name }}">
+            {% if p.prefetched_main_images and p.prefetched_main_images.0.image %}
+                <img src="{{ p.prefetched_main_images.0.image.url }}" alt="{{ p.prefetched_main_images.0.alt_text|default:p.name }}">
             {% else %}
                 {% with imgs=p.images.all %}
-                    {% if imgs %}
-                        <img src="{% cloudinary_url imgs.0.image %}" alt="{{ imgs.0.alt_text|default:p.name }}">
+                    {% if imgs and imgs.0.image %}
+                        <img src="{{ imgs.0.image.url }}" alt="{{ imgs.0.alt_text|default:p.name }}">
                     {% else %}
                         <img src="{% static 'ecommerce/assets/img/fallback.jpg' %}" alt="{{ p.name }}">
                     {% endif %}
@@ -152,3 +152,5 @@
   padding: 4px 8px;
   border-radius: 999px;
   font-size: 12px;
+}
+</style>
