@@ -156,6 +156,11 @@ color: var(--primary);
   cursor: pointer;
   /* transition: transform 0.2s ease; */
   z-index: 7;
+  outline: none;
+}
+
+.fav-icon:focus {
+  outline: none;
 }
 
 /* Petit zoom au survol */

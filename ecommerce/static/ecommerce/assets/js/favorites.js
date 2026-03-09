@@ -120,9 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const added = toggleLocalFavorite(productId);
             updateIconState(productId, added);
             if (added) {
-                showNotification("Ajouté aux favoris (local)", "success");
+                // showNotification("Ajouté aux favoris (local)", "success");
             } else {
-                showNotification("Retiré des favoris (local)", "info");
+                // showNotification("Retiré des favoris (local)", "info");
             }
             // Update count from local storage
             updateHeaderFavoriteCount(getLocalFavorites().length);

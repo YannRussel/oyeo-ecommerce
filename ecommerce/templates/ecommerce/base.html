@@ -53,7 +53,7 @@
             window.USER_FAVORITES_COUNT = 0;
         {% endif %}
     </script>
-    <script src="{% static 'ecommerce/assets/js/favorites.js' %}" defer></script>
+    <script src="{% static 'ecommerce/assets/js/favorites.js' %}?v={% now 'U' %}" defer></script>
 
 
 
@@ -132,6 +132,9 @@
           -webkit-transform: none !important;
         }
     </style>
+<style>
+.fav-icon:focus, .fav-icon:active, .fav-icon:focus-visible { outline: none !important; border: none !important; box-shadow: none !important; }
+</style>
 </head>
 
 <body>

@@ -2924,7 +2924,7 @@
         window.CSRF_TOKEN = "{{ csrf_token }}";
     </script>
     <!-- Inclure le script favorites.js -->
-    <script src="{% static 'ecommerce/assets/js/favorites.js' %}"></script>
+    <script src="{% static 'ecommerce/assets/js/favorites.js' %}?v={% now 'U' %}"></script>
     <!-- Charger static si pas déjà fait en haut -->
     {% load static %}
 
