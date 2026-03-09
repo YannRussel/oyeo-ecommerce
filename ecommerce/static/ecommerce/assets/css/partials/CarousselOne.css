@@ -44,30 +44,30 @@
   position: relative;
   z-index: 10;
   text-align: left; /* Ensure left alignment by default for all devices */
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Urbanist', sans-serif;
 }
 
 .slide-content-wrapper h1 {
-  font-size: 3.5rem;
+  font-size: 2.2rem;
   font-weight: bold;
   text-align: left; /* Explicitly align h1 */
 }
 
 .slide-content-wrapper p {
-  font-size: 1.6rem;
-  margin: 20px 0px;
+  font-size: 1.1rem;
+  margin: 15px 0px;
   text-align: left; /* Explicitly align p */
 }
 
 .slide-content-wrapper .cta-btn {
-  margin-top: 1.5rem;
+  margin-top: 3.5rem; /* Increased to push buttons down */
   text-align: left; /* Explicitly align button container */
   display: flex;
   gap: 15px; /* Default gap for desktop */
 }
 
 .cta-btn button {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Urbanist', sans-serif;
   font-size: 1rem;
   padding: 12px 25px;
   min-width: 200px;
@@ -152,7 +152,7 @@
   }
 
   .slide-content-wrapper h1 {
-    font-size: 2.8rem;
+    font-size: 2.0rem;
     font-weight: bold;
   }
 
@@ -189,20 +189,20 @@
   }
 
   .slide-content-wrapper h1 {
-     font-size: 2.5rem; /* Slightly larger on tablet */
+     font-size: 1.8rem; /* Slightly larger on tablet */
      margin-bottom: 0.8rem;
      line-height: 1.2;
      width: 100%;
   }
   
   .slide-content-wrapper p {
-     font-size: 1.1rem;
+     font-size: 1rem;
      margin: 15px 0;
      max-width: 500px; /* Limit paragraph width too */
   }
 
   .cta-btn {
-     margin-top: 1.5rem;
+     margin-top: 2.5rem; /* Increased to push buttons down on tablet */
      display: flex;
      flex-direction: row; /* Keep side-by-side on tablet */
      flex-wrap: wrap; /* Allow wrapping if needed */
@@ -224,17 +224,18 @@
   }
   
   .slide-content-wrapper h1 {
-     font-size: 1.8rem;
+     font-size: 1.5rem;
      line-height: 1.1;
      margin-bottom: 1rem;
   }
   
   .slide-content-wrapper p {
-     font-size: 1rem;
+     font-size: 0.9rem;
      margin: 15px 0;
   }
 
   .cta-btn {
+     margin-top: 2rem; /* Added margin-top to push down on mobile */
      flex-direction: row; /* Allow row on small, but wrap if too small */
      flex-wrap: wrap; /* Important */
   }

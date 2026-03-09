@@ -186,11 +186,4 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'ecommerce/assets/js/favorites.js' %}?v={% now 'U' %}"></script>
-<script>
-    // Initialize favorites visual state if needed
-    document.addEventListener("DOMContentLoaded", function () {
-         refreshFavoritesUI();
-    });
-</script>
 {% endblock %}
