@@ -25,7 +25,7 @@
   display: flex !important;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch; /* Stretch wrapper to full width to allow centering inside */
   padding: 0 9%;
   box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
@@ -38,22 +38,26 @@
 
 .slide-content-wrapper {
   width: 100%;
-  max-width: 700px; /* Limit width to match screenshot layout */
-  /* Removed animation that might cause shifting/jumping */
-  /* animation: slideFadeUp 1s ease forwards; */
+  max-width: 100%; /* Take full width of the padded container to allow buttons to center */
   position: relative;
   z-index: 10;
-  text-align: left; /* Ensure left alignment by default for all devices */
-  font-family: 'Urbanist', sans-serif;
+  text-align: left; /* Ensure left alignment */
+}
+
+.wrapper-text-principal {
+  max-width: 700px; /* Constrain text width */
+  margin: 0; /* Keep it forcefully left */
 }
 
 .slide-content-wrapper h1 {
+  font-family: 'Anton', sans-serif !important;
   font-size: 2.2rem;
-  font-weight: bold;
+  font-weight: normal; /* Anton is already bold by design */
   text-align: left; /* Explicitly align h1 */
 }
 
 .slide-content-wrapper p {
+  font-family: 'Anton', sans-serif !important;
   font-size: 1.1rem;
   margin: 15px 0px;
   text-align: left; /* Explicitly align p */
@@ -61,17 +65,20 @@
 
 .slide-content-wrapper .cta-btn {
   margin-top: 3.5rem; /* Increased to push buttons down */
-  text-align: left; /* Explicitly align button container */
+  width: 100%; /* Stretch across the container */
+  text-align: center; /* Container text alignment */
   display: flex;
+  justify-content: center; /* Center the buttons inside the container */
   gap: 15px; /* Default gap for desktop */
 }
 
 .cta-btn button {
-  font-family: 'Urbanist', sans-serif;
-  font-size: 1rem;
-  padding: 12px 25px;
-  min-width: 200px;
+  font-family: 'Anton', sans-serif !important;
+  font-size: 0.85rem; /* Réduit la taille du texte */
+  padding: 10px 20px; /* Réduit la taille du bouton */
+  min-width: 180px; /* Moins large par défaut */
   margin: 0; /* Let gap handle spacing */
+  font-weight: 400; /* Anton is naturally thick */
 }
 
 .nav-arrow {
@@ -177,15 +184,15 @@
   }
 
   .wrapper-text-principal {
-     max-width: 90%; /* Wider text block */
-     margin: 0;      /* Left align container */
+     max-width: 90%; 
+     margin: 0;  /* Left align container */
   }
   
   .slide-content-wrapper {
       margin: 0 !important;
       text-align: left; /* Left align text */
       width: 100%;
-      max-width: 650px; /* Ensure wrapping on tablets matches */
+      max-width: 100%; 
   }
 
   .slide-content-wrapper h1 {
@@ -193,6 +200,7 @@
      margin-bottom: 0.8rem;
      line-height: 1.2;
      width: 100%;
+     max-width: 650px;
   }
   
   .slide-content-wrapper p {
@@ -203,10 +211,12 @@
 
   .cta-btn {
      margin-top: 2.5rem; /* Increased to push buttons down on tablet */
+     width: 100%;
      display: flex;
      flex-direction: row; /* Keep side-by-side on tablet */
      flex-wrap: wrap; /* Allow wrapping if needed */
-     align-items: center; /* Left align buttons */
+     align-items: center; 
+     justify-content: center; /* Center the buttons */
      gap: 15px;
   }
   
@@ -238,6 +248,7 @@
      margin-top: 2rem; /* Added margin-top to push down on mobile */
      flex-direction: row; /* Allow row on small, but wrap if too small */
      flex-wrap: wrap; /* Important */
+     justify-content: center; /* Center on mobile too */
   }
   
   .cta-btn button {
