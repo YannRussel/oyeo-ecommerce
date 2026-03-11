@@ -41,7 +41,7 @@
     
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/unique/Home.css' %}">
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/CarousselOne.css' %}?v=23">
-    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ProductsModelOne.css' %}?v=15">
+    <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ProductsModelOne.css' %}?v=17">
     
     <!-- FAVORIS SCRIPT -->
     <script>
@@ -136,6 +136,12 @@
     </style>
 <style>
 .fav-icon:focus, .fav-icon:active, .fav-icon:focus-visible { outline: none !important; border: none !important; box-shadow: none !important; }
+    /* Override any inline SVG presentation attributes that remained (old orange hearts) */
+    svg .fav-icon path[stroke="#e86429"], svg path[stroke="#e86429"], .fav-icon path[stroke="#e86429"] {
+      stroke: #6b6b6b !important;
+      stroke-width: 1.5 !important;
+      fill: transparent !important;
+    }
 </style>
 </head>
 

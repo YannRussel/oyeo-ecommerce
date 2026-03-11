@@ -7,9 +7,10 @@
 {% endif %}
 
 {% if section and product_sections %}
-<section class="product-section" id="section-{{ section.slug }}">
+<section class="product-section" id="section-{{ section.slug }}"
+  {% if section.slug == 'offres-du-jours' %} style="font-family: 'Anton', sans-serif !important;" {% endif %}>
   <div class="section-header">
-    <h2 class="section-title">{{ section.name }}</h2>
+    <h2 class="section-title" {% if section.slug == 'offres-du-jours' %} style="font-family: 'Anton', sans-serif !important; font-size:34px;" {% endif %}>{{ section.name }}</h2>
       {% if show_see_more and section_url %}
       <a href="{{ section_url }}" class="see-more">Voir plus</a>
     {% endif %}
@@ -44,10 +45,9 @@
             style="overflow:visible;">
             <path
               d="M12 21s-6.5-4.35-9.5-7.88C-0.5 9.5 1.5 4.5 6 4.5c2 0 4 1 6 3 2-2 4-3 6-3 4.5 0 6.5 5 3.5 8.62C18.5 16.65 12 21 12 21z"
-              stroke="#e86429"
+              stroke="#6b6b6b"
               fill="transparent"
-              stroke-width="2"
-              stroke-linecap="round"
+              stroke-width="1.5"
               stroke-linecap="round"/>
           </svg>
 
@@ -145,12 +145,12 @@
 .fav-icon:active { outline: none; }
 
 /* default path style (tomate contour) */
-.fav-icon path { fill: transparent; stroke: var(--primary); stroke-width: 2; transition: fill .22s ease, stroke .22s ease; }
-.fav-icon:hover path { fill: var(--primary); }
+.fav-icon path { fill: transparent; stroke: #6b6b6b !important; stroke-width: 1.5 !important; transition: fill .22s ease, stroke .22s ease; }
+.fav-icon:hover path { /* keep hover only as scale, no color change */ }
 
-/* favorited = bleu */
-.fav-icon.favorited path { fill: #007bff !important; stroke: #007bff !important; }
-.fav-icon.favorited:hover path { fill: #0056b3 !important; stroke: #0056b3 !important; }
+/* favorited = rouge rempli + contour noir épais */
+.fav-icon.favorited path { fill: #e51b23 !important; stroke: #000 !important; }
+.fav-icon.favorited:hover path { fill: #c8161f !important; stroke: #000 !important; }
 
 /* petite animation "pop" */
 .fav-icon.pop {

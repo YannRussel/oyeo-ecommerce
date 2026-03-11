@@ -177,21 +177,24 @@ color: var(--primary);
 
 /* Cœur = contour + remplissage */
 .fav-icon path {
-  transition: fill 0.4s ease;
+  transition: fill 0.4s ease, stroke 0.2s ease;
   fill: transparent;       /* vide par défaut */
-  stroke: var(--primary) /* #e86429; */ ;        /* contour tomate */
-  stroke-width: 2;
+  stroke: #6b6b6b !important;            /* contour gris */
+  stroke-width: 1.5 !important;         /* contour mince */
 }
 
-/* Au hover => remplissage intérieur */
-.fav-icon:hover path {
-  fill: var(--primary) /* #e86429 */;
-}
+/* Keep hover only as scale/interaction handled elsewhere; no color change on hover */
+.fav-icon:hover path { }
 
-/* ETAT FAVORIS ACTIF (classe ajoutée par JS ou Django) */
+/* Favorited state: remplissage rouge + contour noir */
 .fav-icon.favorited path {
-  fill: var(--primary) !important;
-  stroke: var(--primary) !important;
+  fill: #e51b23 !important;
+  stroke: #000 !important;
+}
+
+.fav-icon.favorited:hover path {
+  fill: #c8161f !important;
+  stroke: #000 !important;
 }
 
 
@@ -228,12 +231,12 @@ color: var(--primary);
   display: flex;
   align-items: baseline; /* aligne par baseline pour un rendu pro */
   gap: 8px;
-  white-space: nowrap;  /* interdit le retour à la ligne */
-  flex: 0 1 auto;
-  min-width: 0;
-}
-
-/* Styles pour chaque élément (conserver cohérence) */
+  .fav-icon path {
+    transition: fill 0.4s ease;
+    fill: transparent;       /* vide par défaut */
+    stroke: var(--primary);        /* contour primaire */
+    stroke-width: 2;
+  }
 .original-price {
   color:#777;
   text-decoration:line-through;
@@ -402,6 +405,40 @@ color: var(--primary);
 
 
 /* Urbanist specifically for the "Offres du jours" section */
+
+/* Apply Urbanist font to the Offres du jours section only and increase sizes */
+#section-offres-du-jours, #section-offres-du-jours * {
+  font-family: 'Anton', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#section-offres-du-jours .section-title {
+  font-family: 'Anton', sans-serif !important;
+  font-weight: 700;
+  font-size: 34px;
+  letter-spacing: 0.6px;
+}
+
+#section-offres-du-jours .product-title {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+#section-offres-du-jours .price {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+#section-offres-du-jours .brand {
+  font-family: 'Anton', sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+
 #section-offres-du-jours, #section-offres-du-jours * {
   font-family: 'Urbanist', sans-serif !important;
 }

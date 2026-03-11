@@ -165,15 +165,24 @@ color: var(--primary);
 
 /* Cœur = contour + remplissage */
 .fav-icon path {
-  transition: fill 0.4s ease;
+  transition: fill 0.4s ease, stroke 0.2s ease;
   fill: transparent;       /* vide par défaut */
-  stroke: var(--primary) /* #e86429; */ ;        /* contour tomate */
-  stroke-width: 2;
+  stroke: #6b6b6b !important;            /* contour gris */
+  stroke-width: 1.5 !important;         /* contour mince */
 }
 
-/* Au hover => remplissage intérieur */
-.fav-icon:hover path {
-  fill: var(--primary) /* #e86429 */;
+/* Hover keeps only the scale interaction; no color change */
+.fav-icon:hover path { }
+
+/* Favorited state: remplissage rouge + contour noir */
+.fav-icon.favorited path {
+  fill: #e51b23 !important;
+  stroke: #000 !important;
+}
+
+.fav-icon.favorited:hover path {
+  fill: #c8161f !important;
+  stroke: #000 !important;
 }
 
 /* image */
