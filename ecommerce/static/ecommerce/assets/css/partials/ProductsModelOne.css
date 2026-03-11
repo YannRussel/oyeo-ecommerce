@@ -409,75 +409,75 @@ color: var(--primary);
 /* Urbanist specifically for the "Offres du jours" section */
 
 /* Apply Urbanist font to the Offres du jours section only and increase sizes */
-#section-offres-du-jours, #section-offres-du-jours * {
+#section-offres-du-jours, #section-tendances-du-moment, #section-offres-du-jours * , #section-tendances-du-moment * {
   font-family: 'Anton', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#section-offres-du-jours .section-title {
+#section-offres-du-jours .section-title , #section-tendances-du-moment .section-title {
   font-family: 'Anton', sans-serif !important;
   font-weight: 700;
   font-size: 34px;
   letter-spacing: 0.6px;
 }
 
-#section-offres-du-jours .product-title {
+#section-offres-du-jours .product-title , #section-tendances-du-moment .product-title {
   font-family: 'Anton', sans-serif !important;
   font-size: 1.25rem;
   font-weight: 700;
 }
 
-#section-offres-du-jours .price {
+#section-offres-du-jours .price , #section-tendances-du-moment .price {
   font-family: 'Anton', sans-serif !important;
   font-size: 1.15rem;
   font-weight: 700;
 }
 
-#section-offres-du-jours .brand {
+#section-offres-du-jours .brand , #section-tendances-du-moment .brand {
   font-family: 'Anton', sans-serif !important;
   font-size: 0.95rem;
   font-weight: 600;
 }
 
 
-#section-offres-du-jours, #section-offres-du-jours * {
+#section-offres-du-jours, #section-tendances-du-moment, #section-offres-du-jours * , #section-tendances-du-moment * {
   font-family: 'Urbanist', sans-serif !important;
 }
 
-#section-offres-du-jours .section-title {
+#section-offres-du-jours .section-title , #section-tendances-du-moment .section-title {
   font-weight: 800 !important;
   font-size: 2rem !important;
   color: #1C2B39 !important;
 }
 
-#section-offres-du-jours .product-card,
-#section-offres-du-jours .product-card .brand,
-#section-offres-du-jours .product-card .product-title,
-#section-offres-du-jours .product-card .collection-name,
-#section-offres-du-jours .product-card .card-body p,
-#section-offres-du-jours .product-card .price,
-#section-offres-du-jours .product-card .original-price,
-#section-offres-du-jours .product-card .badge {
+#section-offres-du-jours .product-card, #section-tendances-du-moment .product-card,
+#section-offres-du-jours .product-card .brand, #section-tendances-du-moment .product-card .brand,
+#section-offres-du-jours .product-card .product-title, #section-tendances-du-moment .product-card .product-title,
+#section-offres-du-jours .product-card .collection-name, #section-tendances-du-moment .product-card .collection-name,
+#section-offres-du-jours .product-card .card-body p, #section-tendances-du-moment .product-card .card-body p,
+#section-offres-du-jours .product-card .price, #section-tendances-du-moment .product-card .price,
+#section-offres-du-jours .product-card .original-price, #section-tendances-du-moment .product-card .original-price,
+#section-offres-du-jours .product-card .badge , #section-tendances-du-moment .product-card .badge {
   font-family: 'Urbanist', sans-serif !important;
 }
 
-#section-offres-du-jours .product-card .product-title {
+#section-offres-du-jours .product-card .product-title , #section-tendances-du-moment .product-card .product-title {
   font-weight: 700 !important;
   font-size: 1.25rem !important;
 }
 
-#section-offres-du-jours .product-card .brand {
+#section-offres-du-jours .product-card .brand , #section-tendances-du-moment .product-card .brand {
   font-size: 0.95rem !important;
   font-weight: 700 !important;
 }
 
-#section-offres-du-jours .product-card .collection-name,
-#section-offres-du-jours .product-card .card-body p {
+#section-offres-du-jours .product-card .collection-name, #section-tendances-du-moment .product-card .collection-name,
+#section-offres-du-jours .product-card .card-body p , #section-tendances-du-moment .product-card .card-body p {
   font-size: 0.95rem !important;
 }
 
-#section-offres-du-jours .product-card .price {
+#section-offres-du-jours .product-card .price , #section-tendances-du-moment .product-card .price {
   font-size: 1.2rem !important;
   font-weight: 800 !important;
 }
