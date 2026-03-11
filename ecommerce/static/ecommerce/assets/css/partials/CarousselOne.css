@@ -16,7 +16,8 @@
   background-size: cover;
   background-position: center;
   color: white;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  /* soften global shadow so text doesn't appear overly bold */
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
   opacity: 0;
   visibility: hidden;
   transition: opacity 1.2s ease-in-out, visibility 1.2s;
@@ -50,16 +51,20 @@
 }
 
 .slide-content-wrapper h1 {
-  font-family: 'Anton', sans-serif !important;
+  font-family: 'Urbanist', sans-serif;
   font-size: 2.2rem;
-  font-weight: normal; /* Anton is already bold by design */
+  /* use a balanced weight for readability */
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
   text-align: left; /* Explicitly align h1 */
 }
 
 .slide-content-wrapper p {
-  font-family: 'Anton', sans-serif !important;
+  font-family: 'Urbanist', sans-serif;
   font-size: 1.1rem;
   margin: 15px 0px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
   text-align: left; /* Explicitly align p */
 }
 
@@ -73,12 +78,14 @@
 }
 
 .cta-btn button {
-  font-family: 'Anton', sans-serif !important;
-  font-size: 0.85rem; /* Réduit la taille du texte */
-  padding: 10px 20px; /* Réduit la taille du bouton */
-  min-width: 180px; /* Moins large par défaut */
+  font-family: 'Urbanist', sans-serif;
+  font-size: 0.95rem; /* légèrement plus lisible */
+  padding: 10px 20px; /* ajusté pour compacité */
+  min-width: 180px;
   margin: 0; /* Let gap handle spacing */
-  font-weight: 400; /* Anton is naturally thick */
+  font-weight: 600; /* semi-bold for readability */
+  letter-spacing: 0.4px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .nav-arrow {

@@ -141,11 +141,18 @@ color: var(--primary);
  */
 /* .product-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(16,24,40,0.08); } */
 
-/* badge */
+/* badge gender/promo */
 .product-card .badge {
-  position:absolute; top:16px; left:16px;
-  background-color:#e0f7fa; color:#00796b;
-  font-size:10px; font-weight:600; padding:4px 8px; border-radius:10px; z-index:8;
+  position:absolute; top:12px; left:12px;
+  background-color: transparent; 
+  color: #000;
+  border: 1.5px solid #E0E0E0; /* Gray border */
+  font-size: 11px; 
+  font-weight: 700; 
+  padding: 4px 12px; 
+  border-radius: 20px; 
+  z-index: 8;
+  text-transform: uppercase;
 }
 
 /* Positionnement icône favoris */
@@ -363,6 +370,8 @@ color: var(--primary);
   margin: 0 0 .25rem;
   line-height: 1.2;
 }
+
+
 .product-brand {
   font-size: .85rem;
   color: var(--muted);
@@ -380,4 +389,58 @@ color: var(--primary);
   font-size: .9rem;
   margin-left: .6rem;
 } */
+
+/* Apply Urbanist to product cards only (override global Quicksand) */
+.product-card, .product-card .brand, .product-card .product-title, .product-card .collection-name, .product-card .card-body p, .product-card .price, .product-card .original-price, .product-card .badge {
+  font-family: 'Urbanist', sans-serif !important;
+}
+
+/* Slightly moderate title weight for readability */
+.product-card .product-title {
+  font-weight: 600 !important;
+}
+
+
+/* Urbanist specifically for the "Offres du jours" section */
+#section-offres-du-jours, #section-offres-du-jours * {
+  font-family: 'Urbanist', sans-serif !important;
+}
+
+#section-offres-du-jours .section-title {
+  font-weight: 800 !important;
+  font-size: 2rem !important;
+  color: #1C2B39 !important;
+}
+
+#section-offres-du-jours .product-card,
+#section-offres-du-jours .product-card .brand,
+#section-offres-du-jours .product-card .product-title,
+#section-offres-du-jours .product-card .collection-name,
+#section-offres-du-jours .product-card .card-body p,
+#section-offres-du-jours .product-card .price,
+#section-offres-du-jours .product-card .original-price,
+#section-offres-du-jours .product-card .badge {
+  font-family: 'Urbanist', sans-serif !important;
+}
+
+#section-offres-du-jours .product-card .product-title {
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+}
+
+#section-offres-du-jours .product-card .brand {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+}
+
+#section-offres-du-jours .product-card .collection-name,
+#section-offres-du-jours .product-card .card-body p {
+  font-size: 0.95rem !important;
+}
+
+#section-offres-du-jours .product-card .price {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+}
+
 

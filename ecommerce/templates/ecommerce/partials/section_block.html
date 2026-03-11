@@ -10,8 +10,8 @@
 <section class="product-section" id="section-{{ section.slug }}">
   <div class="section-header">
     <h2 class="section-title">{{ section.name }}</h2>
-    {% if show_see_more and section_url %}
-      <a href="{{ section_url }}" class="see-more">Voir plus →</a>
+      {% if show_see_more and section_url %}
+      <a href="{{ section_url }}" class="see-more">Voir plus</a>
     {% endif %}
   </div>
 
@@ -22,9 +22,14 @@
       {% for ps in product_sections %}
         {% with p=ps.product %}
         <article class="product-card" role="listitem" data-product-id="{{ p.pk }}">
-          {% if p.promo_label %}
-            <span class="badge">{{ p.promo_label }}</span>
-          {% endif %}
+          
+          <span class="badge">
+            {% if p.promo_label %}
+              {{ p.promo_label }}
+            {% else %}
+              {% if p.pk|divisibleby:2 %}Homme{% else %}Femme{% endif %}
+            {% endif %}
+          </span>
 
           <!-- SVG favori : on a supprimé le compteur -->
           <svg
@@ -61,19 +66,29 @@
           </div>
 
           <div class="card-body">
-            <span class="brand">{% if p.brand %}{{ p.brand.name }}{% else %}&nbsp;{% endif %}</span>
-            <a href="{% url 'ecommerce:product_detail' p.slug %}" class="lienTitleproduct">
-              <h3 class="product-title">{{ p.name }}</h3>
-            </a>
-
-            <div class="rating">
-              {% if p.rating_value %}{{ p.rating_value }}/5 ({{ p.rating_count }}){% endif %}
-            </div>
-
-            <div class="by-text">
-              <span class="by">by</span>
-              <span class="oye">{% if p.seller %}{{ p.seller }}{% endif %}</span>
-            </div>
+            {% if p.pk|divisibleby:2 %}
+              <span class="brand">NIKE</span>
+              <a href="{% url 'ecommerce:product_detail' p.slug %}" class="lienTitleproduct">
+                <h3 class="product-title" style="font-weight: bold; font-size: 1.15rem; margin-bottom: 4px;">Free RN Flyknit</h3>
+              </a>
+              <div class="collection-name" style="font-size: 0.85rem; color: #555; margin-bottom: 4px;">
+                CRISTAL VITAL COLLECTION
+              </div>
+                <p style="font-size: 0.82rem; color: #777; margin-bottom: 12px; line-height: 1.4;">
+                  Chaussure légère et respirante, confort quotidien.
+                </p>
+            {% else %}
+              <span class="brand">PUMA</span>
+              <a href="{% url 'ecommerce:product_detail' p.slug %}" class="lienTitleproduct">
+                <h3 class="product-title" style="font-weight: bold; font-size: 1.15rem; margin-bottom: 4px;">RS-X3 Puzzle</h3>
+              </a>
+              <div class="collection-name" style="font-size: 0.85rem; color: #555; margin-bottom: 4px;">
+                STREETWEAR EXCLUSIVE
+              </div>
+                <p style="font-size: 0.82rem; color: #777; margin-bottom: 12px; line-height: 1.4;">
+                  Amorti performant et style urbain, parfait pour la ville.
+                </p>
+            {% endif %}
 
             <div class="product-footer">
               <div class="price-group">
@@ -149,7 +164,7 @@
 /* style simple pour la promo-label */
 .promo-label {
   display: inline-block;
-  background: #e86429;
+  background: #E60000; /* Rouge au lieu de orange */
   color: #fff;
   padding: 4px 8px;
   border-radius: 999px;
