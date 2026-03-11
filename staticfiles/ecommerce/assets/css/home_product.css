@@ -177,12 +177,14 @@ color: var(--primary);
 /* Favorited state: remplissage rouge + contour noir */
 .fav-icon.favorited path {
   fill: #e51b23 !important;
-  stroke: #000 !important;
+  stroke: transparent !important;
+  stroke-width: 0 !important;
 }
 
 .fav-icon.favorited:hover path {
   fill: #c8161f !important;
-  stroke: #000 !important;
+  stroke: transparent !important;
+  stroke-width: 0 !important;
 }
 
 /* image */

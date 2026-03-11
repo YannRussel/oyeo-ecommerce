@@ -12,7 +12,7 @@
   <div class="section-header">
     <h2 class="section-title" {% if section.slug == 'offres-du-jours' %} style="font-family: 'Anton', sans-serif !important; font-size:34px;" {% endif %}>{{ section.name }}</h2>
       {% if show_see_more and section_url %}
-      <a href="{{ section_url }}" class="see-more">Voir plus</a>
+      <span class="see-more disabled" aria-disabled="true">Voir plus</span>
     {% endif %}
   </div>
 
@@ -149,8 +149,8 @@
 .fav-icon:hover path { /* keep hover only as scale, no color change */ }
 
 /* favorited = rouge rempli + contour noir épais */
-.fav-icon.favorited path { fill: #e51b23 !important; stroke: #000 !important; }
-.fav-icon.favorited:hover path { fill: #c8161f !important; stroke: #000 !important; }
+.fav-icon.favorited path { fill: #e51b23 !important; stroke: transparent !important; stroke-width: 0 !important; }
+.fav-icon.favorited:hover path { fill: #c8161f !important; stroke: transparent !important; stroke-width: 0 !important; }
 
 /* petite animation "pop" */
 .fav-icon.pop {
