@@ -446,7 +446,8 @@ color: var(--primary);
 }
 
 #section-offres-du-jours .section-title , #section-tendances-du-moment .section-title {
-  font-weight: 800 !important;
+  font-family: 'Urbanist', sans-serif !important;
+  font-weight: 600 !important;
   font-size: 2rem !important;
   color: #1C2B39 !important;
 }

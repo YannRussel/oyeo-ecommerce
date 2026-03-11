@@ -10,7 +10,7 @@
 <section class="product-section" id="section-{{ section.slug }}"
   {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'Anton', sans-serif !important;" {% endif %}>
   <div class="section-header">
-    <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'Anton', sans-serif !important; font-size:34px;" {% endif %}>{{ section.name }}</h2>
+    <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'Urbanist', sans-serif !important; font-size:34px; font-weight: 500 !important;" {% endif %}>{{ section.name }}</h2>
       {% if show_see_more and section_url %}
       <span class="see-more disabled" aria-disabled="true">Voir plus</span>
     {% endif %}
