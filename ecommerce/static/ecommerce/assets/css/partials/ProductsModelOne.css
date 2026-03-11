@@ -143,16 +143,19 @@ color: var(--primary);
 
 /* badge gender/promo */
 .product-card .badge {
-  position:absolute; top:12px; left:12px;
-  background-color: transparent; 
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: transparent;
   color: #000;
   border: 1.5px solid #E0E0E0; /* Gray border */
-  font-size: 11px; 
-  font-weight: 700; 
-  padding: 4px 12px; 
-  border-radius: 20px; 
+  font-size: 11px;
+  font-weight: 700 !important;
+  padding: 4px 12px;
+  border-radius: 20px;
   z-index: 8;
-  text-transform: uppercase;
+  /* Capitalize first letter only: Homme, Femme, Robes, Baskets */
+  text-transform: capitalize !important;
 }
 
 /* Positionnement icône favoris */
@@ -252,15 +255,16 @@ color: var(--primary);
   flex: 0 0 auto;
 }
 .promo-label {
-  display:inline-block;
+  display: inline-block;
   flex: 0 0 auto;
-  background: var(--primary)/* #e86429 */;
-  color:#fff;
-  font-size:0.75rem;
-  font-weight:700;
-  padding:6px 10px;
-  border-radius:20px;
-  text-transform:uppercase;
+  background: var(--primary) /* #e86429 */;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 20px;
+  /* Force uppercase and bold */
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
 }
 
 /* responsive carousel */
@@ -410,32 +414,32 @@ color: var(--primary);
 
 /* Apply Urbanist font to the Offres du jours section only and increase sizes */
 #section-offres-du-jours, #section-tendances-du-moment, #section-offres-du-jours * , #section-tendances-du-moment * {
-  font-family: 'Anton', sans-serif !important;
+  font-family: 'Urbanist', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 #section-offres-du-jours .section-title , #section-tendances-du-moment .section-title {
-  font-family: 'Anton', sans-serif !important;
+  font-family: 'Urbanist', sans-serif !important;
   font-weight: 700;
   font-size: 34px;
   letter-spacing: 0.6px;
 }
 
 #section-offres-du-jours .product-title , #section-tendances-du-moment .product-title {
-  font-family: 'Anton', sans-serif !important;
+  font-family: 'Urbanist', sans-serif !important;
   font-size: 1.25rem;
   font-weight: 700;
 }
 
 #section-offres-du-jours .price , #section-tendances-du-moment .price {
-  font-family: 'Anton', sans-serif !important;
+  font-family: 'Urbanist', sans-serif !important;
   font-size: 1.15rem;
   font-weight: 700;
 }
 
 #section-offres-du-jours .brand , #section-tendances-du-moment .brand {
-  font-family: 'Anton', sans-serif !important;
+  font-family: 'Urbanist', sans-serif !important;
   font-size: 0.95rem;
   font-weight: 600;
 }
