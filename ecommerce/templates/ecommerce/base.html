@@ -285,10 +285,12 @@
                             </div>
                             <span class="icon_text">Favoris</span>
                         </a>
-
-                        <a class="icon" href="#" style="position: relative;">
+                        <a class="icon" href="{% url 'ecommerce:recap_panier' %}" style="position: relative;">
                             <img src="{% static 'ecommerce/ressources/icons/icon-cart.svg' %}" alt="Mon icône">
                             <span class="icon_text">Panier</span>
+                            {% if cart_count and cart_count > 0 %}
+                                <span class="cart-badge">{{ cart_count }}</span>
+                            {% endif %}
                         </a>
 
                         {# Connexion / Mon compte selon authentification #}

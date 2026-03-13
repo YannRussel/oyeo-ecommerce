@@ -12,8 +12,10 @@
   <div class="section-header">
     <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'Urbanist', sans-serif !important; font-size:34px; font-weight: 500 !important;" {% endif %}>{{ section.name }}</h2>
       {% if show_see_more and section_url %}
-      <span class="see-more disabled" aria-disabled="true">Voir plus</span>
-    {% endif %}
+        <a href="{{ section_url }}" class="see-more-link">
+          <span class="see-more">Voir plus</span>
+        </a>
+      {% endif %}
   </div>
 
   <div class="product-carousel-wrapper" tabindex="0" aria-label="{{ section.name }}">

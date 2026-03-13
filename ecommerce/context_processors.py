@@ -215,3 +215,20 @@ def menu(request):
         menu_json = "[]"
 
     return {"menu": menu_data, "menu_json": menu_json}
+
+
+def cart_context(request):
+    cart = request.session.get("cart", {})
+    if not isinstance(cart, dict):
+        cart = {}
+
+    cart_count = 0
+    for item in cart.values():
+        try:
+            cart_count += int(item.get("quantity", 0))
+        except (TypeError, ValueError):
+            pass
+
+    return {
+        "cart_count": cart_count
+    }
