@@ -20,7 +20,6 @@ from .models import (
     ProductImage,
     Section,
     ProductSection,
-    Favorite,
 )
 
 # core/views.py
@@ -82,14 +81,6 @@ def build_breadcrumbs(category):
     return crumbs
 
 
-def _get_user_favorites_for_product_ids(user, product_ids):
-    """
-    Retourne un set d'ids de produits favoris pour l'utilisateur donné.
-    Si user est anonymous, retourne set() rapidement.
-    """
-    if not user.is_authenticated or not product_ids:
-        return set()
-    return set(Favorite.objects.filter(user=user, product_id__in=product_ids).values_list('product_id', flat=True))
 
 
 def get_leaf_categories(category):
@@ -156,8 +147,6 @@ def category_detail(request, slug):
         child_leaf_ids.extend([c.pk for c in leaves])
 
     featured_products = Product.objects.none()
-    featured_favorites = set()
-
     if child_leaf_ids:
         featured_base_qs = Product.objects.filter(
             Q(primary_category__in=child_leaf_ids) | Q(categories__in=child_leaf_ids),
@@ -184,8 +173,6 @@ def category_detail(request, slug):
             )
 
             featured_product_ids = [p.pk for p in featured_products]
-            featured_favorites = _get_user_favorites_for_product_ids(request.user, featured_product_ids)
-
     # --- queryset de base : primary_category OU categories (M2M) ---
     base_qs = Product.objects.filter(
         Q(primary_category__in=leaf_ids) | Q(categories__in=leaf_ids),
@@ -202,9 +189,7 @@ def category_detail(request, slug):
             'products': [],
             'page_obj': None,
             'breadcrumbs': breadcrumbs,
-            'user_favorites': set(),
             'featured_products': featured_products,
-            'featured_favorites': featured_favorites,
         })
 
     # Mélange aléatoire des ids (en Python)
@@ -232,8 +217,6 @@ def category_detail(request, slug):
     page_obj = paginator.get_page(page_number)
 
     page_product_ids = [p.pk for p in page_obj.object_list]
-    user_favorites = _get_user_favorites_for_product_ids(request.user, page_product_ids)
-
     breadcrumbs.append({"label": f"{len(product_ids)} Articles", "url": None})
 
     return render(request, 'ecommerce/categorie.html', {
@@ -242,9 +225,7 @@ def category_detail(request, slug):
         'products': page_obj.object_list,  # liste des produits à afficher
         'page_obj': page_obj,
         'breadcrumbs': breadcrumbs,
-        'user_favorites': user_favorites,
         'featured_products': featured_products,
-        'featured_favorites': featured_favorites,
     })
 
 
@@ -254,7 +235,7 @@ def category_detail(request, slug):
 def section_list(request, slug):
     """
     Liste paginée des ProductSection actifs pour une section.
-    Passe page_obj (page d'objets ProductSection) ET product_sections (liste) et user_favorites.
+    Passe page_obj (page d'objets ProductSection) ET product_sections (liste).
     """
     section = get_object_or_404(Section, slug=slug, is_active=True)
     now = timezone.now()
@@ -277,15 +258,10 @@ def section_list(request, slug):
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
-    # Récupère les product ids présents sur la page (pour calculer user_favorites)
-    product_ids = [ps.product_id for ps in page_obj.object_list]
-    user_favorites = _get_user_favorites_for_product_ids(request.user, product_ids)
-
     context = {
         'section': section,
         'page_obj': page_obj,          # page d'objets ProductSection
         'product_sections': page_obj.object_list,  # compatibilité templates
-        'user_favorites': user_favorites,
     }
     return render(request, 'ecommerce/section_list.html', context)
 
@@ -296,7 +272,7 @@ def section_list(request, slug):
 def product_detail(request, slug):
     """
     Détail produit : récupère le product par slug et précharge l'image principale.
-    Fournit aussi is_favorited pour le user connecté.
+    
     """
     product = get_object_or_404(Product, slug=slug, is_active=True)
 
@@ -310,52 +286,12 @@ def product_detail(request, slug):
         product = get_object_or_404(Product, slug=slug, is_active=True)
 
     # état favori pour le produit
-    is_favorited = False
-    if request.user.is_authenticated:
-        is_favorited = Favorite.objects.filter(user=request.user, product=product).exists()
-
     context = {
         'product': product,
-        'is_favorited': is_favorited,
     }
     return render(request, 'ecommerce/produit_detail.html', context)
 
 
-# ------------------------
-# Toggle favorite (AJAX)
-# ------------------------
-@require_POST
-@login_required
-def toggle_favorite(request):
-    """
-    Toggle favorite via AJAX.
-    Accepte JSON ou form-data. Retourne JSON: {'favorited': bool, 'count': int, 'product_id': id}
-    """
-    # support JSON body ou form-data
-    if request.content_type == 'application/json':
-        try:
-            payload = json.loads(request.body.decode())
-        except Exception:
-            return HttpResponseBadRequest("JSON invalide")
-        product_id = payload.get('product_id')
-    else:
-        product_id = request.POST.get('product_id')
-
-    if not product_id:
-        return HttpResponseBadRequest("product_id manquant")
-
-    product = get_object_or_404(Product, pk=product_id)
-
-    fav, created = Favorite.objects.get_or_create(user=request.user, product=product)
-    if not created:
-        # existait déjà -> supprimer (toggle off)
-        fav.delete()
-        favorited = False
-    else:
-        favorited = True
-
-    count = Favorite.objects.filter(product=product).count()
-    return JsonResponse({'favorited': favorited, 'count': count, 'product_id': product.pk})
 # ------------------------
 # Menu API (si utilisé)
 # ------------------------

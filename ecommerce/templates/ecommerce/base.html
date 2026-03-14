@@ -43,19 +43,7 @@
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/CarousselOne.css' %}?v=23">
     <link rel="stylesheet" href="{% static 'ecommerce/assets/css/partials/ProductsModelOne.css' %}?v=26">
     
-    <!-- FAVORIS SCRIPT -->
-    <script>
-        // Variables globales pour le script favorites.js
-        window.USER_IS_AUTHENTICATED = {{ user.is_authenticated|yesno:"true,false" }};
-        window.CSRF_TOKEN = "{{ csrf_token }}";
-        {% if user.is_authenticated %}
-       
-            window.USER_FAVORITES_COUNT = {{ user.favorites.count }};
-        {% else %}
-            window.USER_FAVORITES_COUNT = 0;
-        {% endif %}
-    </script>
-    <script src="{% static 'ecommerce/assets/js/favorites.js' %}?v={% now 'U' %}" defer></script>
+    
 
 
 
@@ -278,10 +266,7 @@
                         <a class="icon" href="#">
                             <div style="position: relative; display: inline-block;">
                                 <img src="{% static 'ecommerce/ressources/icons/icon-heart.svg' %}" alt="Mon icône">
-                                <span id="fav-count-badge" class="badge rounded-pill bg-danger" 
-                                      style="position: absolute; top: -5px; right: -2px; font-size: 0.75rem; color: black !important; padding: 3px 6px; display: none;">
-                                    0
-                                </span>
+                                
                             </div>
                             <span class="icon_text">Favoris</span>
                         </a>
