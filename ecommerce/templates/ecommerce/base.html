@@ -51,8 +51,8 @@
 
     <!-- Quick global typography enforcement -->
     <style>
-        /* final typography enforcement: apply Quicksand but preserve footer and slider */
-        body, body *:not(.site-footer):not(.site-footer *):not(.slide-content-wrapper):not(.slide-content-wrapper *) {
+        /* final typography enforcement: apply Quicksand but preserve footer, slider and header; exclude product listings so their font (DM Sans) can apply */
+        body, body *:not(.site-footer):not(.site-footer *):not(.slide-content-wrapper):not(.slide-content-wrapper *):not(.topbar):not(.topbar *):not(#smallMenu):not(#smallMenu *):not(.product-section):not(.product-section *):not(.product-card):not(.product-card *):not(.product-grid):not(.product-grid *):not(.product-details):not(.product-details *) {
           font-family: 'Quicksand', sans-serif !important;
         }
 
@@ -130,6 +130,29 @@
       stroke-width: 1.5 !important;
       fill: transparent !important;
     }
+</style>
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Changer la police de tous les articles et détails pour DM Sans */
+.product-card,
+.product-card *,
+.product-details,
+.product-details *,
+.produit-info,
+.produit-info *,
+.details-produit,
+.details-produit *,
+.card-setup,
+.card-setup *,
+.card_description,
+.card_description * {
+    font-family: 'DM Sans', sans-serif !important;
+}
 </style>
 </head>
 

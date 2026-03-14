@@ -1,0 +1,282 @@
+/*********************************************************************************************
+************************ BLOCK : OYEO , BLOC SEARCH , FAVORIS-PANIER-MON COMPTE **************
+**********************************************************************************************/
+
+
+/*******   LOGO OYEO  **************/
+#logo_oyeo {
+    font-size: 30px;
+}
+
+#logo_oyeo span span {
+  color: orangered;
+}
+.no-scroll {
+  overflow: hidden;
+  /* bloque le scroll */
+  height: 100vh;
+  /* empêche le body de s'étendre */
+}
+.body-limited{
+  height: 100vh;
+  /* limite la hauteur */
+  overflow: hidden;
+  /* cache tout dépassement */
+}
+.lienTitleproduct{ text-decoration: none;}
+.lienTitleproduct:hover .product-title { color: var(--primary)!important;}
+
+
+
+
+
+
+
+
+.actions {
+  color: var(--gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions .icon {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.actions .icon i {
+  font-size: 1.3vw;
+  color: var(--primary) !important;
+}
+
+.actions .icon .icon_text {
+  font-size: 1rem;
+  color: var(--gray) !important;
+}
+
+.blocsearch {
+  width: 50%;
+  margin: 0px 12px;
+}
+
+#searchInput {
+ /*  border-radius: 50px; */
+  border-bottom-left-radius: 50px;
+  border-top-left-radius: 50px;
+  padding: 8px 15px !important;
+  font-size: 0.85rem;
+  border-right: none;
+}
+#btnSearch{
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+  border-left: none!important;
+  padding: 8px 15px !important;
+  background-color: white;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: 1; 
+  color: #ced4da; /* Exact match to border color */
+  border-color: #ced4da;
+  z-index: 5;
+  min-width: 40px;
+}
+
+#btnSearch:hover {
+  color: #6c757d; /* darker on hover */
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+}
+
+#btnSearch svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+}
+
+
+#searchInput:focus {
+  box-shadow: none !important;
+  border-color: #ced4da !important;
+}
+
+.logo {
+  font-weight: bold;
+}
+
+.logo .dot {
+  color: var(--primary);
+}
+
+#menubtn, #searchbtnIcone {
+  display: none;
+  font-size: 15px;
+  height: 35px;
+}
+
+header {
+/*          width: 90%; margin: auto;         */
+/*          border: 2px solid red;            */
+}
+#bloc_phone_header_navigation{
+  display: none;
+}
+
+#nbrProduct{ 
+    border-radius: 50px; 
+    padding: 2px 10px; 
+    background-color: rgb(139, 17, 17); 
+    color: white;
+    position: absolute;
+    transform: translate(-10px,-12px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width : 980px) {
+
+  .actions .icon .icon_text {
+    display: none;
+  }
+
+  #smallMenu {
+    position: sticky !important;
+    top: 0px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: var(--bs-shadow, 0 .5rem 1rem rgba(0, 0, 0, .15)) !important;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    z-index: 1001;
+  }
+
+  #logo_oyeo {
+    font-size: 25px !important;
+  }
+
+
+  #menubtn {
+    display: block;
+  }
+
+  .activeDesactive {
+    margin-left: 0% !important;
+  }
+
+
+
+}
+
+@media screen and (max-width : 950px) {
+
+  /*******   LOGO OYEO  **************/
+  #logo_oyeo {
+    font-size: 20px;
+  }
+  
+  /*=========  BLOCK : OYEO , BLOC SEARCH , FAVORIS-PANIER-MON COMPTE ============*/
+  .actions .icon {
+    padding: 2px 5px;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .actions .icon i {
+    font-size: 1.3rem;
+  }
+
+  .actions {
+    width: 65%;
+  }
+
+
+  .blocsearch {
+    width: 99%;
+  }
+
+  #searchInput {
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+/*     box-shadow: var(--bs-shadow, 0 .5rem 1rem rgba(0, 0, 0, .15)) !important;
+ */
+  }
+
+  #btnSearch{
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height:1;
+  }
+
+
+
+
+}
+
+
+
+
+@media screen and (max-width : 550px) {
+
+  #searchbtnIcone {
+    display: block;
+    background-color: orange;
+    font-size: 15px;
+    height: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .blocsearch {
+    top: 62px;
+    padding: 5px;
+    /* background-color: rgb(228, 223, 223); */
+    position: absolute;
+    margin-left: -550px;
+    width: 100%;
+    left: 0px;
+    transition: .2s ease-in-out all;
+    padding-left: 3%;
+    padding-right: 5%;
+
+  }
+    #searchInput {
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+
+  }
+
+  #btnSearch{
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+
+     border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    line-height:1;
+  }
+
+  .activeDesactiveSearch {
+    margin-left: 0px !important;
+  }
+}
+

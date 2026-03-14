@@ -1,0 +1,94 @@
+/**********************************************
+************************ TOP BAR **************
+***********************************************/
+
+.topbar {
+  background-color: #192232 !important;
+  color: #ffffff !important;
+  font-size: .8rem;
+}
+
+.topbar .service-client {
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.topbar .lienshaut a {
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.topbar .lienshaut a span,
+.service-client span {
+  color: #ffffff !important;
+}
+
+.topbar .lienshaut a:nth-child(2) {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.topbar .lienshaut a:hover,
+.topbar .lienshaut a span:hover {
+  color: #088178;
+  /* text-decoration: underline; */
+}
+.topbar #select-devise{
+    background-color: rgba(13, 195, 250, 0) !important;
+    border: none;
+    padding-left: 10px;
+    padding-right: 14px;
+    padding-top: 5px;
+    color: #ffffff !important;
+}
+
+/* force white text for options too */
+.topbar #select-devise option {
+    color: #000000; /* some browsers ignore color on options; keep default black for legibility */
+}
+
+.livraison-bloc {
+  font-weight: 600;
+  color: #333;
+}
+
+
+
+
+@media screen and (max-width : 950px) {
+  /*=========== topbar ============*/
+  .topbar {
+    background-color: #192232 !important;
+    color: #ffffff !important;
+    font-size: .8rem;
+  }
+
+  .livraison-bloc {
+    width: 60%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 25px;
+    text-align: right;
+  }
+
+
+}
+
+@media screen and (max-width : 940px) {
+  .topbar .text {
+    display: none;
+  }
+}
+
+@media screen and (max-width : 550px) {
+   .livraison-bloc {
+    font-size: 12px;
+    padding-top: 5px;
+  }
+
+}
+
+
+

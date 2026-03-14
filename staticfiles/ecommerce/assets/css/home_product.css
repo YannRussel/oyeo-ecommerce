@@ -380,3 +380,13 @@ color: var(--primary);
   margin-left: .6rem;
 } */
 
+
+/* Force "Inter" font on all products and product details globally */
+.product-card, .product-card *,
+.product-section .product-card, .product-section .product-card *,
+.product-details, .product-details *,
+.details-produit, .details-produit *,
+.produit-info, .produit-info *,
+.product-title, .price, .original-price, .description, .badge, .brand {
+    font-family: 'Inter', sans-serif !important;
+}
