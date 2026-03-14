@@ -10,13 +10,13 @@
 <section class="product-section" id="section-{{ section.slug }}"
   {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'DM Sans', sans-serif !important;" {% endif %}>
   <div class="section-header">
-    <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'DM Sans', sans-serif !important; font-size:34px; font-weight: 500 !important;" {% endif %}>{{ section.name }}</h2>
-      {% if show_see_more and section_url %}
+    <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'DM Sans', sans-serif !important; font-size:34px; font-weight: 500 !important;" {% endif %}>{% if section.slug != 'sponsorise' %}{{ section.name }}{% endif %}</h2>
+      {% if show_see_more and section_url and section.slug != 'sponsorise' %}
       <span class="see-more disabled" aria-disabled="true">Voir plus</span>
     {% endif %}
   </div>
 
-  <div class="product-carousel-wrapper" tabindex="0" aria-label="{{ section.name }}">
+  <div class="product-carousel-wrapper" tabindex="0" aria-label="{% if section.slug != 'sponsorise' %}{{ section.name }}{% endif %}">
     <button class="scroll-btn left" aria-label="Gauche">←</button>
 
     <div class="product-grid scroll-container" role="list">

@@ -186,11 +186,12 @@
 }
 
 .sponsored-label {
-  font-size: 12px;
-  color: var(--muted);
+  font-size: 28px;
+  color: var(--text-dark, #333);
   margin-bottom: 8px;
   letter-spacing: 0.02em;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: none;
 }
 
 .sponsored-title {
@@ -1337,5 +1338,9 @@ span {
 
 
 .product-card, .product-card *, .product-details, .product-details *, .produit-info, .produit-info *, .card_description, .card_description * {
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+.sponsored-label, .sponsored-title, .sponsored-subtitle, .sponsored-cta {
     font-family: 'DM Sans', sans-serif !important;
 }
