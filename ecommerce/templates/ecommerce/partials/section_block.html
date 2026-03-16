@@ -8,9 +8,9 @@
 
 {% if section %}
 <section class="product-section" id="section-{{ section.slug }}"
-  {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'DM Sans', sans-serif !important;" {% endif %}>
+  {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' or section.slug == 'mode-bien-etre' or section.slug == 'maison-deco-pratique' or section.slug == 'cuisine-alimentation' %} style="font-family: 'DM Sans', sans-serif !important;" {% endif %}>
   <div class="section-header">
-    <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'DM Sans', sans-serif !important; font-size:34px; font-weight: 500 !important;" {% endif %}>{% if section.slug != 'sponsorise' %}{{ section.name }}{% endif %}</h2>
+    <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' or section.slug == 'mode-bien-etre' or section.slug == 'maison-deco-pratique' or section.slug == 'cuisine-alimentation' %} style="font-family: 'DM Sans', sans-serif !important; font-size:34px; font-weight: 500 !important;" {% endif %}>{% if section.slug != 'sponsorise' %}{{ section.name }}{% endif %}</h2>
       {% if show_see_more and section_url and section.slug != 'sponsorise' %}
       <span class="see-more disabled" aria-disabled="true">Voir plus</span>
     {% endif %}

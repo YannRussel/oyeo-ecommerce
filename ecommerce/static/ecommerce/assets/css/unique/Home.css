@@ -423,6 +423,41 @@ span {
 }
 
 
+/* ------------------------------------------------------------------ */
+/* Désactiver tout mouvement/animation des flèches et boutons (annuler les
+   translations, transitions et animations) comme demandé dans la capture */
+/* ------------------------------------------------------------------ */
+.scroll-btn,
+.scroll-btn.left,
+.scroll-btn.right,
+.fav-icon,
+.sponsored-cta,
+.sponsored-cta.cta-asym,
+.see-more,
+.btn-see-more,
+.promo-gallery-right a,
+.promo-gallery-right img,
+.promo-gallery-right div,
+.collection5-card .collection5-overlay-content a {
+  transition: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  animation: none !important;
+}
+
+/* Empêcher tout effet au survol/au focus */
+.scroll-btn:hover,
+.scroll-btn:focus,
+.sponsored-cta:hover,
+.sponsored-cta:focus,
+.sponsored-cta.cta-asym:hover,
+.fav-icon:focus {
+  transform: none !important;
+  -webkit-transform: none !important;
+  box-shadow: none !important;
+}
+
+
 #banners .small-banners {
   display: flex;
   align-items: center;
