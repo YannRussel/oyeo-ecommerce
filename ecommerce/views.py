@@ -455,3 +455,23 @@ def search_autocomplete(request):
         })
         
     return JsonResponse(results, safe=False)
+# --- Dummy Cart Views (Placeholder) ---
+def recap_panier(request):
+    from django.shortcuts import render
+    return render(request, "ecommerce/recap_panier.html", {})
+
+def checkout(request):
+    from django.shortcuts import render
+    return render(request, "ecommerce/checkout.html", {})
+
+def add_to_cart(request):
+    from django.http import JsonResponse
+    return JsonResponse({"success": True})
+
+def update_cart_quantity(request):
+    from django.http import JsonResponse
+    return JsonResponse({"success": True})
+
+def remove_from_cart(request):
+    from django.http import JsonResponse
+    return JsonResponse({"success": True})
