@@ -329,6 +329,18 @@
 **  MA PARTIE BANNER
 
 */
+/* ------------------------------------------------------------------ */
+/* Forcer DM Sans sur boutons 'Voir plus' et titres spécifiques */
+/* ------------------------------------------------------------------ */
+.see-more,
+.btn-see-more {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+#section-offres-du-jours .section-title,
+#section-tendances-du-moment .section-title {
+  font-family: 'DM Sans', sans-serif !important;
+}
 /* banners section styles */
 
 
@@ -399,6 +411,17 @@ span {
 #banners .small-banners-3 {
   background-image: url('../../../ressources/image/banner/b18.jpg');
 }
+
+/* ------------------------------------------------------------------ */
+/* Force DM Sans for the collection cards ("Découvrez nos univers") */
+/* ------------------------------------------------------------------ */
+.collection5-section h2,
+.collection5-card .collection5-overlay-content h4,
+.collection5-card .collection5-overlay-content p,
+.collection5-card .collection5-overlay-content a {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
 
 #banners .small-banners {
   display: flex;
