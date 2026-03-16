@@ -19,6 +19,26 @@
             border-radius: 50% !important;
             line-height: 1 !important;
         }
+
+        /* Positionner les flèches droites des carrousels à l'extrémité droite */
+        .product-carousel-wrapper { position: relative; width: 100%; }
+        .product-carousel-wrapper .scroll-btn.right {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        /* Espace au-dessus de la section témoignages et ajustement des bannières */
+        #banners { margin-bottom: 28px; }
+        .big-banners { display:flex; gap:24px; align-items:stretch; }
+        .big-banners-1, .big-banners-2 { padding: 28px; border-radius: 8px; background: #fff; }
+        #nyota-testimonials-section { margin-top: 60px; padding-top: 12px; }
+        @media (max-width: 768px) {
+            #nyota-testimonials-section { margin-top: 32px; }
+            .product-carousel-wrapper .scroll-btn.right { right: 8px; }
+        }
     </style>
 
     <!-- CROUSSEL  -- SLIDER  -->
@@ -106,23 +126,16 @@
                         Découvrir
                     </a>
             </div>
+            
+                <!-- Colonne image (Bloc photo remplaçant la grille) -->
+                <div class="sponsored-photo-block" style="display:flex; justify-content:flex-end; align-items:center; width:100%; min-height:250px;">
+                    <div style="position:relative; width:600px; height:245px; border-radius:12px; overflow:hidden; box-shadow:0 6px 18px rgba(0,0,0,0.12);">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80" alt="Oyéo Revolut - Nouvelles chaussures" style="width:100%; height:100%; object-fit:cover; display:block;">
+                    </div>
+                </div>
 
-            <!-- Colonne image (Grille de publicités) -->
-            <div class="promo-gallery-right" style="display: flex; gap: 30px; justify-content: flex-end; align-items: center; width: 100%; min-height: 250px;">
-                
-                <!-- Bloc Image 1 -->
-                <div style="width: 250px; height: 250px; background-color: #ffffff; border: 1.5px solid #14213d; display: flex; justify-content: center; align-items: center; padding: 15px; box-sizing: border-box;">
-                    <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500&q=80" alt="Chaussure 1" style="width: 100%; height: 100%; object-fit: contain;">
-                </div>
-                
-                <!-- Bloc Image 2 -->
-                <div style="width: 250px; height: 250px; background-color: #ffffff; border: 1.5px solid #14213d; display: flex; justify-content: center; align-items: center; padding: 15px; box-sizing: border-box;">
-                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&q=80" alt="Chaussure 2" style="width: 100%; height: 100%; object-fit: contain;">
-                </div>
-                
             </div>
-        </div>
-    </section>
+        </section>
 
 
 {% render_section 'sponsorise' 8 %}
@@ -258,6 +271,8 @@
                 </div>
 
             </div>
+
+            
         </div>
     </section>
 
@@ -281,12 +296,9 @@
             <h2 class="promo-title" style="color: white; font-family: 'DM Sans', sans-serif !important; font-size: 24px; font-weight: 500; text-transform: uppercase; margin: 0; padding-left: 5px;">MARQUE POUR TOUS</h2>
         </div>
 
-        <div class="promo-visual" style="display:flex; flex-direction:row; flex-wrap:nowrap; gap:30px; justify-content:flex-end; align-items:stretch; width:auto; flex-shrink:0;">
-            <!-- Boîte blanche gauche -->
-            <div class="promo-image shadow" style="background-color:#ffffff; background-image:url('/static/ecommerce/ressources/img/habit/card-image5.jpg'); background-size:cover; background-position:center; width:250px; min-width:250px; height:320px; border-radius:8px; box-shadow: 0 8px 18px rgba(0,0,0,0.05); display:block;"></div>
-
-            <!-- Boîte blanche droite avec bouton 'Découvrir' -->
-            <div style="position:relative; width:250px; min-width:250px; height:320px;">
+            <div class="promo-visual" style="display:flex; flex-direction:row; flex-wrap:nowrap; gap:30px; justify-content:flex-end; align-items:stretch; width:auto; flex-shrink:0;">
+            <!-- Boîte droite unique avec bouton 'Découvrir' (gauche supprimée) -->
+            <div style="position:relative; width:600px; height:305px;">
                 <div class="promo-image shadow" style="background-color:#ffffff; background-image:url('/static/ecommerce/ressources/img/habit/about-6.png'); background-size:cover; background-position:center; width:100%; height:100%; border-radius:8px; box-shadow: 0 8px 18px rgba(0,0,0,0.05); display:block;"></div>
                 <a href="#" class="promo-btn text-light" style="position:absolute; bottom:-16px; left:50%; transform:translateX(-50%); background:#de622b; color:#fff; padding:8px 30px; border-radius:30px; font-weight:700; font-family: 'DM Sans', sans-serif !important; text-decoration:none; box-shadow:0 4px 12px rgba(0,0,0,0.15); font-size: 16px; z-index: 10; white-space:nowrap;">Découvrir</a>
             </div>
@@ -300,6 +312,23 @@
         <p style="font-family: 'DM Sans', sans-serif !important;">Donnez une seconde vie à vos objets et faites de bonnes affaires dès aujourd’hui !</p>
         <div class="occasion-btn-group">
             <button class="occasion-btn" style="font-family: 'DM Sans', sans-serif !important; transition: none !important; animation: none !important; transform: none !important;">Je découvre</button>
+        </div>
+    </section>
+
+    <!-- Séction indépendante pour les produits d'occasion -->
+    <section id="occasion-products" class="occasion-products product-section" style="margin-top:20px;">
+        <div class="section-header">
+            <!-- titre supprimé: section sans intitulé -->
+        </div>
+
+        <div class="product-carousel-wrapper" tabindex="0" aria-label="Occasions">
+            <button class="scroll-btn left" aria-label="Gauche">←</button>
+
+            <div class="product-grid scroll-container" role="list">
+                <p class="no-products">Aucun produit pour le moment.</p>
+            </div>
+
+            <button class="scroll-btn right" aria-label="Droite">→</button>
         </div>
     </section>
 
@@ -478,7 +507,7 @@
 
 
     <br>
-    <section id="newsletter" class="section-p1 section-m1" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; padding: 40px 60px; margin-top: 40px; margin-bottom: 20px; font-family: 'DM Sans', sans-serif;">
+    <section id="newsletter" class="section-p1 section-m1" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; padding: 40px 60px; margin-top: 40px; margin-bottom: 20px; font-family: 'DM Sans', sans-serif; background-color: #fbf7f3; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.03);">
     <div class="newsletter_text" style="flex: 1; max-width: 45%; min-width: 300px; margin-bottom: 20px;">
         <h3 style="font-weight: 700; font-size: 24px; color: #000; margin-bottom: 10px; font-family: 'DM Sans', sans-serif !important;">S'inscrire sur notre newsletter</h3>
         <p style="font-size: 14px; color: #333; margin: 0; font-family: 'DM Sans', sans-serif !important;">Rejoins notre communauté et sois le premier à découvrir nos offres exclusives et nos nouvelles</p>
