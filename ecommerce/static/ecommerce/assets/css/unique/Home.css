@@ -1348,10 +1348,10 @@ span {
     gap: 32px;
     align-items: center;
     white-space: nowrap;
-    animation: nyota-uniq-scroll-left var(--nyota-uniq-scroll-duration, 20s) linear infinite;
-    animation-play-state: paused; /* paused par défaut */
+    animation: nyota-uniq-scroll-left 20s linear infinite;
+    animation-play-state: running; /* paused par défaut */
     will-change: transform;
-    transform: translateX(var(--nyota-uniq-start-offset, 0px));
+    transform: translateX(0);
   }
 
   /* logos */
@@ -1369,15 +1369,14 @@ span {
 
   /* démarrer l'animation seulement quand on survole le bloc entier (scopé) */
   #nyota-logos-section-uniq:hover .nyota-uniq__track {
-    animation-play-state: running;
+    animation-play-state: paused;
   }
 
   /* animation scoping name unique */
   @keyframes nyota-uniq-scroll-left {
-    0%   { transform: translateX(var(--nyota-uniq-start-offset)); }
-    100% { transform: translateX(calc(var(--nyota-uniq-start-offset) - 50%)); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
-
   /* reduced motion respecté */
   @media (prefers-reduced-motion: reduce) {
     #nyota-logos-section-uniq .nyota-uniq__track {
