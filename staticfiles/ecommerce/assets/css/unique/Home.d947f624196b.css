@@ -393,23 +393,23 @@ span {
 }
 
 #banners .big-banners-1 {
-  background-image: url('../../../ressources/image/banner/b17.jpg');
+  background-image: url("../../../ressources/image/banner/b17.f671db0ccbd6.jpg");
 }
 
 #banners .big-banners-2 {
-  background-image: url('../../../ressources/image/banner/b10.jpg');
+  background-image: url("../../../ressources/image/banner/b10.a1f17d2bc7c0.jpg");
 }
 
 #banners .small-banners-1 {
-  background-image: url('../../../ressources/image/banner/b7.jpg');
+  background-image: url("../../../ressources/image/banner/b7.eb047be6117b.jpg");
 }
 
 #banners .small-banners-2 {
-  background-image: url('../../../ressources/image/banner/b4.jpg');
+  background-image: url("../../../ressources/image/banner/b4.75f78e8c696b.jpg");
 }
 
 #banners .small-banners-3 {
-  background-image: url('../../../ressources/image/banner/b18.jpg');
+  background-image: url("../../../ressources/image/banner/b18.fff152928930.jpg");
 }
 
 /* ------------------------------------------------------------------ */
@@ -856,7 +856,7 @@ span {
    /* lES AFFAIRES D'OCCASION */
 
   #occasion-banner {
-  background-image: url('../../../ressources/image/banner/banner-12.png');
+  background-image: url("../../../ressources/image/banner/banner-12.0e226542034b.png");
   background-size: cover;
   height: 30vh;
   max-width: 93%/* 1400px */;

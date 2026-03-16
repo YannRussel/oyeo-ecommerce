@@ -393,24 +393,54 @@ span {
 }
 
 #banners .big-banners-1 {
-  background-image: url('../../../ressources/image/banner/b17.jpg');
+  background-image: url("../../../ressources/image/banner/b17.f671db0ccbd6.jpg");
 }
 
 #banners .big-banners-2 {
-  background-image: url('../../../ressources/image/banner/b10.jpg');
+  background-image: url("../../../ressources/image/banner/b10.a1f17d2bc7c0.jpg");
 }
 
 #banners .small-banners-1 {
-  background-image: url('../../../ressources/image/banner/b7.jpg');
+  background-image: url("../../../ressources/image/banner/b7.eb047be6117b.jpg");
 }
 
 #banners .small-banners-2 {
-  background-image: url('../../../ressources/image/banner/b4.jpg');
+  background-image: url("../../../ressources/image/banner/b4.75f78e8c696b.jpg");
 }
 
 #banners .small-banners-3 {
-  background-image: url('../../../ressources/image/banner/b18.jpg');
+  background-image: url("../../../ressources/image/banner/b18.fff152928930.jpg");
 }
+
+/* Promo banner typography */
+.promo-content .promo-tag,
+.promo-content .promo-title {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+/* Collection5 cards: overlay content inside the card (default layout) */
+.collection5-card {
+  position: relative;
+  overflow: hidden;
+}
+.collection5-card .collection5-overlay-content {
+  position: relative;
+  display: block;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.collection5-card .collection5-overlay-content a {
+  position: static;
+  display: inline-block;
+  background: transparent;
+  color: #ffffff;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: underline;
+  font-weight: 500;
+  box-shadow: none;
+}
+
 
 /* ------------------------------------------------------------------ */
 /* Force DM Sans for the collection cards ("Découvrez nos univers") */
@@ -677,7 +707,7 @@ span {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  background: #0b0b0b;
+  background: linear-gradient(135deg, #efaf18 0%, #d6a32b 100%);
   border-radius: 8px;
   overflow: hidden;
   max-width: 1460px;
@@ -734,22 +764,6 @@ span {
  
 }
 
-.price-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #e16628;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: bold;
-  width: 48px;
-  height: 48px;
-  line-height: 48px;
-  text-align: center;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 2;
-}
 
 .promo-image {
   width: 50%;
@@ -767,17 +781,19 @@ span {
 }
 
 .promo-btn {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -26px;
   background: #e16628;
-  color: #333;
+  color: #ffffff;
   text-decoration: none;
-  font-weight: bold;
-  padding: 8px 20px;
+  font-weight: 700;
+  padding: 12px 28px;
   border-radius: 30px;
-  transition: background 0.3s;
-  bottom: 10px;
-  left:-20px;
- 
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 10px 24px rgba(11,116,218,0.12);
+  z-index: 5;
 }
 
 .promo-btn:hover {
@@ -809,16 +825,11 @@ span {
 }
 .promo-btn {
   position: relative;
-  background: #e16628;
-  color: #333;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 8px 40px;
-  border-radius: 30px;
-  transition: background 0.3s;
-  bottom: 10px;
-  left:0px;
- 
+  left: auto;
+  transform: none;
+  bottom: 0;
+  margin-top: 16px;
+  padding: 10px 28px;
 }
   .promo-visual {
     margin-top: 16px;
@@ -828,14 +839,7 @@ span {
     width: 100%;
     border: 1px solid white;
   }
-  .price-badge {
-    top: 6px;
-    right: 6px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 0.8rem;
-  }
+  /* price-badge removed */
 }
 
 
@@ -856,7 +860,7 @@ span {
    /* lES AFFAIRES D'OCCASION */
 
   #occasion-banner {
-  background-image: url('../../../ressources/image/banner/banner-12.png');
+  background-image: url("../../../ressources/image/banner/banner-12.0e226542034b.png");
   background-size: cover;
   height: 30vh;
   max-width: 93%/* 1400px */;
