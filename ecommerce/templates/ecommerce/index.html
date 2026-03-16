@@ -478,23 +478,19 @@
 
 
     <br>
-    <section id="newsletter">
-        <div class="newsletter_div">
-            <h3>S'inscrire sur notre newsletter</h3>
-            <h5>Rejoins notre communauté et sois <span class="text-primary"> le premier à découvrir nos offres
-                    exclusives et nos nouvelles
-                    affaires
-                    !</span>
-            </h5>
+    <section id="newsletter" class="section-p1 section-m1" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; padding: 40px 60px; margin-top: 40px; margin-bottom: 20px; font-family: 'DM Sans', sans-serif;">
+    <div class="newsletter_text" style="flex: 1; max-width: 45%; min-width: 300px; margin-bottom: 20px;">
+        <h3 style="font-weight: 700; font-size: 24px; color: #000; margin-bottom: 10px;">S'inscrire sur notre newsletter</h3>
+        <p style="font-size: 14px; color: #333; margin: 0;">Rejoins notre communauté et sois le premier à découvrir nos offres exclusives et nos nouvelles</p>
+    </div>
+    
+    <form action="" style="flex: 1; min-width: 300px; display:flex; align-items: flex-end; gap: 30px; padding-bottom:5px;">
+        <div style="flex: 1; border-bottom: 2px solid #bbb; padding-bottom: 5px; position:relative;">
+            <input type="email" placeholder="votre@email.com" style="width: 100%; border: none; outline: none; font-size: 20px; color: #888; text-align: left; background: transparent; padding: 10px 0; font-weight:500;" aria-label="Votre email">
         </div>
-        <form action="" class="newsletter_div">
-            <div class="input-group mb-3 w-100 border">
-                <input type="email" class="form-control" placeholder="your email please "
-                    aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Sign Up</button>
-            </div>
-        </form>
-    </section>
+        <button type="submit" style="background-color: #000; color: #fff; border: none; border-radius: 8px; padding: 16px 38px; font-size: 18px; font-weight: bold; cursor: pointer; text-transform: uppercase;">S'inscrire</button>
+    </form>
+</section>
 
 
 {% endblock %}
