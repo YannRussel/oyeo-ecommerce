@@ -47,9 +47,9 @@
   text-decoration: none;
   color: #fdfcfc;
   background-color: #3e09fca2;
-  width: 220px;
-  padding: 2%;
-  display: block;
+  width: fit-content;
+  display: inline-block;
+  padding: 10px 24px;
   border-radius: 10px;
   margin-top: 50px;
 }
@@ -66,10 +66,10 @@
 
 }
 .decouverte .contenu-section a {
-  width: 80%;
+  width: fit-content;
   margin-top: 20px;
   font-size: 12px;
-  padding: 3%;
+  padding: 8px 20px;
 }
 
 }
@@ -120,8 +120,8 @@
   text-decoration: none;
   color: #fdfcfc;
   background-color: #3e09fca2;
-  width: 60%;
-  padding: 3%;
+  width: fit-content;
+  padding: 8px 16px;
 }
   .contenu-section{
     width: 100%;
@@ -186,11 +186,12 @@
 }
 
 .sponsored-label {
-  font-size: 12px;
-  color: var(--muted);
+  font-size: 28px;
+  color: var(--text-dark, #333);
   margin-bottom: 8px;
   letter-spacing: 0.02em;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: none;
 }
 
 .sponsored-title {
@@ -328,6 +329,18 @@
 **  MA PARTIE BANNER
 
 */
+/* ------------------------------------------------------------------ */
+/* Forcer DM Sans sur boutons 'Voir plus' et titres spécifiques */
+/* ------------------------------------------------------------------ */
+.see-more,
+.btn-see-more {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+#section-offres-du-jours .section-title,
+#section-tendances-du-moment .section-title {
+  font-family: 'DM Sans', sans-serif !important;
+}
 /* banners section styles */
 
 
@@ -398,6 +411,52 @@ span {
 #banners .small-banners-3 {
   background-image: url('../../../ressources/image/banner/b18.jpg');
 }
+
+/* ------------------------------------------------------------------ */
+/* Force DM Sans for the collection cards ("Découvrez nos univers") */
+/* ------------------------------------------------------------------ */
+.collection5-section h2,
+.collection5-card .collection5-overlay-content h4,
+.collection5-card .collection5-overlay-content p,
+.collection5-card .collection5-overlay-content a {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Désactiver tout mouvement/animation des flèches et boutons (annuler les
+   translations, transitions et animations) comme demandé dans la capture */
+/* ------------------------------------------------------------------ */
+.scroll-btn,
+.scroll-btn.left,
+.scroll-btn.right,
+.fav-icon,
+.sponsored-cta,
+.sponsored-cta.cta-asym,
+.see-more,
+.btn-see-more,
+.promo-gallery-right a,
+.promo-gallery-right img,
+.promo-gallery-right div,
+.collection5-card .collection5-overlay-content a {
+  transition: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  animation: none !important;
+}
+
+/* Empêcher tout effet au survol/au focus */
+.scroll-btn:hover,
+.scroll-btn:focus,
+.sponsored-cta:hover,
+.sponsored-cta:focus,
+.sponsored-cta.cta-asym:hover,
+.fav-icon:focus {
+  transform: none !important;
+  -webkit-transform: none !important;
+  box-shadow: none !important;
+}
+
 
 #banners .small-banners {
   display: flex;
@@ -618,7 +677,7 @@ span {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  background: linear-gradient(135deg, #efaf18 0%, #d6a32b 100%);
+  background: #0b0b0b;
   border-radius: 8px;
   overflow: hidden;
   max-width: 1460px;
@@ -1289,10 +1348,10 @@ span {
     gap: 32px;
     align-items: center;
     white-space: nowrap;
-    animation: nyota-uniq-scroll-left var(--nyota-uniq-scroll-duration, 20s) linear infinite;
-    animation-play-state: paused; /* paused par défaut */
+    animation: nyota-uniq-scroll-left 20s linear infinite;
+    animation-play-state: running; /* paused par défaut */
     will-change: transform;
-    transform: translateX(var(--nyota-uniq-start-offset, 0px));
+    transform: translateX(0);
   }
 
   /* logos */
@@ -1310,15 +1369,14 @@ span {
 
   /* démarrer l'animation seulement quand on survole le bloc entier (scopé) */
   #nyota-logos-section-uniq:hover .nyota-uniq__track {
-    animation-play-state: running;
+    animation-play-state: paused;
   }
 
   /* animation scoping name unique */
   @keyframes nyota-uniq-scroll-left {
-    0%   { transform: translateX(var(--nyota-uniq-start-offset)); }
-    100% { transform: translateX(calc(var(--nyota-uniq-start-offset) - 50%)); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
-
   /* reduced motion respecté */
   @media (prefers-reduced-motion: reduce) {
     #nyota-logos-section-uniq .nyota-uniq__track {
@@ -1335,3 +1393,11 @@ span {
   }
 
 
+
+.product-card, .product-card *, .product-details, .product-details *, .produit-info, .produit-info *, .card_description, .card_description * {
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+.sponsored-label, .sponsored-title, .sponsored-subtitle, .sponsored-cta {
+    font-family: 'DM Sans', sans-serif !important;
+}

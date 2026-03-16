@@ -1,0 +1,588 @@
+/* barre top supermarcheRayon */
+#topbarre {
+
+    padding-left: 4%;
+    padding-right: 4%;
+    background-color: rgb(31, 148, 119) !important;
+    margin-bottom: 10px;
+}
+
+#topbarre_bloc {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 4px;
+    max-width: 100%;
+
+
+}
+
+#topbarre_bloc a.active {
+    background: #2d2e2e42;
+    border: none;
+}
+
+#topbarre_bloc a {
+    /*  min-width: 200px; */
+    height: 38px;
+
+    color: white;
+    text-decoration: none;
+    /* enlève le soulignement */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#topbarre_bloc a .topbarre_emojie {
+    font-size: 22px;
+}
+
+#topbarre_bloc a .topbarre_emojie img {
+    width: 32px;
+    height: 32px;
+}
+
+#topbarre_bloc a:hover {
+    background: #2d2e2e42;
+    transform: scale(1.03);
+}
+
+
+
+
+/* ************  MINI MENU DE TRIE ET FILTRE **************** */
+.mini_menu_filtre_trie {
+    width: 92%;
+    margin: auto;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    margin-bottom: 30px;
+}
+
+.mini_menu_filtre_trie .form-select {
+    /* display: block;
+    width: 100%!important; */
+}
+
+.mini_menu_filtre_trie .mini_menu_filtre_trie_bloc_trie {
+    width: 200px;
+}
+
+.mini_menu_filtre_trie .mini_menu_filtre_trie_bloc_trie label {
+    font-size: 13px;
+    color: black;
+}
+
+
+
+
+/* Conteneur pour positionner la bulle */
+.range-container {
+    position: relative;
+    width: 100%;
+}
+
+/* La bulle (l'indicateur sur le curseur) */
+.range-tooltip {
+    position: absolute;
+    top: -25px; /* Position au dessus de la barre */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(31, 148, 119); /* Primary */
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    pointer-events: none; /* Pour ne pas gêner le clic */
+}
+
+/* Triangle sous la bulle */
+.range-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(31, 148, 119) transparent transparent transparent;
+}
+
+/* Style de la barre */
+.custom-range-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    outline: none;
+    background: #dee2e6;
+    margin: 15px 0 10px 0;
+}
+
+/* Le curseur (rond bleu) */
+.custom-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgb(31, 148, 119);
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.custom-range-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgb(31, 148, 119);
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+
+
+
+
+
+/* ============================    TOUT NOS PRODUITs ============================= */
+
+
+
+#bloc_toutnosproduits_supermarcheRayon{
+  padding-top: 0px;
+  padding-bottom: 50px;
+
+   width: 92%;
+   margin: auto;
+}
+#bloc_toutnosproduits_supermarcheRayon .titre_principal {
+/*   margin:2% 5%; */
+  text-align: left;
+  font-weight: bolder;
+}
+#bloc_toutnosproduits_supermarcheRayon .btn_retour{
+    font-weight: 500;
+ }
+#bloc_toutnosproduits_supermarcheRayon .btn_retour a{
+text-decoration: none;
+ color: rgb(31, 148, 119);
+ }
+  #bloc_toutnosproduits_supermarcheRayon .btn_retour a:hover{
+
+ color: rgb(89, 202, 174);
+ }
+
+
+
+
+ 
+#bloc_toutnosproduits_supermarcheRayon #sousbloc_toutnosproduits{
+  text-align: center;
+/*   width: 92%; */
+  margin: auto;
+  margin-top: 40px;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.bloc_etoile_toutnosproduits{
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+.image_etoile_toutnosproduits{
+    height: 20px;
+    width: 18px;
+}
+
+
+#bloc_toutnosproduits_supermarcheRayon  #sousbloc_toutnosproduits .produit_toutnosproduits {
+  display: inline-block; 
+  width: 320px; 
+  margin-right: 10px;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px; border-radius: 9px;
+    box-shadow: 0 4px 12px rgba(6, 27, 49, 0.178);
+}
+
+#sousbloc_toutnosproduits .produit_toutnosproduits:hover {
+  transform: translateY(-3px);
+}
+
+#bloc_toutnosproduits_supermarcheRayon  #sousbloc_toutnosproduits .produit_toutnosproduits .bloc_image_produit_toutnosproduits{
+	height: 250px;
+  position: relative;
+
+  border-top-right-radius:  10px;
+border-top-left-radius:  10px;
+}
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits{
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width:auto;
+  padding-left: 8px;
+  padding-right: 8px;
+  
+   
+  
+}
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits div{
+    margin-bottom: 4px;
+   text-align: left;
+     padding:4px 10px!important;
+    border-radius: 10px;
+     font-size: 12px;
+}
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits div img{
+    width: 12px;
+    height: 12px;
+}
+
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits .type_toutnosproduits{
+ background-color: rgb(10, 172, 45);
+ font-size: 12px;
+ padding:2px 10px;
+ color:white;
+ border-radius: 10px;
+}
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits .reduction_toutnosproduits{
+ background-color: var(--bs-danger);
+ font-size: 12px;
+ padding:2px 10px;
+ color:white;
+ border-radius: 10px;
+}
+
+#sousbloc_toutnosproduits .produit_toutnosproduits .bloc_description_produit_toutnosproduits{
+  text-align: left;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+ }
+
+  .bloc_description_produit_toutnosproduits .blocEnd_description{
+    /* margin-top: 15px; */
+  }
+  .bloc_description_produit_toutnosproduits .text_desciptive,  .bloc_description_produit_toutnosproduits .text_qte{
+    font-size: 14px;
+  }
+
+   .bloc_description_produit_toutnosproduits .text_titre{
+    font-weight: bold;
+    font-size: larger;
+   }
+
+ .bloc_description_produit_toutnosproduits .blocEnd_description .price{
+  font-size: 23px;
+  color: rgb(10, 172, 45);;
+ }
+ 
+  .bloc_description_produit_toutnosproduits .blocEnd_description .priceUnite{
+  font-size: 11.5px;
+ }
+
+
+
+
+ @media screen and (max-width:1250px) {
+  #bloc_toutnosproduits_supermarcheRayon #sousbloc_toutnosproduits{
+
+  display: block;
+/*   justify-content: space-between;
+  flex-wrap: wrap; */
+}
+  #bloc_toutnosproduits_supermarcheRayon  #sousbloc_toutnosproduits .produit_toutnosproduits {
+    width: 250px;
+   /*  border: 1px solid red;  */
+  }
+#bloc_toutnosproduits_supermarcheRayon  #sousbloc_toutnosproduits .produit_toutnosproduits .bloc_image_produit_toutnosproduits{
+	height: 200px;
+  position: relative;
+
+  border-top-right-radius:  10px;
+  border-top-left-radius:  10px;
+}
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************   SECTION PRODUIT DEALS OF DAYS *************************** */
+#bloc_produitdealofdays_supermarcheRayon {
+
+ 
+}
+
+#bloc_produitdealofdays_supermarcheRayon .titre_principal {
+  margin-top: 5%;
+  margin-bottom: 4%;
+  font-family: 'Comic sans ms', Courier, monospace;
+  text-align: center;
+  color: rgb(2, 53, 77);
+  font-weight: bolder;
+}
+
+#sous_bloc_produitdealofdays_supermarcheRayon {
+ /*  border: 2px solid red; */
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday {
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 300px; 
+  position: relative;
+  min-height: 350px;
+  border-radius: 9px;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px;
+}
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday:hover {
+  transform: translateY(-3px);
+}
+
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday .bloc_image_dealofday {
+  height: 270px;
+   border-radius: 9px;
+}
+
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday .bloc_text_dealofday {
+  position: absolute;
+  margin: 0px 6%;
+  bottom: 0;
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday {
+  text-align: center;
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday .sous_stat {
+  display: inline-block;
+  width: 55px;
+  background-color: white;
+  border-radius: 9px;
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 50px;
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday .sous_stat span {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday .sous_stat span:nth-child(1) {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgb(31, 148, 119);
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday .sous_stat span:nth-child(2) {
+  font-size: .8rem;
+  font-weight: 500;
+  color: gray
+}
+
+.produit_dealofday .bloc_description_dealofday {
+  background-color: white;
+  margin-top: 3%;
+  bottom: 0;
+  border-radius: 9px;
+  padding: 5% 10%;
+  box-shadow: 0 4px 12px rgba(6, 27, 49, 0.11);
+  text-align: left;
+}
+
+.produit_dealofday .bloc_description_dealofday p {
+  font-size: 1rem;
+  font-family: "comic sans ms";
+  margin-bottom: 1.5px;
+
+}
+  .produit_dealofday .bloc_description_dealofday .qte{
+    font-size: 11px;
+  }
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd .newPrice {
+  font-size: 15px;
+  font-weight: bold;
+  color:rgb(31, 148, 119);
+}
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd .oldPrice {
+  font-size: 11.5px;
+  font-weight: bold;
+  color:gray;
+  text-decoration: line-through;
+}
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd .btn {
+
+  font-weight: bold;
+  color:rgb(31, 148, 119);
+  background-color: rgba(0, 255, 191, 0.171);
+  font-size: 12px;
+
+}
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd .btn:hover {
+  color:white;
+  background-color:rgb(31, 148, 119);
+
+}
+
+@media screen and (max-width:800px) {
+  #sous_bloc_produitdealofdays_supermarcheRayon {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width:700px) {
+ #sous_bloc_produitdealofdays_supermarcheRayon {
+  width: 98%;
+  margin: auto;
+}
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday {
+/*   display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px; */
+  width: 48%; 
+/*   position: relative;
+  min-height: 350px;
+  border-radius: 9px;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px; */
+}
+}
+
+
+
+
+
+
+/* ============================    LES PLUS ACHETE ============================= */
+#bloc_produitLesPlusAchete{
+  padding-top: 50px;
+   padding-bottom: 50px;
+}
+#bloc_produitLesPlusAchete .titre_principal {
+  margin:2% 5%;
+  text-align: left;
+  font-weight: bolder;
+}
+
+#bloc_produitLesPlusAchete #sousbloc_produitLesPlusAchete{
+  text-align: center;
+  width: 92%;
+  margin: auto;
+}
+
+
+#bloc_produitLesPlusAchete  #sousbloc_produitLesPlusAchete .produit_produitLesPlusAchete {
+  display: inline-block; 
+  width: 220px; 
+  margin-right: 10px;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px; border-radius: 9px;
+    box-shadow: 0 4px 12px rgba(6, 27, 49, 0.178);
+}
+
+#sousbloc_produitLesPlusAchete .produit_produitLesPlusAchete:hover {
+  transform: translateY(-3px);
+}
+
+#bloc_produitLesPlusAchete  #sousbloc_produitLesPlusAchete .produit_produitLesPlusAchete .bloc_image_produit_produitLesPlusAchete{
+	height: 200px;
+  position: relative;
+
+    border-top-right-radius:  10px;
+border-top-left-radius:  10px;
+
+}
+.bloc_image_produit_produitLesPlusAchete .bloc_type_reduction_produitLesPlusAchete{
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.bloc_image_produit_produitLesPlusAchete .bloc_type_reduction_produitLesPlusAchete .type_produitLesPlusAchete{
+ background-color: rgb(10, 172, 45);
+ font-size: 12px;
+ padding:2px 10px;
+ color:white;
+ border-radius: 10px;
+}
+.bloc_image_produit_produitLesPlusAchete .bloc_type_reduction_produitLesPlusAchete .reduction_produitLesPlusAchete{
+ background-color: var(--bs-danger);
+ font-size: 12px;
+ padding:2px 10px;
+ color:white;
+ border-radius: 10px;
+}
+
+#sousbloc_produitLesPlusAchete .produit_produitLesPlusAchete .bloc_description_produit_produitLesPlusAchete{
+  text-align: left;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+ }
+
+  .bloc_description_produit_produitLesPlusAchete .blocEnd_description{
+    margin-top: 15px;
+  }
+
+   .bloc_description_produit_produitLesPlusAchete .text_titre{
+    font-weight: bold;
+   }
+
+ .bloc_description_produit_produitLesPlusAchete .blocEnd_description .price{
+  font-size: 23px;
+ }
+ 
+  .bloc_description_produit_produitLesPlusAchete .blocEnd_description .priceUnite{
+  font-size: 11.5px;
+ }
+ .blocEnd_description .btn{
+  background-color: rgb(10, 172, 45);
+  color:white;
+  border-radius: 8px;
+ }

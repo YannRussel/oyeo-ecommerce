@@ -1,5 +1,9 @@
 # This file must be used with "source bin/activate" *from bash*
+<<<<<<< HEAD
 # You cannot run it directly
+=======
+# you cannot run it directly
+>>>>>>> 589caa82c75f1fcc38df9e82660516420c1d66d2
 
 deactivate () {
     # reset old environment variables
@@ -14,9 +18,18 @@ deactivate () {
         unset _OLD_VIRTUAL_PYTHONHOME
     fi
 
+<<<<<<< HEAD
     # Call hash to forget past commands. Without forgetting
     # past commands the $PATH changes we made may not be respected
     hash -r 2> /dev/null
+=======
+    # This should detect bash and zsh, which have a hash command that must
+    # be called to get it to forget past commands.  Without forgetting
+    # past commands the $PATH changes we made may not be respected
+    if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
+        hash -r 2> /dev/null
+    fi
+>>>>>>> 589caa82c75f1fcc38df9e82660516420c1d66d2
 
     if [ -n "${_OLD_VIRTUAL_PS1:-}" ] ; then
         PS1="${_OLD_VIRTUAL_PS1:-}"
@@ -25,7 +38,10 @@ deactivate () {
     fi
 
     unset VIRTUAL_ENV
+<<<<<<< HEAD
     unset VIRTUAL_ENV_PROMPT
+=======
+>>>>>>> 589caa82c75f1fcc38df9e82660516420c1d66d2
     if [ ! "${1:-}" = "nondestructive" ] ; then
     # Self destruct!
         unset -f deactivate
@@ -35,6 +51,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+<<<<<<< HEAD
 # on Windows, a path can contain colons and backslashes and has to be converted:
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
@@ -47,6 +64,13 @@ fi
 
 _OLD_VIRTUAL_PATH="$PATH"
 PATH="$VIRTUAL_ENV/"bin":$PATH"
+=======
+VIRTUAL_ENV="/Users/borisbab/Documents/Projet-oyéo/oyeo-ecommerce/env"
+export VIRTUAL_ENV
+
+_OLD_VIRTUAL_PATH="$PATH"
+PATH="$VIRTUAL_ENV/bin:$PATH"
+>>>>>>> 589caa82c75f1fcc38df9e82660516420c1d66d2
 export PATH
 
 # unset PYTHONHOME if set
@@ -59,6 +83,7 @@ fi
 
 if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
     _OLD_VIRTUAL_PS1="${PS1:-}"
+<<<<<<< HEAD
     PS1='(env) '"${PS1:-}"
     export PS1
     VIRTUAL_ENV_PROMPT='(env) '
@@ -68,3 +93,15 @@ fi
 # Call hash to forget past commands. Without forgetting
 # past commands the $PATH changes we made may not be respected
 hash -r 2> /dev/null
+=======
+    PS1="(env) ${PS1:-}"
+    export PS1
+fi
+
+# This should detect bash and zsh, which have a hash command that must
+# be called to get it to forget past commands.  Without forgetting
+# past commands the $PATH changes we made may not be respected
+if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
+    hash -r 2> /dev/null
+fi
+>>>>>>> 589caa82c75f1fcc38df9e82660516420c1d66d2

@@ -8,23 +8,21 @@
 
 {% if section %}
 <section class="product-section" id="section-{{ section.slug }}"
-  {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'Anton', sans-serif !important;" {% endif %}>
+  {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' or section.slug == 'mode-bien-etre' or section.slug == 'maison-deco-pratique' or section.slug == 'cuisine-alimentation' %} style="font-family: 'DM Sans', sans-serif !important;" {% endif %}>
   <div class="section-header">
-    <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' %} style="font-family: 'Urbanist', sans-serif !important; font-size:34px; font-weight: 500 !important;" {% endif %}>{{ section.name }}</h2>
-      {% if show_see_more and section_url %}
-        <a href="{{ section_url }}" class="see-more-link">
-          <span class="see-more">Voir plus</span>
-        </a>
-      {% endif %}
+    <h2 class="section-title" {% if section.slug == 'offres-du-jours' or section.slug == 'tendances-du-moment' or section.slug == 'mode-bien-etre' or section.slug == 'maison-deco-pratique' or section.slug == 'cuisine-alimentation' %} style="font-family: 'DM Sans', sans-serif !important; font-size:34px; font-weight: 500 !important;" {% endif %}>{% if section.slug != 'sponsorise' %}{{ section.name }}{% endif %}</h2>
+      {% if show_see_more and section_url and section.slug != 'sponsorise' %}
+      <span class="see-more disabled" aria-disabled="true">Voir plus</span>
+    {% endif %}
   </div>
 
-  <div class="product-carousel-wrapper" tabindex="0" aria-label="{{ section.name }}">
+  <div class="product-carousel-wrapper" tabindex="0" aria-label="{% if section.slug != 'sponsorise' %}{{ section.name }}{% endif %}">
     <button class="scroll-btn left" aria-label="Gauche">←</button>
 
     <div class="product-grid scroll-container" role="list">
       {% for ps in product_sections %}
         {% with p=ps.product %}
-        <article class="product-card" role="listitem" data-product-id="{{ p.pk }}">
+        <article class="product-card" role="listitem" data-product-id="{{ p.pk }}" style="font-family: 'DM Sans', sans-serif !important;">
           
           <span class="badge">
             {% if p.promo_label %}
@@ -36,7 +34,7 @@
 
           <!-- SVG favori : on a supprimé le compteur -->
           <svg
-            class="fav-icon {% if user_favorites and p.pk in user_favorites %}favorited{% endif %}"
+            class="fav-icon "
             data-product-id="{{ p.pk }}"
             viewBox="0 0 24 24"
             width="28" height="28"

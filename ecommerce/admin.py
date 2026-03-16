@@ -7,7 +7,7 @@ from django.conf import settings
 
 from .models import (
     SliderImage, Category, CategorySlugHistory, MenuColumn, MenuColumnItem,
-    Brand, Product, ProductImage, Section, ProductSection, Favorite
+    Brand, Product, ProductImage, Section, ProductSection
 )
 
 
@@ -302,18 +302,3 @@ class MenuColumnItemAdmin(AdminHelpMixin, admin.ModelAdmin):
     list_filter = ('is_card', 'is_active')
     raw_id_fields = ('menu_column', 'category')
 
-
-# -------------------------
-# Favorite admin
-# -------------------------
-@admin.register(Favorite)
-class FavoriteAdmin(AdminHelpMixin, admin.ModelAdmin):
-    admin_help = """
-    <h3>Guide rapide — Favoris</h3>
-    <p>Liste des utilisateurs ayant ajouté des produits en favoris.</p>
-    """
-
-    list_display = ('user', 'product', 'created_at')
-    list_filter = ('created_at',)
-    raw_id_fields = ('user', 'product')
-    search_fields = ('user__username', 'product__name')

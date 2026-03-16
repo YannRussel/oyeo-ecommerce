@@ -20,7 +20,6 @@ from .models import (
     ProductImage,
     Section,
     ProductSection,
-    Favorite,
 )
 
 # core/views.py
@@ -34,8 +33,7 @@ from .models import ShopSettings
 from ecommerce.utils import create_default_sections
 from django.utils.text import slugify
 
-from decimal import Decimal, InvalidOperation
-from django.views.decorators.http import require_http_methods
+
 
 from django.http import HttpResponse
 from django.core.management import call_command
@@ -83,116 +81,7 @@ def build_breadcrumbs(category):
     return crumbs
 
 
-def _get_user_favorites_for_product_ids(user, product_ids):
-    """
-    Retourne un set d'ids de produits favoris pour l'utilisateur donné.
-    Si user est anonymous, retourne set() rapidement.
-    """
-    if not user.is_authenticated or not product_ids:
-        return set()
-    return set(Favorite.objects.filter(user=user, product_id__in=product_ids).values_list('product_id', flat=True))
 
-
-# ------------------------
-# Cart helpers (session)
-# ------------------------
-CART_SESSION_KEY = "cart"
-
-
-def _get_cart(request):
-    """
-    Retourne le panier stocké en session.
-    Format:
-    {
-        "12": {"quantity": 2},
-        "8": {"quantity": 1}
-    }
-    """
-    cart = request.session.get(CART_SESSION_KEY, {})
-    if not isinstance(cart, dict):
-        cart = {}
-    return cart
-
-
-def _save_cart(request, cart):
-    request.session[CART_SESSION_KEY] = cart
-    request.session.modified = True
-
-
-def _cart_count(cart):
-    return sum(int(item.get("quantity", 0)) for item in cart.values())
-
-
-def _build_cart_context(request):
-    """
-    Construit les données prêtes pour recap_panier.html
-    à partir du panier en session.
-    """
-    cart = _get_cart(request)
-    product_ids = []
-
-    for key in cart.keys():
-        try:
-            product_ids.append(int(key))
-        except (TypeError, ValueError):
-            continue
-
-    main_img_qs = ProductImage.objects.filter(is_main=True)
-
-    products_qs = (
-        Product.objects
-        .filter(pk__in=product_ids, is_active=True)
-        .select_related("brand", "primary_category")
-        .prefetch_related(Prefetch("images", queryset=main_img_qs, to_attr="prefetched_main_images"))
-    )
-
-    products_map = {p.pk: p for p in products_qs}
-
-    cart_items = []
-    cart_subtotal = Decimal("0.00")
-
-    for product_id_str, item_data in cart.items():
-        try:
-            product_id = int(product_id_str)
-        except (TypeError, ValueError):
-            continue
-
-        product = products_map.get(product_id)
-        if not product:
-            continue
-
-        quantity = int(item_data.get("quantity", 1))
-        if quantity < 1:
-            quantity = 1
-
-        unit_price = product.price_current or Decimal("0.00")
-        total_price = unit_price * quantity
-        cart_subtotal += total_price
-
-        cart_items.append({
-            "product": product,
-            "quantity": quantity,
-            "unit_price": unit_price,
-            "total_price": total_price,
-            "show_options": False,
-            "sizes": [],
-            "colors": [],
-            "selected_size": None,
-            "selected_color": None,
-            "is_donation_eligible": False,
-        })
-
-    shipping_total = Decimal("0.00")
-    cart_total = cart_subtotal + shipping_total
-
-    return {
-        "cart_items": cart_items,
-        "cart_count": _cart_count(cart),
-        "cart_subtotal": cart_subtotal,
-        "shipping_total": shipping_total,
-        "cart_total": cart_total,
-        "beneficiaries": [],
-    }
 
 def get_leaf_categories(category):
     """
@@ -258,8 +147,6 @@ def category_detail(request, slug):
         child_leaf_ids.extend([c.pk for c in leaves])
 
     featured_products = Product.objects.none()
-    featured_favorites = set()
-
     if child_leaf_ids:
         featured_base_qs = Product.objects.filter(
             Q(primary_category__in=child_leaf_ids) | Q(categories__in=child_leaf_ids),
@@ -286,8 +173,6 @@ def category_detail(request, slug):
             )
 
             featured_product_ids = [p.pk for p in featured_products]
-            featured_favorites = _get_user_favorites_for_product_ids(request.user, featured_product_ids)
-
     # --- queryset de base : primary_category OU categories (M2M) ---
     base_qs = Product.objects.filter(
         Q(primary_category__in=leaf_ids) | Q(categories__in=leaf_ids),
@@ -304,9 +189,7 @@ def category_detail(request, slug):
             'products': [],
             'page_obj': None,
             'breadcrumbs': breadcrumbs,
-            'user_favorites': set(),
             'featured_products': featured_products,
-            'featured_favorites': featured_favorites,
         })
 
     # Mélange aléatoire des ids (en Python)
@@ -334,8 +217,6 @@ def category_detail(request, slug):
     page_obj = paginator.get_page(page_number)
 
     page_product_ids = [p.pk for p in page_obj.object_list]
-    user_favorites = _get_user_favorites_for_product_ids(request.user, page_product_ids)
-
     breadcrumbs.append({"label": f"{len(product_ids)} Articles", "url": None})
 
     return render(request, 'ecommerce/categorie.html', {
@@ -344,9 +225,7 @@ def category_detail(request, slug):
         'products': page_obj.object_list,  # liste des produits à afficher
         'page_obj': page_obj,
         'breadcrumbs': breadcrumbs,
-        'user_favorites': user_favorites,
         'featured_products': featured_products,
-        'featured_favorites': featured_favorites,
     })
 
 
@@ -355,234 +234,45 @@ def category_detail(request, slug):
 # ------------------------
 def section_list(request, slug):
     """
-    Liste paginée et dynamique des produits d'une section.
-    Affiche la page decouvrir.html avec un rendu plus moderne.
+    Liste paginée des ProductSection actifs pour une section.
+    Passe page_obj (page d'objets ProductSection) ET product_sections (liste).
     """
     section = get_object_or_404(Section, slug=slug, is_active=True)
     now = timezone.now()
 
+    # queryset ProductSection valides pour cette section
     ps_qs = ProductSection.objects.filter(
         section=section,
         is_active=True
     ).filter(
         Q(start_date__lte=now) | Q(start_date__isnull=True),
         Q(end_date__gte=now) | Q(end_date__isnull=True)
-    ).select_related(
-        'product',
-        'product__brand',
-        'product__primary_category'
-    ).order_by('order', '-created_at')
+    ).select_related('product', 'product__brand').order_by('order', '-created_at')
 
+    # précharger l'image principale si tu utilises ProductImage.is_main
     main_img_qs = ProductImage.objects.filter(is_main=True)
-    ps_qs = ps_qs.prefetch_related(
-        Prefetch('product__images', queryset=main_img_qs, to_attr='prefetched_main_images')
-    )
+    ps_qs = ps_qs.prefetch_related(Prefetch('product__images', queryset=main_img_qs, to_attr='prefetched_main_images'))
 
+    # pagination (ex : 24 produits par page)
     paginator = Paginator(ps_qs, 24)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
-    product_ids = [ps.product_id for ps in page_obj.object_list]
-    user_favorites = _get_user_favorites_for_product_ids(request.user, product_ids)
-
-    # blocs dynamiques pour “dynamiser” la page
-    total_products = ps_qs.count()
-    promoted_count = ps_qs.filter(product__is_promoted=True).count()
-    in_stock_count = ps_qs.filter(product__stock__gt=0).count()
-
-    # catégories présentes dans la section
-    categories = (
-        Category.objects.filter(
-            Q(products__sections=section) | Q(products_extra__sections=section),
-            is_active=True
-        )
-        .distinct()
-        .order_by('name')[:12]
-    )
-
     context = {
         'section': section,
-        'page_obj': page_obj,
-        'product_sections': page_obj.object_list,
-        'user_favorites': user_favorites,
-        'total_products': total_products,
-        'promoted_count': promoted_count,
-        'in_stock_count': in_stock_count,
-        'categories': categories,
+        'page_obj': page_obj,          # page d'objets ProductSection
+        'product_sections': page_obj.object_list,  # compatibilité templates
     }
-
-    return render(request, 'ecommerce/decouvrir.html', context)
-
-
-# ------------------------
-# Cart views
-# ------------------------
-def recap_panier(request):
-    context = _build_cart_context(request)
-    return render(request, "ecommerce/recap_panier.html", context)
+    return render(request, 'ecommerce/section_list.html', context)
 
 
-@require_POST
-def add_to_cart(request):
-    """
-    Ajoute un produit au panier.
-    Accepte JSON ou form-data:
-    - product_id
-    - quantity (optionnel)
-    """
-    if request.content_type == "application/json":
-        try:
-            payload = json.loads(request.body.decode())
-        except Exception:
-            return HttpResponseBadRequest("JSON invalide")
-        product_id = payload.get("product_id")
-        quantity = payload.get("quantity", 1)
-    else:
-        product_id = request.POST.get("product_id")
-        quantity = request.POST.get("quantity", 1)
-
-    if not product_id:
-        return HttpResponseBadRequest("product_id manquant")
-
-    try:
-        product = Product.objects.get(pk=product_id, is_active=True)
-    except Product.DoesNotExist:
-        raise Http404("Produit introuvable")
-
-    try:
-        quantity = int(quantity)
-    except (TypeError, ValueError):
-        quantity = 1
-
-    if quantity < 1:
-        quantity = 1
-
-    cart = _get_cart(request)
-    key = str(product.pk)
-
-    if key in cart:
-        cart[key]["quantity"] = int(cart[key].get("quantity", 0)) + quantity
-    else:
-        cart[key] = {"quantity": quantity}
-
-    _save_cart(request, cart)
-
-    context = _build_cart_context(request)
-
-    return JsonResponse({
-        "success": True,
-        "message": "Produit ajouté au panier",
-        "cart_count": context["cart_count"],
-        "cart_total": str(context["cart_total"]),
-        "product_id": product.pk,
-    })
-
-
-@require_POST
-def update_cart_quantity(request):
-    """
-    Met à jour la quantité d'un produit dans le panier.
-    Accepte:
-    - product_id
-    - quantity
-    """
-    if request.content_type == "application/json":
-        try:
-            payload = json.loads(request.body.decode())
-        except Exception:
-            return HttpResponseBadRequest("JSON invalide")
-        product_id = payload.get("product_id")
-        quantity = payload.get("quantity")
-    else:
-        product_id = request.POST.get("product_id")
-        quantity = request.POST.get("quantity")
-
-    if not product_id:
-        return HttpResponseBadRequest("product_id manquant")
-
-    try:
-        quantity = int(quantity)
-    except (TypeError, ValueError):
-        return HttpResponseBadRequest("quantity invalide")
-
-    cart = _get_cart(request)
-    key = str(product_id)
-
-    if key not in cart:
-        return JsonResponse({"success": False, "error": "Produit absent du panier"}, status=404)
-
-    if quantity <= 0:
-        del cart[key]
-    else:
-        cart[key]["quantity"] = quantity
-
-    _save_cart(request, cart)
-    context = _build_cart_context(request)
-
-    item_total = "0"
-    for item in context["cart_items"]:
-        if item["product"].pk == int(product_id):
-            item_total = str(item["total_price"])
-            break
-
-    return JsonResponse({
-        "success": True,
-        "cart_count": context["cart_count"],
-        "cart_subtotal": str(context["cart_subtotal"]),
-        "cart_total": str(context["cart_total"]),
-        "item_total": item_total,
-        "product_id": int(product_id),
-    })
-
-
-@require_POST
-def remove_from_cart(request):
-    """
-    Supprime un produit du panier.
-    """
-    if request.content_type == "application/json":
-        try:
-            payload = json.loads(request.body.decode())
-        except Exception:
-            return HttpResponseBadRequest("JSON invalide")
-        product_id = payload.get("product_id")
-    else:
-        product_id = request.POST.get("product_id")
-
-    if not product_id:
-        return HttpResponseBadRequest("product_id manquant")
-
-    cart = _get_cart(request)
-    key = str(product_id)
-
-    if key in cart:
-        del cart[key]
-        _save_cart(request, cart)
-
-    context = _build_cart_context(request)
-
-    return JsonResponse({
-        "success": True,
-        "cart_count": context["cart_count"],
-        "cart_subtotal": str(context["cart_subtotal"]),
-        "cart_total": str(context["cart_total"]),
-        "product_id": int(product_id),
-    })
-
-
-def checkout(request):
-    """
-    Vue simple temporaire.
-    """
-    context = _build_cart_context(request)
-    return render(request, "ecommerce/checkout.html", context)
 # ------------------------
 # Product detail
 # ------------------------
 def product_detail(request, slug):
     """
     Détail produit : récupère le product par slug et précharge l'image principale.
-    Fournit aussi is_favorited pour le user connecté.
+    
     """
     product = get_object_or_404(Product, slug=slug, is_active=True)
 
@@ -596,52 +286,12 @@ def product_detail(request, slug):
         product = get_object_or_404(Product, slug=slug, is_active=True)
 
     # état favori pour le produit
-    is_favorited = False
-    if request.user.is_authenticated:
-        is_favorited = Favorite.objects.filter(user=request.user, product=product).exists()
-
     context = {
         'product': product,
-        'is_favorited': is_favorited,
     }
     return render(request, 'ecommerce/produit_detail.html', context)
 
 
-# ------------------------
-# Toggle favorite (AJAX)
-# ------------------------
-@require_POST
-@login_required
-def toggle_favorite(request):
-    """
-    Toggle favorite via AJAX.
-    Accepte JSON ou form-data. Retourne JSON: {'favorited': bool, 'count': int, 'product_id': id}
-    """
-    # support JSON body ou form-data
-    if request.content_type == 'application/json':
-        try:
-            payload = json.loads(request.body.decode())
-        except Exception:
-            return HttpResponseBadRequest("JSON invalide")
-        product_id = payload.get('product_id')
-    else:
-        product_id = request.POST.get('product_id')
-
-    if not product_id:
-        return HttpResponseBadRequest("product_id manquant")
-
-    product = get_object_or_404(Product, pk=product_id)
-
-    fav, created = Favorite.objects.get_or_create(user=request.user, product=product)
-    if not created:
-        # existait déjà -> supprimer (toggle off)
-        fav.delete()
-        favorited = False
-    else:
-        favorited = True
-
-    count = Favorite.objects.filter(product=product).count()
-    return JsonResponse({'favorited': favorited, 'count': count, 'product_id': product.pk})
 # ------------------------
 # Menu API (si utilisé)
 # ------------------------

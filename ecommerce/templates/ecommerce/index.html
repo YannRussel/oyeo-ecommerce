@@ -19,6 +19,26 @@
             border-radius: 50% !important;
             line-height: 1 !important;
         }
+
+        /* Positionner les flèches droites des carrousels à l'extrémité droite */
+        .product-carousel-wrapper { position: relative; width: 100%; }
+        .product-carousel-wrapper .scroll-btn.right {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        /* Espace au-dessus de la section témoignages et ajustement des bannières */
+        #banners { margin-bottom: 28px; }
+        .big-banners { display:flex; gap:24px; align-items:stretch; }
+        .big-banners-1, .big-banners-2 { padding: 28px; border-radius: 8px; background: #fff; }
+        #nyota-testimonials-section { margin-top: 60px; padding-top: 12px; }
+        @media (max-width: 768px) {
+            #nyota-testimonials-section { margin-top: 32px; }
+            .product-carousel-wrapper .scroll-btn.right { right: 8px; }
+        }
     </style>
 
     <!-- CROUSSEL  -- SLIDER  -->
@@ -97,24 +117,25 @@
         <div class="sponsored-inner">
             <!-- Colonne texte -->
             <div class="sponsored-left">
-                <div class="sponsored-label">Sponsorisé</div>
-                <h2 class="sponsored-title">Tommy Hilfiger<br><span class="sponsored-subtitle">Nouvelles
-                        chaussures</span>
+                <div class="sponsored-label" style="font-family: 'DM Sans', sans-serif !important; margin-top: -70px; margin-bottom: 40px;">Sponsorisé</div>
+                <h2 class="sponsored-title" style="font-family: 'DM Sans', sans-serif !important;">Oyéo  Revolut<br><span class="sponsored-subtitle" style="font-family: 'DM Sans', sans-serif !important;">Nouvelles
+                    chaussures</span>
                 </h2>
 
-                <a class="sponsored-cta cta-asym" href="#" aria-label="Découvrir la collection">
-                            Découvrir
-                        </a>
+                <a class="sponsored-cta cta-asym" href="#" aria-label="Découvrir la collection" style="font-family: 'DM Sans', sans-serif !important;">
+                        Découvrir
+                    </a>
             </div>
+            
+                <!-- Colonne image (Bloc photo remplaçant la grille) -->
+                <div class="sponsored-photo-block" style="display:flex; justify-content:flex-end; align-items:center; width:100%; min-height:250px;">
+                    <div style="position:relative; width:600px; height:245px; border-radius:12px; overflow:hidden; box-shadow:0 6px 18px rgba(0,0,0,0.12);">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80" alt="Oyéo Revolut - Nouvelles chaussures" style="width:100%; height:100%; object-fit:cover; display:block;">
+                    </div>
+                </div>
 
-            <!-- Colonne image -->
-            <div class="sponsored-right" role="img" aria-label="Visuel Tommy Hilfiger">
-                <!-- Remplace le src par ton image -->
-                <img class="hero-img" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-                    alt="Photo de la collection Tommy Hilfiger">
             </div>
-        </div>
-    </section>
+        </section>
 
 
 {% render_section 'sponsorise' 8 %}
@@ -126,24 +147,18 @@
         <section class="decouverte">
             <div class="contenu-section"
                 style="background: url('https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=800&q=60') center; background-size: cover;">
-                <h1>Everyday Fresh &
-                    Clean with Our
-                    Products</h1>
-                <a href="decouvrir.html">Je decouvre <i class="fi-rs-arrow-small-right"></i></a>
+                <h1 style="font-family: 'DM Sans', sans-serif !important;">Produits frais et propres pour votre quotidien</h1>
+                <a href="decouvrir.html" style="font-family: 'DM Sans', sans-serif !important;">Je découvre <i class="fi-rs-arrow-small-right"></i></a>
             </div>
             <div class="contenu-section"
                 style="background: url('https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=800&q=60') center; background-size: cover;">
-                <h1>Everyday Fresh &
-                    Clean with Our
-                    Products</h1>
-                <a href="">Commencer la journée <i class="fi-rs-arrow-small-right"></i></a>
+                <h1 style="font-family: 'DM Sans', sans-serif !important;">Produits frais et propres pour votre quotidien</h1>
+                <a href="" style="font-family: 'DM Sans', sans-serif !important;">Commencer la journée <i class="fi-rs-arrow-small-right"></i></a>
             </div>
             <div class="contenu-section"
                 style="background: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60') center; background-size: cover;">
-                <h1>Everyday Fresh &
-                    Clean with Our
-                    Products</h1>
-                <a href="">Je decouvre</a>
+                <h1 style="font-family: 'DM Sans', sans-serif !important;">Produits frais et propres pour votre quotidien</h1>
+                <a href="" style="font-family: 'DM Sans', sans-serif !important;">Je découvre</a>
             </div>
         </section>
     </div>
@@ -151,7 +166,7 @@
     <br>
 
     <section class="collection5-section">
-        <h2 style="text-align:center; margin-bottom:40px; color:#2b3940; font-weight:700; font-size:2rem;">
+        <h2 style="text-align:center; margin-bottom:40px; color:#2b3940; font-weight:700; font-size:2rem; font-family: 'DM Sans', sans-serif !important;">
             Découvrez nos univers
         </h2>
         <div class="collection5-wrapper">
@@ -256,6 +271,8 @@
                 </div>
 
             </div>
+
+            
         </div>
     </section>
 
@@ -271,70 +288,69 @@
 
 
     </br>
-    <section class="promo-banner">
-        <div class="promo-content">
-            <span class="promo-tag p-2 rounded text-md">Découvrez les meilleures marque</span>
-            <h2 class="promo-title" style="color: white;">MARQUE POUR TOUS</h2>
-            <p class="promo-dates">Du 07 au 20 Juillet</p>
-            <h3 class="promo-subtitle">Consultez Nos articles</h3>
-            <ul class="promo-details">
-                <li>Xiaomi Redmi A5 – 6.88″</li>
-                <li>4G – 8/32 Mpx – Garantie 12 Mois</li>
-                <li>Mercredi 16 Juillet à 12h30</li>
-                <li>Uniquement sur l’app</li>
-            </ul>
+        <section class="promo-banner" style="background: #000000; padding: 40px; border-radius: 0; display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30px; margin-bottom: 30px; font-family: 'DM Sans', sans-serif;">
+        <div class="promo-content" style="flex: 1; padding-top: 20px;">
+            <div style="display: inline-block; background-color: #e26733; padding: 8px 15px; border-radius: 4px; margin-bottom: 5px;">
+                <span style="color: white; font-weight: 700; font-family: 'DM Sans', sans-serif !important; font-size: 20px; letter-spacing: 0.5px; text-transform: uppercase;">DÉCOUVREZ LES MEILLEURES MARQUE</span>
+            </div>
+            <h2 class="promo-title" style="color: white; font-family: 'DM Sans', sans-serif !important; font-size: 24px; font-weight: 500; text-transform: uppercase; margin: 0; padding-left: 5px;">MARQUE POUR TOUS</h2>
         </div>
 
-        <div class="promo-visual ">
-            <div class="price-badge">1 FCFA</div>
-            <div class="promo-image shadow" style="background-image: url('./ressources/img/habit/about-6.png'); background-size: cover;
-  background-position: center; background-repeat: no-repeat;">
-
+            <div class="promo-visual" style="display:flex; flex-direction:row; flex-wrap:nowrap; gap:30px; justify-content:flex-end; align-items:stretch; width:auto; flex-shrink:0;">
+            <!-- Boîte droite unique avec bouton 'Découvrir' (gauche supprimée) -->
+            <div style="position:relative; width:600px; height:305px;">
+                <div class="promo-image shadow" style="background-color:#ffffff; background-image:url('/static/ecommerce/ressources/img/habit/about-6.png'); background-size:cover; background-position:center; width:100%; height:100%; border-radius:8px; box-shadow: 0 8px 18px rgba(0,0,0,0.05); display:block;"></div>
+                <a href="#" class="promo-btn text-light" style="position:absolute; bottom:-16px; left:50%; transform:translateX(-50%); background:#de622b; color:#fff; padding:8px 30px; border-radius:30px; font-weight:700; font-family: 'DM Sans', sans-serif !important; text-decoration:none; box-shadow:0 4px 12px rgba(0,0,0,0.15); font-size: 16px; z-index: 10; white-space:nowrap;">Découvrir</a>
             </div>
-            <a href="#" class="promo-btn text-light">Découvrir →</a>
-
         </div>
     </section>
-
-
-
-{% render_section 'marque-pour-tous' 8 %}
 
 
     </br>
     <section id="occasion-banner" class="occasion-section product-section">
-        <h2>Découvrez les meilleures affaires d'occasion près de chez vous</h2>
-        <p>Donnez une seconde vie à vos objets et faites de bonnes affaires dès aujourd’hui !</p>
+        <h2 style="font-family: 'DM Sans', sans-serif !important;">Découvrez les meilleures affaires d'occasion près de chez vous</h2>
+        <p style="font-family: 'DM Sans', sans-serif !important;">Donnez une seconde vie à vos objets et faites de bonnes affaires dès aujourd’hui !</p>
         <div class="occasion-btn-group">
-            <button class="occasion-btn">Je découvre</button>
+            <button class="occasion-btn" style="font-family: 'DM Sans', sans-serif !important; transition: none !important; animation: none !important; transform: none !important;">Je découvre</button>
         </div>
     </section>
 
+    <!-- Séction indépendante pour les produits d'occasion -->
+    <section id="occasion-products" class="occasion-products product-section" style="margin-top:20px;">
+        <div class="section-header">
+            <!-- titre supprimé: section sans intitulé -->
+        </div>
 
-{% render_section 'marque-pour-tous' 8 %}
+        <div class="product-carousel-wrapper" tabindex="0" aria-label="Occasions">
+            <button class="scroll-btn left" aria-label="Gauche">←</button>
 
+            <div class="product-grid scroll-container" role="list">
+                <p class="no-products">Aucun produit pour le moment.</p>
+            </div>
 
-    <hr>
+            <button class="scroll-btn right" aria-label="Droite">→</button>
+        </div>
+    </section>
 
     <div class="container_fluid_">
-        <section id="banners" class="section-p1">
+        <section id="banners" class="section-p1" style="margin-top: 40px;">
             <header class="ns-header" style="text-align: center;">
-                <h2 id="ns-services-title enGras" style="color: black; font-size: 40px; font-weight: bold;">Services
+                <h2 id="ns-services-title enGras" style="color: black; font-size: 40px; font-weight: bold; font-family: 'DM Sans', sans-serif !important;">Services
                     Professionnels</h2>
-                <p style="font-size: 20px;">Des solutions sur mesure pour développer votre entreprise et atteindre vos
+                <p style="font-size: 20px; font-family: 'DM Sans', sans-serif !important;">Des solutions sur mesure pour développer votre entreprise et atteindre vos
                     objectifs.</p>
             </header>
-            <div class="big-banners">
-                <div class="big-banners-1">
+            <div class="big-banners" style="font-family: 'DM Sans', sans-serif !important;">
+                <div class="big-banners-1" style="font-family: 'DM Sans', sans-serif;">
                     <h4>Avec Oyeo etendez vos limites</h4>
                     <h2>Besion d'un Professionnel competetent ?</h2>
-                    <span>trouvez facilement un peintre, un prestataire ou un expert pour tous vos besions</span>
+                    <p>trouvez facilement un peintre, un prestataire ou un expert pour tous vos besions</p>
                     <!-- <button class="banner-btn">Learn More</button> -->
                 </div>
-                <div class="big-banners-2">
+                <div class="big-banners-2" style="font-family: 'DM Sans', sans-serif;">
                     <h4>Etes vous a l'etranger ? On s'occupe de tout</h4>
                     <h2>upcomming season</h2>
-                    <span>The best classic dress is on sale at cara</span>
+                    <p>The best classic dress is on sale at cara</p>
                     <!-- <button class="banner-btn">Collection</button> -->
                 </div>
             </div>
@@ -349,13 +365,13 @@
 
     <!-- ===== end services ===== -->
     <!-- ===== NYOTA: Testimonials ===== -->
-    <section id="nyota-testimonials-section" class="nyota-wrap nyota-testimonials" aria-labelledby="nyota-test-title">
-        <h3 id="nyota-test-title" class="nyota-testimonials-title">Que disent nos meilleurs services — Que disent nos
+    <section id="nyota-testimonials-section" class="nyota-wrap nyota-testimonials" aria-labelledby="nyota-test-title" style="background: #e0e0e2; padding: 30px 0; font-family: 'DM Sans', sans-serif !important;">
+        <h3 id="nyota-test-title" class="nyota-testimonials-title" style="font-family: 'DM Sans', sans-serif !important;">Que disent nos meilleurs services — Que disent nos
             clients ?</h3>
 
         <div class="nyota-test-cards" role="list">
             <article class="nyota-test-card" role="listitem" aria-label="Témoignage 1">
-                <div class="nyota-test-rate">★★★★★ <span
+                <div class="nyota-test-rate" style="color:#000;">★★★★★ <span
                         style="font-weight:600;color:#6b7280;margin-left:8px;font-size:13px">4.8 (124)</span></div>
                 <p class="nyota-test-text"><strong>Quality of work was excellent</strong><br>J'ai eu une très bonne
                     expérience
@@ -374,7 +390,7 @@
             </article>
 
             <article class="nyota-test-card" role="listitem" aria-label="Témoignage 2">
-                <div class="nyota-test-rate">★★★★★ <span
+                <div class="nyota-test-rate" style="color:#000;">★★★★★ <span
                         style="font-weight:600;color:#6b7280;margin-left:8px;font-size:13px">4.9 (89)</span></div>
                 <p class="nyota-test-text"><strong>Green Cleaning</strong><br>J'adore leur usage de produits éco sans
                     compromettre la propreté.</p>
@@ -393,7 +409,7 @@
             </article>
 
             <article class="nyota-test-card" role="listitem" aria-label="Témoignage 3">
-                <div class="nyota-test-rate">★★★★★ <span
+                <div class="nyota-test-rate" style="color:#000;">★★★★★ <span
                         style="font-weight:600;color:#6b7280;margin-left:8px;font-size:13px">4.7 (70)</span></div>
                 <p class="nyota-test-text"><strong>Luxury Car Cleaning</strong><br>Très bonne finition et service
                     premium.</p>
@@ -491,23 +507,19 @@
 
 
     <br>
-    <section id="newsletter">
-        <div class="newsletter_div">
-            <h3>S'inscrire sur notre newsletter</h3>
-            <h5>Rejoins notre communauté et sois <span class="text-primary"> le premier à découvrir nos offres
-                    exclusives et nos nouvelles
-                    affaires
-                    !</span>
-            </h5>
+    <section id="newsletter" class="section-p1 section-m1" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; padding: 40px 60px; margin-top: 40px; margin-bottom: 20px; font-family: 'DM Sans', sans-serif; background-color: #fbf7f3; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.03);">
+    <div class="newsletter_text" style="flex: 1; max-width: 45%; min-width: 300px; margin-bottom: 20px;">
+        <h3 style="font-weight: 700; font-size: 24px; color: #000; margin-bottom: 10px; font-family: 'DM Sans', sans-serif !important;">S'inscrire sur notre newsletter</h3>
+        <p style="font-size: 14px; color: #333; margin: 0; font-family: 'DM Sans', sans-serif !important;">Rejoins notre communauté et sois le premier à découvrir nos offres exclusives et nos nouvelles</p>
+    </div>
+    
+    <form action="" style="flex: 1; min-width: 300px; display:flex; align-items: flex-end; gap: 30px; padding-bottom:5px;">
+        <div style="flex: 1; border-bottom: 2px solid #bbb; padding-bottom: 5px; position:relative;">
+            <input type="email" placeholder="votre@email.com" style="width: 100%; border: none; outline: none; font-size: 20px; color: #888; text-align: left; background: transparent; padding: 10px 0; font-weight:500; font-family: 'DM Sans', sans-serif !important;" aria-label="Votre email">
         </div>
-        <form action="" class="newsletter_div">
-            <div class="input-group mb-3 w-100 border">
-                <input type="email" class="form-control" placeholder="your email please "
-                    aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Sign Up</button>
-            </div>
-        </form>
-    </section>
+        <button type="submit" style="background-color: #000; color: #fff; border: none; border-radius: 8px; padding: 16px 38px; font-size: 18px; font-weight: bold; cursor: pointer; text-transform: uppercase;">S'inscrire</button>
+    </form>
+</section>
 
 
 {% endblock %}

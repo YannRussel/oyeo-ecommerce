@@ -1,0 +1,924 @@
+/* **************   BLOC LIVRAISON EXPRESS , CLIET SATISFAIT ....    ******************* */
+#bloc_disponible_livraisonexpress_cltsatisfait{
+    width: 92%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+ #bloc_disponible_livraisonexpress_cltsatisfait   #sous_bloc_disponible_livraisonexpress_cltsatisfait{
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    flex-wrap: wrap;
+ }
+ #bloc_disponible_livraisonexpress_cltsatisfait   #sous_bloc_disponible_livraisonexpress_cltsatisfait .element_disponible_livraisonexpress_cltsatisfait{
+    white-space: nowrap;
+    text-align: center;
+    transition: 0.3s all ease-in-out;
+ }
+
+
+ #bloc_disponible_livraisonexpress_cltsatisfait   #sous_bloc_disponible_livraisonexpress_cltsatisfait .element_disponible_livraisonexpress_cltsatisfait .valeur{
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(31, 148, 119);
+ }
+
+  #bloc_disponible_livraisonexpress_cltsatisfait   #sous_bloc_disponible_livraisonexpress_cltsatisfait .element_disponible_livraisonexpress_cltsatisfait .text_descriptif{
+  color: rgb(68, 68, 68);
+  margin: 1% 0;
+ }
+   #bloc_disponible_livraisonexpress_cltsatisfait   #sous_bloc_disponible_livraisonexpress_cltsatisfait .element_disponible_livraisonexpress_cltsatisfait:hover{
+  transform: translateY(-2px);
+ }
+   #bloc_disponible_livraisonexpress_cltsatisfait   #sous_bloc_disponible_livraisonexpress_cltsatisfait .element_disponible_livraisonexpress_cltsatisfait:hover .valeur{
+  color: rgb(15, 124, 64)!important;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =================  bloc_featured_categorie ================================== */
+#bloc_featured_categorie{
+    width: 92%;
+    margin: auto;
+    margin-top: 4%;
+    margin-bottom: 5%;
+}
+#bloc_featured_categorie .titre_principal{
+  color: rgb(2, 53, 77);
+  font-weight: bolder;
+}
+ #bloc_featured_categorie #scrollLeft,  #bloc_featured_categorie #scrollRight{
+  display: inline-block;
+  background-color: rgb(31, 148, 119);
+  color: white;
+ }
+
+
+
+.filters-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.filters-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    flex-grow: 1;
+    justify-content: space-between;
+    margin-top: 2%;
+}
+
+.filters-container::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-item {
+  display: inline-block;
+  text-align: center;
+  min-width: 120px;
+  /* border: 1px solid rgba(201, 196, 196, 0.486);  */
+  white-space: nowrap;
+  margin-left: .5%;
+  margin-right: .5%;
+  border-radius: 10px;
+  height: auto;
+  padding: 5px;
+   transition: 0.3s;
+   text-decoration: none;
+  color: rgb(2, 53, 77);
+
+  background-color: rgba(255, 185, 127, 0.185);
+   /* 
+    flex: 0 0 auto;
+    margin-right: 10px;
+    border-radius: 19px;
+    border: 1px solid var(--gray);
+     font-size: 13px; */
+}
+.filter-item:nth-child(1) {
+background-color: rgba(127, 255, 212, 0.185);
+}
+.filter-item:nth-child(2) {
+background-color: rgba(142, 255, 127, 0.185);
+}
+.filter-item:nth-child(3) {
+background-color: rgba(255, 236, 127, 0.185);
+}
+.filter-item:nth-child(4) {
+background-color: rgba(255, 185, 127, 0.185);
+}
+.filter-item:nth-child(5) {
+background-color: rgba(255, 127, 202, 0.185);
+}
+.filter-item:nth-child(6) {
+background-color: rgba(102, 166, 170, 0.185);
+}
+.filter-item:nth-child(7) {
+background-color: rgba(136, 127, 255, 0.185);
+}
+.filter-item:nth-child(8) {
+background-color: rgba(69, 129, 20, 0.185);
+}
+.filter-item:nth-child(9) {
+background-color: rgba(116, 14, 119, 0.185);
+}
+
+.filter-item:nth-child(10) {
+background-color: rgba(70, 119, 14, 0.185);
+}
+.filter-item:nth-child(11) {
+background-color: rgba(245, 248, 36, 0.185);
+}
+.filter-item .filter-item-titre{
+  font-size: 1rem;
+   margin:2px 0px;
+}
+.filter-item p{
+  font-size: 12px;
+  margin:3px 0px;
+}
+
+
+
+.filter-item:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
+            background: linear-gradient(to right, rgba(0, 204, 153, 0.267), rgba(153, 255, 102, 0.26)) !important;
+            color: black;
+            border: 2px solid linear-gradient(to right, rgba(0, 204, 153, 0.267), rgba(153, 255, 102, 0.26)) !important;
+  }
+
+.scroll-arrow {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.scroll-arrow:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.scroll-arrow:hover:not(:disabled) {
+    background-color: #e9ecef;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================   BANNIER ============================================= */
+#supermarche_bannier{
+    min-height: 65vh;
+    background-color: rgba(31, 148, 119, 0.137);
+    width: 92%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(6, 27, 49, 0);
+}
+
+
+
+#supermarche_bannier   #bloc_container_supermarche_bannier {
+
+    position: relative;
+    height: 100%;
+
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 5%;
+}
+ #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .livraison_ville{
+    color: rgb(35, 148, 31);
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 3px 9px;
+    font-size: 14px;
+    background-color: rgba(31, 148, 119, 0.397);
+    width: fit-content;
+  }
+#supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one{
+   /*  background-color: rgb(255, 255, 255);
+ */
+}
+
+ #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one  .titre_principal{
+    margin-top: 20px;
+    font-size: 3rem;
+    font-weight: bold;
+ }
+  #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one  .titre_principal span{
+   display: block;
+ }
+ #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one  .titre_principal span:nth-child(2){
+   color: rgb(31, 148, 119);
+ }
+
+  #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one  p{
+   margin-top: 20px;
+   margin-bottom: 25px;
+   color: rgb(68, 68, 68);
+   font-size: 1.2rem;
+ }
+   #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one  p span{
+  display: block;
+ }
+
+   #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_btn .btn{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    margin-right:3% ;
+    border: 2px solid rgb(31, 148, 119);
+    
+   }
+   #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_btn .btn:nth-child(1){
+    background-color: rgb(31, 148, 119);
+   }
+#supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_btn  {
+    margin-bottom: 50px;
+}
+#supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_btn .btn:hover{
+    background-color: rgb(42, 165, 134);
+    border: 2px solid rgb(42, 165, 134);
+   }
+#supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_btn  .promo_btn{
+    background-color: red;
+    color:white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 8px;
+    border-radius: 20px;
+    margin-left: 5px;
+}
+
+ #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card{
+    display: flex;
+    justify-content: space-between;
+    align-items:  baseline;
+    width: fit-content  ;
+ }
+
+
+  #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element{
+    width: 180px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-right: 20px;
+    background-color: white;
+    min-height: 120px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: .3s all ease-in-out;
+ }
+   #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element:hover{
+    transform: translateY(-3px);
+ }
+  #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element .icon{
+    padding: 12px 15px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-right: 10px;
+ }
+  #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element .icon:nth-child(1){
+    /* background-color: rgb(31, 148, 119); */
+ }
+   #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element .icon.icone_one{
+    background-color: rgba(31, 148, 99, 0.281);
+    color: rgb(31, 148, 119);
+ }
+  #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element .icon.icone_two{
+    background-color: rgba(31, 78, 148, 0.281);
+    color: rgb(19, 69, 233);
+ }
+
+   #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element .icon.icone_three{
+    background-color: rgba(148, 64, 31, 0.281);
+    color: rgb(233, 105, 19);
+ }
+   #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element .card_description_title{
+    font-weight: bold;
+    margin: 0px;
+ }
+
+    #supermarche_bannier   #bloc_container_supermarche_bannier   #sousbloc_container_supermarche_bannier_one .bloc_card .card_element .card_description p{
+    font-size: 12px;
+    margin: 0px;
+    margin-top: 5px;
+ }
+
+ #sousbloc_container_supermarche_bannier_two{
+    position: relative;
+ }
+  #sousbloc_container_supermarche_bannier_two   .image_bannier{
+    border-radius: 20px;
+    transform: rotate(5deg);
+    margin-top: 50px;
+    height: 50vh;
+    margin-bottom: 20px;
+    
+  }
+
+  #sousbloc_container_supermarche_bannier_two   .nbr_avis{
+        position: absolute;
+        right: 0;
+        top: 15px;
+        display: flex;
+         background-color: rgb(31, 148, 119);
+       box-shadow: 0 4px 12px rgba(6, 27, 49, 0.178);
+        align-items: center;
+        color: white;
+         border-radius: 10px;
+         padding: 8px 15px;
+         z-index:1 ;
+    }
+    #sousbloc_container_supermarche_bannier_two   .nbr_avis i{
+       margin-right: 5px;
+   
+    }
+     #sousbloc_container_supermarche_bannier_two   .nbr_avis div span{
+      font-weight: bold;
+      display: block;
+    }
+
+    #sousbloc_container_supermarche_bannier_two   .nbr_produit{
+        position: absolute;
+        left: -20%;
+        bottom: 0;
+        display: flex;
+        background-color: white;
+        box-shadow: 0 4px 12px rgba(6, 27, 49, 0.418);
+        padding: 10px;
+        align-items: center;
+        border-radius: 10px;
+    }
+    #sousbloc_container_supermarche_bannier_two   .nbr_produit i{
+       margin-right: 5px;
+       color: rgb(31, 148, 119);
+    }
+     #sousbloc_container_supermarche_bannier_two   .nbr_produit div span{
+      font-weight: bold;
+      display: block;
+    }
+
+    #sousbloc_container_supermarche_bannier_two small{
+      font-size: 12px;
+    }
+
+
+
+
+
+
+
+
+/* ============================    TOUT NOS PRODUITs ============================= */
+
+
+
+#bloc_toutnosproduits_supermarcheRayon{
+  padding-top: 0px;
+  padding-bottom: 50px;
+
+   width: 92%;
+   margin: auto;
+}
+#bloc_toutnosproduits_supermarcheRayon .titre_principal {
+/*   margin:2% 5%; */
+  text-align: left;
+  font-weight: bolder;
+}
+#bloc_toutnosproduits_supermarcheRayon .btn_retour{
+    font-weight: 500;
+ }
+#bloc_toutnosproduits_supermarcheRayon .btn_retour a{
+text-decoration: none;
+ color: rgb(31, 148, 119);
+ }
+  #bloc_toutnosproduits_supermarcheRayon .btn_retour a:hover{
+
+ color: rgb(89, 202, 174);
+ }
+
+
+
+
+ 
+#bloc_toutnosproduits_supermarcheRayon #sousbloc_toutnosproduits{
+  text-align: center;
+/*   width: 92%; */
+  margin: auto;
+  margin-top: 40px;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.bloc_etoile_toutnosproduits{
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+.image_etoile_toutnosproduits{
+    height: 20px;
+    width: 18px;
+}
+
+
+#bloc_toutnosproduits_supermarcheRayon  #sousbloc_toutnosproduits .produit_toutnosproduits {
+  display: inline-block; 
+  width: 320px; 
+  margin-right: 10px;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px; border-radius: 9px;
+    box-shadow: 0 4px 12px rgba(6, 27, 49, 0.178);
+}
+
+#sousbloc_toutnosproduits .produit_toutnosproduits:hover {
+  transform: translateY(-3px);
+}
+
+#bloc_toutnosproduits_supermarcheRayon  #sousbloc_toutnosproduits .produit_toutnosproduits .bloc_image_produit_toutnosproduits{
+	height: 250px;
+  position: relative;
+
+  border-top-right-radius:  10px;
+border-top-left-radius:  10px;
+}
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits{
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width:auto;
+  padding-left: 8px;
+  padding-right: 8px;
+  
+   
+  
+}
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits div{
+    margin-bottom: 4px;
+   text-align: left;
+     padding:4px 10px!important;
+    border-radius: 10px;
+     font-size: 12px;
+}
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits div img{
+    width: 12px;
+    height: 12px;
+}
+
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits .type_toutnosproduits{
+ background-color: rgb(10, 172, 45);
+ font-size: 12px;
+ padding:2px 10px;
+ color:white;
+ border-radius: 10px;
+}
+.bloc_image_produit_toutnosproduits .bloc_type_reduction_toutnosproduits .reduction_toutnosproduits{
+ background-color: var(--bs-danger);
+ font-size: 12px;
+ padding:2px 10px;
+ color:white;
+ border-radius: 10px;
+}
+
+#sousbloc_toutnosproduits .produit_toutnosproduits .bloc_description_produit_toutnosproduits{
+  text-align: left;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+ }
+
+  .bloc_description_produit_toutnosproduits .blocEnd_description{
+    /* margin-top: 15px; */
+  }
+  .bloc_description_produit_toutnosproduits .text_desciptive,  .bloc_description_produit_toutnosproduits .text_qte{
+    font-size: 14px;
+  }
+
+   .bloc_description_produit_toutnosproduits .text_titre{
+    font-weight: bold;
+    font-size: larger;
+   }
+
+ .bloc_description_produit_toutnosproduits .blocEnd_description .price{
+  font-size: 23px;
+  color: rgb(10, 172, 45);;
+ }
+ 
+  .bloc_description_produit_toutnosproduits .blocEnd_description .priceUnite{
+  font-size: 11.5px;
+ }
+
+
+
+
+ @media screen and (max-width:1250px) {
+  #bloc_toutnosproduits_supermarcheRayon #sousbloc_toutnosproduits{
+
+  display: block;
+/*   justify-content: space-between;
+  flex-wrap: wrap; */
+}
+  #bloc_toutnosproduits_supermarcheRayon  #sousbloc_toutnosproduits .produit_toutnosproduits {
+    width: 250px;
+   /*  border: 1px solid red;  */
+  }
+#bloc_toutnosproduits_supermarcheRayon  #sousbloc_toutnosproduits .produit_toutnosproduits .bloc_image_produit_toutnosproduits{
+	height: 200px;
+  position: relative;
+
+  border-top-right-radius:  10px;
+  border-top-left-radius:  10px;
+}
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************   SECTION PRODUIT DEALS OF DAYS *************************** */
+#bloc_produitdealofdays_supermarcheRayon {
+
+ 
+}
+
+#bloc_produitdealofdays_supermarcheRayon .titre_principal {
+  margin-top: 5%;
+  margin-bottom: 4%;
+  font-family: 'Comic sans ms', Courier, monospace;
+  text-align: center;
+  color: rgb(2, 53, 77);
+  font-weight: bolder;
+}
+
+#sous_bloc_produitdealofdays_supermarcheRayon {
+ /*  border: 2px solid red; */
+  text-align: center;
+  width: 92%;
+  margin: auto;
+}
+
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday {
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 300px; 
+  position: relative;
+  min-height: 350px;
+  border-radius: 9px;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px;
+}
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday:hover {
+  transform: translateY(-3px);
+}
+
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday .bloc_image_dealofday {
+  height: 270px;
+   border-radius: 9px;
+}
+
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday .bloc_text_dealofday {
+  position: absolute;
+  margin: 0px 6%;
+  bottom: 0;
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday {
+  text-align: center;
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday .sous_stat {
+  display: inline-block;
+  width: 55px;
+  background-color: white;
+  border-radius: 9px;
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 50px;
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday .sous_stat span {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday .sous_stat span:nth-child(1) {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgb(31, 148, 119);
+}
+
+.bloc_text_dealofday .bloc_stat_dealofday .sous_stat span:nth-child(2) {
+  font-size: .8rem;
+  font-weight: 500;
+  color: gray
+}
+
+.produit_dealofday .bloc_description_dealofday {
+  background-color: white;
+  margin-top: 3%;
+  bottom: 0;
+  border-radius: 9px;
+  padding: 5% 10%;
+  box-shadow: 0 4px 12px rgba(6, 27, 49, 0.11);
+  text-align: left;
+}
+
+.produit_dealofday .bloc_description_dealofday p {
+  font-size: 1rem;
+  font-family: "comic sans ms";
+  margin-bottom: 1.5px;
+
+}
+ .produit_dealofday .bloc_description_dealofday .rating .etoile{
+    color: orange;
+  }
+  .produit_dealofday .bloc_description_dealofday .qte{
+    font-size: 11px;
+  }
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd .newPrice {
+  font-size: 15px;
+  font-weight: bold;
+  color:rgb(31, 148, 119);
+}
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd .oldPrice {
+  font-size: 11.5px;
+  font-weight: bold;
+  color:gray;
+  text-decoration: line-through;
+}
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd .btn {
+
+  font-weight: bold;
+  color:rgb(31, 148, 119);
+  background-color: rgba(0, 255, 191, 0.171);
+  font-size: 12px;
+
+}
+.produit_dealofday .bloc_description_dealofday .pricePlusAdd .btn:hover {
+  color:white;
+  background-color:rgb(31, 148, 119);
+
+}
+
+@media screen and (max-width:800px) {
+  #sous_bloc_produitdealofdays_supermarcheRayon {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width:700px) {
+ #sous_bloc_produitdealofdays_supermarcheRayon {
+  width: 98%;
+  margin: auto;
+}
+#sous_bloc_produitdealofdays_supermarcheRayon .produit_dealofday {
+/*   display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px; */
+  width: 48%; 
+/*   position: relative;
+  min-height: 350px;
+  border-radius: 9px;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px; */
+}
+}
+
+
+
+
+
+
+
+
+
+/*-- ============== SECTION :  categorie quatre ============ -- */
+
+#bloc_categorie_four{
+  width: 92%;
+  margin:5% auto;
+
+}
+#bloc_categorie_four  #sous_bloc_categorie_four{
+  display:flex;
+  /* flex-grow: 1; */
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; 
+}
+#bloc_categorie_four  #sous_bloc_categorie_four .element_categorie_four  .img_element_categorie_four{
+  width: 100px;
+  height: auto;
+  margin-right: 8px;
+  
+}
+#bloc_categorie_four  #sous_bloc_categorie_four .element_categorie_four{
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 2%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 400px;
+}
+#bloc_categorie_four  #sous_bloc_categorie_four .element_categorie_four  .bloc_descriptif h6{
+  color: rgb(2, 53, 77);
+  font-size: 1.1rem;
+}
+#bloc_categorie_four  #sous_bloc_categorie_four .element_categorie_four  .bloc_descriptif {
+  width: 70%;
+}
+
+#bloc_categorie_four  #sous_bloc_categorie_four .element_categorie_four:nth-child(1){
+background-color: rgba(102, 166, 170, 0.185);
+}
+#bloc_categorie_four  #sous_bloc_categorie_four .element_categorie_four:nth-child(2){
+background-color: rgba(134, 102, 170, 0.185);
+}
+#bloc_categorie_four  #sous_bloc_categorie_four .element_categorie_four:nth-child(3){
+background-color: rgba(37, 180, 113, 0.185);
+}
+#bloc_categorie_four  #sous_bloc_categorie_four .element_categorie_four:nth-child(4){
+background-color: rgba(221, 112, 69, 0.185);
+}
+
+
+
+
+
+/* ============================    LES PLUS ACHETE ============================= */
+#bloc_produitLesPlusAchete {
+/*   padding-top: 50px; */
+   padding-bottom: 50px;
+}
+#bloc_produitLesPlusAchete .titre_principal {
+ /*  margin:2% 5%; */
+  text-align: left;
+  font-weight: bolder;
+}
+#bloc_produitLesPlusAchete .bloc_titre{
+  width: 90%;
+  margin: 1% auto;
+ padding : 1.2% 1%;
+ background-color: rgba(216, 133, 219, 0.185);
+ border-radius: 10px;
+}
+
+#bloc_produitLesPlusAchete  .topbarre_emojie img {
+    width: 32px;
+    height: 32px;
+}
+
+#bloc_produitLesPlusAchete #sousbloc_produitLesPlusAchete{
+  text-align: center;
+  width: 92%;
+  margin: auto;
+}
+
+
+#bloc_produitLesPlusAchete  #sousbloc_produitLesPlusAchete .produit_produitLesPlusAchete {
+  display: inline-block; 
+  width: 220px; 
+  margin-right: 10px;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+  margin-bottom: 20px; border-radius: 9px;
+    box-shadow: 0 4px 12px rgba(6, 27, 49, 0.178);
+}
+
+#sousbloc_produitLesPlusAchete .produit_produitLesPlusAchete:hover {
+  transform: translateY(-3px);
+}
+
+#bloc_produitLesPlusAchete  #sousbloc_produitLesPlusAchete .produit_produitLesPlusAchete .bloc_image_produit_produitLesPlusAchete{
+	height: 200px;
+  position: relative;
+
+    border-top-right-radius:  10px;
+border-top-left-radius:  10px;
+
+}
+.bloc_image_produit_produitLesPlusAchete .bloc_type_reduction_produitLesPlusAchete{
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.bloc_image_produit_produitLesPlusAchete .bloc_type_reduction_produitLesPlusAchete .type_produitLesPlusAchete{
+ background-color: rgb(10, 172, 45);
+ font-size: 12px;
+ padding:2px 10px;
+ color:white;
+ border-radius: 10px;
+}
+.bloc_image_produit_produitLesPlusAchete .bloc_type_reduction_produitLesPlusAchete .reduction_produitLesPlusAchete{
+ background-color: var(--bs-danger);
+ font-size: 12px;
+ padding:2px 10px;
+ color:white;
+ border-radius: 10px;
+}
+
+#sousbloc_produitLesPlusAchete .produit_produitLesPlusAchete .bloc_description_produit_produitLesPlusAchete{
+  text-align: left;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+ }
+
+  .bloc_description_produit_produitLesPlusAchete .blocEnd_description{
+    margin-top: 15px;
+  }
+
+   .bloc_description_produit_produitLesPlusAchete .text_titre{
+    font-weight: bold;
+   }
+
+ .bloc_description_produit_produitLesPlusAchete .blocEnd_description .price{
+  font-size: 23px;
+ }
+ 
+  .bloc_description_produit_produitLesPlusAchete .blocEnd_description .priceUnite{
+  font-size: 11.5px;
+ }
+ .blocEnd_description .btn{
+  background-color: rgb(10, 172, 45);
+  color:white;
+  border-radius: 8px;
+ }

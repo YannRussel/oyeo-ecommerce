@@ -1,0 +1,267 @@
+/** slider réécrit avec classes uniques */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 500px; /* Increased min-height to accommodate content */
+  overflow: hidden; /* Prevent content spilling out */
+}
+
+.slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  /* soften global shadow so text doesn't appear overly bold */
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s ease-in-out, visibility 1.2s;
+  
+  /* Robust Flexbox centering */
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch; /* Stretch wrapper to full width to allow centering inside */
+  padding: 0 9%;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.slide-item.active-slide {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+.slide-content-wrapper {
+  width: 100%;
+  max-width: 100%; /* Take full width of the padded container to allow buttons to center */
+  position: relative;
+  z-index: 10;
+  text-align: left; /* Ensure left alignment */
+}
+
+.wrapper-text-principal {
+  max-width: 700px; /* Constrain text width */
+  margin: 0; /* Keep it forcefully left */
+}
+
+.slide-content-wrapper h1 {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 2.2rem;
+  /* use a balanced weight for readability */
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  text-align: left; /* Explicitly align h1 */
+}
+
+.slide-content-wrapper p {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1.1rem;
+  margin: 15px 0px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-align: left; /* Explicitly align p */
+}
+
+.slide-content-wrapper .cta-btn {
+  margin-top: 3.5rem; /* Increased to push buttons down */
+  width: 100%; /* Stretch across the container */
+  text-align: center; /* Container text alignment */
+  display: flex;
+  justify-content: center; /* Center the buttons inside the container */
+  gap: 15px; /* Default gap for desktop */
+}
+
+.cta-btn button {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 0.95rem; /* légèrement plus lisible */
+  padding: 10px 20px; /* ajusté pour compacité */
+  min-width: 180px;
+  margin: 0; /* Let gap handle spacing */
+  font-weight: 600; /* semi-bold for readability */
+  letter-spacing: 0.4px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem !important; /* Force reduction */
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  padding: 0px 8px !important; /* Force padding reduction */
+  width: 30px !important; /* Explicit width */
+  height: 30px !important; /* Explicit height */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+  z-index: 100; /* Increased z-index to be above content wrapper */
+  transition: background 0.3s;
+  border-radius: 50% !important; /* Perfect circle */
+}
+
+.nav-arrow:hover {
+  background: var(--primary);
+}
+
+.nav-arrow.prev-arrow {
+  left: 20px;
+}
+
+.nav-arrow.next-arrow {
+  right: 20px;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.dot-button {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 15;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot-button.active-dot {
+  background-color: var(--primary);
+}
+
+/* Animation du contenu */
+@keyframes slideFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width : 1400px) {
+  .slider-wrapper {
+    height: 50vh;
+  }
+
+  .slide-content-wrapper h1 {
+    font-size: 2.0rem;
+    font-weight: bold;
+  }
+
+  #modalite_securite {
+    display: flex;
+    justify-content: space-between;
+    font-size: .8rem;
+  }
+}
+
+
+
+@media screen and (max-width : 1024px) {
+  .slider-wrapper {
+    height: 60vh; /* Fixed height for stability */
+    min-height: 550px; /* Ensure tall enough for content */
+  }
+
+  .slide-item {
+     padding: 40px 5%;
+     justify-content: center; /* Center vertically */
+  }
+
+  .wrapper-text-principal {
+     max-width: 90%; 
+     margin: 0;  /* Left align container */
+  }
+  
+  .slide-content-wrapper {
+      margin: 0 !important;
+      text-align: left; /* Left align text */
+      width: 100%;
+      max-width: 100%; 
+  }
+
+  .slide-content-wrapper h1 {
+     font-size: 1.8rem; /* Slightly larger on tablet */
+     margin-bottom: 0.8rem;
+     line-height: 1.2;
+     width: 100%;
+     max-width: 650px;
+  }
+  
+  .slide-content-wrapper p {
+     font-size: 1rem;
+     margin: 15px 0;
+     max-width: 500px; /* Limit paragraph width too */
+  }
+
+  .cta-btn {
+     margin-top: 2.5rem; /* Increased to push buttons down on tablet */
+     width: 100%;
+     display: flex;
+     flex-direction: row; /* Keep side-by-side on tablet */
+     flex-wrap: wrap; /* Allow wrapping if needed */
+     align-items: center; 
+     justify-content: center; /* Center the buttons */
+     gap: 15px;
+  }
+  
+  .cta-btn button {
+     width: auto;      
+     min-width: 180px; /* Ensure they aren't too small */
+     margin: 0;
+  }
+}
+
+@media screen and (max-width : 600px) {
+  .slider-wrapper {
+     height: 70vh;
+     min-height: 500px;
+  }
+  
+  .slide-content-wrapper h1 {
+     font-size: 1.5rem;
+     line-height: 1.1;
+     margin-bottom: 1rem;
+  }
+  
+  .slide-content-wrapper p {
+     font-size: 0.9rem;
+     margin: 15px 0;
+  }
+
+  .cta-btn {
+     margin-top: 2rem; /* Added margin-top to push down on mobile */
+     flex-direction: row; /* Allow row on small, but wrap if too small */
+     flex-wrap: wrap; /* Important */
+     justify-content: center; /* Center on mobile too */
+  }
+  
+  .cta-btn button {
+     width: auto;
+     flex: 1 1 auto; /* Grow to fill if needed, but allow wrapping */
+     max-width: 100%;
+     min-width: 140px; /* Minimum width for small screens */
+  }
+}
