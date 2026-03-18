@@ -148,7 +148,10 @@
   --title-color: #0f1724;
   --muted: #6b7280;
   --img-height: 360px;
-  --sponsored-bg: #f2f2f26c;
+  /* Arrière-plan légèrement plus sombre pour la section sponsorisée */
+  --sponsored-bg: rgba(226,224,214,0.46);
+  /* Accent couleur pour la section sponsorisée (un peu plus sombre) */
+  --sponsored-accent: #b9552f; /* teinte plus sombre que #d9774a */
 }
 
 /* ================= Section Sponsorisée ================= */
@@ -230,8 +233,10 @@
 .sponsored-cta.cta-asym {
   padding: 12px 22px;
   color: #ffffff;
-  background: linear-gradient(90deg, #ea7a26 0%, #ea7a26 100%);
-  box-shadow: 0 10px 30px rgba(11,116,218,0.18);
+  /* Utilise la variable atténuée pour réduire la dominante rouge */
+  background: linear-gradient(90deg, var(--sponsored-accent) 0%, var(--sponsored-accent) 100%);
+  /* ombre plus neutre et légèrement plus sombre pour atténuer la vivacité */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
   border: none;
   display: inline-flex;
   align-items: center;
@@ -1185,7 +1190,7 @@ span {
   --card-shadow: 0 10px 30px rgba(16,24,40,0.08);
 
   --control-size: 48px;
-  --radius: 12px;
+  --radius: 0;
   --accent: #0b74da;
   --bg: #f8fafc;
   --text: #081126;
@@ -1262,7 +1267,7 @@ span {
 */
 /* ================= TESTIMONIALS (gradient) - plus large ================= */
 .nyota-testimonials {
-  border-radius: 18px;
+  border-radius: 0;
   padding: 44px 28px;
   background: linear-gradient(90deg,#fff0f3 0%, #eafff3 100%);
   box-shadow: 0 10px 44px rgba(8,10,20,0.06);
@@ -1287,6 +1292,26 @@ span {
 .nyota-test-footer { display: flex; justify-content: space-between; align-items: center; color: #6b7280; font-size: 14px; }
 .nyota-test-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; }
 .nyota-test-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Newsletter section background and readable text */
+#newsletter {
+  background: #0D161D !important;
+  color: #ffffff;
+}
+
+#newsletter .newsletter_text h3,
+#newsletter .newsletter_text p {
+  color: #f5f5f5;
+}
+
+#newsletter input[type="email"] {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+#newsletter input::placeholder {
+  color: #bfc9cc !important;
+}
 
 /* ================= LOGOS ================= */
 .nyota-logos {
