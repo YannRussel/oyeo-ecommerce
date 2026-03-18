@@ -66,11 +66,11 @@ color: var(--primary);
   font-size:0.95rem;
   color: var(--primary) /* #e86429 */;
   background:rgba(11,116,218,0.06);
-  transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+  transition: background .15s ease, box-shadow .15s ease;
   white-space:nowrap;
 }
 .see-more:hover, .see-more:focus {
-  transform: translateX(4px);
+  
   background: rgba(11,116,218,0.12);
   box-shadow: 0 4px 12px rgba(11,116,218,0.08);
   text-decoration:none;
@@ -380,3 +380,13 @@ color: var(--primary);
   margin-left: .6rem;
 } */
 
+
+/* Force "Inter" font on all products and product details globally */
+.product-card, .product-card *,
+.product-section .product-card, .product-section .product-card *,
+.product-details, .product-details *,
+.details-produit, .details-produit *,
+.produit-info, .produit-info *,
+.product-title, .price, .original-price, .description, .badge, .brand {
+    font-family: 'Inter', sans-serif !important;
+}
