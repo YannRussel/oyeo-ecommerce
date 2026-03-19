@@ -122,6 +122,25 @@
           -webkit-transform: none !important;
         }
     </style>
+    <style>
+      /* Nudge breadcrumbs a bit to the right for better alignment */
+      .breadcrumb__links {
+        padding-left: 4.5rem !important;
+        margin-left: 0 !important;
+      }
+      @media (max-width: 768px) {
+        .breadcrumb__links { padding-left: 0.75rem !important; }
+      }
+    </style>
+    <style>
+      /* Make submenu 'Tout voir' links and related items display in black */
+      .sub-menu-2 p a,
+      .sub-menu-2 a.enGras,
+      .sub-menu-2 p a:link,
+      .sub-menu-2 p a:visited {
+        color: #000000 !important;
+      }
+    </style>
 <style>
 .fav-icon:focus, .fav-icon:active, .fav-icon:focus-visible { outline: none !important; border: none !important; box-shadow: none !important; }
     /* Override any inline SVG presentation attributes that remained (old orange hearts) */
