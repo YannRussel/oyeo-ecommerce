@@ -360,15 +360,7 @@
             </div>
 
 
-            <!-- Contrôles gauche / droite uniquement -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-
-
-            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
+            <!-- Contrôles gauche / droite uniquement retiré -->
 
 
         </div>
@@ -384,11 +376,6 @@
 
 <div class="container_ mt-3 mb-2">
     <div class="filters-wrapper">
-
-        <!-- Bouton gauche -->
-        <button id="scrollLeft" class="scroll-arrow me-3 px-3" disabled>
-            <i class="fa-solid fa-arrow-left"></i>
-        </button>
 
         <!-- Conteneur scrollable -->
         <div id="filtersContainer" class="filters-container">
@@ -411,17 +398,12 @@
 
         </div>
 
-        <!-- Bouton droit -->
-        <button id="scrollRight" class="scroll-arrow ms-3 px-3">
-            <i class="fa-solid fa-arrow-right"></i>
-        </button>
-
     </div>
 </div>
 
     <div class="container_ container_filtre_marge">
         <!-- En-tête contenu: titre + filtres -->
-        <form action="">
+        <form action="" method="GET">
             <div class="content-header">
                 <a class="btn " id="filtre_detailler"><i class="fa-solid fa-sliders"></i> Plus de Filtre </a>
 
@@ -429,55 +411,67 @@
                     <div id="bloc_filtre_detailler" class="">
                         <div  class="d-flex flex-wrap align-items-center filter_block"
                             role="toolbar" aria-label="Filtres">
-                            <select class="form-select d-inline-block w-auto" name="" id="">
+                            <select class="form-select d-inline-block w-auto" name="marque" onchange="this.form.submit()">
                                 <option value="">Marque</option>
-                                <option value="">Adidas</option>
-                                <option value="">Nike</option>
-                                <option value="">Jordan</option>
+                                {% for b in available_brands %}
+                                    <option value="{{ b.brand__slug }}" {% if request.GET.marque == b.brand__slug %}selected{% endif %}>{{ b.brand__name }}</option>
+                                {% endfor %}
                             </select>
 
-                            <select class="form-select d-inline-block w-auto" name="" id="">
+                            <select class="form-select d-inline-block w-auto" name="taille" onchange="this.form.submit()">
                                 <option value="">Taille</option>
-                                <option value="">xl</option>
-                                <option value="">xxl</option>
-                                <option value="">lg</option>
+                                <option value="S" {% if request.GET.taille == 'S' %}selected{% endif %}>S</option>
+                                <option value="M" {% if request.GET.taille == 'M' %}selected{% endif %}>M</option>
+                                <option value="L" {% if request.GET.taille == 'L' %}selected{% endif %}>L</option>
+                                <option value="XL" {% if request.GET.taille == 'XL' %}selected{% endif %}>XL</option>
                             </select>
-                            <select class="form-select d-inline-block w-auto" name="" id="">
+
+                            <select class="form-select d-inline-block w-auto" name="couleur" onchange="this.form.submit()">
                                 <option value="">Couleur</option>
-                                <option value="">Noir </option>
-                                <option value="">Vert</option>
-                                <option value="">Bleu</option>
+                                <option value="noir" {% if request.GET.couleur == 'noir' %}selected{% endif %}>Noir</option>
+                                <option value="blanc" {% if request.GET.couleur == 'blanc' %}selected{% endif %}>Blanc</option>
+                                <option value="rouge" {% if request.GET.couleur == 'rouge' %}selected{% endif %}>Rouge</option>
+                                <option value="bleu" {% if request.GET.couleur == 'bleu' %}selected{% endif %}>Bleu</option>
                             </select>
-                            <select class="form-select d-inline-block w-auto" name="" id="">
-                                <option value="">Prix</option>
-                                <option value=""> < à 35 $ </option>
-                                <option value=""> > a 50$</option>
+
+                            <select class="form-select d-inline-block w-auto" name="prix" onchange="this.form.submit()">
+                                <option value="">Prix (FCFA)</option>
+                                <option value="moins_10k" {% if request.GET.prix == 'moins_10k' %}selected{% endif %}>&lt; 10 000 FCFA</option>
+                                <option value="10k_50k" {% if request.GET.prix == '10k_50k' %}selected{% endif %}>10 000 - 50 000 FCFA</option>
+                                <option value="plus_50k" {% if request.GET.prix == 'plus_50k' %}selected{% endif %}>&gt; 50 000 FCFA</option>
                             </select>
-                            <select class="form-select d-inline-block w-auto" name="" id="">
-                                <option value="">Propriete</option>
-                                <option value=""> Propriete 1 </option>
-                                <option value=""> Propriete 2 </option>
+
+                            <select class="form-select d-inline-block w-auto" name="propriete" onchange="this.form.submit()">
+                                <option value="">Propriété</option>
+                                <option value="1" {% if request.GET.propriete == '1' %}selected{% endif %}>Propriété 1</option>
+                                <option value="2" {% if request.GET.propriete == '2' %}selected{% endif %}>Propriété 2</option>
                             </select>
-                            <select class="form-select d-inline-block w-auto" name="" id="">
+
+                            <select class="form-select d-inline-block w-auto" name="style" onchange="this.form.submit()">
                                 <option value="">Style</option>
-                                <option value=""> Style 1 </option>
-                                <option value=""> Style 2 </option>
+                                <option value="1" {% if request.GET.style == '1' %}selected{% endif %}>Style 1</option>
+                                <option value="2" {% if request.GET.style == '2' %}selected{% endif %}>Style 2</option>
                             </select>
-                            <select class="form-select d-inline-block w-auto" name="" id="">
+
+                            <select class="form-select d-inline-block w-auto" name="forme" onchange="this.form.submit()">
                                 <option value="">Forme</option>
-                                <option value=""> Forme 1 </option>
-                                <option value=""> Forme 2 </option>
+                                <option value="1" {% if request.GET.forme == '1' %}selected{% endif %}>Forme 1</option>
+                                <option value="2" {% if request.GET.forme == '2' %}selected{% endif %}>Forme 2</option>
                             </select>
-                            <select class="form-select d-inline-block w-auto" name="" id="">
+
+                            <select class="form-select d-inline-block w-auto" name="doublure" onchange="this.form.submit()">
                                 <option value="">Doublure</option>
-                                <option value=""> Doublure 1 </option>
-                                <option value=""> Doublure 2 </option>
+                                <option value="oui" {% if request.GET.doublure == 'oui' %}selected{% endif %}>Oui</option>
+                                <option value="non" {% if request.GET.doublure == 'non' %}selected{% endif %}>Non</option>
                             </select>
-                            <select class="form-select d-inline-block w-auto" name="" id="">
+
+                            <select class="form-select d-inline-block w-auto" name="matiere" onchange="this.form.submit()">
                                 <option value="">Matière</option>
-                                <option value=""> Matière 1 </option>
-                                <option value=""> Matière 2 </option>
+                                <option value="coton" {% if request.GET.matiere == 'coton' %}selected{% endif %}>Coton</option>
+                                <option value="cuir" {% if request.GET.matiere == 'cuir' %}selected{% endif %}>Cuir</option>
                             </select>
+
+                            <!-- Keeping these as dummy values so the layout stays identical to the user's design -->
                             <select class="form-select d-inline-block w-auto" name="" id="">
                                 <option value="">Catregorie</option>
                                 <option value=""> Promotion</option>
@@ -499,8 +493,8 @@
                             <select class="form-select d-inline-block w-auto" name="" id="">
                                 <option value="">Prix</option>
                                 <option value="">
-                                    < à 35 $ </option>
-                                <option value=""> > a 50$</option>
+                                    &lt; à 35 FCFA </option>
+                                <option value=""> &gt; a 50 FCFA</option>
                             </select>
                             <select class="form-select d-inline-block w-auto" name="" id="">
                                 <option value="">Propriete</option>
@@ -519,16 +513,22 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="statistiques_recherche">
-                    <div class="sous_statistique_recherche">
-                        <div class="border-end">
-                        <a href="categorie.html" class="result-count">10 522 resultats</a>
-                        <small class="info-badge">?</small>
+                    <div class="sous_statistique_recherche align-items-center">
+                        <div class="border-end pe-3 me-3">
+                        <span class="result-count" style="font-weight: bold; font-size: 1.2rem; color: #888;">{{ page_obj.paginator.count|default:"0" }}</span> <span style="color: #6c757d; font-weight: 500;">resultats</span>
+                        <small class="info-badge" style="border: 1px solid #dee2e6; border-radius: 50%; padding: 0 5px; color: #adb5bd; margin-left: 5px;">?</small>
                         </div>
 
-                        <div class="d-flex statdiv_2">
-                        <span class="text-secondary d-block">Trier par</span>
-                        <button type="submit" class="enGras btn_recommandation">Recommander ▾</button>
+                        <div class="d-flex statdiv_2 align-items-center">
+                        <span class="text-secondary d-block me-2">Trier par</span>
+                        <select name="sort" class="form-select border-0 enGras" style="width: auto; cursor: pointer; padding-left: 0; font-weight: bold;" onchange="this.form.submit()">
+                            <option value="recommander" {% if request.GET.sort == 'recommander' or not request.GET.sort %}selected{% endif %}>Recommander</option>
+                            <option value="prix_asc" {% if request.GET.sort == 'prix_asc' %}selected{% endif %}>Prix croissant</option>
+                            <option value="prix_desc" {% if request.GET.sort == 'prix_desc' %}selected{% endif %}>Prix décroissant</option>
+                            <option value="nouveautes" {% if request.GET.sort == 'nouveautes' %}selected{% endif %}>Nouveautés</option>
+                        </select>
                         </div>
                     </div>
                     </div>

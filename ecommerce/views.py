@@ -179,6 +179,28 @@ def category_detail(request, slug):
         is_active=True
     ).distinct().select_related('brand', 'primary_category')
 
+    # Filtrage par marque, prix, etc.
+    marque_param = request.GET.get('marque')
+    prix_param = request.GET.get('prix')
+
+    if marque_param:
+        base_qs = base_qs.filter(brand__slug=marque_param)
+
+    if prix_param:
+        if prix_param == 'moins_10k':
+            base_qs = base_qs.filter(price_current__lt=10000)
+        elif prix_param == '10k_50k':
+            base_qs = base_qs.filter(price_current__gte=10000, price_current__lte=50000)
+        elif prix_param == 'plus_50k':
+            base_qs = base_qs.filter(price_current__gt=50000)
+
+    # Obtenir la liste consolidée exhaustive des marques pour les filtres (avant filtrage sur les marques elles-mêmes sinon ça disparaît)
+    unfiltered_qs = Product.objects.filter(
+        Q(primary_category__in=leaf_ids) | Q(categories__in=leaf_ids),
+        is_active=True
+    )
+    available_brands = unfiltered_qs.exclude(brand__isnull=True).values('brand__slug', 'brand__name').distinct().order_by('brand__name')
+
     product_ids = list(base_qs.values_list('pk', flat=True))
 
     if not product_ids:
@@ -192,24 +214,46 @@ def category_detail(request, slug):
             'featured_products': featured_products,
         })
 
-    # Mélange aléatoire des ids (en Python)
-    random_ids = random.sample(product_ids, k=len(product_ids))
-
-    # Conserver l'ordre aléatoire en SQL via CASE WHEN
-    order_expr = Case(
-        *[When(pk=pk, then=Value(i)) for i, pk in enumerate(random_ids)],
-        output_field=IntegerField()
-    )
+    # Mélange aléatoire ou Tri
+    sort_param = request.GET.get('sort', 'recommander')
 
     main_img_qs = ProductImage.objects.filter(is_main=True)
 
-    products_qs = (
-        Product.objects.filter(pk__in=random_ids)
-        .annotate(_rand_order=order_expr)
-        .order_by('_rand_order')
-        .prefetch_related(Prefetch('images', queryset=main_img_qs, to_attr='prefetched_main_images'))
-        .select_related('brand', 'primary_category')
-    )
+    if sort_param == 'prix_asc':
+        products_qs = (
+            Product.objects.filter(pk__in=product_ids)
+            .order_by('price_current')
+            .prefetch_related(Prefetch('images', queryset=main_img_qs, to_attr='prefetched_main_images'))
+            .select_related('brand', 'primary_category')
+        )
+    elif sort_param == 'prix_desc':
+        products_qs = (
+            Product.objects.filter(pk__in=product_ids)
+            .order_by('-price_current')
+            .prefetch_related(Prefetch('images', queryset=main_img_qs, to_attr='prefetched_main_images'))
+            .select_related('brand', 'primary_category')
+        )
+    elif sort_param == 'nouveautes':
+        products_qs = (
+            Product.objects.filter(pk__in=product_ids)
+            .order_by('-created_at')
+            .prefetch_related(Prefetch('images', queryset=main_img_qs, to_attr='prefetched_main_images'))
+            .select_related('brand', 'primary_category')
+        )
+    else:
+        # Mélange aléatoire (recommander)
+        random_ids = random.sample(product_ids, k=len(product_ids))
+        order_expr = Case(
+            *[When(pk=pk, then=Value(i)) for i, pk in enumerate(random_ids)],
+            output_field=IntegerField()
+        )
+        products_qs = (
+            Product.objects.filter(pk__in=random_ids)
+            .annotate(_rand_order=order_expr)
+            .order_by('_rand_order')
+            .prefetch_related(Prefetch('images', queryset=main_img_qs, to_attr='prefetched_main_images'))
+            .select_related('brand', 'primary_category')
+        )
 
     # pagination (ajuste le nombre par page si besoin)
     paginator = Paginator(products_qs, 24)
@@ -226,6 +270,7 @@ def category_detail(request, slug):
         'page_obj': page_obj,
         'breadcrumbs': breadcrumbs,
         'featured_products': featured_products,
+        'available_brands': available_brands,
     })
 
 

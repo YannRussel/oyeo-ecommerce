@@ -459,7 +459,7 @@
 
             <div style="display:flex; gap:8px; align-items:center; margin-left:12px;">
                 <button id="reset-filters" class="dropdown-btn" style="background:#eee;">Réinitialiser</button>
-                <div class="results-count">10 522 résultats</div>
+                <div class="results-count">{{ page_obj.paginator.count|default:"0" }} résultats</div>
             </div>
         </div>
     </section>

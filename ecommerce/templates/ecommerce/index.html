@@ -39,8 +39,40 @@
             #nyota-testimonials-section { margin-top: 32px; }
             .product-carousel-wrapper .scroll-btn.right { right: 8px; }
         }
+        /* Force Montserrat for slider and sub-slider (high specificity + !important) */
+        .slider-wrapper .slide-item .slide-content-wrapper,
+        .slider-wrapper .slide-item .slide-content-wrapper *,
+        .slider-wrapper .slide-item .wrapper-text-principal,
+        .slider-wrapper .slide-item h1,
+        .slider-wrapper .slide-item p,
+        .sub-slider,
+        .sub-slider * {
+            font-family: 'Montserrat', sans-serif !important;
+        }
+
+        .slider-wrapper .slide-item h1 {
+            font-size: 48px !important;
+            font-weight: 700 !important;
+            line-height: 1.05 !important;
+            letter-spacing: 0.2px !important;
+            color: #ffffff !important;
+            text-shadow: 0 2px 0 rgba(0,0,0,0.12) !important;
+        }
+
+        .slider-wrapper .slide-item p {
+            font-size: 18px !important;
+            color: rgba(255,255,255,0.92) !important;
+            margin-top: 12px !important;
+            max-width: 720px !important;
+        }
+
+        @media (max-width: 768px) {
+            .slider-wrapper .slide-item h1 { font-size: 30px !important; }
+            .slider-wrapper .slide-item p { font-size: 15px !important; }
+        }
     </style>
 
+   
     <!-- CROUSSEL  -- SLIDER  -->
     <!-- mon  -->
 <div class="slider-wrapper">
@@ -88,6 +120,11 @@
     -->
 </div>
     <!-- SYSTEME DE PAIEMENT ET DETAIL  -->
+
+    <!-- Sous-slider (texte Montserrat) -->
+    <section class="sub-slider container_">
+        
+    </section>
 
 
 

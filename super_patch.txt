@@ -1,0 +1,121 @@
+   205	     <div class="container_n1 container_filtre_marge">
+   206	        <!-- En-tête contenu: titre + filtres -->
+   207	        <form action="">
+   208	            <div class="content-header">
+   209	                <a class="btn " id="filtre_detailler"><i class="fa-solid fa-sliders"></i> Plus de Filtre </a>
+   210	
+   211	                <div class="d-flex  justify-content-between  flex-nowrap">
+   212	                    <div id="bloc_filtre_detailler" class="">
+   213	                        <div  class="d-flex flex-wrap align-items-center filter_block"
+   214	                            role="toolbar" aria-label="Filtres">
+   215	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   216	                                <option value="">Marque</option>
+   217	                                <option value="">Adidas</option>
+   218	                                <option value="">Nike</option>
+   219	                                <option value="">Jordan</option>
+   220	                            </select>
+   221	
+   222	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   223	                                <option value="">Taille</option>
+   224	                                <option value="">xl</option>
+   225	                                <option value="">xxl</option>
+   226	                                <option value="">lg</option>
+   227	                            </select>
+   228	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   229	                                <option value="">Couleur</option>
+   230	                                <option value="">Noir </option>
+   231	                                <option value="">Vert</option>
+   232	                                <option value="">Bleu</option>
+   233	                            </select>
+   234	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   235	                                <option value="">Prix</option>
+   236	                                <option value=""> < à 35 $ </option>
+   237	                                <option value=""> > a 50$</option>
+   238	                            </select>
+   239	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   240	                                <option value="">Propriete</option>
+   241	                                <option value=""> Propriete 1 </option>
+   242	                                <option value=""> Propriete 2 </option>
+   243	                            </select>
+   244	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   245	                                <option value="">Style</option>
+   246	                                <option value=""> Style 1 </option>
+   247	                                <option value=""> Style 2 </option>
+   248	                            </select>
+   249	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   250	                                <option value="">Forme</option>
+   251	                                <option value=""> Forme 1 </option>
+   252	                                <option value=""> Forme 2 </option>
+   253	                            </select>
+   254	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   255	                                <option value="">Doublure</option>
+   256	                                <option value=""> Doublure 1 </option>
+   257	                                <option value=""> Doublure 2 </option>
+   258	                            </select>
+   259	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   260	                                <option value="">Matière</option>
+   261	                                <option value=""> Matière 1 </option>
+   262	                                <option value=""> Matière 2 </option>
+   263	                            </select>
+   264	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   265	                                <option value="">Catregorie</option>
+   266	                                <option value=""> Promotion</option>
+   267	                                <option value=""> Nouveauté</option>
+   268	                            </select>
+   269	
+   270	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   271	                                <option value="">Taille</option>
+   272	                                <option value="">xl</option>
+   273	                                <option value="">xxl</option>
+   274	                                <option value="">lg</option>
+   275	                            </select>
+   276	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   277	                                <option value="">Couleur</option>
+   278	                                <option value="">Noir </option>
+   279	                                <option value="">Vert</option>
+   280	                                <option value="">Bleu</option>
+   281	                            </select>
+   282	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   283	                                <option value="">Prix</option>
+   284	                                <option value="">
+   285	                                    < à 35 $ </option>
+   286	                                <option value=""> > a 50$</option>
+   287	                            </select>
+   288	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   289	                                <option value="">Propriete</option>
+   290	                                <option value=""> Propriete 1 </option>
+   291	                                <option value=""> Propriete 2 </option>
+   292	                            </select>
+   293	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   294	                                <option value=""> Style </option>
+   295	                                <option value=""> Style 1 </option>
+   296	                                <option value=""> Style 2 </option>
+   297	                            </select>
+   298	                            <select class="form-select d-inline-block w-auto" name="" id="">
+   299	                                <option value=""> Forme </option>
+   300	                                <option value=""> Forme 1 </option>
+   301	                                <option value=""> Forme 2 </option>
+   302	                            </select>
+   303	                        </div>
+   304	                    </div>
+   305	
+   306	                    <div class="statistiques_recherche"><!-- statistiques_recherche -->
+   307	                        <div class="sous_statistique_recherche justify-content-end">
+   308	                            <div class="border-end "><!--  me-2 -->
+   309	                                <a href="categorie.html" class=" py-2 px-2 text-secondary" style="text-decoration: none;">10 522 resultats </a>
+   310	                                <small class="text-secondary border px-2" style="border-radius: 50px; font-size: 12px;">?</small>
+   311	                            </div>
+   312	
+   313	                            <div class="d-flex statdiv_2 justify-content-start align-items-center">
+   314	                                <span class="text-secondary d-block">Trier par </span>
+   315	                                <button type="submit" class="enGras btn_recommandation ms-2">Recommander▾</button>
+   316	                            </div>
+   317	                        </div>
+   318	
+   319	                    </div>
+   320	                </div>
+   321	
+   322	            </div>
+   323	        </form>
+   324	    </div>
+   325	
