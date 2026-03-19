@@ -317,9 +317,8 @@
                 <div class="carousel-item active slide-1">
                     <div class="d-flex justify-content-between">
                         <div class="">
-                            <h2>Les Femmes et la mode</h2>
-                            <p class="text-secondary">Découvrez des denière fabrication <br> de la mode feminine.</p>
-                            <a class="btn btn-commande">Commander</a>
+                            <h2 style="font-family: 'DM Sans', sans-serif !important;">Les Femmes et la mode</h2>
+                            <p class="text-secondary" style="font-family: 'DM Sans', sans-serif !important;">Découvrez des denière fabrication <br> de la mode feminine.</p>
                         </div>
                         <img src="{./ressources/img/articles/card-image3.jpg}" alt="" srcset=""
                             class="image_carrousel shadow">
@@ -332,9 +331,8 @@
                 <div class="carousel-item slide-2">
                     <div class="d-flex justify-content-between">
                         <div class="">
-                            <h2 class="text-light">Livraison Rapide et Sécurisée</h2>
-                            <p class="text-light">Découvrez des denière fabrication <br> de la mode feminine.</p>
-                            <a class="btn btn-commande">Commander</a>
+                            <h2 class="text-light" style="font-family: 'DM Sans', sans-serif !important;">Livraison Rapide et Sécurisée</h2>
+                            <p class="text-light" style="font-family: 'DM Sans', sans-serif !important;">Découvrez des denière fabrication <br> de la mode feminine.</p>
                         </div>
                         <img src="./ressources/img/articles/card-image5.jpg" alt="" srcset=""
                             class=" image_carrousel shadow">
@@ -345,10 +343,9 @@
                 <div class="carousel-item slide-3">
                     <div class="d-flex justify-content-between">
                         <div class="">
-                            <h2 class="text-light">Fiable et Approuvé partout</h2>
-                            <p class="text-light">Rejoignez une communauté croissante de clients <br> satisfaits et en
+                            <h2 class="text-light" style="font-family: 'DM Sans', sans-serif !important;">Fiable et Approuvé partout</h2>
+                            <p class="text-light" style="font-family: 'DM Sans', sans-serif !important;">Rejoignez une communauté croissante de clients <br> satisfaits et en
                                 bonne santé.</p>
-                            <a class="btn btn-commande">Commander</a>
                         </div>
                         <img src="./ressources/img/articles/card-image6.jpg" alt="" srcset=""
                             class="image_carrousel shadow">
@@ -522,7 +519,7 @@
                         </div>
 
                         <div class="d-flex statdiv_2 align-items-center">
-                        <span class="text-secondary d-block me-2">Trier par</span>
+                        <span class="text-secondary text-nowrap me-2">Trier par</span>
                         <select name="sort" class="form-select border-0 enGras" style="width: auto; cursor: pointer; padding-left: 0; font-weight: bold;" onchange="this.form.submit()">
                             <option value="recommander" {% if request.GET.sort == 'recommander' or not request.GET.sort %}selected{% endif %}>Recommander</option>
                             <option value="prix_asc" {% if request.GET.sort == 'prix_asc' %}selected{% endif %}>Prix croissant</option>
