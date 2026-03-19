@@ -68,9 +68,7 @@
           <div class="card-body">
             {% if p.pk|divisibleby:2 %}
               <span class="brand">NIKE</span>
-              <a href="{% url 'ecommerce:product_detail' p.slug %}" class="lienTitleproduct">
-                <h3 class="product-title" style="font-weight: bold; font-size: 1.15rem; margin-bottom: 4px;">Free RN Flyknit</h3>
-              </a>
+              <h3 class="product-title" style="font-weight: bold; font-size: 1.15rem; margin-bottom: 4px;">Free RN Flyknit</h3>
               <div class="collection-name" style="font-size: 0.85rem; color: #555; margin-bottom: 4px;">
                 CRISTAL VITAL COLLECTION
               </div>
@@ -79,9 +77,7 @@
                 </p>
             {% else %}
               <span class="brand">PUMA</span>
-              <a href="{% url 'ecommerce:product_detail' p.slug %}" class="lienTitleproduct">
-                <h3 class="product-title" style="font-weight: bold; font-size: 1.15rem; margin-bottom: 4px;">RS-X3 Puzzle</h3>
-              </a>
+              <h3 class="product-title" style="font-weight: bold; font-size: 1.15rem; margin-bottom: 4px;">RS-X3 Puzzle</h3>
               <div class="collection-name" style="font-size: 0.85rem; color: #555; margin-bottom: 4px;">
                 STREETWEAR EXCLUSIVE
               </div>
@@ -92,15 +88,6 @@
 
             <div class="product-footer">
               <div class="price-group">
-                <span class="price">
-                    {{ p.price_current|convert_price:request.currency }} 
-                    {% if request.currency == 'XAF' %}
-                        FCFA
-                    {% else %}
-                        €
-                    {% endif %}
-                </span>
-                
                 {% if p.price_original %}
                   <span class="original-price">
                     {{ p.price_original|convert_price:request.currency }}
@@ -111,6 +98,15 @@
                     {% endif %}
                   </span>
                 {% endif %}
+
+                <span class="price">
+                    {{ p.price_current|convert_price:request.currency }} 
+                    {% if request.currency == 'XAF' %}
+                        FCFA
+                    {% else %}
+                        €
+                    {% endif %}
+                </span>
               </div>
 
               {# ← REMIS : état promo lié à la section (méthode callable) #}
@@ -171,5 +167,11 @@
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
+  margin-top: 18px;
 }
+
+/* Prix: afficher le prix initial (barré) au-dessus du prix promo */
+.price-group { display:flex; flex-direction:column; align-items:flex-start; gap:6px; }
+.price-group .original-price { display:block; text-decoration: line-through; color: #6b7280; font-size: 0.95rem; }
+.price-group .price { font-size: 1.05rem; font-weight: 700; color: #111827; }
 </style>
