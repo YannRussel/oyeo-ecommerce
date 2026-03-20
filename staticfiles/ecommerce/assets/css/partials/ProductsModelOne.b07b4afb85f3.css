@@ -1,0 +1,567 @@
+
+.lienTitleproduct{ text-decoration: none;}
+.lienTitleproduct:hover .product-title { color: var(--primary)!important;}
+/* ---------- Section produit ---------- */
+.product-section { padding: 20px; background: #fff; }
+#filtre_detailler, .btn_recommandation{
+background-color: white;
+ border: none; 
+ outline: none;
+}
+.statistiques_recherche{
+  width:480px; 
+}
+.sous_statistique_recherche{
+  display: flex;
+}
+.btn_recommandation{
+display: block;
+}
+.btn_recommandation:hover, #filtre_detailler:hover{
+color: var(--primary);
+}
+
+#filtre_detailler{
+  display: none;
+}
+
+#bloc_filtre_detailler{
+  width: 75%;
+  max-height: auto;
+
+}
+.bloc_filtre_detailler_height{
+ 
+  animation: affiche 0.7s ease-in-out  both; /* forwards pour conserver l’état final */
+
+}
+@keyframes affiche {
+  from {
+    max-height: 69px;
+  }
+  to {
+    max-height: 100%; /* par exemple, remplacer par la hauteur réelle que tu veux */
+  }
+}
+
+/* header produit (titre + voir plus) */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 0 6px;
+}
+.section-title { font-size: 22px; color: #1C2B39; margin:0; font-weight:700; }
+.see-more {
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid transparent;
+  font-weight:600;
+  font-size:0.95rem;
+  color: var(--primary) /* #e86429 */;
+  background:rgba(11,116,218,0.06);
+  transition: background .15s ease, box-shadow .15s ease;
+  white-space:nowrap;
+}
+.see-more:hover, .see-more:focus {
+  
+  background: rgba(11,116,218,0.12);
+  box-shadow: 0 4px 12px rgba(11,116,218,0.08);
+  text-decoration:none;
+  outline:none;
+}
+.see-more.fixed {
+  position: fixed;
+  right: 18px;
+  top: 120px;
+  z-index: 10/* 9999 */;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  font-size: 0.95rem;
+}
+
+/* carousel wrapper */
+.product-carousel-wrapper { display:flex; align-items:center; gap:8px; }
+.scroll-btn {
+  background:#fff; border:1px solid #e6e6e6; border-radius:50%;
+  width:36px; height:36px; font-size:18px; cursor:pointer; flex-shrink:0;
+  display:inline-flex; align-items:center; justify-content:center;
+  transition: transform .12s ease, box-shadow .12s ease;
+  box-shadow: var(--card-shadow);
+}
+.scroll-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(18,38,63,0.06); }
+
+.product-grid {
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  padding:8px;
+  align-items:stretch;
+
+}
+.product-grid:active { cursor: grabbing; }
+.product-grid::-webkit-scrollbar { display: none; }
+.product-grid { -ms-overflow-style:none; scrollbar-width:none; }
+
+/* product card */
+.product-card {
+  position: relative;
+  flex: 0 0 260px;
+  background:#fff;
+  border-radius: var(--round);
+  box-shadow: var(--card-shadow);
+  overflow:hidden;
+  /* transition: transform .2s, box-shadow .2s; */
+  display:flex;
+  flex-direction:column;
+  min-height:360px;
+ /*  border:1px solid red;
+  width: auto; */
+}
+.product-grid-simple { display:flex;
+  gap:16px;
+ justify-content: space-around; 
+  flex-wrap: wrap;
+ /*  overflow-x:auto; */
+/*   scroll-behavior:smooth; */
+/*   -webkit-overflow-scrolling: touch;
+ */  /* cursor: grab;
+  padding:8px; */
+ /*  align-items:stretch; */
+}
+/* .product-grid-simple .product-card{ width: 260px;  dis }
+ */
+/* .product-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(16,24,40,0.08); } */
+
+/* badge gender/promo */
+.product-card .badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: transparent;
+  color: #000;
+  border: 1.5px solid #E0E0E0; /* Gray border */
+  font-size: 11px;
+  font-weight: 300 !important;
+  padding: 4px 12px;
+  border-radius: 20px;
+  z-index: 8;
+  /* Capitalize first letter only: Homme, Femme, Robes, Baskets */
+  text-transform: capitalize !important;
+}
+
+/* Positionnement icône favoris */
+.fav-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  /* transition: transform 0.2s ease; */
+  z-index: 7;
+  outline: none;
+}
+
+.fav-icon:focus {
+  outline: none;
+}
+
+/* Petit zoom au survol */
+/* .fav-icon:hover {
+  transform: scale(1.15);
+} */
+
+/* Cœur = contour + remplissage */
+.fav-icon path {
+  transition: fill 0.4s ease, stroke 0.2s ease;
+  fill: transparent;       /* vide par défaut */
+  stroke: #6b6b6b !important;            /* contour gris */
+  stroke-width: 1.5 !important;         /* contour mince */
+}
+
+/* Keep hover only as scale/interaction handled elsewhere; no color change on hover */
+.fav-icon:hover path { }
+
+/* Favorited state: remplissage rouge + contour noir */
+.fav-icon.favorited path {
+  fill: #e51b23 !important;
+  stroke: transparent !important;
+  stroke-width: 0 !important;
+}
+
+.fav-icon.favorited:hover path {
+  fill: #c8161f !important;
+  stroke: transparent !important;
+  stroke-width: 0 !important;
+}
+
+
+/* image */
+.img-wrap { width:100%; height:320px; overflow:hidden; background:#f7f7f7; position:relative; }
+.img-wrap img {
+  display:block; width:100%; height:100%; object-fit:cover;
+  /* transition: transform .45s cubic-bezier(.2,.8,.2,1); */
+}
+/* .product-card:hover .img-wrap img { transform: scale(1.05); } */
+
+/* body text */
+.card-body { padding:12px; display:flex; flex-direction:column; gap:6px; flex:1; }
+.brand { font-size:11px; color:#888; }
+.product-title { font-size:15px; margin:0; color:#2b3940; line-height:1.25; }
+.rating { font-size:13px; color:#f5a623; }
+.by-text { display:block; font-size:12px; color:#444; }
+.by-text .by { color:#666; margin-right:6px; }
+.by-text .oye { color:#28a745; font-weight:700; }
+
+/* footer card (prix/promo) */
+.product-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between; /* prix group à gauche, promo à droite */
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap; /* empêche le passage à la ligne */
+  min-width: 0;
+}
+
+/* Groupe des prix (garantit même ligne) */
+.price-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.original-price {
+  color:#777;
+  text-decoration:line-through;
+  font-size:0.95rem;
+  flex: 0 0 auto;
+}
+.price {
+  font-weight:800;
+  font-size:1.05rem;
+  color:#111827;
+  flex: 0 0 auto;
+}
+.promo-label {
+  display: inline-block;
+  flex: 0 0 auto;
+  background: #E60000 !important;
+  color: #fff !important;
+  font-size: 0.75rem !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+}
+
+/* responsive carousel */
+@media (max-width:1100px) {
+  .product-card { flex: 0 0 230px; min-height:440px; }
+  .img-wrap { height:300px; }
+}
+@media (max-width:1000px) {
+  #filtre_detailler{
+  display: inline-block;
+}
+  #bloc_filtre_detailler{
+  max-height: 69px;
+  overflow: hidden;
+}
+.statistiques_recherche{
+  font-size: .7rem;
+  width:200px; 
+
+}
+.statdiv_2{
+  margin-top: 7px;
+}
+.sous_statistique_recherche{
+  display: flex;
+  flex-direction: column;
+}
+.btn_recommandation{
+/*   margin-top: 10px; */
+  display: block;
+}
+
+
+}
+@media (max-width:800px) {
+
+  .product-card { flex: 0 0 200px; min-height:20px;/* border: 1px solid red; */ } 
+  .img-wrap { height:160px; }
+  .section-header { gap:8px;  }
+  .card-body { /* border: 1px solid orange; */ flex:0;/* padding:12px; display:flex; flex-direction:column; gap:6px; flex:1; */ }
+  /* product card */
+
+}
+@media (max-width:690px) {
+.product-grid-simple { display:flex;
+  gap:9px;
+ justify-content: space-around; 
+  flex-wrap: wrap;
+ /*  overflow-x:auto; */
+/*   scroll-behavior:smooth; */
+/*   -webkit-overflow-scrolling: touch;
+ */  /* cursor: grab;
+  padding:8px; */
+ /*  align-items:stretch; */
+}
+
+}
+
+@media (max-width:640px) {
+  .section-header { flex-direction:column; align-items:flex-start; }
+  .see-more.fixed { display:none; }
+  .scroll-btn { display:none; }
+  .product-card { flex: 0 0 72%; }
+  .img-wrap { height:220px; }
+}
+
+/* Ajustements pour très petits écrans : réduire taille texte si besoin */
+@media (max-width:600px) {
+  .product-footer { gap: 5px;/*  border: 1px solid red; */}
+  .price { font-size: .8rem; }
+  .original-price { font-size: 0.7rem; }
+  .section-title { font-size: 18px; }
+  .img-wrap { height:120px; }
+
+
+
+
+  .product-card { flex: 0 0 148px; min-height:20px;/* border: 1px solid red; */} 
+  .section-header { gap:5px;  }
+  .card-body { padding : 2px ; flex:0;/*border: 1px solid orange; padding:12px; display:flex; flex-direction:column; gap:6px; flex:1; */ }
+   .product-title {
+   font-size: .8rem;
+   }
+
+  .product-grid-simple {
+    justify-content: space-around;
+    gap:6px;
+  }
+ .product-grid {
+ /*    display:flex;*/
+  gap:6px;
+   padding:5px;
+/*   overflow-x:auto;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+ 
+  align-items:stretch;
+ */
+} 
+
+  
+}
+
+
+
+/* ---------- Product typography ---------- */
+/* .product-title {
+  font-size: 1rem;
+  font-weight: var(--w-medium);
+  color: var(--text);
+  margin: 0 0 .25rem;
+  line-height: 1.2;
+}
+
+
+.product-brand {
+  font-size: .85rem;
+  color: var(--muted);
+  font-weight: var(--w-regular);
+}
+.price {
+  font-weight: var(--w-bold);
+  color: var(--accent);
+  font-size: 1.05rem;
+  display:inline-block;
+}
+.price-old {
+  text-decoration: line-through;
+  color: #9AA0A6;
+  font-size: .9rem;
+  margin-left: .6rem;
+} */
+
+/* Apply Urbanist to product cards only (override global Quicksand) */
+.product-card, .product-card .brand, .product-card .product-title, .product-card .collection-name, .product-card .card-body p, .product-card .price, .product-card .original-price, .product-card .badge {
+  font-family: 'Urbanist', sans-serif !important;
+}
+
+/* ---------- Uniformisation des tailles d'images / blocs (copie de "Offres du jours") ---------- */
+/* Applique les mêmes dimensions de bloc et d'image aux autres blocs de produits pour uniformiser la grille */
+.product-section .product-card,
+.product-grid .product-card,
+.product-grid-simple .product-card {
+  flex: 0 0 260px !important;
+  min-height: 440px !important;
+}
+.product-section .img-wrap,
+.product-grid .img-wrap,
+.product-grid-simple .img-wrap {
+  height: 320px !important;
+}
+
+@media (max-width:1100px) {
+  .product-section .product-card, .product-grid .product-card, .product-grid-simple .product-card {
+    flex: 0 0 230px !important;
+    min-height: 440px !important;
+  }
+  .product-section .img-wrap, .product-grid .img-wrap, .product-grid-simple .img-wrap { height: 300px !important; }
+}
+@media (max-width:800px) {
+  .product-section .product-card, .product-grid .product-card, .product-grid-simple .product-card { flex: 0 0 200px !important; min-height: 20px !important; }
+  .product-section .img-wrap, .product-grid .img-wrap, .product-grid-simple .img-wrap { height: 160px !important; }
+}
+@media (max-width:640px) {
+  .product-section .product-card, .product-grid .product-card, .product-grid-simple .product-card { flex: 0 0 72% !important; }
+  .product-section .img-wrap, .product-grid .img-wrap, .product-grid-simple .img-wrap { height: 220px !important; }
+}
+@media (max-width:600px) {
+  .product-section .product-card, .product-grid .product-card, .product-grid-simple .product-card { flex: 0 0 148px !important; min-height: 20px !important; }
+  .product-section .img-wrap, .product-grid .img-wrap, .product-grid-simple .img-wrap { height: 120px !important; }
+}
+
+
+/* Slightly moderate title weight for readability */
+.product-card .product-title {
+  font-weight: 600 !important;
+}
+
+
+/* Urbanist specifically for the "Offres du jours" section */
+
+/* Apply Urbanist font to the Offres du jours section only and increase sizes */
+#section-offres-du-jours, #section-tendances-du-moment, #section-offres-du-jours * , #section-tendances-du-moment * {
+  font-family: 'Urbanist', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#section-offres-du-jours .section-title , #section-tendances-du-moment .section-title {
+  font-family: 'Urbanist', sans-serif !important;
+  font-weight: 700;
+  font-size: 34px;
+  letter-spacing: 0.6px;
+}
+
+#section-offres-du-jours .product-title , #section-tendances-du-moment .product-title {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+#section-offres-du-jours .price , #section-tendances-du-moment .price {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+#section-offres-du-jours .brand , #section-tendances-du-moment .brand {
+  font-family: 'Urbanist', sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+
+#section-offres-du-jours, #section-tendances-du-moment, #section-offres-du-jours * , #section-tendances-du-moment * {
+  font-family: 'Urbanist', sans-serif !important;
+}
+
+#section-offres-du-jours .section-title , #section-tendances-du-moment .section-title {
+  font-family: 'Urbanist', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 34px !important;
+  color: #1C2B39 !important;
+}
+
+#section-offres-du-jours .product-card, #section-tendances-du-moment .product-card,
+#section-offres-du-jours .product-card .brand, #section-tendances-du-moment .product-card .brand,
+#section-offres-du-jours .product-card .product-title, #section-tendances-du-moment .product-card .product-title,
+#section-offres-du-jours .product-card .collection-name, #section-tendances-du-moment .product-card .collection-name,
+#section-offres-du-jours .product-card .card-body p, #section-tendances-du-moment .product-card .card-body p,
+#section-offres-du-jours .product-card .price, #section-tendances-du-moment .product-card .price,
+#section-offres-du-jours .product-card .original-price, #section-tendances-du-moment .product-card .original-price,
+#section-offres-du-jours .product-card .badge , #section-tendances-du-moment .product-card .badge {
+  font-family: 'Urbanist', sans-serif !important;
+}
+
+#section-offres-du-jours .product-card .product-title , #section-tendances-du-moment .product-card .product-title {
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+}
+
+#section-offres-du-jours .product-card .brand , #section-tendances-du-moment .product-card .brand {
+  text-transform: uppercase !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+}
+
+#section-offres-du-jours .product-card .collection-name, #section-tendances-du-moment .product-card .collection-name,
+#section-offres-du-jours .product-card .card-body p , #section-tendances-du-moment .product-card .card-body p {
+  font-size: 0.95rem !important;
+}
+
+#section-offres-du-jours .product-card .price , #section-tendances-du-moment .product-card .price {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+}
+
+
+
+.product-card, .product-card *, .product-details, .product-details *, .produit-info, .produit-info *, .card_description, .card_description * {
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+
+/* Uniformisation des tailles selon "Offres du jour" pour toutes les grilles */
+.product-card .product-title {
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+}
+
+.product-card .brand {
+  text-transform: uppercase !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+}
+
+.product-card .collection-name, .product-card .card-body p {
+  font-size: 0.95rem !important;
+}
+
+.product-card .price {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+}
+
+.section-title {
+  font-weight: 600 !important;
+  font-size: 34px !important;
+}
+
+/* FORCE EXACT SIZES FOR EVERY PRODUCT CARD EVERYWHERE */
+body .product-card, body .product-section .product-card, body .product-grid .product-card, body .product-grid-simple .product-card { flex: 0 0 260px !important; min-height: 360px !important; max-width: 260px !important; width: 260px !important; }
+body .product-card .img-wrap { height: 320px !important; max-height: 320px !important; }
+
+/* FORCE SIZES */
+body .product-card{flex:0 0 260px !important;max-width:260px !important}
+body .product-card .img-wrap{height:320px !important}
+
+/* FORCE SIZES FIX */
+.product-card{flex:0 0 260px !important;max-width:260px !important}
+.product-card .img-wrap{height:320px !important}
+
+/* FIX SPACING SPREAD */
+.product-grid-simple, .product-grid { justify-content: flex-start !important; gap: 24px !important; }

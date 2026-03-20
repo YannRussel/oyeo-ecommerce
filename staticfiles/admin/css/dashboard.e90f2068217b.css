@@ -27,3 +27,7 @@ ul.actionlist li {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* FIX SPACING SPREAD */
+.product-grid-simple { justify-content: flex-start !important; gap: 24px !important; }
+.product-grid { gap: 24px !important; }

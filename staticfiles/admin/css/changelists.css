@@ -326,3 +326,7 @@
 #changelist .actions .button:focus, #changelist .actions .button:hover {
     border-color: var(--body-quiet-color);
 }
+
+/* FIX SPACING SPREAD */
+.product-grid-simple { justify-content: flex-start !important; gap: 24px !important; }
+.product-grid { gap: 24px !important; }

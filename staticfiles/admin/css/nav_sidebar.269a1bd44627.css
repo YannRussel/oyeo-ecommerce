@@ -142,3 +142,7 @@
 #nav-sidebar table {
     width: 100%;
 }
+
+/* FIX SPACING SPREAD */
+.product-grid-simple { justify-content: flex-start !important; gap: 24px !important; }
+.product-grid { gap: 24px !important; }

@@ -128,7 +128,7 @@ color: var(--primary);
 }
 .product-grid-simple { display:flex;
   gap:16px;
- justify-content: space-around; 
+ justify-content: flex-start !important; 
   flex-wrap: wrap;
  /*  overflow-x:auto; */
 /*   scroll-behavior:smooth; */
@@ -150,7 +150,7 @@ color: var(--primary);
   color: #000;
   border: 1.5px solid #E0E0E0; /* Gray border */
   font-size: 11px;
-  font-weight: 700 !important;
+  font-weight: 300 !important;
   padding: 4px 12px;
   border-radius: 20px;
   z-index: 8;
@@ -234,21 +234,17 @@ color: var(--primary);
 /* Groupe des prix (garantit même ligne) */
 .price-group {
   display: flex;
-  align-items: baseline; /* aligne par baseline pour un rendu pro */
-  gap: 8px;
-  .fav-icon path {
-    transition: fill 0.4s ease;
-    fill: transparent;       /* vide par défaut */
-    stroke: var(--primary);        /* contour primaire */
-    stroke-width: 2;
-  }
-.original-price {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.original.price { order: 2 !important;  order: 1 !important; margin-bottom: 2px; 
   color:#777;
   text-decoration:line-through;
   font-size:0.95rem;
   flex: 0 0 auto;
 }
-.price {
+.price { order: 2 !important; 
   font-weight:800;
   font-size:1.05rem;
   color:#111827;
@@ -257,12 +253,11 @@ color: var(--primary);
 .promo-label {
   display: inline-block;
   flex: 0 0 auto;
-  background: var(--primary) /* #e86429 */;
-  color: #fff;
-  font-size: 0.75rem;
-  padding: 6px 10px;
-  border-radius: 20px;
-  /* Force uppercase and bold */
+  background: #E60000 !important;
+  color: #fff !important;
+  font-size: 0.75rem !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
   text-transform: uppercase !important;
   font-weight: 700 !important;
 }
@@ -311,7 +306,7 @@ color: var(--primary);
 @media (max-width:690px) {
 .product-grid-simple { display:flex;
   gap:9px;
- justify-content: space-around; 
+ justify-content: flex-start !important; 
   flex-wrap: wrap;
  /*  overflow-x:auto; */
 /*   scroll-behavior:smooth; */
@@ -334,8 +329,8 @@ color: var(--primary);
 /* Ajustements pour très petits écrans : réduire taille texte si besoin */
 @media (max-width:600px) {
   .product-footer { gap: 5px;/*  border: 1px solid red; */}
-  .price { font-size: .8rem; }
-  .original-price { font-size: 0.7rem; }
+  .price { order: 2 !important;  font-size: .8rem; }
+  .original.price { order: 2 !important;  order: 1 !important; margin-bottom: 2px;  font-size: 0.7rem; }
   .section-title { font-size: 18px; }
   .img-wrap { height:120px; }
 
@@ -350,7 +345,7 @@ color: var(--primary);
    }
 
   .product-grid-simple {
-    justify-content: space-around;
+    justify-content: flex-start !important;
     gap:6px;
   }
  .product-grid {
@@ -386,7 +381,7 @@ color: var(--primary);
   color: var(--muted);
   font-weight: var(--w-regular);
 }
-.price {
+.price { order: 2 !important; 
   font-weight: var(--w-bold);
   color: var(--accent);
   font-size: 1.05rem;
@@ -403,6 +398,41 @@ color: var(--primary);
 .product-card, .product-card .brand, .product-card .product-title, .product-card .collection-name, .product-card .card-body p, .product-card .price, .product-card .original-price, .product-card .badge {
   font-family: 'Urbanist', sans-serif !important;
 }
+
+/* ---------- Uniformisation des tailles d'images / blocs (copie de "Offres du jours") ---------- */
+/* Applique les mêmes dimensions de bloc et d'image aux autres blocs de produits pour uniformiser la grille */
+.product-section .product-card,
+.product-grid .product-card,
+.product-grid-simple .product-card {
+  flex: 0 0 260px !important;
+  min-height: 440px !important;
+}
+.product-section .img-wrap,
+.product-grid .img-wrap,
+.product-grid-simple .img-wrap {
+  height: 320px !important;
+}
+
+@media (max-width:1100px) {
+  .product-section .product-card, .product-grid .product-card, .product-grid-simple .product-card {
+    flex: 0 0 230px !important;
+    min-height: 440px !important;
+  }
+  .product-section .img-wrap, .product-grid .img-wrap, .product-grid-simple .img-wrap { height: 300px !important; }
+}
+@media (max-width:800px) {
+  .product-section .product-card, .product-grid .product-card, .product-grid-simple .product-card { flex: 0 0 200px !important; min-height: 20px !important; }
+  .product-section .img-wrap, .product-grid .img-wrap, .product-grid-simple .img-wrap { height: 160px !important; }
+}
+@media (max-width:640px) {
+  .product-section .product-card, .product-grid .product-card, .product-grid-simple .product-card { flex: 0 0 72% !important; }
+  .product-section .img-wrap, .product-grid .img-wrap, .product-grid-simple .img-wrap { height: 220px !important; }
+}
+@media (max-width:600px) {
+  .product-section .product-card, .product-grid .product-card, .product-grid-simple .product-card { flex: 0 0 148px !important; min-height: 20px !important; }
+  .product-section .img-wrap, .product-grid .img-wrap, .product-grid-simple .img-wrap { height: 120px !important; }
+}
+
 
 /* Slightly moderate title weight for readability */
 .product-card .product-title {
@@ -432,7 +462,7 @@ color: var(--primary);
   font-weight: 700;
 }
 
-#section-offres-du-jours .price , #section-tendances-du-moment .price {
+#section-offres-du-jours .price , #section-tendances-du-moment .price { order: 2 !important; 
   font-family: 'Urbanist', sans-serif !important;
   font-size: 1.15rem;
   font-weight: 700;
@@ -452,7 +482,7 @@ color: var(--primary);
 #section-offres-du-jours .section-title , #section-tendances-du-moment .section-title {
   font-family: 'Urbanist', sans-serif !important;
   font-weight: 600 !important;
-  font-size: 2rem !important;
+  font-size: 34px !important;
   color: #1C2B39 !important;
 }
 
@@ -473,6 +503,7 @@ color: var(--primary);
 }
 
 #section-offres-du-jours .product-card .brand , #section-tendances-du-moment .product-card .brand {
+  text-transform: uppercase !important;
   font-size: 0.95rem !important;
   font-weight: 700 !important;
 }
@@ -482,7 +513,7 @@ color: var(--primary);
   font-size: 0.95rem !important;
 }
 
-#section-offres-du-jours .product-card .price , #section-tendances-du-moment .product-card .price {
+#section-offres-du-jours .product-card .price , #section-tendances-du-moment .product-card .price { order: 2 !important; 
   font-size: 1.2rem !important;
   font-weight: 800 !important;
 }
@@ -492,3 +523,45 @@ color: var(--primary);
 .product-card, .product-card *, .product-details, .product-details *, .produit-info, .produit-info *, .card_description, .card_description * {
     font-family: 'DM Sans', sans-serif !important;
 }
+
+
+/* Uniformisation des tailles selon "Offres du jour" pour toutes les grilles */
+.product-card .product-title {
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+}
+
+.product-card .brand {
+  text-transform: uppercase !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+}
+
+.product-card .collection-name, .product-card .card-body p {
+  font-size: 0.95rem !important;
+}
+
+.product-card .price { order: 2 !important; 
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+}
+
+.section-title {
+  font-weight: 600 !important;
+  font-size: 34px !important;
+}
+
+/* FORCE EXACT SIZES FOR EVERY PRODUCT CARD EVERYWHERE */
+body .product-card, body .product-section .product-card, body .product-grid .product-card, body .product-grid-simple .product-card { flex: 0 0 260px !important; min-height: 360px !important; max-width: 260px !important; width: 260px !important; }
+body .product-card .img-wrap { height: 320px !important; max-height: 320px !important; }
+
+/* FORCE SIZES */
+body .product-card{flex:0 0 260px !important;max-width:260px !important}
+body .product-card .img-wrap{height:320px !important}
+
+/* FORCE SIZES FIX */
+.product-card{flex:0 0 260px !important;max-width:260px !important}
+.product-card .img-wrap{height:320px !important}
+
+/* FIX SPACING SPREAD */
+.product-grid-simple, .product-grid { justify-content: flex-start !important; gap: 6px !important; }

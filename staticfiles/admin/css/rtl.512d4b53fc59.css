@@ -296,3 +296,7 @@ form .form-row p.datetime {
     margin-left: inherit;
     margin-right: 2px;
 }
+
+/* FIX SPACING SPREAD */
+.product-grid-simple { justify-content: flex-start !important; gap: 24px !important; }
+.product-grid { gap: 24px !important; }

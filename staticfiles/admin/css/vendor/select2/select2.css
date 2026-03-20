@@ -479,3 +479,7 @@
 
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
+
+/* FIX SPACING SPREAD */
+.product-grid-simple { justify-content: flex-start !important; gap: 24px !important; }
+.product-grid { gap: 24px !important; }

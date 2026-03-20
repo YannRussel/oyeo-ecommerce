@@ -135,3 +135,7 @@ html[data-theme="light"] .theme-toggle svg.theme-icon-when-light {
     color: var(--body-fg);
     background-color: var(--body-bg);
 }
+
+/* FIX SPACING SPREAD */
+.product-grid-simple { justify-content: flex-start !important; gap: 24px !important; }
+.product-grid { gap: 24px !important; }

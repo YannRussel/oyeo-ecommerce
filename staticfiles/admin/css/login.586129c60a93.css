@@ -59,3 +59,7 @@
 .login .password-reset-link {
     text-align: center;
 }
+
+/* FIX SPACING SPREAD */
+.product-grid-simple { justify-content: flex-start !important; gap: 24px !important; }
+.product-grid { gap: 24px !important; }
